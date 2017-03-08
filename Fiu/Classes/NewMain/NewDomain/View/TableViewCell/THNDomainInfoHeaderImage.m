@@ -49,7 +49,7 @@
 - (void)thn_setRollimageView:(DominInfoData *)model {
     if (model.covers.count) {
         [self thn_setCurrentImageIndex:_imageIndex];
-        self.sumLabel.text = [NSString stringWithFormat:@" / %zi", model.covers.count];
+        self.sumLabel.text = [NSString stringWithFormat:@"／%zi", model.covers.count];
         self.rollImageView.imageURLStringsGroup = model.covers;
     }
 }
@@ -99,7 +99,7 @@
     [self addSubview:self.iconImage];
     [_iconImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(10, 10));
-        make.left.equalTo(_indexLabel.mas_left).with.offset(5);
+        make.left.equalTo(_indexLabel.mas_left).with.offset(3);
         make.centerY.equalTo(_indexLabel);
     }];
     

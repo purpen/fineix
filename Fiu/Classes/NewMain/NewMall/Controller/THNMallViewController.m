@@ -88,7 +88,7 @@ static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
     [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
         [self.categoryMarr addObject:@"推荐"];
         [self.categoryMarr addObject:@"情境"];
-        [self.categoryMarr addObject:@"全部"];
+        [self.categoryMarr addObject:@"合集"];
         NSMutableArray *idxMarr = [NSMutableArray array];
         NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary *dataDict in dataArr) {
@@ -155,7 +155,7 @@ static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
     [SVProgressHUD show];
     NSDictionary *requestDic = @{@"page":@"1",
                                  @"size":@"5",
-                                 @"sort":@"1",
+                                 @"sort":@"0",
                                  @"type":@"5",
 //                                 @"stick":@"1",
                                  @"use_cache":@"1"};
