@@ -471,10 +471,13 @@ UITableViewDataSource
         return CGSizeMake(60*SCREEN_HEIGHT/667.0,
                           100*SCREEN_HEIGHT/667.0);
     } else if (indexPath.section == 5) {
-        return CGSizeMake((SCREEN_WIDTH-90-20*2-3)/2*SCREEN_HEIGHT/667.0, 135/2.0*SCREEN_HEIGHT/667.0);
+        if (SCREEN_HEIGHT == 736) {
+            return CGSizeMake((SCREEN_WIDTH-90-36*2-3)/2*SCREEN_HEIGHT/667.0, 135/2.0*SCREEN_HEIGHT/667.0);
+        }
+        return CGSizeMake(120*SCREEN_HEIGHT/667.0, 135/2.0*SCREEN_HEIGHT/667.0);
     } else if (indexPath.section == 6) {
         return CGSizeMake(SCREEN_WIDTH-80,
-                          535/2*SCREEN_HEIGHT/667.0);
+                          300/2*SCREEN_HEIGHT/667.0);
     }
     return CGSizeMake(((SCREEN_WIDTH - 80 - 4 - 4) / 3)*SCREEN_HEIGHT/667.0,
                       ((SCREEN_WIDTH - 80 - 4 - 4) / 3 + 30)*SCREEN_HEIGHT/667.0);
