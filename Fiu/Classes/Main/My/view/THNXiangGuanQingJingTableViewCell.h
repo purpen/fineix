@@ -24,6 +24,8 @@
 @property (nonatomic, strong) UIViewController *vc;
 /**  */
 @property (nonatomic, strong) UILabel *biaoTiLabel;
+/**  */
+@property (nonatomic, assign) CGFloat cellHeight;
 
 -(void)haModelAry:(NSMutableArray*)ary;
 

@@ -421,6 +421,9 @@ static NSInteger const saveTime = 30 * 24 * 60;
 }
 
 - (void)thn_addBarItemRightBarButton:(NSString *)title image:(NSString *)image {
+    [self.rightBtn setTitle:title forState:UIControlStateNormal];
+    self.rightBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+    self.rightBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, -5, 5);
     [self.rightBtn setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
     [self.navView addSubview:self.rightBtn];
 }

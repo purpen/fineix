@@ -8,11 +8,22 @@
 
 #import "THNWithdrawViewController.h"
 #import "UIView+TYAlertView.h"
+#import "THNZhangHuView.h"
+#import "UIView+FSExtension.h"
+#import "THNZhangHuModel.h"
+#import "MJExtension.h"
 
 static NSString *const URLAliance = @"/alliance/view";
 static NSString *const URLApply = @"/withdraw_cash/apply_cash";
 
 @interface THNWithdrawViewController ()
+
+/**  */
+@property (nonatomic, strong) THNZhangHuView *zhangHuView;
+/**  */
+@property (nonatomic, assign) ZhangHu zhangHu;
+/**  */
+@property (nonatomic, strong) THNZhangHuModel *zhangHuModel;
 
 @end
 
@@ -39,8 +50,23 @@ static NSString *const URLApply = @"/withdraw_cash/apply_cash";
         
         NSDictionary *dict = [result valueForKey:@"data"];
         self.dataModel = [[THNAllinaceData alloc] initWithDictionary:dict];
-        [self setViewUI];
-        [SVProgressHUD dismiss];
+        FBRequest *zhangHuRequest = [FBAPI postWithUrlString:@"/payment_card/defaulted" requestDictionary:nil delegate:self];
+        [zhangHuRequest startRequestSuccess:^(FBRequest *request, id result) {
+            NSDictionary *dataDict = result[@"data"];
+            self.zhangHuModel = [THNZhangHuModel mj_objectWithKeyValues:dataDict];
+            if ([dataDict[@"has_default"] integerValue] == 0) {
+                self.zhangHu = none;
+            } else {
+                if ([dataDict[@"pay_type_label"] rangeOfString:@"银行"].location != NSNotFound) {
+                    self.zhangHu = zhiFuBao;
+                } else {
+                    self.zhangHu = YingHangKa;
+                }
+            }
+            [self setViewUI];
+            [SVProgressHUD dismiss];
+        } failure:^(FBRequest *request, NSError *error) {
+        }];
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"-- %@", [error localizedDescription]);
@@ -84,18 +110,47 @@ static NSString *const URLApply = @"/withdraw_cash/apply_cash";
 
 #pragma mark - 设置界面UI
 - (void)setViewUI {
+    [self.view addSubview:self.zhangHuView];
     [self.view addSubview:self.withdrawView];
+    [_withdrawView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(150);
+        make.left.right.equalTo(self.view).with.offset(0);
+        make.top.equalTo(self.zhangHuView.mas_bottom).with.offset(15);
+    }];
     [self.view addSubview:self.sureButton];
     [_sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, 35));
         make.left.equalTo(self.view.mas_left).with.offset(15);
-        make.top.equalTo(_withdrawView.mas_bottom).with.offset(15);
+        make.top.equalTo(_withdrawView.mas_bottom).with.offset(106/2);
     }];
+}
+
+-(THNZhangHuView *)zhangHuView{
+    if (!_zhangHuView) {
+        _zhangHuView = [[THNZhangHuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        _zhangHuView.nav = self.navigationController;
+        _zhangHuView.zhangHu = self.zhangHu;
+        switch (self.zhangHu) {
+            case none:
+            {_zhangHuView.height = 44;}
+            break;
+            case zhiFuBao:
+            {_zhangHuView.height = 60;}
+            break;
+            case YingHangKa:
+            {_zhangHuView.height = 60;}
+            break;
+            
+            default:
+            break;
+        }
+    }
+    return _zhangHuView;
 }
 
 - (THNWithdrawView *)withdrawView {
     if (!_withdrawView) {
-        _withdrawView = [[THNWithdrawView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 150)];
+        _withdrawView = [[THNWithdrawView alloc] init];
         [_withdrawView thn_setCanWithdrawMoneyData:self.dataModel.waitCashAmount];
     }
     return _withdrawView;
