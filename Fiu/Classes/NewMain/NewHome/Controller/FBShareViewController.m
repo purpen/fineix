@@ -9,22 +9,25 @@
 #import "FBShareViewController.h"
 #import "ShareStyleCollectionViewCell.h"
 #import "FBEditShareInfoViewController.h"
+#import "THNShareActionView.h"
 
 static NSString *const URLShareTextNum = @"/scene_sight/add_share_context_num";
 static NSString *const URLGiveExp = @"/user/send_exp";
 static NSString *const URLSceneInfo = @"/scene_sight/view";
+static NSString *const URLShareLink = @"/gateway/share_link";
 
-static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！>>> http://m.taihuoniao.com/fiu";
+static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！>>> http://m.taihuoniao.com/d3in";
 
 @interface FBShareViewController () {
-    NSString * _editBgImg;
-    NSString * _editTitle;
-    NSString * _editDes;
-    NSString * _tags;
-    NSString * _oid;
+    NSString *_editBgImg;
+    NSString *_editTitle;
+    NSString *_editDes;
+    NSString *_tags;
+    NSString *_oid;
+    NSString *_linkUrl;
 }
 
-@pro_strong  ShareViewController  *  shareVC;
+@property (nonatomic, strong) ShareViewController  *shareVC;
 
 @end
 
@@ -50,12 +53,29 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 }
 
 #pragma mark - 网络请求
+#pragma mark 统计分享次数
 - (void)networkShareTextNumData:(NSString *)oid {
     self.shareTextNumRequest = [FBAPI postWithUrlString:URLShareTextNum requestDictionary:@{@"id":oid} delegate:self];
     [self.shareTextNumRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"%@", result);
+//        NSLog(@"%@", result);
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", error);
+        NSLog(@"---%@---", error);
+    }];
+}
+
+#pragma mark 获取分享链接
+- (void)thn_networkShareInfoData {
+    self.shareRequest = [FBAPI postWithUrlString:URLShareLink requestDictionary:@{@"id":self.sceneId, @"type":@"2"} delegate:self];
+    [self.shareRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSDictionary *dict =  [result valueForKey:@"data"];
+            _linkUrl = [dict valueForKey:@"url"];
+        }
+        [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:_linkUrl];
+        [self saveImageToPhotoAlbum];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@" ---- %@ ----", error);
     }];
 }
 
@@ -79,7 +99,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
     }];
 }
 
-#pragma mark - 获取情境详情
+#pragma mark 获取情境数据
 - (void)thn_getSceneInfoData:(NSString *)sceneId {
     [SVProgressHUD show];
     self.sceneInfoRequest = [FBAPI getWithUrlString:URLSceneInfo requestDictionary:@{@"id":sceneId} delegate:self];
@@ -256,24 +276,30 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 }
 
 - (void)shareItemSelected {
-    //  保存图片到本地
-    UIImageWriteToSavedPhotosAlbum([self shareImage],
-                                   self,
-                                   @selector(image:didFinishSavingWithError:contextInfo:),
-                                   nil);
+    if (self.sceneId.length) {
+        [self thn_networkShareInfoData];
+    }
     
     if (_oid.length > 0) {
         [self networkShareTextNumData:_oid];
     }
-    
-    self.shareVC = [[ShareViewController alloc] init];
-    self.shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    self.shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentViewController:self.shareVC animated:YES completion:nil];
-    [self.shareVC.wechatBtn addTarget:self action:@selector(wechatShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.shareVC.friendBtn addTarget:self action:@selector(timelineShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.shareVC.weiBoBtn addTarget:self action:@selector(sinaShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.shareVC.qqBtn addTarget:self action:@selector(qqShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+}
+
+#pragma mark - 创建分享消息对象
+- (UMSocialMessageObject *)shareMessageObject {
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+    shareObject.shareImage = [self shareImage];
+    messageObject.shareObject = shareObject;
+    return messageObject;
+}
+
+#pragma mark - 保存图片到本地
+- (void)saveImageToPhotoAlbum {
+    UIImageWriteToSavedPhotosAlbum([self shareImage],
+                                   self,
+                                   @selector(image:didFinishSavingWithError:contextInfo:),
+                                   nil);
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
@@ -284,6 +310,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
     }
 }
 
+#pragma mark - 创建分享图片对象
 - (UIImage *)shareImage {
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT), NO, [UIScreen mainScreen].scale);
     [self.shareView.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -292,59 +319,9 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
     return image;
 }
 
--(void)afterShare{
+#pragma mark - 分享完成后获取积分
+- (void)afterShare{
     [self networkGiveExp];
-}
-
-- (UMSocialMessageObject *)shareMessageObject {
-    //创建分享消息对象
-    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    //创建图片内容对象
-    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
-    shareObject.shareImage = [self shareImage];
-    //分享消息对象设置分享内容对象
-    messageObject.shareObject = shareObject;
-    return messageObject;
-}
-
--(void)wechatShareBtnAction {
-    [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_WechatSession) messageObject:[self shareMessageObject] currentViewController:self completion:^(id result, NSError *error) {
-        if (error) {
-            NSLog(@"************Share fail with error %@*********",error);
-        }else{
-            [self networkGiveExp];
-        }
-    }];
-}
-
--(void)timelineShareBtnAction {
-    [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_WechatTimeLine) messageObject:[self shareMessageObject] currentViewController:self completion:^(id result, NSError *error) {
-        if (error) {
-            NSLog(@"************Share fail with error %@*********",error);
-        }else{
-            [self networkGiveExp];
-        }
-    }];
-}
-
--(void)qqShareBtnAction {
-    [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_QQ) messageObject:[self shareMessageObject] currentViewController:self completion:^(id result, NSError *error) {
-        if (error) {
-            NSLog(@"************Share fail with error %@*********",error);
-        }else{
-            [self networkGiveExp];
-        }
-    }];
-}
-
--(void)sinaShareBtnAction {
-    [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_Sina) messageObject:[self shareMessageObject] currentViewController:self completion:^(id result, NSError *error) {
-        if (error) {
-            NSLog(@"************Share fail with error %@*********",error);
-        }else{
-            [self networkGiveExp];
-        }
-    }];
 }
 
 @end
