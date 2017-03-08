@@ -17,17 +17,17 @@ typedef void(^GetEditContentAndTags)(NSString * title, NSString * des, NSMutable
     TTTAttributedLabelDelegate
 >
 
-@pro_strong UIViewController    *vc;
-@pro_strong UIImageView         *sceneImgView;
-@pro_strong UILabel             *title;            //    场景标题
-@pro_strong UILabel             *suTitle;
-@pro_strong UIButton            *addText;          //    添加描述
-@pro_strong NSMutableArray      *userAddTags;
-@pro_strong UIScrollView        *contentRoll;
-@pro_strong TTTAttributedLabel  *content;          //    场景描述内容
-@pro_strong NSString            *actionId;         //    活动Id
+@property (nonatomic, strong) UIViewController    *vc;
+@property (nonatomic, strong) UIImageView         *sceneImgView;
+@property (nonatomic, strong) UILabel             *title;            //    场景标题
+//@property (nonatomic, strong) UILabel             *suTitle;
+@property (nonatomic, strong) UIButton            *addText;          //    添加描述
+@property (nonatomic, strong) NSMutableArray      *userAddTags;
+@property (nonatomic, strong) UIScrollView        *contentRoll;
+@property (nonatomic, strong) TTTAttributedLabel  *content;          //    场景描述内容
+@property (nonatomic, strong) NSString            *actionId;         //    活动Id
 
-@pro_copy GetEditContentAndTags  getEditContentAndTags;
+@property (nonatomic, copy) GetEditContentAndTags  getEditContentAndTags;
 
 - (void)thn_setSceneTitle:(NSString *)title;
 - (void)getContentWithTags:(NSString *)content;

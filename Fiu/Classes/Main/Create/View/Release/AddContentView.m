@@ -63,13 +63,13 @@
         make.top.equalTo(_contentRoll.mas_top).with.offset(5);
     }];
     
-    [self addSubview:self.suTitle];
-    [_suTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(100, 25));
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.bottom.equalTo(_sceneImgView.mas_bottom).with.offset(-20);
-    }];
-    
+//    [self addSubview:self.suTitle];
+//    [_suTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(100, 25));
+//        make.left.equalTo(self.mas_left).with.offset(0);
+//        make.bottom.equalTo(_sceneImgView.mas_bottom).with.offset(-20);
+//    }];
+//    
     [self addSubview:self.title];
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(100, 25));
@@ -103,15 +103,15 @@
 
 - (void)goChooseText {
     FBEditShareInfoViewController *chooseTextVC = [[FBEditShareInfoViewController alloc] init];
-    NSString *title = [self.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *suTitle = [self.suTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];;
-    if (title.length == 0) {
-        title = @"";
-    }
-    if (suTitle.length == 0) {
-        suTitle = @"";
-    }
-    chooseTextVC.titleText.text = [NSString stringWithFormat:@"%@%@", title, suTitle];
+//    NSString *title = self.title.text;
+//    NSString *suTitle = [self.suTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];;
+//    if (title.length == 0) {
+//        title = @"";
+//    }
+//    if (suTitle.length == 0) {
+//        suTitle = @"";
+//    }
+    chooseTextVC.titleText.text = self.title.text;
     chooseTextVC.desText.text = self.content.text;
     chooseTextVC.actionTitle = _actionTitle;
     chooseTextVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
@@ -130,51 +130,61 @@
 }
 
 - (void)thn_setSceneTitle:(NSString *)title {
-    if (title.length > 20) {
-        title = [title substringToIndex:20];
-    }
-    self.suTitle.text = @"";
     if (title.length == 0) {
         self.title.hidden = YES;
-        self.suTitle.hidden = YES;
         self.addText.hidden = NO;
-        self.title.text = title;
-        
-    } else if (title.length > 10) {
+    } else {
         self.title.hidden = NO;
-        self.suTitle.hidden = NO;
         self.addText.hidden = YES;
-        
-        NSString * titleStr = [NSString stringWithFormat:@"    %@  ", [title substringToIndex:10]];
-        self.title.text = titleStr;
-        
-        NSString * suTitleStr = [NSString stringWithFormat:@"    %@  ", [title substringFromIndex:10]];
-        self.suTitle.text = suTitleStr;
-        
-        [self.suTitle mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@([self getTitleSizeWidth:suTitleStr].width));
-        }];
-        
         [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@([self getTitleSizeWidth:titleStr].width));
-            make.bottom.equalTo(_sceneImgView.mas_bottom).with.offset(-48);
-        }];
-        
-        [self layoutIfNeeded];
-        
-    } else if (title.length <= 10) {
-        self.title.hidden = NO;
-        self.suTitle.hidden = YES;
-        self.addText.hidden = YES;
-        NSString * str = [NSString stringWithFormat:@"    %@  ", title];
-        self.title.text = str;
-        [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@([self getTitleSizeWidth:str].width));
+            make.width.equalTo(@([self getTitleSizeWidth:title].width + 30));
             make.bottom.equalTo(_sceneImgView.mas_bottom).with.offset(-20);
         }];
-        
-        [self layoutIfNeeded];
     }
+    self.title.text = title;
+    
+//    if (title.length > 20) {
+//        title = [title substringToIndex:20];
+//    }
+////    self.suTitle.text = @"";
+//    if (title.length == 0) {
+//        self.title.hidden = YES;
+////        self.suTitle.hidden = YES;
+//        self.addText.hidden = NO;
+//        self.title.text = title;
+//        
+//    } else if (title.length > 10) {
+//        self.title.hidden = NO;
+////        self.suTitle.hidden = NO;
+//        self.addText.hidden = YES;
+//        
+////        NSString * titleStr = [NSString stringWithFormat:@"%@", [title substringToIndex:10]];
+////        self.title.text = titleStr;
+//        
+////        NSString * suTitleStr = [NSString stringWithFormat:@"%@", [title substringFromIndex:10]];
+////        self.suTitle.text = suTitleStr;
+//        
+//        [self.suTitle mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.width.equalTo(@([self getTitleSizeWidth:suTitleStr].width));
+//        }];
+//        
+//        [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.width.equalTo(@([self getTitleSizeWidth:titleStr].width));
+//            make.bottom.equalTo(_sceneImgView.mas_bottom).with.offset(-48);
+//        }];
+//        
+//        [self layoutIfNeeded];
+//        
+//    } else if (title.length <= 10) {
+//        self.title.hidden = NO;
+//        self.suTitle.hidden = YES;
+//        self.addText.hidden = YES;
+//        NSString * str = [NSString stringWithFormat:@"%@", title];
+//        self.title.text = str;
+
+//        
+//        [self layoutIfNeeded];
+//    }
 }
 
 - (CGSize)getTitleSizeWidth:(NSString *)text {
@@ -198,6 +208,7 @@
         _title.textColor = [UIColor colorWithHexString:WHITE_COLOR];
         _title.font = [UIFont systemFontOfSize:17];
         _title.hidden = YES;
+        _title.textAlignment = NSTextAlignmentCenter;
         _title.userInteractionEnabled = YES;
         UITapGestureRecognizer *titleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goChooseText)];
         [_title addGestureRecognizer:titleTap];
@@ -205,19 +216,19 @@
     return _title;
 }
 
-- (UILabel *)suTitle {
-    if (!_suTitle) {
-        _suTitle = [[UILabel alloc] init];
-        _suTitle.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
-        _suTitle.textColor = [UIColor colorWithHexString:WHITE_COLOR];
-        _suTitle.font = [UIFont systemFontOfSize:17];
-        _suTitle.hidden = YES;
-        _suTitle.userInteractionEnabled = YES;
-        UITapGestureRecognizer *titleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goChooseText)];
-        [_suTitle addGestureRecognizer:titleTap];
-    }
-    return _suTitle;
-}
+//- (UILabel *)suTitle {
+//    if (!_suTitle) {
+//        _suTitle = [[UILabel alloc] init];
+//        _suTitle.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
+//        _suTitle.textColor = [UIColor colorWithHexString:WHITE_COLOR];
+//        _suTitle.font = [UIFont systemFontOfSize:17];
+//        _suTitle.hidden = YES;
+//        _suTitle.userInteractionEnabled = YES;
+//        UITapGestureRecognizer *titleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goChooseText)];
+//        [_suTitle addGestureRecognizer:titleTap];
+//    }
+//    return _suTitle;
+//}
 
 #pragma mark - 描述
 - (UIScrollView *)contentRoll {

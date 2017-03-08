@@ -31,15 +31,16 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
 
 #pragma mark - setModel
 - (void)thn_setSceneContentData:(HomeSceneListRow *)contentModel {
+    self.titleLab.text = contentModel.title;
     [self getContentWithTags:contentModel.des];
     
     CGSize size = [_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 50, 0)];
-    if (size.height*1.5 <= 65) {
-        self.defaultCellHigh = size.height*1.5 + 10;
+    if (size.height*1.5 <= 55) {
+        self.defaultCellHigh = size.height*1.5 + 35;
     } else {
-        self.defaultCellHigh = 65;
+        self.defaultCellHigh = 90;
     }
-    self.cellHigh = size.height*1.5;
+    self.cellHigh = size.height*1.5 + 25;
 }
 
 //  检索描述内容中的标签
@@ -76,11 +77,19 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
 
 #pragma mark - setUI
 - (void)setCellUI {
+    [self addSubview:self.titleLab];
+    [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(40);
+        make.top.equalTo(self.mas_top).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(25);
+        make.right.equalTo(self.mas_right).with.offset(-25);
+    }];
+    
     [self addSubview:self.graybackView];
     [_graybackView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(15);
         make.right.equalTo(self.mas_right).with.offset(-15);
-        make.top.equalTo(self.mas_top).with.offset(15);
+        make.top.equalTo(self.mas_top).with.offset(40);
         make.bottom.equalTo(self.mas_bottom).with.offset(0);
     }];
     
@@ -101,6 +110,15 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
 }
 
 #pragma mark - init
+- (UILabel *)titleLab {
+    if (!_titleLab) {
+        _titleLab = [[UILabel alloc] init];
+        _titleLab.font = [UIFont systemFontOfSize:14];
+        _titleLab.textColor = [UIColor colorWithHexString:@"#666666"];
+    }
+    return _titleLab;
+}
+
 - (UIView *)graybackView {
     if (!_graybackView) {
         _graybackView = [[UIView alloc] init];

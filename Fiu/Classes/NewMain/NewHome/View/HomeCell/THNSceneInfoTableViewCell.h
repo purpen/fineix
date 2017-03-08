@@ -15,12 +15,13 @@
     TTTAttributedLabelDelegate
 >
 
-@pro_strong UINavigationController *nav;
-@pro_strong UIView *graybackView;
-@pro_strong TTTAttributedLabel *content;
-@pro_strong UIButton *moreIcon;
-@pro_assign CGFloat cellHigh;
-@pro_assign CGFloat defaultCellHigh;
+@property (nonatomic, strong) UINavigationController *nav;
+@property (nonatomic, strong) UILabel *titleLab;
+@property (nonatomic, strong) UIView *graybackView;
+@property (nonatomic, strong) TTTAttributedLabel *content;
+@property (nonatomic, strong) UIButton *moreIcon;
+@property (nonatomic, assign) CGFloat cellHigh;
+@property (nonatomic, assign) CGFloat defaultCellHigh;
 
 - (void)thn_setSceneContentData:(HomeSceneListRow *)contentModel;
 
