@@ -64,39 +64,39 @@
                                   [self thn_showLoadImageAnimate:YES];
                               }];
 
-    if (sceneModel.title.length == 0 || [sceneModel.title isKindOfClass:[NSNull class]]) {
-        self.title.hidden = YES;
-        self.suTitle.hidden = YES;
-
-    } else if (sceneModel.title.length > 10) {
-        self.title.hidden = NO;
-        self.suTitle.hidden = NO;
-        
-        NSString *titleStr = [NSString stringWithFormat:@"    %@  ", [sceneModel.title substringToIndex:10]];
-        self.title.text = titleStr;
-        
-        NSString *suTitleStr = [NSString stringWithFormat:@"    %@  ", [sceneModel.title substringFromIndex:10]];
-        self.suTitle.text = suTitleStr;
-        
-        [self.suTitle mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@([self getTextSizeWidth:suTitleStr font:17].width));
-        }];
-        
-        [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@([self getTextSizeWidth:titleStr font:17].width));
-            make.bottom.equalTo(self.mas_bottom).with.offset(-48);
-        }];
-        
-    } else if (sceneModel.title.length <= 10) {
-        self.suTitle.hidden = YES;
-        self.title.hidden = NO;
-        
-        NSString *titleStr = [NSString stringWithFormat:@"    %@  ", sceneModel.title];
-        self.title.text = titleStr;
-        [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@([self getTextSizeWidth:titleStr font:17].width));
-        }];
-    }
+//    if (sceneModel.title.length == 0 || [sceneModel.title isKindOfClass:[NSNull class]]) {
+//        self.title.hidden = YES;
+//        self.suTitle.hidden = YES;
+//
+//    } else if (sceneModel.title.length > 10) {
+//        self.title.hidden = NO;
+//        self.suTitle.hidden = NO;
+//        
+//        NSString *titleStr = [NSString stringWithFormat:@"    %@  ", [sceneModel.title substringToIndex:10]];
+//        self.title.text = titleStr;
+//        
+//        NSString *suTitleStr = [NSString stringWithFormat:@"    %@  ", [sceneModel.title substringFromIndex:10]];
+//        self.suTitle.text = suTitleStr;
+//        
+//        [self.suTitle mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.width.equalTo(@([self getTextSizeWidth:suTitleStr font:17].width));
+//        }];
+//        
+//        [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.width.equalTo(@([self getTextSizeWidth:titleStr font:17].width));
+//            make.bottom.equalTo(self.mas_bottom).with.offset(-48);
+//        }];
+//        
+//    } else if (sceneModel.title.length <= 10) {
+//        self.suTitle.hidden = YES;
+//        self.title.hidden = NO;
+//        
+//        NSString *titleStr = [NSString stringWithFormat:@"    %@  ", sceneModel.title];
+//        self.title.text = titleStr;
+//        [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.width.equalTo(@([self getTextSizeWidth:titleStr font:17].width));
+//        }];
+//    }
     
 }
 
@@ -188,19 +188,19 @@
         make.top.equalTo(self.mas_top).with.offset(0);
     }];
     
-    [self addSubview:self.suTitle];
-    [_suTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(50, 25));
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.bottom.equalTo(self.mas_bottom).with.offset(-20);
-    }];
-    
-    [self addSubview:self.title];
-    [_title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(50, 25));
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.bottom.equalTo(self.mas_bottom).with.offset(-20);
-    }];
+//    [self addSubview:self.suTitle];
+//    [_suTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(50, 25));
+//        make.left.equalTo(self.mas_left).with.offset(0);
+//        make.bottom.equalTo(self.mas_bottom).with.offset(-20);
+//    }];
+//    
+//    [self addSubview:self.title];
+//    [_title mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(50, 25));
+//        make.left.equalTo(self.mas_left).with.offset(0);
+//        make.bottom.equalTo(self.mas_bottom).with.offset(-20);
+//    }];
 }
 
 #pragma mark - init

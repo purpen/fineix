@@ -617,7 +617,7 @@ static NSInteger const actionButtonTag  = 611;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.sceneTable) {
         if (indexPath.row == 2) {
-            if (_contentHigh > 65.0f) {
+            if (_contentHigh > 90.0f) {
                 if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
                     _selectedIndexPath = nil;
                 } else {

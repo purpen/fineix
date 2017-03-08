@@ -819,6 +819,7 @@
 		D8DD22581DB756C0007D80CE /* THNChooseCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD22571DB756C0007D80CE /* THNChooseCityViewController.m */; };
 		D8DD225B1DBA1809007D80CE /* THNProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD225A1DBA1809007D80CE /* THNProvinceModel.m */; };
 		D8DDEE101D338D760020FF66 /* FBPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DDEE0F1D338D760020FF66 /* FBPopupView.m */; };
+		D8E1EB771E6FDCDE0041F010 /* THNDomainSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1EB761E6FDCDE0041F010 /* THNDomainSetViewController.m */; };
 		D8E3AEB61CFC9B84006E5E8C /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */; };
 		D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */; };
 		D8E3AEBC1CFC9B84006E5E8C /* SceneAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB51CFC9B84006E5E8C /* SceneAddViewController.m */; };
@@ -2276,6 +2277,8 @@
 		D8DD225A1DBA1809007D80CE /* THNProvinceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNProvinceModel.m; sourceTree = "<group>"; };
 		D8DDEE0E1D338D760020FF66 /* FBPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPopupView.h; sourceTree = "<group>"; };
 		D8DDEE0F1D338D760020FF66 /* FBPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPopupView.m; sourceTree = "<group>"; };
+		D8E1EB751E6FDCDE0041F010 /* THNDomainSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDomainSetViewController.h; sourceTree = "<group>"; };
+		D8E1EB761E6FDCDE0041F010 /* THNDomainSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomainSetViewController.m; sourceTree = "<group>"; };
 		D8E3AEA81CFC9B84006E5E8C /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageViewController.h; sourceTree = "<group>"; };
 		D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipImageViewController.m; sourceTree = "<group>"; };
 		D8E3AEB21CFC9B84006E5E8C /* ReleaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseViewController.h; sourceTree = "<group>"; };
@@ -5447,6 +5450,8 @@
 				D8884DDC1E56D58400CEE159 /* THNDomainInfoViewController.m */,
 				D85F19281E60345E0038E0BB /* THNDomianLightViewController.h */,
 				D85F19291E60345E0038E0BB /* THNDomianLightViewController.m */,
+				D8E1EB751E6FDCDE0041F010 /* THNDomainSetViewController.h */,
+				D8E1EB761E6FDCDE0041F010 /* THNDomainSetViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5952,6 +5957,7 @@
 				1F2A8FDC1CF40277005116C7 /* GoodsSceneCollectionViewCell.m in Sources */,
 				1F2A8F511CF40277005116C7 /* FBSticker.m in Sources */,
 				1F2AFC651D88170B00DA6035 /* DatePickerViewController.m in Sources */,
+				D8E1EB771E6FDCDE0041F010 /* THNDomainSetViewController.m in Sources */,
 				1F2A90261CF40277005116C7 /* UIImagePickerController+Flag.m in Sources */,
 				1F2AFD1F1D8817CC00DA6035 /* THNCuXiaoProductModel.m in Sources */,
 				1F2AFCA31D88170B00DA6035 /* TalentView.m in Sources */,

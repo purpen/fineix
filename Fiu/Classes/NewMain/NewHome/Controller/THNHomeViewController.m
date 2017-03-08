@@ -974,7 +974,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section != 0 && indexPath.section != 1 && indexPath.section != 2 && indexPath.section != 3) {
         if (indexPath.row == 2) {
-            if (_contentHigh > 65.0f) {
+            if (_contentHigh > 90.0f) {
                 if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
                     _selectedIndexPath = nil;
                 } else {

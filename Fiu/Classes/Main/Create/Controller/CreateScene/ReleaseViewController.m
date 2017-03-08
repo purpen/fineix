@@ -52,15 +52,15 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 #pragma mark - 网络请求
 #pragma mark 发布情境
 - (void)networkNewSceneData:(NSString *)sceneId {
-    NSString *firTitle = [self.addContent.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *subTitle = [self.addContent.suTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    if (subTitle.length == 0) {
-        subTitle = @"";
+    NSString *title = self.addContent.title.text;
+//    NSString *subTitle = self.addContent.suTitle.text;
+//    if (subTitle.length == 0) {
+//        subTitle = @"";
+//    }
+    if (title.length == 0) {
+        title = @"";
     }
-    if (firTitle.length == 0) {
-        firTitle = @"";
-    }
-    NSString *title = [NSString stringWithFormat:@"%@%@", firTitle, subTitle];
+//    NSString *title = [NSString stringWithFormat:@"%@%@", firTitle, subTitle];
     
     if ([self.addContent.content.text isEqualToString:NSLocalizedString(@"addDescription", nil)]) {
         self.addContent.content.text = @"";
