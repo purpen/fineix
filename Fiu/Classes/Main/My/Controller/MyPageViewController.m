@@ -45,6 +45,7 @@
 #import "AboutViewController.h"
 #import "THNQiYeQingDingZhiViewController.h"
 #import "THNZhaoMuViewController.h"
+#import "THNDiPanGuanLiCollectionViewCell.h"
 
 @interface MyPageViewController ()<THNNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -232,6 +233,7 @@
         [_myCollectionView registerClass:[MyPageBtnCollectionViewCell class] forCellWithReuseIdentifier:@"MyPageBtnCollectionViewCell"];
         [_myCollectionView registerClass:[THNDivideCollectionViewCell class] forCellWithReuseIdentifier:THNDIVIDECollectionViewCell];
         [_myCollectionView registerClass:[THNOrderCollectionViewCell class] forCellWithReuseIdentifier:THNORDErCollectionViewCell];
+        [_myCollectionView registerClass:[THNDiPanGuanLiCollectionViewCell class] forCellWithReuseIdentifier:THNDIPanGuanLiCollectionViewCell];
     }
     return _myCollectionView;
 }
@@ -250,8 +252,10 @@
     if (section == 0) {
         return UIEdgeInsetsMake(0, 0, 0, 0);
     } else if (section == 2) {
-        return UIEdgeInsetsMake(8, 0, 10, 0);
-    }else if (section == 3) {
+        return UIEdgeInsetsMake(8, 0, 1, 0);
+    }else if (section == 4) {
+        return UIEdgeInsetsMake(0, 0, 10, 0);
+    } else if (section == 3) {
         return UIEdgeInsetsMake(0, 0, 10, 0);
     }
     else{
@@ -260,7 +264,7 @@
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 6;
+    return 7;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -277,8 +281,11 @@
     }else if (indexPath.section == 2){
         THNDivideCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNDIVIDECollectionViewCell forIndexPath:indexPath];
         return cell;
+    } else if (indexPath.section == 3) {
+        THNDiPanGuanLiCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNDIPanGuanLiCollectionViewCell forIndexPath:indexPath];
+        return cell;
     }
-    else if(indexPath.section == 3){
+    else if(indexPath.section == 4){
         THNOrderCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNORDErCollectionViewCell forIndexPath:indexPath];
         [cell.btn1 addTarget:self action:@selector(oderActionBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn2 addTarget:self action:@selector(oderActionBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -287,7 +294,7 @@
         [cell.btn5 addTarget:self action:@selector(refundAction) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
-    else if(indexPath.section == 4){
+    else if(indexPath.section == 5){
         MyPageBtnCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyPageBtnCollectionViewCell" forIndexPath:indexPath];
         cell.nav = self.navigationController;
         if ([_counterModel.message_total_count intValue] == 0) {
@@ -350,7 +357,7 @@
         [cell.btn9 addTarget:self action:@selector(createBtnClick) forControlEvents:UIControlEventTouchUpInside];
         return cell;
         
-    } else if (indexPath.section == 5) {
+    } else if (indexPath.section == 6) {
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell1" forIndexPath:indexPath];
         self.botView.frame = CGRectMake(146/667.0*SCREEN_HEIGHT, 0, SCREEN_WIDTH, 88);
         [self.botView.aboutBtn addTarget:self action:@selector(aboutBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -443,12 +450,15 @@
         return CGSizeMake(SCREEN_WIDTH, 44/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 3) {
-        return CGSizeMake(SCREEN_WIDTH, 120.5/667.0*SCREEN_HEIGHT);
+        return CGSizeMake(SCREEN_WIDTH, 44/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 4) {
-        return CGSizeMake(SCREEN_WIDTH, (190 + 140)/667.0*SCREEN_HEIGHT);
+        return CGSizeMake(SCREEN_WIDTH, 120.5/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 5) {
+        return CGSizeMake(SCREEN_WIDTH, (190 + 140)/667.0*SCREEN_HEIGHT);
+    }
+    if (indexPath.section == 6) {
         return CGSizeMake(SCREEN_HEIGHT, 200);
     }
     return CGSizeMake(0, 0);
@@ -459,10 +469,12 @@
     if (indexPath.section == 2) {
         THNAllianceViewController *allianceVC = [[THNAllianceViewController alloc] init];
         [self.navigationController pushViewController:allianceVC animated:YES];
-    } else if (indexPath.section == 3) {
+    } else if (indexPath.section == 4) {
         MyOderInfoViewController *vc = [[MyOderInfoViewController alloc] init];
         vc.type = @0;
         [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.section == 3) {
+        //地盘管理
     }
 }
 

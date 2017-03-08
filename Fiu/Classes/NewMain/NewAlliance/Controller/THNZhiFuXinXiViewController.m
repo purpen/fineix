@@ -73,12 +73,12 @@
         make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
     }];
 
-    [self.view addSubview:self.yanZhengView];
-    [_yanZhengView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self.view).mas_offset(0);
-        make.top.mas_equalTo(self.phoneView.mas_bottom).mas_offset(1);
-        make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
-    }];
+//    [self.view addSubview:self.yanZhengView];
+//    [_yanZhengView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.mas_equalTo(self.view).mas_offset(0);
+//        make.top.mas_equalTo(self.phoneView.mas_bottom).mas_offset(1);
+//        make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
+//    }];
     
 }
 
