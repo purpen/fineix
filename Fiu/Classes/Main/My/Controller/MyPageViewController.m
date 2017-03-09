@@ -252,7 +252,7 @@
     if (section == 0) {
         return UIEdgeInsetsMake(0, 0, 0, 0);
     } else if (section == 2) {
-        return UIEdgeInsetsMake(8, 0, 1, 0);
+        return UIEdgeInsetsMake(8, 0, 0, 0);
     }else if (section == 4) {
         return UIEdgeInsetsMake(0, 0, 10, 0);
     } else if (section == 3) {

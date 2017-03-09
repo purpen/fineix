@@ -10,11 +10,18 @@
 #import "Fiu.h"
 #import "LSActionSheet.h"
 #import "THNZhiFuXinXiViewController.h"
+#import "THNZhangHuModel.h"
+#import "MJExtension.h"
+#import "THNZhangHuTableViewCell.h"
 
-@interface THNBangDingTiXianZhangHuViewController ()
+@interface THNBangDingTiXianZhangHuViewController () <THNNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
 
 /**  */
 @property (nonatomic, strong) UIView *addView;
+/**  */
+@property (nonatomic, strong) NSArray *modelAry;
+/**  */
+@property (nonatomic, strong) UITableView *tabelView;
 
 @end
 
@@ -24,6 +31,44 @@
     [super viewWillAppear:animated];
     
     [self thn_setNavigationViewUI];
+    [self.view addSubview:self.tabelView];
+    FBRequest *request = [FBAPI postWithUrlString:@"/payment_card/getlist" requestDictionary:@{
+                                                                                               @"page" : @"1",
+                                                                                               @"size" : @"8",
+                                                                                               @"sort" : @"0"
+                                                                                               } delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary *dict = result[@"data"];
+        NSArray *ary = dict[@"rows"];
+        self.modelAry = [THNZhangHuModel mj_objectArrayWithKeyValuesArray:ary];
+        [self.tabelView reloadData];
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
+}
+
+-(UITableView *)tabelView{
+    if (!_tabelView) {
+        _tabelView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64-44)];
+        _tabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tabelView.delegate = self;
+        _tabelView.dataSource = self;
+        _tabelView.rowHeight = 60;
+        _tabelView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        [_tabelView registerClass:[THNZhangHuTableViewCell class] forCellReuseIdentifier:THNZHANGHuTableViewCell];
+    }
+    return _tabelView;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.modelAry.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    THNZhangHuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:THNZHANGHuTableViewCell];
+    THNZhangHuModel *model = self.modelAry[indexPath.row];
+    cell.model = model;
+    return cell;
 }
 
 #pragma mark - 设置Nav
@@ -31,7 +76,14 @@
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.navViewTitle.text = @"绑定提现账户";
+    [self thn_addBarItemRightBarButton:@"管理" image:nil];
+    self.delegate = self;
 }
+
+-(void)thn_rightBarItemSelected{
+    NSLog(@"管理");
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

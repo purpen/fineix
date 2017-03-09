@@ -8,6 +8,7 @@
 
 #import "THNZhiFuXinXiViewController.h"
 #import "Fiu.h"
+#import "NSString+Helper.h"
 
 @interface THNZhiFuXinXiViewController ()<THNNavigationBarItemsDelegate>
 
@@ -17,8 +18,18 @@
 @property (nonatomic, strong) UIView *zhangHuView;
 @property (nonatomic, strong) UIView *phoneView;
 @property (nonatomic, strong) UIView *yanZhengView;
+/**  */
+@property (nonatomic, strong) UITextField *phoneTF;
+/**  */
+@property (nonatomic, strong) UILabel *repostLabel;
+/**  */
+@property (nonatomic, strong) UITextField *nameTF;
+@property (nonatomic, strong) UITextField *zhangHuTF;
+@property (nonatomic, strong) UITextField *yanZhengMaTF;
 
 @end
+
+static NSString *const URLAliance = @"/alliance/view";
 
 @implementation THNZhiFuXinXiViewController
 
@@ -38,7 +49,36 @@
 }
 
 -(void)thn_rightBarItemSelected{
-    NSLog(@"保存");
+    if (self.nameTF.text.length == 0) {
+        [SVProgressHUD showInfoWithStatus:@"请输入姓名"];
+    } else if (self.zhangHuTF.text.length == 0) {
+        [SVProgressHUD showInfoWithStatus:@"请输入账户"];
+    } else if (self.phoneTF.text.length == 0) {
+        [SVProgressHUD showInfoWithStatus:@"请输入手机号"];
+    } else if (self.yanZhengMaTF.text.length == 0) {
+        [SVProgressHUD showInfoWithStatus:@"请输入验证码"];
+    } else {
+        __block NSString *str;
+        FBRequest *alianceRequest = [FBAPI postWithUrlString:URLAliance requestDictionary:@{} delegate:self];
+        [alianceRequest startRequestSuccess:^(FBRequest *request, id result) {
+            NSDictionary *dict = [result valueForKey:@"data"];
+            str = dict[@"_id"];
+            FBRequest *requestTwo = [FBAPI postWithUrlString:@"/payment_card/save" requestDictionary:@{
+                                                                                                    @"alliance_id" : str,
+                                                                                                        @"kind" : @"2",
+                                                                                                    @"account" : self.zhangHuTF.text,
+                                                                                                    @"username" : self.nameTF.text,
+                                                                                                    @"phone" : self.phoneTF.text,
+                                                                                                    @"verify_code" : self.yanZhengMaTF.text
+                                                                                                    } delegate:self];
+            [requestTwo startRequestSuccess:^(FBRequest *request, id result) {
+                [SVProgressHUD showSuccessWithStatus:@"成功绑定账户"];
+                [self.navigationController popViewControllerAnimated:YES];
+            } failure:^(FBRequest *request, NSError *error) {
+            }];
+        } failure:^(FBRequest *request, NSError *error) {
+        }];
+    }
 }
 
 - (void)viewDidLoad {
@@ -73,12 +113,12 @@
         make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
     }];
 
-//    [self.view addSubview:self.yanZhengView];
-//    [_yanZhengView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.mas_equalTo(self.view).mas_offset(0);
-//        make.top.mas_equalTo(self.phoneView.mas_bottom).mas_offset(1);
-//        make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
-//    }];
+    [self.view addSubview:self.yanZhengView];
+    [_yanZhengView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view).mas_offset(0);
+        make.top.mas_equalTo(self.phoneView.mas_bottom).mas_offset(1);
+        make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
+    }];
     
 }
 
@@ -98,17 +138,92 @@
             make.width.mas_equalTo(65);
         }];
         
-        UITextField *textF = [[UITextField alloc] init];
-        textF.borderStyle = UITextBorderStyleNone;
-        textF.placeholder = @"输入短信验证码";
-        [_yanZhengView addSubview:textF];
-        textF.font = [UIFont systemFontOfSize:14];
-        [textF mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.yanZhengMaTF = [[UITextField alloc] init];
+        _yanZhengMaTF.borderStyle = UITextBorderStyleNone;
+        _yanZhengMaTF.placeholder = @"输入短信验证码";
+        [_yanZhengView addSubview:_yanZhengMaTF];
+        _yanZhengMaTF.font = [UIFont systemFontOfSize:14];
+        [_yanZhengMaTF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(label.mas_right).mas_offset(15*SCREEN_HEIGHT/667.0);
-            make.right.top.bottom.mas_equalTo(_yanZhengView).mas_offset(0);
+            make.top.bottom.mas_equalTo(_yanZhengView).mas_offset(0);
+            make.right.mas_equalTo(_yanZhengView.mas_right).mas_offset(-(68+30+20)/2);
+        }];
+        
+        _repostLabel = [[UILabel alloc] init];
+        _repostLabel.userInteractionEnabled = YES;
+        _repostLabel.text = @"发送验证码";
+        _repostLabel.textAlignment = NSTextAlignmentCenter;
+        _repostLabel.font = [UIFont systemFontOfSize:13];
+        _repostLabel.textColor = [UIColor colorWithHexString:@"#868686"];
+        _repostLabel.layer.masksToBounds = YES;
+        _repostLabel.layer.cornerRadius = 3;
+        _repostLabel.layer.borderColor = [UIColor colorWithHexString:@"#d3d3d3"].CGColor;
+        _repostLabel.layer.borderWidth = 0.5;
+        [_yanZhengView addSubview:_repostLabel];
+        UIButton *btn = [[UIButton alloc] init];
+        btn.backgroundColor = [UIColor clearColor];
+        [btn addTarget:self action:@selector(postTap) forControlEvents:UIControlEventTouchUpInside];
+        [_yanZhengView addSubview:btn];
+        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(_yanZhengView.mas_centerY).mas_offset(0);
+            make.right.mas_equalTo(_yanZhengView.mas_right).mas_offset(-15);
+            make.top.mas_equalTo(_yanZhengView.mas_top).mas_offset(5);
+            make.bottom.mas_equalTo(_yanZhengView.mas_bottom).mas_offset(-5);
+            make.width.mas_equalTo(88);
+        }];
+        [_repostLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(_yanZhengView.mas_centerY).mas_offset(0);
+            make.right.mas_equalTo(_yanZhengView.mas_right).mas_offset(-15);
+            make.top.mas_equalTo(_yanZhengView.mas_top).mas_offset(5);
+            make.bottom.mas_equalTo(_yanZhengView.mas_bottom).mas_offset(-5);
+            make.width.mas_equalTo(88);
         }];
     }
     return _yanZhengView;
+}
+
+//开始倒计时准备重新发送
+-(void)startTime{
+    __block int timeout = 30;//倒计时时间
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), 1.0*NSEC_PER_SEC, 0);//每秒执行
+    dispatch_source_set_event_handler(_timer, ^{
+        //倒计时结束，关闭
+        if (timeout <= 0) {
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //时间到了后重新发送view消失
+                _repostLabel.text = @"发送验证码";
+            });
+        }//按钮显示剩余时间
+        else{
+            int seconds = timeout % 60;
+            NSString *strTime = [NSString stringWithFormat:@"%.2d秒",seconds];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UIView beginAnimations:nil context:nil];
+                [UIView setAnimationDuration:1];
+                _repostLabel.text = strTime;
+                [UIView commitAnimations];
+            });
+            timeout --;
+        }
+    });
+    dispatch_resume(_timer);
+}
+
+
+-(void)postTap{
+    if (![self.phoneTF.text checkTel]) {
+        [SVProgressHUD showErrorWithStatus:@"手机号输入错误"];
+        return;
+    }
+    FBRequest *request = [FBAPI postWithUrlString:[NSString stringWithFormat:@"/auth/verify_code?mobile=%@&type=5",self.phoneTF.text] requestDictionary:nil delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        [self startTime];
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
 }
 
 -(UIView *)phoneView{
@@ -127,12 +242,12 @@
             make.width.mas_equalTo(65);
         }];
         
-        UITextField *textF = [[UITextField alloc] init];
-        textF.borderStyle = UITextBorderStyleNone;
-        textF.placeholder = @"输入手机号";
-        [_zhangHuView addSubview:textF];
-        textF.font = [UIFont systemFontOfSize:14];
-        [textF mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.phoneTF = [[UITextField alloc] init];
+        self.phoneTF.borderStyle = UITextBorderStyleNone;
+        self.phoneTF.placeholder = @"输入手机号";
+        [_phoneView addSubview:self.phoneTF];
+        self.phoneTF.font = [UIFont systemFontOfSize:14];
+        [_phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(label.mas_right).mas_offset(15*SCREEN_HEIGHT/667.0);
             make.right.top.bottom.mas_equalTo(_phoneView).mas_offset(0);
         }];
@@ -153,15 +268,15 @@
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(_zhangHuView.mas_centerY).mas_offset(0);
             make.left.mas_equalTo(_zhangHuView.mas_left).mas_offset(15);
-            make.width.mas_equalTo(65);
+            make.width.mas_equalTo(75);
         }];
         
-        UITextField *textF = [[UITextField alloc] init];
-        textF.borderStyle = UITextBorderStyleNone;
-        textF.placeholder = @"输入帐号";
-        [_zhangHuView addSubview:textF];
-        textF.font = [UIFont systemFontOfSize:14];
-        [textF mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.zhangHuTF = [[UITextField alloc] init];
+        _zhangHuTF.borderStyle = UITextBorderStyleNone;
+        _zhangHuTF.placeholder = @"输入帐号";
+        [_zhangHuView addSubview:_zhangHuTF];
+        _zhangHuTF.font = [UIFont systemFontOfSize:14];
+        [_zhangHuTF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(label.mas_right).mas_offset(15*SCREEN_HEIGHT/667.0);
             make.right.top.bottom.mas_equalTo(_zhangHuView).mas_offset(0);
         }];
@@ -185,12 +300,12 @@
             make.width.mas_equalTo(65);
         }];
         
-        UITextField *textF = [[UITextField alloc] init];
-        textF.borderStyle = UITextBorderStyleNone;
-        textF.placeholder = @"输入姓名";
-        [_nameView addSubview:textF];
-        textF.font = [UIFont systemFontOfSize:14];
-        [textF mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.nameTF = [[UITextField alloc] init];
+        _nameTF.borderStyle = UITextBorderStyleNone;
+        _nameTF.placeholder = @"输入姓名";
+        [_nameView addSubview:_nameTF];
+        _nameTF.font = [UIFont systemFontOfSize:14];
+        [_nameTF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(label.mas_right).mas_offset(15*SCREEN_HEIGHT/667.0);
             make.right.top.bottom.mas_equalTo(_nameView).mas_offset(0);
         }];
