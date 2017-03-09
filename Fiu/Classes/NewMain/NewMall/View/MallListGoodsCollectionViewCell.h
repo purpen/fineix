@@ -15,10 +15,10 @@
 
 @interface MallListGoodsCollectionViewCell : UICollectionViewCell
 
-@pro_strong UIImageView *goodsImageView;
-@pro_strong UIView *blackView;
-@pro_strong UILabel *title;
-@pro_strong UILabel *price;
+@property (nonatomic, strong) UIImageView *goodsImageView;
+@property (nonatomic, strong) UIView *blackView;
+@property (nonatomic, strong) UILabel *title;
+@property (nonatomic, strong) UILabel *price;
 
 - (void)thn_setHomeGoodsData:(HomeGoodsRow *)model;
 

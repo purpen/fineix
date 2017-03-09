@@ -31,9 +31,22 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
 
 #pragma mark - setModel
 - (void)thn_setSceneContentData:(HomeSceneListRow *)contentModel {
+//    if (contentModel.title.length == 0) {
+//        self.titleLab.hidden = YES;
+//    } else {
+//        self.titleLab.hidden = NO;
+//    }
+//    
+//    if (contentModel.des.length == 0) {
+//        self.graybackView.hidden = YES;
+//        self.content.hidden = YES;
+//    } else {
+//        self.graybackView.hidden = NO;
+//        self.content.hidden = NO;
+//    }
+    
     self.titleLab.text = contentModel.title;
     [self getContentWithTags:contentModel.des];
-    
     CGSize size = [_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 50, 0)];
     if (size.height*1.5 <= 55) {
         self.defaultCellHigh = size.height*1.5 + 35;

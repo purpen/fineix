@@ -79,16 +79,18 @@
     
     [self addSubview:self.title];
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(self.bounds.size.width - 6, 15));
-        make.top.left.equalTo(_blackView).with.offset(3);
-        make.centerX.equalTo(_blackView);
+        make.width.mas_equalTo(@(self.bounds.size.width - 6));
+        make.left.equalTo(_blackView.mas_left).with.offset(3);
+        make.top.equalTo(_blackView.mas_top).with.offset(0);
+        make.bottom.equalTo(_blackView.mas_centerY).with.offset(0);
     }];
     
     [self addSubview:self.price];
     [_price mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(self.bounds.size.width, 15));
-        make.bottom.equalTo(_blackView).with.offset(-3);
-        make.centerX.equalTo(_blackView);
+        make.width.mas_equalTo(@(self.bounds.size.width - 6));
+        make.top.equalTo(_title.mas_bottom).with.offset(0);
+        make.bottom.equalTo(_blackView.mas_bottom).with.offset(0);
+        make.left.equalTo(_blackView.mas_left).with.offset(3);
     }];
 }
 
@@ -117,6 +119,7 @@
         _title.font = [UIFont systemFontOfSize:10];
         _title.textColor = [UIColor whiteColor];
         _title.textAlignment = NSTextAlignmentCenter;
+        [_title sizeToFit];
     }
     return _title;
 }
@@ -127,6 +130,7 @@
         _price.font = [UIFont systemFontOfSize:10];
         _price.textColor = [UIColor colorWithHexString:MAIN_COLOR];
         _price.textAlignment = NSTextAlignmentCenter;
+        [_price sizeToFit];
     }
     return _price;
 }
