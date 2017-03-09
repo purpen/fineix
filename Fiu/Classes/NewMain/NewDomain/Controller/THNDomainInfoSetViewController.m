@@ -7,6 +7,9 @@
 //
 
 #import "THNDomainInfoSetViewController.h"
+#import "THNInfoTitleTableViewCell.h"
+
+static NSString *const setInfoCellId = @"SetInfoCellId";
 
 @interface THNDomainInfoSetViewController ()
 
@@ -49,8 +52,21 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
-    cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"CellID"];
+    THNInfoTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:setInfoCellId];
+    cell = [[THNInfoTitleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:setInfoCellId];
+    if (indexPath.section == 0) {
+        NSArray *leftText = @[@"地盘头像", @"地盘标题", @"地盘副标题", @"地盘分类", @"地盘标签"];
+        NSArray *rightText = @[@"", self.infoData.title, self.infoData.subTitle, @"", @""];
+        [cell thn_setInfoTitleLeftText:leftText[indexPath.row] andRightText:rightText[indexPath.row]];
+        if (indexPath.row == 0) {
+            [cell thn_showImage:self.infoData.avatarUrl];
+        }
+    
+    } else if (indexPath.section == 1) {
+        NSArray *leftText = @[@"地盘地址", @"地盘电话", @"地盘营业时间"];
+        NSArray *rightText = @[self.infoData.address, self.infoData.extra.tel, self.infoData.extra.shopHours];
+        [cell thn_setInfoTitleLeftText:leftText[indexPath.row] andRightText:rightText[indexPath.row]];
+    }
     return cell;
 }
 

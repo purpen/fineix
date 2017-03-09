@@ -41,6 +41,7 @@
     entity.interest_scene_cate = userInfo.interest_scene_cate;
     entity.is_bonus = userInfo.is_bonus;
     entity.allianceId = userInfo.allianceId;
+    entity.storageId = userInfo.storageId;
 }
 
 @end

@@ -168,6 +168,7 @@
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
+        
         NSDictionary *dataDict = result[@"data"];
         _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
@@ -194,6 +195,8 @@
         }
         _userInfo.is_expert = [result objectForKey:@"data"][@"identify"][@"is_expert"];
         _userInfo.allianceId = [result objectForKey:@"data"][@"identify"][@"alliance_id"];
+        _userInfo.storageId = [NSString stringWithFormat:@"%zi", [[result objectForKey:@"data"][@"identify"][@"storage_id"] integerValue]];
+        
         [_userInfo saveOrUpdate];
         [_userInfo updateUserInfoEntity];
         
@@ -476,8 +479,11 @@
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 3) {
         //地盘管理
-        THNDomainSetViewController *domainSetVC = [[THNDomainSetViewController alloc] init];
-        [self.navigationController pushViewController:domainSetVC animated:YES];
+        if (_userInfo.storageId.length > 0) {
+            THNDomainSetViewController *domainSetVC = [[THNDomainSetViewController alloc] init];
+            domainSetVC.domainId = _userInfo.storageId;
+            [self.navigationController pushViewController:domainSetVC animated:YES];
+        }
     }
 }
 

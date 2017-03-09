@@ -7,12 +7,14 @@
 //
 
 #import "THNViewController.h"
+#import "THNDomainManageInfoData.h"
 
 @interface THNDomainInfoSetViewController : THNViewController <
     UITableViewDelegate,
     UITableViewDataSource
 >
 
+@property (nonatomic, strong) THNDomainManageInfoData *infoData;
 @property (nonatomic, strong) UITableView *infoTableView;
 
 @end

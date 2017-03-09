@@ -821,6 +821,13 @@
 		D8DDEE101D338D760020FF66 /* FBPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DDEE0F1D338D760020FF66 /* FBPopupView.m */; };
 		D8E1EB771E6FDCDE0041F010 /* THNDomainSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1EB761E6FDCDE0041F010 /* THNDomainSetViewController.m */; };
 		D8E1EB7A1E7108770041F010 /* THNDomainInfoSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1EB791E7108770041F010 /* THNDomainInfoSetViewController.m */; };
+		D8E1EB881E7132E20041F010 /* THNDomainManageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1EB7D1E7132E20041F010 /* THNDomainManageInfo.m */; };
+		D8E1EB891E7132E20041F010 /* THNDomainManageInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1EB7F1E7132E20041F010 /* THNDomainManageInfoData.m */; };
+		D8E1EB8A1E7132E20041F010 /* THNDomainManageInfoExtra.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1EB811E7132E20041F010 /* THNDomainManageInfoExtra.m */; };
+		D8E1EB8B1E7132E20041F010 /* THNDomainManageInfoLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1EB831E7132E20041F010 /* THNDomainManageInfoLocation.m */; };
+		D8E1EB8C1E7132E20041F010 /* THNDomainManageInfoNCover.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1EB851E7132E20041F010 /* THNDomainManageInfoNCover.m */; };
+		D8E1EB8D1E7132E20041F010 /* THNDomainManageInfoUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1EB871E7132E20041F010 /* THNDomainManageInfoUser.m */; };
+		D8E1EB911E713A760041F010 /* THNInfoTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1EB901E713A760041F010 /* THNInfoTitleTableViewCell.m */; };
 		D8E3AEB61CFC9B84006E5E8C /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */; };
 		D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */; };
 		D8E3AEBC1CFC9B84006E5E8C /* SceneAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB51CFC9B84006E5E8C /* SceneAddViewController.m */; };
@@ -2282,6 +2289,20 @@
 		D8E1EB761E6FDCDE0041F010 /* THNDomainSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomainSetViewController.m; sourceTree = "<group>"; };
 		D8E1EB781E7108770041F010 /* THNDomainInfoSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDomainInfoSetViewController.h; sourceTree = "<group>"; };
 		D8E1EB791E7108770041F010 /* THNDomainInfoSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomainInfoSetViewController.m; sourceTree = "<group>"; };
+		D8E1EB7C1E7132E20041F010 /* THNDomainManageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDomainManageInfo.h; sourceTree = "<group>"; };
+		D8E1EB7D1E7132E20041F010 /* THNDomainManageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomainManageInfo.m; sourceTree = "<group>"; };
+		D8E1EB7E1E7132E20041F010 /* THNDomainManageInfoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDomainManageInfoData.h; sourceTree = "<group>"; };
+		D8E1EB7F1E7132E20041F010 /* THNDomainManageInfoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomainManageInfoData.m; sourceTree = "<group>"; };
+		D8E1EB801E7132E20041F010 /* THNDomainManageInfoExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDomainManageInfoExtra.h; sourceTree = "<group>"; };
+		D8E1EB811E7132E20041F010 /* THNDomainManageInfoExtra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomainManageInfoExtra.m; sourceTree = "<group>"; };
+		D8E1EB821E7132E20041F010 /* THNDomainManageInfoLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDomainManageInfoLocation.h; sourceTree = "<group>"; };
+		D8E1EB831E7132E20041F010 /* THNDomainManageInfoLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomainManageInfoLocation.m; sourceTree = "<group>"; };
+		D8E1EB841E7132E20041F010 /* THNDomainManageInfoNCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDomainManageInfoNCover.h; sourceTree = "<group>"; };
+		D8E1EB851E7132E20041F010 /* THNDomainManageInfoNCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomainManageInfoNCover.m; sourceTree = "<group>"; };
+		D8E1EB861E7132E20041F010 /* THNDomainManageInfoUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDomainManageInfoUser.h; sourceTree = "<group>"; };
+		D8E1EB871E7132E20041F010 /* THNDomainManageInfoUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomainManageInfoUser.m; sourceTree = "<group>"; };
+		D8E1EB8F1E713A760041F010 /* THNInfoTitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNInfoTitleTableViewCell.h; sourceTree = "<group>"; };
+		D8E1EB901E713A760041F010 /* THNInfoTitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNInfoTitleTableViewCell.m; sourceTree = "<group>"; };
 		D8E3AEA81CFC9B84006E5E8C /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageViewController.h; sourceTree = "<group>"; };
 		D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipImageViewController.m; sourceTree = "<group>"; };
 		D8E3AEB21CFC9B84006E5E8C /* ReleaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseViewController.h; sourceTree = "<group>"; };
@@ -5464,6 +5485,7 @@
 		D8884DD91E56D55F00CEE159 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D8E1EB7B1E7132E20041F010 /* DomainManage */,
 				D8884DE41E57007800CEE159 /* DomainInfo */,
 			);
 			path = Model;
@@ -5472,6 +5494,7 @@
 		D8884DDA1E56D55F00CEE159 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8E1EB8E1E713A490041F010 /* DomainManage */,
 				D8884E011E595FC000CEE159 /* FooterView */,
 				D8884E021E595FC000CEE159 /* TableViewCell */,
 				D8884DFD1E57195F00CEE159 /* Lightspot */,
@@ -5573,6 +5596,34 @@
 				D81318221D928DF4007CE71C /* ShareStyleViewThree.m */,
 			);
 			path = Share;
+			sourceTree = "<group>";
+		};
+		D8E1EB7B1E7132E20041F010 /* DomainManage */ = {
+			isa = PBXGroup;
+			children = (
+				D8E1EB7C1E7132E20041F010 /* THNDomainManageInfo.h */,
+				D8E1EB7D1E7132E20041F010 /* THNDomainManageInfo.m */,
+				D8E1EB7E1E7132E20041F010 /* THNDomainManageInfoData.h */,
+				D8E1EB7F1E7132E20041F010 /* THNDomainManageInfoData.m */,
+				D8E1EB801E7132E20041F010 /* THNDomainManageInfoExtra.h */,
+				D8E1EB811E7132E20041F010 /* THNDomainManageInfoExtra.m */,
+				D8E1EB821E7132E20041F010 /* THNDomainManageInfoLocation.h */,
+				D8E1EB831E7132E20041F010 /* THNDomainManageInfoLocation.m */,
+				D8E1EB841E7132E20041F010 /* THNDomainManageInfoNCover.h */,
+				D8E1EB851E7132E20041F010 /* THNDomainManageInfoNCover.m */,
+				D8E1EB861E7132E20041F010 /* THNDomainManageInfoUser.h */,
+				D8E1EB871E7132E20041F010 /* THNDomainManageInfoUser.m */,
+			);
+			path = DomainManage;
+			sourceTree = "<group>";
+		};
+		D8E1EB8E1E713A490041F010 /* DomainManage */ = {
+			isa = PBXGroup;
+			children = (
+				D8E1EB8F1E713A760041F010 /* THNInfoTitleTableViewCell.h */,
+				D8E1EB901E713A760041F010 /* THNInfoTitleTableViewCell.m */,
+			);
+			path = DomainManage;
 			sourceTree = "<group>";
 		};
 		D8E3AEA71CFC9B84006E5E8C /* CreateScene */ = {
@@ -5909,12 +5960,14 @@
 				D8E8FFCB1D77393400DDC3E0 /* THNUserAddGoodsViewController.m in Sources */,
 				D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */,
 				D857C4631E2CB06200569B3D /* THNTradingRecordViewController.m in Sources */,
+				D8E1EB911E713A760041F010 /* THNInfoTitleTableViewCell.m in Sources */,
 				D8C0951F1D7533FD00908491 /* ShareInfo.m in Sources */,
 				1F1804311E5AF9E800722AF5 /* THNShangPinCollectionViewCell.m in Sources */,
 				D869BD6B1D6036A000432423 /* CommentNViewController.m in Sources */,
 				D857AC1E1DE7E6EE00F924E8 /* SubOrderModel.m in Sources */,
 				D86E54C01DD444230075ED88 /* FSNashvilleFilter.m in Sources */,
 				1F2A8FCA1CF40277005116C7 /* GoodsRow.m in Sources */,
+				D8E1EB881E7132E20041F010 /* THNDomainManageInfo.m in Sources */,
 				1F2AFC961D88170B00DA6035 /* FriendCollectionViewCell.m in Sources */,
 				D81318081D923A8C007CE71C /* THNRemindViewController.m in Sources */,
 				1F2A8FC31CF40277005116C7 /* CommentModelUser.m in Sources */,
@@ -5931,6 +5984,7 @@
 				D869BD7C1D6044F700432423 /* THNAddTagViewController.m in Sources */,
 				1FF36EA91D5099AA00EB3C93 /* UIView+FSExtension.m in Sources */,
 				D8ACF45E1D6D7BCC00DB79D8 /* THNSubscribeViewController.m in Sources */,
+				D8E1EB891E7132E20041F010 /* THNDomainManageInfoData.m in Sources */,
 				D857AC3E1DE836F000F924E8 /* THNServiceTableViewCell.m in Sources */,
 				D8F80B911DD3103500C086FA /* THNAdjustCollectionViewCell.m in Sources */,
 				D80FB14A1DAF89BA0060C561 /* NSString+TimeDate.m in Sources */,
@@ -5939,6 +5993,7 @@
 				1F2A90621CF40277005116C7 /* SystemInformsViewController.m in Sources */,
 				D806697B1D6F0206007FD81E /* MallSearchViewController.m in Sources */,
 				D86E54C41DD444230075ED88 /* FSWaldenFilter.m in Sources */,
+				D8E1EB8D1E7132E20041F010 /* THNDomainManageInfoUser.m in Sources */,
 				D8117AEB1E5A89D60094E7EB /* UserModelData.m in Sources */,
 				1F2AFDD91D8818A400DA6035 /* ExpressInfoModel.m in Sources */,
 				D8AC3E131D2DF9D900148522 /* UITabBar+badge.m in Sources */,
@@ -6016,6 +6071,7 @@
 				D8117AEE1E5A89D60094E7EB /* HelpUserData.m in Sources */,
 				1F2AFD941D88186C00DA6035 /* THNTFView.m in Sources */,
 				D8C095121D752EC600908491 /* ShareStyleTopView.m in Sources */,
+				D8E1EB8C1E7132E20041F010 /* THNDomainManageInfoNCover.m in Sources */,
 				D857C4691E2CBC8F00569B3D /* THNSettlementRecordTableViewCell.m in Sources */,
 				1F2A90661CF40277005116C7 /* CommentsTableViewCell.m in Sources */,
 				D8C095181D7533D000908491 /* CatagoryFiuSceneModel.m in Sources */,
@@ -6205,6 +6261,7 @@
 				1F2AFC771D88170B00DA6035 /* THNSenceTopicViewController.m in Sources */,
 				1F5E9FBF1E6E4EB500822312 /* THNZhangHuView.m in Sources */,
 				1F99E15C1E515A94000D3D73 /* LJCollectionViewFlowLayout.m in Sources */,
+				D8E1EB8B1E7132E20041F010 /* THNDomainManageInfoLocation.m in Sources */,
 				1F2A903A1CF40277005116C7 /* FBLocationViewController.m in Sources */,
 				1F2A90391CF40277005116C7 /* FBCityViewController.m in Sources */,
 				1F2A8FB91CF40277005116C7 /* Category.m in Sources */,
@@ -6220,6 +6277,7 @@
 				D857C4AD1E2F4FB300569B3D /* THNSettlementInfoProduct.m in Sources */,
 				1F2A8FCD1CF40277005116C7 /* GoodsBrandTableViewCell.m in Sources */,
 				1F2A90A21CF40277005116C7 /* SubscribePeopleTableViewCell.m in Sources */,
+				D8E1EB8A1E7132E20041F010 /* THNDomainManageInfoExtra.m in Sources */,
 				D86E54901DD444230075ED88 /* FSAmaroFilter.m in Sources */,
 				D8117B0E1E5AAE5D0094E7EB /* FBSubjectModelRow.m in Sources */,
 				1F2A901D1CF40277005116C7 /* BonusCell.m in Sources */,

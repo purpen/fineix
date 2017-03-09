@@ -8,6 +8,10 @@
 
 #import "THNDomainSetViewController.h"
 #import "THNDomainInfoSetViewController.h"
+#import "THNInfoTitleTableViewCell.h"
+
+static NSString *const URLDomainInfo = @"/scene_scene/view";
+static NSString *const infoCellId = @"THNInfoTitleTableViewCellId";
 
 @interface THNDomainSetViewController ()
 
@@ -24,7 +28,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self thn_networkDomainInfoData];
     [self.view addSubview:self.setTableView];
+}
+
+#pragma mark 地盘详情数据
+- (void)thn_networkDomainInfoData {
+    [SVProgressHUD show];
+    self.infoRequest = [FBAPI getWithUrlString:URLDomainInfo requestDictionary:@{@"id":self.domainId, @"is_edit":@"1"} delegate:self];
+    [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"======= %@", [NSString jsonStringWithObject:result]);
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSDictionary *dict =  [result valueForKey:@"data"];
+            self.infoData = [[THNDomainManageInfoData alloc] initWithDictionary:dict];
+            [self.setTableView reloadData];
+            [SVProgressHUD dismiss];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@" ---- %@ ----", error);
+    }];
 }
 
 #pragma mark - 设置界面UI 
@@ -50,8 +73,22 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
-    cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"CellID"];
+    THNInfoTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:infoCellId];
+    cell = [[THNInfoTitleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:infoCellId];
+    if (self.infoData) {
+        if (indexPath.section == 0) {
+            [cell thn_setInfoTitleLeftText:@"地盘基本信息" andRightText:@""];
+            [cell thn_showImage:self.infoData.avatarUrl];
+            
+        } else if (indexPath.section == 1) {
+            NSArray *leftText = @[@"地盘简介", @"地盘亮点"];
+            [cell thn_setInfoTitleLeftText:leftText[indexPath.row] andRightText:@""];
+        
+        } else if (indexPath.section == 3) {
+            [cell thn_setInfoTitleLeftText:@"添加商品到地盘" andRightText:@""];
+            [cell thn_showLeftButton];
+        }
+    }
     return cell;
 }
 
@@ -76,6 +113,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         THNDomainInfoSetViewController *infoSetVC = [[THNDomainInfoSetViewController alloc] init];
+        infoSetVC.infoData = self.infoData;
         [self.navigationController pushViewController:infoSetVC animated:YES];
     }
 }
@@ -86,5 +124,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
     self.navViewTitle.text = @"地盘管理";
 }
+
+#pragma mark - 
 
 @end
