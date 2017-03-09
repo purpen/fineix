@@ -19,24 +19,24 @@
 
 @interface THNViewController : UIViewController
 
-@pro_strong UIView *navView;        //  Nav视图
-@pro_strong UILabel *navViewTitle;  //  控制器标题
-@pro_strong UIButton *navBackBtn;   //  返回按钮
-@pro_strong UIButton *leftBtn;      //  ligthItem
-@pro_strong UIButton *rightBtn;     //  rightItem
-@pro_strong UIButton *logoImg;      //  Nav中间的Logo
-@pro_strong UIButton *qrBtn;        //  二维码扫描
-@pro_strong UIButton *searchBtn;    //  搜索
-@pro_strong UITableView *baseTable; //  当前列表
-@pro_strong UIButton *subscribeBtn; //  订阅按钮
+@property (nonatomic, strong) UIView *navView;        //  Nav视图
+@property (nonatomic, strong) UILabel *navViewTitle;  //  控制器标题
+@property (nonatomic, strong) UIButton *navBackBtn;   //  返回按钮
+@property (nonatomic, strong) UIButton *leftBtn;      //  ligthItem
+@property (nonatomic, strong) UIButton *rightBtn;     //  rightItem
+@property (nonatomic, strong) UIButton *logoImg;      //  Nav中间的Logo
+@property (nonatomic, strong) UIButton *qrBtn;        //  二维码扫描
+@property (nonatomic, strong) UIButton *searchBtn;    //  搜索
+@property (nonatomic, strong) UITableView *baseTable; //  当前列表
+@property (nonatomic, strong) UIButton *subscribeBtn; //  订阅按钮
 
 
 /**
  *  请求购物车数量
  */
-@pro_strong FBRequest   *   goodsCarRequest;
-@pro_strong NSString    *   goodsCount;
-@pro_strong UILabel     *   countLab;
+@property (nonatomic, strong) FBRequest   *   goodsCarRequest;
+@property (nonatomic, strong) NSString    *   goodsCount;
+@property (nonatomic, strong) UILabel     *   countLab;
 - (void)getGoodsCarNumData;
 - (void)setNavGoodsCarNumLab;
 

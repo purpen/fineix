@@ -821,6 +821,7 @@
 		D8DD225B1DBA1809007D80CE /* THNProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD225A1DBA1809007D80CE /* THNProvinceModel.m */; };
 		D8DDEE101D338D760020FF66 /* FBPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DDEE0F1D338D760020FF66 /* FBPopupView.m */; };
 		D8E1EB771E6FDCDE0041F010 /* THNDomainSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1EB761E6FDCDE0041F010 /* THNDomainSetViewController.m */; };
+		D8E1EB7A1E7108770041F010 /* THNDomainInfoSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1EB791E7108770041F010 /* THNDomainInfoSetViewController.m */; };
 		D8E3AEB61CFC9B84006E5E8C /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */; };
 		D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */; };
 		D8E3AEBC1CFC9B84006E5E8C /* SceneAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB51CFC9B84006E5E8C /* SceneAddViewController.m */; };
@@ -2282,6 +2283,8 @@
 		D8DDEE0F1D338D760020FF66 /* FBPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPopupView.m; sourceTree = "<group>"; };
 		D8E1EB751E6FDCDE0041F010 /* THNDomainSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDomainSetViewController.h; sourceTree = "<group>"; };
 		D8E1EB761E6FDCDE0041F010 /* THNDomainSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomainSetViewController.m; sourceTree = "<group>"; };
+		D8E1EB781E7108770041F010 /* THNDomainInfoSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDomainInfoSetViewController.h; sourceTree = "<group>"; };
+		D8E1EB791E7108770041F010 /* THNDomainInfoSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomainInfoSetViewController.m; sourceTree = "<group>"; };
 		D8E3AEA81CFC9B84006E5E8C /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageViewController.h; sourceTree = "<group>"; };
 		D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipImageViewController.m; sourceTree = "<group>"; };
 		D8E3AEB21CFC9B84006E5E8C /* ReleaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseViewController.h; sourceTree = "<group>"; };
@@ -5457,6 +5460,8 @@
 				D85F19291E60345E0038E0BB /* THNDomianLightViewController.m */,
 				D8E1EB751E6FDCDE0041F010 /* THNDomainSetViewController.h */,
 				D8E1EB761E6FDCDE0041F010 /* THNDomainSetViewController.m */,
+				D8E1EB781E7108770041F010 /* THNDomainInfoSetViewController.h */,
+				D8E1EB791E7108770041F010 /* THNDomainInfoSetViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -6049,6 +6054,7 @@
 				1F1804251E56961700722AF5 /* THNSortCollectionViewCell.m in Sources */,
 				D857C4B61E2F58A500569B3D /* THNAllinaceContact.m in Sources */,
 				D88F47EE1D5C5BD300C83A0C /* FBCategoryView.m in Sources */,
+				D8E1EB7A1E7108770041F010 /* THNDomainInfoSetViewController.m in Sources */,
 				1F1804111E53EEF200722AF5 /* THNDivideCollectionViewCell.m in Sources */,
 				D861BC6E1D7E977700A26022 /* THNBrandInfoViewController.m in Sources */,
 				1F18041B1E5432C100722AF5 /* UIButton+Layout.m in Sources */,

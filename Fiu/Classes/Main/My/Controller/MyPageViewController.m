@@ -46,6 +46,7 @@
 #import "THNQiYeQingDingZhiViewController.h"
 #import "THNZhaoMuViewController.h"
 #import "THNDiPanGuanLiCollectionViewCell.h"
+#import "THNDomainSetViewController.h"
 
 @interface MyPageViewController ()<THNNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -484,6 +485,8 @@
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 3) {
         //地盘管理
+        THNDomainSetViewController *domainSetVC = [[THNDomainSetViewController alloc] init];
+        [self.navigationController pushViewController:domainSetVC animated:YES];
     }
 }
 

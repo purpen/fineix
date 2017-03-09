@@ -1,19 +1,18 @@
 //
-//  THNDomainSetViewController.m
+//  THNDomainInfoSetViewController.m
 //  Fiu
 //
-//  Created by FLYang on 2017/3/8.
+//  Created by FLYang on 2017/3/9.
 //  Copyright © 2017年 taihuoniao. All rights reserved.
 //
 
-#import "THNDomainSetViewController.h"
 #import "THNDomainInfoSetViewController.h"
 
-@interface THNDomainSetViewController ()
+@interface THNDomainInfoSetViewController ()
 
 @end
 
-@implementation THNDomainSetViewController
+@implementation THNDomainInfoSetViewController
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -24,29 +23,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view addSubview:self.setTableView];
+    [self.view addSubview:self.infoTableView];
 }
 
-#pragma mark - 设置界面UI 
-- (UITableView *)setTableView {
-    if (!_setTableView) {
-        _setTableView = [[UITableView alloc] initWithFrame:CGRectMake(0 , 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStyleGrouped)];
-        _setTableView.delegate = self;
-        _setTableView.dataSource = self;
-        _setTableView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+#pragma mark - 设置界面UI
+- (UITableView *)infoTableView {
+    if (!_infoTableView) {
+        _infoTableView = [[UITableView alloc] initWithFrame:CGRectMake(0 , 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStyleGrouped)];
+        _infoTableView.delegate = self;
+        _infoTableView.dataSource = self;
+        _infoTableView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
     }
-    return _setTableView;
+    return _infoTableView;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 1) {
-        return 2;
+    if (section == 0) {
+        return 5;
     } else
-        return 1;
+        return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -56,10 +55,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 2) {
-        return 140.0f;
-    } else
-        return 44.0f;
+    return 44.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -73,18 +69,11 @@
     return 0.01f;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        THNDomainInfoSetViewController *infoSetVC = [[THNDomainInfoSetViewController alloc] init];
-        [self.navigationController pushViewController:infoSetVC animated:YES];
-    }
-}
-
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
-    self.navViewTitle.text = @"地盘管理";
+    self.navViewTitle.text = @"基本信息";
 }
 
 @end

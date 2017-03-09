@@ -325,7 +325,7 @@ static NSInteger const saveTime = 30 * 24 * 60;
 #pragma mark Nav中间的Logo
 - (UIButton *)logoImg {
     if (!_logoImg) {
-        _logoImg = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 22, 20, 44, 44)];
+        _logoImg = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 28, 27, 56, 25)];
         [_logoImg setImage:[UIImage imageNamed:@"shouye_Logo"] forState:(UIControlStateNormal)];
         [_logoImg setImage:[UIImage imageNamed:@"shouye_Logo"] forState:(UIControlStateHighlighted)];
         [_logoImg addTarget:self action:@selector(backTop) forControlEvents:(UIControlEventTouchUpInside)];
