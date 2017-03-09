@@ -28,5 +28,6 @@ typedef  void(^LSActionSheetBlock)(int index);
 +(void)showWithTitle:(NSString*)title  destructiveTitle:(NSString*)destructiveTitle  otherTitles:(NSArray*)otherTitles block:(LSActionSheetBlock)block;
 
 -(void)showTwo;
+-(void)zhangHuSheetShow;
 
 @end

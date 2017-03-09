@@ -37,7 +37,8 @@
 
 - (void)thn_setCanWithdrawMoneyData:(CGFloat)money {
     _maxMoney = money;
-    NSString *maxMoney = [NSString stringWithFormat:@"可提现金额：￥%.2f", money];
+    NSString *maxMoney = [NSString stringWithFormat:@"可提现金额:￥%.2f", money];
+    NSLog(@"dasdasd  %@",maxMoney);
     CGFloat width = [maxMoney boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 20)
                                            options:(NSStringDrawingUsesDeviceMetrics)
                                         attributes:nil

@@ -62,6 +62,9 @@
 @property(nonatomic,strong) UIView *naviViewAl;
 /**  */
 @property (nonatomic, strong) CAGradientLayer *shadowLayer;
+/**  */
+@property(nonatomic,copy) NSString *moneyStr;
+
 @end
 
 @implementation MyPageViewController
@@ -131,7 +134,6 @@
     [self.myCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
     self.delegate = self;
     [self thn_addNavLogoImage];
-//    [self thn_addBarItemLeftBarButton:nil image:@"my_riLi"];
     [self thn_addBarItemRightBarButton:nil image:@"my_set"];
     [self.view insertSubview:self.navView aboveSubview:self.myCollectionView];
     self.navView.backgroundColor = [UIColor clearColor];
@@ -141,6 +143,12 @@
     //网络请求
     [self netGetData];
     self.tabBarController.tabBar.hidden = NO;
+    FBRequest *request = [FBAPI postWithUrlString:@"/alliance/view" requestDictionary:@{} delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary *dict = [result valueForKey:@"data"];
+        self.moneyStr = dict[@"wait_cash_amount"];
+    } failure:^(FBRequest *request, NSError *error) {
+    }];
 }
 
 -(CAGradientLayer *)shadowLayer{
@@ -280,6 +288,7 @@
         return cell;
     }else if (indexPath.section == 2){
         THNDivideCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNDIVIDECollectionViewCell forIndexPath:indexPath];
+        cell.moneyStr = self.moneyStr;
         return cell;
     } else if (indexPath.section == 3) {
         THNDiPanGuanLiCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNDIPanGuanLiCollectionViewCell forIndexPath:indexPath];

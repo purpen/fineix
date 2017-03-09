@@ -7,7 +7,19 @@
 //
 
 #import "THNViewController.h"
+#import "THNZhangHuView.h"
+#import "THNZhangHuModel.h"
+
+@protocol THNBangDingTiXianZhangHuViewControllerDelaget <NSObject>
+
+-(void)setBangZhangHu:(ZhangHu)zhangHu andModel:(THNZhangHuModel*)model;
+
+@end
 
 @interface THNBangDingTiXianZhangHuViewController : THNViewController
+
+@property (nonatomic, assign) ZhangHu zhangHu;
+/**  */
+@property (nonatomic, weak) id<THNBangDingTiXianZhangHuViewControllerDelaget> bangDingDelegate;
 
 @end

@@ -13,19 +13,29 @@
 #import "THNZhangHuModel.h"
 #import "MJExtension.h"
 #import "THNZhangHuTableViewCell.h"
+#import "THNYinHangKaXinXiViewController.h"
 
 @interface THNBangDingTiXianZhangHuViewController () <THNNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
 
 /**  */
 @property (nonatomic, strong) UIView *addView;
 /**  */
-@property (nonatomic, strong) NSArray *modelAry;
+@property (nonatomic, strong) NSMutableArray *modelAry;
 /**  */
 @property (nonatomic, strong) UITableView *tabelView;
+/**  */
+@property (nonatomic, strong) THNZhangHuTableViewCell *selectedCell;
 
 @end
 
 @implementation THNBangDingTiXianZhangHuViewController
+
+-(NSMutableArray *)modelAry{
+    if (!_modelAry) {
+        _modelAry = [NSMutableArray array];
+    }
+    return _modelAry;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -40,10 +50,10 @@
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dict = result[@"data"];
         NSArray *ary = dict[@"rows"];
+        NSLog(@"asdasdsa  %@",ary);
         self.modelAry = [THNZhangHuModel mj_objectArrayWithKeyValuesArray:ary];
         [self.tabelView reloadData];
     } failure:^(FBRequest *request, NSError *error) {
-        
     }];
 }
 
@@ -71,17 +81,128 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    for (int i = 0; i < self.modelAry.count; i++) {
+        THNZhangHuTableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        cell.circleBtn.selected = NO;
+    }
+    THNZhangHuTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.circleBtn.selected = YES;
+}
+
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.navViewTitle.text = @"绑定提现账户";
     [self thn_addBarItemRightBarButton:@"管理" image:nil];
+    [self thn_addBarItemLeftBarButton:@"" image:@"icon_back_white"];
     self.delegate = self;
 }
 
+-(void)thn_leftBarItemSelected{
+    BOOL b = NO;
+    for (int i = 0; i < self.modelAry.count; i++) {
+        THNZhangHuTableViewCell *cell = [self.tabelView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        if (cell.circleBtn.selected) {
+            b = YES;
+            _selectedCell = cell;
+        }
+    }
+    if (b == NO) {
+        //未选择
+        if ([self.bangDingDelegate respondsToSelector:@selector(setZhangHu:)]) {
+            [self.bangDingDelegate setBangZhangHu:none andModel:nil];
+        }
+    } else {
+        //有选择账户
+        if ([self.selectedCell.model.kind isEqualToString:@"1"]) {
+            if ([self.bangDingDelegate respondsToSelector:@selector(setZhangHu:)]) {
+                [self.bangDingDelegate setBangZhangHu:YingHangKa andModel:self.selectedCell.model];
+            }
+        } else {
+            if ([self.bangDingDelegate respondsToSelector:@selector(setZhangHu:)]) {
+                [self.bangDingDelegate setBangZhangHu:zhiFuBao andModel:self.selectedCell.model];
+            }
+        }
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(void)thn_rightBarItemSelected{
-    NSLog(@"管理");
+    BOOL b = NO;
+    for (int i = 0; i < self.modelAry.count; i++) {
+        THNZhangHuTableViewCell *cell = [self.tabelView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        if (cell.circleBtn.selected) {
+            b = YES;
+            _selectedCell = cell;
+        }
+    }
+    if (b == NO) {
+        [SVProgressHUD showInfoWithStatus:@"请选择一个账户"];
+        return;
+    }
+    [[UIApplication sharedApplication].keyWindow endEditing:YES];
+    LSActionSheet *sheet=[[LSActionSheet alloc]init];
+    UIWindow *window=[UIApplication sharedApplication].keyWindow;
+    sheet.frame=window.bounds;
+    sheet.title=nil;
+    sheet.destructiveTitle=nil;
+    sheet.otherTitles=@[@"设为默认提现账户",@"修改账户",@"解除绑定"];
+    sheet.block=^(int index) {
+        switch (index) {
+            case 0:
+            {
+                //设为默认账户
+                FBRequest *request = [FBAPI postWithUrlString:@"/payment_card/set_default" requestDictionary:@{@"id" : _selectedCell.model._id} delegate:self];
+                [request startRequestSuccess:^(FBRequest *request, id result) {
+                    for (int i = 0; i < self.modelAry.count; i++) {
+                        THNZhangHuTableViewCell *cell = [self.tabelView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+                        cell.model.is_default = @"0";
+                    }
+                    _selectedCell.model.is_default = @"1";
+                    [self.tabelView reloadData];
+                } failure:^(FBRequest *request, NSError *error) {
+                    
+                }];
+            }
+                
+                break;
+            case 1:
+            {
+                //修改账户
+                if ([_selectedCell.model.kind isEqualToString:@"1"]) {
+                    //银行卡
+                    THNYinHangKaXinXiViewController *vc = [[THNYinHangKaXinXiViewController alloc] init];
+                    vc.model = self.selectedCell.model;
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else if ([_selectedCell.model.kind isEqualToString:@"2"]) {
+                    //支付宝
+                    THNZhiFuXinXiViewController *vc = [[THNZhiFuXinXiViewController alloc] init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else{
+                
+                }
+            }
+                break;
+            case 2:
+            {
+                //解除绑定
+                FBRequest *request = [FBAPI postWithUrlString:@"/payment_card/deleted" requestDictionary:@{@"id" : _selectedCell.model._id} delegate:self];
+                [request startRequestSuccess:^(FBRequest *request, id result) {
+                    [self.modelAry removeObject:_selectedCell.model];
+                    [self.tabelView reloadData];
+                } failure:^(FBRequest *request, NSError *error) {
+                }];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    };
+    [sheet zhangHuSheetShow];
+    [window addSubview:sheet];
 }
 
 
@@ -132,6 +253,8 @@
             case 0:
             {
                 //银行卡
+                THNYinHangKaXinXiViewController *vc = [[THNYinHangKaXinXiViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
             }
             
             break;

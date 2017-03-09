@@ -99,9 +99,10 @@
     [window addSubview:sheet];
 }
 
+
+
 -(void)showTwo
 {
-    
     UIView *contentView=[[UIView alloc]init];
     contentView.backgroundColor=[UIColor whiteColor];
     self.contentView=contentView;
@@ -176,17 +177,94 @@
     [UIView animateWithDuration:LSActionSheetAnimationTime animations:^{
         self.contentView.frame=frame;
         self.alpha=1;
+    }completion:^(BOOL finished) {
+    }];
+}
+
+-(void)zhangHuSheetShow
+{
+    UIView *contentView=[[UIView alloc]init];
+    contentView.backgroundColor=[UIColor whiteColor];
+    self.contentView=contentView;
+    
+    CGFloat y=0;
+    NSInteger tag=0;
+    if (self.title) {
+        UILabel *titleLabel=[[UILabel alloc]init];
+        titleLabel.font=LSActionSheetTitleLabelFont;
+        titleLabel.textColor=LSActionSheetTitleLabelColor;
+        titleLabel.numberOfLines=0;
+        titleLabel.textAlignment=NSTextAlignmentCenter;
+        titleLabel.text=self.title;
+        titleLabel.tag=tag;
+        CGSize size= [self.title boundingRectWithSize:CGSizeMake(LSActionSheetScreenWidth-2*LSActionSheetLeftMargin, MAXFLOAT)
+                                              options:NSStringDrawingUsesLineFragmentOrigin
+                                           attributes:@{NSFontAttributeName:titleLabel.font}
+                                              context:nil]
+        .size;
+        
+        titleLabel.frame=CGRectMake(LSActionSheetLeftMargin, LSActionSheetTopMargin,LSActionSheetScreenWidth-2*LSActionSheetLeftMargin ,size.height );
+        UIView *view=[[UIView alloc]init];
+        view.backgroundColor=LSActionSheetButtonBackgroundColor;
+        view.frame=CGRectMake(0, 0, LSActionSheetScreenWidth, size.height+2*LSActionSheetTopMargin);
+        [contentView addSubview:view];
+        [contentView addSubview:titleLabel];
+        y=size.height+2*LSActionSheetTopMargin+LSActionSheetLineHeight;
+        
+    }
+    
+    for (int i=0; i<self.otherTitles.count; i++) {
+        UIButton *button=[self createButtonWithTitle:self.otherTitles[i] color:[UIColor colorWithHexString:@"#717171"] font:LSActionSheetOtherButtonFont height:LSActionSheetOtherButtonHeight y:y+(LSActionSheetOtherButtonHeight+LSActionSheetLineHeight)*i];
+        [contentView addSubview:button];
+        if (i==self.otherTitles.count-1) {
+            y=y+(LSActionSheetOtherButtonHeight+LSActionSheetLineHeight)*i+LSActionSheetOtherButtonHeight;
+        }
+        button.tag=tag;
+        tag++;
+        if (i == 1) {
+            [button setTitleColor:[UIColor colorWithHexString:@"#2db8ff"] forState:UIControlStateNormal];
+        } else if (i == 2) {
+            [button setTitleColor:[UIColor colorWithHexString:@"#ff3b30"] forState:UIControlStateNormal];
+        }
+    }
+    if (self.destructiveTitle) {
+        UIButton *button=[self createButtonWithTitle:self.destructiveTitle color:LSActionSheetCancelButtonColor font:LSActionSheetDestructiveButtonFont height:LSActionSheetDestructiveButtonHeight y:y+LSActionSheetLineHeight];
+        button.tag=tag;
+        [contentView addSubview:button];
+        y+=(LSActionSheetDestructiveButtonHeight+LSActionSheetBottomMargin);
+        tag++;
+        
+    }else{
+        y+=LSActionSheetBottomMargin;
+    }
+    
+    UIButton *cancel=[self  createButtonWithTitle:@"取消" color:[UIColor colorWithHexString:@"#717171"] font:LSActionSheetCancelButtonFont height:LSActionSheetCancelButtonHeight y:y];
+    cancel.tag=tag;
+    [contentView addSubview:cancel];
+    
+    
+    contentView.backgroundColor=[UIColor colorWithHexString:@"#717171"];
+    CGFloat maxY= CGRectGetMaxY(contentView.subviews.lastObject.frame);
+    contentView.frame=CGRectMake(0, self.frame.size.height-maxY, LSActionSheetScreenWidth, maxY) ;
+    [self addSubview:contentView];
+    
+    
+    CGRect frame= self.contentView.frame;
+    
+    CGRect newframe= frame;
+    self.alpha=0.1;
+    newframe.origin.y=self.frame.size.height;
+    contentView.frame=newframe;
+    [UIView animateWithDuration:LSActionSheetAnimationTime animations:^{
+        self.contentView.frame=frame;
+        self.alpha=1;
         
     }completion:^(BOOL finished) {
-        
     }];
-    
-    
 }
 
 -(void)show
 {
-    
     UIView *contentView=[[UIView alloc]init];
     contentView.backgroundColor=[UIColor whiteColor];
     self.contentView=contentView;
@@ -259,11 +337,10 @@
         self.alpha=1;
 
     }completion:^(BOOL finished) {
-
     }];
-    
-    
 }
+
+
 -(UIButton*)createButtonWithTitle:(NSString*)title  color:(UIColor*)color font:(UIFont*)font height:(CGFloat)height y:(CGFloat)y
 {
     

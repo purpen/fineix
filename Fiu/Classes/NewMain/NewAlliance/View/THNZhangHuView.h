@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "THNZhangHuModel.h"
 
 typedef enum
 {
@@ -22,5 +23,7 @@ typedef enum
 @property (nonatomic, assign) ZhangHu zhangHu;
 /**  */
 @property (nonatomic, strong) UINavigationController *nav;
+/**  */
+@property (nonatomic, strong) THNZhangHuModel *model;
 
 @end
