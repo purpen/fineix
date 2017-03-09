@@ -36,6 +36,7 @@ static NSString *const URLLikeScene = @"/favorite/ajax_love";
 static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 static NSString *const URLBuying = @"/shopping/now_buy";
 static NSString *const SceneListCellId = @"SceneListCellId";
+static const CGFloat sceneCellHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
 
 static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！>>> http://m.taihuoniao.com/fiu";
 
@@ -215,13 +216,13 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
         }
         
         NSInteger count;
-        if (self.sceneListMarr.count%2 != 0) {
-            count = (self.sceneListMarr.count +1)/2;
-        } else {
+        if (self.sceneListMarr.count%2 == 0) {
             count = self.sceneListMarr.count/2;
+        } else {
+            count = (self.sceneListMarr.count +1)/2;
         }
-
-        _sceneListHeight = ((SCREEN_WIDTH - 45)/2)*1.5 * count;
+        
+        _sceneListHeight = 20 + (sceneCellHeight + 15) * count;
         self.goodsTable.tableFooterView = self.sceneList;
        [self.sceneList reloadData];
         
@@ -361,7 +362,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 - (UICollectionView *)sceneList {
     if (!_sceneList) {
         UICollectionViewFlowLayout *flowLayou = [[UICollectionViewFlowLayout alloc] init];
-        flowLayou.itemSize = CGSizeMake((SCREEN_WIDTH - 45)/2, ((SCREEN_WIDTH - 45)/2)*1.21);
+        flowLayou.itemSize = CGSizeMake((SCREEN_WIDTH - 45)/2, sceneCellHeight);
         flowLayou.minimumLineSpacing = 15.0f;
         flowLayou.sectionInset = UIEdgeInsetsMake(15, 15, 15, 15);
         flowLayou.scrollDirection = UICollectionViewScrollDirectionVertical;

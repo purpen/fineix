@@ -8,6 +8,11 @@
 
 #import "THNViewController.h"
 
-@interface THNDomainSetViewController : THNViewController
+@interface THNDomainSetViewController : THNViewController <
+    UITableViewDelegate,
+    UITableViewDataSource
+>
+
+@property (nonatomic, strong) UITableView *setTableView;
 
 @end

@@ -302,7 +302,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
 #pragma mark 最新商品
 - (void)thn_networkNewGoodsData {
-    self.goodsRequest = [FBAPI getWithUrlString:URLGoodsList requestDictionary:@{@"fine":@"1", @"size":@"4"} delegate:self];
+    self.goodsRequest = [FBAPI getWithUrlString:URLGoodsList requestDictionary:@{@"fine":@"1", @"size":@"4", @"sort":@"5"} delegate:self];
     [self.goodsRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary *dict in dataArr) {
