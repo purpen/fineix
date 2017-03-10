@@ -1,6 +1,6 @@
 //
 //	THNDomainManageInfoExtra.h
-// on 9/3/2017
+// on 10/3/2017
 //	Copyright © 2017. All rights reserved.
 //
 

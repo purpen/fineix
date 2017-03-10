@@ -17,17 +17,17 @@ typedef void(^GetProjectTypeBlock)(NSString *idx);
 
 @interface FBRollImages : UIView <SDCycleScrollViewDelegate>
 
-@pro_strong UIViewController               *       vc;
-@pro_strong UINavigationController         *       navVC;
-@pro_strong NSArray                        *       imgArr;
-@pro_strong SDCycleScrollView              *       rollImageView;
-@pro_strong NSMutableArray                 *       rollImgDataList;
-@pro_strong NSMutableArray                 *       imgMarr;
-@pro_strong NSMutableArray                 *       targetIdMarr;
-@pro_strong NSMutableArray                 *       typeMarr;
-@pro_strong NSMutableArray                 *       goodsImageMarr;
+@property (nonatomic, strong) UIViewController               *       vc;
+@property (nonatomic, strong) UINavigationController         *       navVC;
+@property (nonatomic, strong) NSArray                        *       imgArr;
+@property (nonatomic, strong) SDCycleScrollView              *       rollImageView;
+@property (nonatomic, strong) NSMutableArray                 *       rollImgDataList;
+@property (nonatomic, strong) NSMutableArray                 *       imgMarr;
+@property (nonatomic, strong) NSMutableArray                 *       targetIdMarr;
+@property (nonatomic, strong) NSMutableArray                 *       typeMarr;
+@property (nonatomic, strong) NSMutableArray                 *       goodsImageMarr;
 
-@pro_copy GetProjectTypeBlock getProjectType;
+@property (nonatomic, copy) GetProjectTypeBlock getProjectType;
 
 - (void)setRollimageView:(NSMutableArray *)model;
 

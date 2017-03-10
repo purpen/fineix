@@ -1,12 +1,13 @@
 //
 //	THNDomainManageInfoData.h
-// on 9/3/2017
+// on 10/3/2017
 //	Copyright © 2017. All rights reserved.
 //
 
 //	Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 #import <UIKit/UIKit.h>
+#import "THNDomainManageInfoCategory.h"
 #import "THNDomainManageInfoExtra.h"
 #import "THNDomainManageInfoLocation.h"
 #import "THNDomainManageInfoNCover.h"
@@ -19,6 +20,8 @@
 @property (nonatomic, strong) NSString * avatarUrl;
 @property (nonatomic, strong) NSArray * banners;
 @property (nonatomic, strong) NSArray * brightSpot;
+@property (nonatomic, strong) THNDomainManageInfoCategory * category;
+@property (nonatomic, assign) NSInteger categoryId;
 @property (nonatomic, strong) NSString * city;
 @property (nonatomic, strong) NSArray * covers;
 @property (nonatomic, strong) NSString * createdAt;

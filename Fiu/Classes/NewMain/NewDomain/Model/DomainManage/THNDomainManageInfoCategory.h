@@ -1,5 +1,5 @@
 //
-//	THNDomainManageInfoLocation.h
+//	THNDomainManageInfoCategory.h
 // on 10/3/2017
 //	Copyright © 2017. All rights reserved.
 //
@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface THNDomainManageInfoLocation : NSObject
+@interface THNDomainManageInfoCategory : NSObject
 
-@property (nonatomic, strong) NSArray * coordinates;
-@property (nonatomic, strong) NSString * type;
+@property (nonatomic, assign) NSInteger idField;
+@property (nonatomic, strong) NSString * title;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end

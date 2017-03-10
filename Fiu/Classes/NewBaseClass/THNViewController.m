@@ -310,7 +310,8 @@ static NSInteger const saveTime = 30 * 24 * 60;
 #pragma mark Nav右边按钮
 - (UIButton *)rightBtn {
     if (!_rightBtn) {
-        _rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 20, 44, 44)];
+        _rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 54, 20, 44, 44)];
+        _rightBtn.titleLabel.font = [UIFont systemFontOfSize:17];
         [_rightBtn addTarget:self action:@selector(rightAction) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _rightBtn;
@@ -422,9 +423,10 @@ static NSInteger const saveTime = 30 * 24 * 60;
 
 - (void)thn_addBarItemRightBarButton:(NSString *)title image:(NSString *)image {
     [self.rightBtn setTitle:title forState:UIControlStateNormal];
-    self.rightBtn.titleLabel.font = [UIFont systemFontOfSize:13];
-    self.rightBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, -5, 5);
-    [self.rightBtn setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
+    if (image.length > 0) {
+        [self.rightBtn setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
+        self.rightBtn.frame = CGRectMake(SCREEN_WIDTH - 44, 20, 44, 44);
+    }
     [self.navView addSubview:self.rightBtn];
 }
 

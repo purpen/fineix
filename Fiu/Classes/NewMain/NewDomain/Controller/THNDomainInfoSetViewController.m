@@ -8,6 +8,7 @@
 
 #import "THNDomainInfoSetViewController.h"
 #import "THNInfoTitleTableViewCell.h"
+#import "THNDomainEditViewController.h"
 
 static NSString *const setInfoCellId = @"SetInfoCellId";
 
@@ -27,6 +28,7 @@ static NSString *const setInfoCellId = @"SetInfoCellId";
     [super viewDidLoad];
     
     [self.view addSubview:self.infoTableView];
+    
 }
 
 #pragma mark - 设置界面UI
@@ -83,6 +85,23 @@ static NSString *const setInfoCellId = @"SetInfoCellId";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0.01f;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        if (indexPath.row != 0) {
+            THNDomainEditViewController *editVC = [[THNDomainEditViewController alloc] init];
+            editVC.setInfoType = indexPath.row;
+            editVC.infoData = self.infoData;
+            [self.navigationController pushViewController:editVC animated:YES];
+        }
+    
+    } else if (indexPath.section == 1) {
+        THNDomainEditViewController *editVC = [[THNDomainEditViewController alloc] init];
+        editVC.setInfoType = indexPath.row + 5;
+        editVC.infoData = self.infoData;
+        [self.navigationController pushViewController:editVC animated:YES];
+    }
 }
 
 #pragma mark - 设置Nav

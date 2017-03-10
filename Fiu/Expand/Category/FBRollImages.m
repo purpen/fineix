@@ -10,6 +10,7 @@
 #import "FBGoodsInfoViewController.h"
 #import "THNProjectViewController.h"
 #import "THNSceneImageViewController.h"
+#import "THNDomainInfoViewController.h"
 
 @interface FBRollImages () {
     
@@ -83,7 +84,7 @@
         
         if (type == 8) {
 
-        } else if (type == 9) {
+        } else if (type == 9 || type == 2) {
             FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
             goodsInfoVC.goodsID = ids;
             [self.navVC pushViewController:goodsInfoVC animated:YES];
@@ -98,6 +99,10 @@
             if (isExsit) {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ids]];
             }
+        } else if (type == 12) {
+            THNDomainInfoViewController *domainInfoVC = [[THNDomainInfoViewController alloc] init];
+            domainInfoVC.infoId = ids;
+            [self.navVC pushViewController:domainInfoVC animated:YES];
         }
         
     } else {

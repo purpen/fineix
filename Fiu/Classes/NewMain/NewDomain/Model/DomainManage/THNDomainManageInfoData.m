@@ -1,6 +1,6 @@
 //
 //	THNDomainManageInfoData.m
-// on 9/3/2017
+// on 10/3/2017
 //	Copyright © 2017. All rights reserved.
 //	Model file generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
@@ -13,6 +13,8 @@ NSString *const kTHNDomainManageInfoDataAddress = @"address";
 NSString *const kTHNDomainManageInfoDataAvatarUrl = @"avatar_url";
 NSString *const kTHNDomainManageInfoDataBanners = @"banners";
 NSString *const kTHNDomainManageInfoDataBrightSpot = @"bright_spot";
+NSString *const kTHNDomainManageInfoDataCategory = @"category";
+NSString *const kTHNDomainManageInfoDataCategoryId = @"category_id";
 NSString *const kTHNDomainManageInfoDataCity = @"city";
 NSString *const kTHNDomainManageInfoDataCovers = @"covers";
 NSString *const kTHNDomainManageInfoDataCreatedAt = @"created_at";
@@ -62,6 +64,14 @@ NSString *const kTHNDomainManageInfoDataViewUrl = @"view_url";
 	if(![dictionary[kTHNDomainManageInfoDataBrightSpot] isKindOfClass:[NSNull class]]){
 		self.brightSpot = dictionary[kTHNDomainManageInfoDataBrightSpot];
 	}	
+	if(![dictionary[kTHNDomainManageInfoDataCategory] isKindOfClass:[NSNull class]]){
+		self.category = [[THNDomainManageInfoCategory alloc] initWithDictionary:dictionary[kTHNDomainManageInfoDataCategory]];
+	}
+
+	if(![dictionary[kTHNDomainManageInfoDataCategoryId] isKindOfClass:[NSNull class]]){
+		self.categoryId = [dictionary[kTHNDomainManageInfoDataCategoryId] integerValue];
+	}
+
 	if(![dictionary[kTHNDomainManageInfoDataCity] isKindOfClass:[NSNull class]]){
 		self.city = dictionary[kTHNDomainManageInfoDataCity];
 	}	

@@ -9,9 +9,12 @@
 #import "THNDomainSetViewController.h"
 #import "THNDomainInfoSetViewController.h"
 #import "THNInfoTitleTableViewCell.h"
+#import "THNDomainImagesTableViewCell.h"
+#import "THNDomainEditViewController.h"
 
 static NSString *const URLDomainInfo = @"/scene_scene/view";
 static NSString *const infoCellId = @"THNInfoTitleTableViewCellId";
+static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
 
 @interface THNDomainSetViewController ()
 
@@ -27,9 +30,11 @@ static NSString *const infoCellId = @"THNInfoTitleTableViewCellId";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self thn_networkDomainInfoData];
-    [self.view addSubview:self.setTableView];
+
+    if (self.domainId.length) {
+        [self thn_networkDomainInfoData];
+        [self.view addSubview:self.setTableView];
+    }
 }
 
 #pragma mark 地盘详情数据
@@ -73,23 +78,32 @@ static NSString *const infoCellId = @"THNInfoTitleTableViewCellId";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    THNInfoTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:infoCellId];
-    cell = [[THNInfoTitleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:infoCellId];
-    if (self.infoData) {
+    if (indexPath.section == 2) {
+        THNDomainImagesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:imageCellId];
+        cell = [[THNDomainImagesTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:imageCellId];
+        return cell;
+        
+    } else {
+        THNInfoTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:infoCellId];
+        cell = [[THNInfoTitleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:infoCellId];
         if (indexPath.section == 0) {
             [cell thn_setInfoTitleLeftText:@"地盘基本信息" andRightText:@""];
-            [cell thn_showImage:self.infoData.avatarUrl];
+            if (self.infoData) {
+                [cell thn_showImage:self.infoData.avatarUrl];
+            }
             
         } else if (indexPath.section == 1) {
             NSArray *leftText = @[@"地盘简介", @"地盘亮点"];
             [cell thn_setInfoTitleLeftText:leftText[indexPath.row] andRightText:@""];
-        
+            
         } else if (indexPath.section == 3) {
             [cell thn_setInfoTitleLeftText:@"添加商品到地盘" andRightText:@""];
             [cell thn_showLeftButton];
         }
+        
+        return cell;
     }
-    return cell;
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -112,9 +126,19 @@ static NSString *const infoCellId = @"THNInfoTitleTableViewCellId";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        THNDomainInfoSetViewController *infoSetVC = [[THNDomainInfoSetViewController alloc] init];
-        infoSetVC.infoData = self.infoData;
-        [self.navigationController pushViewController:infoSetVC animated:YES];
+        if (self.infoData) {
+            THNDomainInfoSetViewController *infoSetVC = [[THNDomainInfoSetViewController alloc] init];
+            infoSetVC.infoData = self.infoData;
+            [self.navigationController pushViewController:infoSetVC animated:YES];
+        }
+    
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            THNDomainEditViewController *editVC = [[THNDomainEditViewController alloc] init];
+            editVC.setInfoType = 8;
+            editVC.infoData = self.infoData;
+            [self.navigationController pushViewController:editVC animated:YES];
+        }
     }
 }
 
