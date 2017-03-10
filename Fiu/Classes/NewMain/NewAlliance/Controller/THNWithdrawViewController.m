@@ -58,9 +58,9 @@ static NSString *const URLApply = @"/withdraw_cash/apply_cash";
                 self.zhangHu = none;
             } else {
                 if ([dataDict[@"pay_type_label"] rangeOfString:@"银行"].location != NSNotFound) {
-                    self.zhangHu = zhiFuBao;
-                } else {
                     self.zhangHu = YingHangKa;
+                } else {
+                    self.zhangHu = zhiFuBao;
                 }
             }
             [self setViewUI];
@@ -129,6 +129,7 @@ static NSString *const URLApply = @"/withdraw_cash/apply_cash";
     if (!_zhangHuView) {
         _zhangHuView = [[THNZhangHuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
         _zhangHuView.nav = self.navigationController;
+        _zhangHuView.model = self.zhangHuModel;
         _zhangHuView.zhangHu = self.zhangHu;
         switch (self.zhangHu) {
             case none:

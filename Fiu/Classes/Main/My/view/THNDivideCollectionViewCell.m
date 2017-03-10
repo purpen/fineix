@@ -20,8 +20,6 @@
 
 @end
 
-static NSString *const URLAliance = @"/alliance/view";
-
 @implementation THNDivideCollectionViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -70,20 +68,13 @@ static NSString *const URLAliance = @"/alliance/view";
             make.centerY.mas_equalTo(self.imageV.mas_centerY).mas_offset(0);
         }];
         
-        [self thn_networkAllinaceListData];
-        
     }
     return self;
 }
 
-#pragma mark - 请求账户数据
-- (void)thn_networkAllinaceListData {
-    FBRequest *request = [FBAPI postWithUrlString:URLAliance requestDictionary:@{} delegate:self];
-    [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSDictionary *dict = [result valueForKey:@"data"];
-        self.numberLabel.text = [NSString stringWithFormat:@"%0.2f元",[dict[@"total_balance_amount"] floatValue]];
-    } failure:^(FBRequest *request, NSError *error) {
-    }];
+-(void)setMoneyStr:(NSString *)moneyStr{
+    _moneyStr = moneyStr;
+    self.numberLabel.text = [NSString stringWithFormat:@"%0.2f元",[moneyStr floatValue]];
 }
 
 @end

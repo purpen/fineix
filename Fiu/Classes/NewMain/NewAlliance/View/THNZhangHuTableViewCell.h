@@ -17,5 +17,7 @@
 @property (nonatomic, strong) UILabel *label;
 /**  */
 @property (nonatomic, strong) THNZhangHuModel *model;
+/**  */
+@property (nonatomic, strong) UIButton *circleBtn;
 
 @end

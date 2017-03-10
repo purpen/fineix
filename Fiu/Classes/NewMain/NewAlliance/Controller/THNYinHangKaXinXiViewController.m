@@ -1,19 +1,20 @@
 //
-//  THNZhiFuXinXiViewController.m
+//  THNYinHangKaXinXiViewController.m
 //  Fiu
 //
-//  Created by THN-Dong on 2017/3/7.
+//  Created by THN-Dong on 2017/3/9.
 //  Copyright © 2017年 taihuoniao. All rights reserved.
 //
 
-#import "THNZhiFuXinXiViewController.h"
+#import "THNYinHangKaXinXiViewController.h"
 #import "Fiu.h"
 #import "NSString+Helper.h"
 
-@interface THNZhiFuXinXiViewController ()<THNNavigationBarItemsDelegate>
+@interface THNYinHangKaXinXiViewController ()<THNNavigationBarItemsDelegate>
 
-/**  */
 @property (nonatomic, strong) UIView *topView;
+@property (nonatomic, strong) UIView *kaiHuHangView;
+@property (nonatomic, strong) UITextField *kaiHuHangTF;
 @property (nonatomic, strong) UIView *nameView;
 @property (nonatomic, strong) UIView *zhangHuView;
 @property (nonatomic, strong) UIView *phoneView;
@@ -26,15 +27,14 @@
 @property (nonatomic, strong) UITextField *nameTF;
 @property (nonatomic, strong) UITextField *zhangHuTF;
 @property (nonatomic, strong) UITextField *yanZhengMaTF;
-@property (nonatomic, strong) UIView *moRenView;
-/**  */
 @property (nonatomic, strong) UISwitch *moRenSwitch;
+@property (nonatomic, strong) UIView *moRenView;
 
 @end
 
 static NSString *const URLAliance = @"/alliance/view";
 
-@implementation THNZhiFuXinXiViewController
+@implementation THNYinHangKaXinXiViewController
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -46,7 +46,7 @@ static NSString *const URLAliance = @"/alliance/view";
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    self.navViewTitle.text = @"支付宝账户信息";
+    self.navViewTitle.text = @"银行卡账户信息";
     self.delegate = self;
     [self thn_addBarItemRightBarButton:@"保存" image:nil];
 }
@@ -58,6 +58,8 @@ static NSString *const URLAliance = @"/alliance/view";
         [SVProgressHUD showInfoWithStatus:@"请输入账户"];
     } else if (self.phoneTF.text.length == 0) {
         [SVProgressHUD showInfoWithStatus:@"请输入手机号"];
+    } else if (self.kaiHuHangTF.text.length == 0) {
+        [SVProgressHUD showInfoWithStatus:@"请输入开户银行"];
     } else if (self.yanZhengMaTF.text.length == 0) {
         [SVProgressHUD showInfoWithStatus:@"请输入验证码"];
     } else {
@@ -67,14 +69,15 @@ static NSString *const URLAliance = @"/alliance/view";
             NSDictionary *dict = [result valueForKey:@"data"];
             str = dict[@"_id"];
             FBRequest *requestTwo = [FBAPI postWithUrlString:@"/payment_card/save" requestDictionary:@{
-                                                                                                    @"alliance_id" : str,
-                                                                                                        @"kind" : @"2",
-                                                                                                    @"account" : self.zhangHuTF.text,
-                                                                                                    @"username" : self.nameTF.text,
-                                                                                                    @"phone" : self.phoneTF.text,
-                                                                                                    @"verify_code" : self.yanZhengMaTF.text,
-                                                                                                    @"is_default" : @(self.moRenSwitch.isOn)
-                                                                                                    } delegate:self];
+                                                                                                       @"bank_address" : self.kaiHuHangTF.text,
+                                                                                                       @"alliance_id" : str,
+                                                                                                       @"kind" : @"1",
+                                                                                                       @"account" : self.zhangHuTF.text,
+                                                                                                       @"username" : self.nameTF.text,
+                                                                                                       @"phone" : self.phoneTF.text,
+                                                                                                       @"verify_code" : self.yanZhengMaTF.text,
+                                                                                                       @"is_default" : @(self.moRenSwitch.isOn)
+                                                                                                       } delegate:self];
             [requestTwo startRequestSuccess:^(FBRequest *request, id result) {
                 [SVProgressHUD showSuccessWithStatus:@"成功绑定账户"];
                 [self.navigationController popViewControllerAnimated:YES];
@@ -83,6 +86,15 @@ static NSString *const URLAliance = @"/alliance/view";
         } failure:^(FBRequest *request, NSError *error) {
         }];
     }
+}
+
+-(void)setModel:(THNZhangHuModel *)model{
+    _model = model;
+    self.kaiHuHangTF.text = model.bank_address;
+    self.nameTF.text = model.username;
+    self.zhangHuTF.text = model.account;
+    self.phoneTF.text = model.phone;
+    [self.moRenSwitch setOn:[model.is_default integerValue]];
 }
 
 - (void)viewDidLoad {
@@ -96,10 +108,17 @@ static NSString *const URLAliance = @"/alliance/view";
         make.height.mas_equalTo(120/2*SCREEN_HEIGHT/667.0);
     }];
     
+    [self.view addSubview:self.kaiHuHangView];
+    [_kaiHuHangView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view).mas_offset(0);
+        make.top.mas_equalTo(self.topView.mas_bottom).mas_offset(15);
+        make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
+    }];
+    
     [self.view addSubview:self.nameView];
     [_nameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view).mas_offset(0);
-        make.top.mas_equalTo(self.topView.mas_bottom).mas_offset(15);
+        make.top.mas_equalTo(self.kaiHuHangView.mas_bottom).mas_offset(1);
         make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
     }];
     
@@ -116,7 +135,7 @@ static NSString *const URLAliance = @"/alliance/view";
         make.top.mas_equalTo(self.zhangHuView.mas_bottom).mas_offset(1);
         make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
     }];
-
+    
     [self.view addSubview:self.yanZhengView];
     [_yanZhengView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view).mas_offset(0);
@@ -280,7 +299,7 @@ static NSString *const URLAliance = @"/alliance/view";
         
         self.phoneTF = [[UITextField alloc] init];
         self.phoneTF.borderStyle = UITextBorderStyleNone;
-        self.phoneTF.placeholder = @"输入手机号";
+        self.phoneTF.placeholder = @"银行卡预留手机号";
         [_phoneView addSubview:self.phoneTF];
         self.phoneTF.font = [UIFont systemFontOfSize:14];
         [_phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -299,7 +318,7 @@ static NSString *const URLAliance = @"/alliance/view";
         UILabel *label = [[UILabel alloc] init];
         label.font = [UIFont systemFontOfSize:14];
         label.textColor = [UIColor blackColor];
-        label.text = @"支付宝账户";
+        label.text = @"卡号";
         [_zhangHuView addSubview:label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(_zhangHuView.mas_centerY).mas_offset(0);
@@ -309,7 +328,7 @@ static NSString *const URLAliance = @"/alliance/view";
         
         self.zhangHuTF = [[UITextField alloc] init];
         _zhangHuTF.borderStyle = UITextBorderStyleNone;
-        _zhangHuTF.placeholder = @"输入帐号";
+        _zhangHuTF.placeholder = @"输入银行卡号";
         [_zhangHuView addSubview:_zhangHuTF];
         _zhangHuTF.font = [UIFont systemFontOfSize:14];
         [_zhangHuTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -328,7 +347,7 @@ static NSString *const URLAliance = @"/alliance/view";
         UILabel *label = [[UILabel alloc] init];
         label.font = [UIFont systemFontOfSize:14];
         label.textColor = [UIColor blackColor];
-        label.text = @"真实姓名";
+        label.text = @"持卡人";
         [_nameView addSubview:label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(_nameView.mas_centerY).mas_offset(0);
@@ -349,12 +368,41 @@ static NSString *const URLAliance = @"/alliance/view";
     return _nameView;
 }
 
+-(UIView *)kaiHuHangView{
+    if (!_kaiHuHangView) {
+        _kaiHuHangView = [[UIView alloc] init];
+        _kaiHuHangView.backgroundColor = [UIColor whiteColor];
+        
+        UILabel *label = [[UILabel alloc] init];
+        label.font = [UIFont systemFontOfSize:14];
+        label.textColor = [UIColor blackColor];
+        label.text = @"开户行";
+        [_kaiHuHangView addSubview:label];
+        [label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(_kaiHuHangView.mas_centerY).mas_offset(0);
+            make.left.mas_equalTo(_kaiHuHangView.mas_left).mas_offset(15);
+            make.width.mas_equalTo(65);
+        }];
+        
+        self.kaiHuHangTF = [[UITextField alloc] init];
+        _kaiHuHangTF.borderStyle = UITextBorderStyleNone;
+        _kaiHuHangTF.placeholder = @"输入开户银行";
+        [_kaiHuHangView addSubview:_kaiHuHangTF];
+        _kaiHuHangTF.font = [UIFont systemFontOfSize:14];
+        [_kaiHuHangTF mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(label.mas_right).mas_offset(15*SCREEN_HEIGHT/667.0);
+            make.right.top.bottom.mas_equalTo(_kaiHuHangView).mas_offset(0);
+        }];
+    }
+    return _kaiHuHangView;
+}
+
 -(UIView *)topView{
     if (!_topView) {
         _topView = [[UIView alloc] init];
         _topView.backgroundColor = [UIColor whiteColor];
         
-        UIImageView *tuBiao = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alipayBig"]];
+        UIImageView *tuBiao = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yinHangKaBig"]];
         [_topView addSubview:tuBiao];
         [tuBiao mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(_topView.mas_centerY).mas_offset(0);
@@ -365,7 +413,7 @@ static NSString *const URLAliance = @"/alliance/view";
         UILabel *label = [[UILabel alloc] init];
         label.font = [UIFont systemFontOfSize:14];
         label.textColor = [UIColor colorWithHexString:@"#232323"];
-        label.text = @"绑定支付宝帐号";
+        label.text = @"绑定银行卡帐号";
         [_topView addSubview:label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(_topView.mas_centerY).mas_offset(0);
@@ -377,7 +425,6 @@ static NSString *const URLAliance = @"/alliance/view";
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
 }
 
 @end

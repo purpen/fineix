@@ -12,4 +12,7 @@
 
 @interface THNDivideCollectionViewCell : UICollectionViewCell
 
+/**  */
+@property(nonatomic,copy) NSString *moneyStr;
+
 @end
