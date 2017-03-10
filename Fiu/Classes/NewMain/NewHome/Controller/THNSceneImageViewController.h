@@ -13,13 +13,13 @@
 
 @interface THNSceneImageViewController : THNViewController
 
-@pro_strong FBRequest *userRequest;     //  检查权限
-@pro_strong FBRequest *stickRequest;    //  推荐
-@pro_strong FBRequest *fineRequest;     //  精选
-@pro_strong FBRequest *checkRequest;    //  屏蔽
+@property (nonatomic, strong) FBRequest *userRequest;     //  检查权限
+@property (nonatomic, strong) FBRequest *stickRequest;    //  推荐
+@property (nonatomic, strong) FBRequest *fineRequest;     //  精选
+@property (nonatomic, strong) FBRequest *checkRequest;    //  屏蔽
 
-@pro_strong NSString *sceneId;
-@pro_strong THNSceneImageScrollView *imageView;
+@property (nonatomic, strong) NSString *sceneId;
+@property (nonatomic, strong) THNSceneImageScrollView *imageView;
 
 /**
  加载情境原图

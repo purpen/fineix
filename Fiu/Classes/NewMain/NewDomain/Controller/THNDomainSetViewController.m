@@ -25,11 +25,17 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshSetTable) name:@"uploadImageSucceed" object:nil];
+    
     [self thn_setNavigationViewUI];
     
     if (self.domainId.length) {
         [self thn_networkDomainInfoData];
     }
+}
+
+- (void)refreshSetTable {
+    [self thn_networkDomainInfoData];
 }
 
 - (void)viewDidLoad {
@@ -43,7 +49,6 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
     [SVProgressHUD show];
     self.infoRequest = [FBAPI getWithUrlString:URLDomainInfo requestDictionary:@{@"id":self.domainId, @"is_edit":@"1"} delegate:self];
     [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"======= %@", [NSString jsonStringWithObject:result]);
         NSDictionary *dict =  [result valueForKey:@"data"];
         self.infoData = [[THNDomainManageInfoData alloc] initWithDictionary:dict];
         [self.setTableView reloadData];
@@ -80,6 +85,10 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
     if (indexPath.section == 2) {
         THNDomainImagesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:imageCellId];
         cell = [[THNDomainImagesTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:imageCellId];
+        if (self.infoData) {
+            [cell thn_setDomainImages:self.infoData.nCovers withDomainId:_domainId];
+            cell.vc = self;
+        }
         return cell;
         
     } else {
@@ -151,5 +160,8 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
 }
 
 #pragma mark - 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"uploadImageSucceed" object:self];
+}
 
 @end

@@ -835,6 +835,7 @@
 		D8E1EB941E7154ED0041F010 /* THNDomainImagesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1EB931E7154ED0041F010 /* THNDomainImagesTableViewCell.m */; };
 		D8E1EB971E7247D10041F010 /* THNDomainEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1EB961E7247D00041F010 /* THNDomainEditViewController.m */; };
 		D8E1EB9A1E72A37C0041F010 /* THNDomainManageInfoCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1EB991E72A37C0041F010 /* THNDomainManageInfoCategory.m */; };
+		D8E1EB9D1E72DD3B0041F010 /* THNDomainImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1EB9C1E72DD3B0041F010 /* THNDomainImageCollectionViewCell.m */; };
 		D8E3AEB61CFC9B84006E5E8C /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */; };
 		D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */; };
 		D8E3AEBC1CFC9B84006E5E8C /* SceneAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB51CFC9B84006E5E8C /* SceneAddViewController.m */; };
@@ -2324,6 +2325,8 @@
 		D8E1EB961E7247D00041F010 /* THNDomainEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomainEditViewController.m; sourceTree = "<group>"; };
 		D8E1EB981E72A37C0041F010 /* THNDomainManageInfoCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDomainManageInfoCategory.h; sourceTree = "<group>"; };
 		D8E1EB991E72A37C0041F010 /* THNDomainManageInfoCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomainManageInfoCategory.m; sourceTree = "<group>"; };
+		D8E1EB9B1E72DD3B0041F010 /* THNDomainImageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDomainImageCollectionViewCell.h; sourceTree = "<group>"; };
+		D8E1EB9C1E72DD3B0041F010 /* THNDomainImageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomainImageCollectionViewCell.m; sourceTree = "<group>"; };
 		D8E3AEA81CFC9B84006E5E8C /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageViewController.h; sourceTree = "<group>"; };
 		D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipImageViewController.m; sourceTree = "<group>"; };
 		D8E3AEB21CFC9B84006E5E8C /* ReleaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseViewController.h; sourceTree = "<group>"; };
@@ -5657,6 +5660,8 @@
 				D8E1EB901E713A760041F010 /* THNInfoTitleTableViewCell.m */,
 				D8E1EB921E7154ED0041F010 /* THNDomainImagesTableViewCell.h */,
 				D8E1EB931E7154ED0041F010 /* THNDomainImagesTableViewCell.m */,
+				D8E1EB9B1E72DD3B0041F010 /* THNDomainImageCollectionViewCell.h */,
+				D8E1EB9C1E72DD3B0041F010 /* THNDomainImageCollectionViewCell.m */,
 			);
 			path = DomainManage;
 			sourceTree = "<group>";
@@ -6073,6 +6078,7 @@
 				D8117AD91E5A89D50094E7EB /* HomeSceneList.m in Sources */,
 				D8ACF4641D6E9E7A00DB79D8 /* SearchSceneViewController.m in Sources */,
 				1FD10CBA1D62FBF5005898EE /* THNGoodsCollectionViewCell.m in Sources */,
+				D8E1EB9D1E72DD3B0041F010 /* THNDomainImageCollectionViewCell.m in Sources */,
 				1F2AFCA11D88170B00DA6035 /* SearchTF.m in Sources */,
 				1F2A8FC01CF40277005116C7 /* CommentModelData.m in Sources */,
 				1F2AFCAA1D88170B00DA6035 /* THNSubHeadView.m in Sources */,

@@ -65,7 +65,7 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
 #pragma mark - 保存编辑
 - (void)thn_networkSaveEditData:(SaveEditType)type headerImage:(UIImage *)image location:(NSDictionary *)location {
     if (type == SaveEditTypeHeaderImage) {
-        [SVProgressHUD showWithStatus:@"正在上传"];
+        [SVProgressHUD showWithStatus:@"正在上传" maskType:(SVProgressHUDMaskTypeBlack)];
         NSData * imageData = UIImageJPEGRepresentation(image, 1);
         NSString *img64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         self.domainEditRequest = [FBAPI postWithUrlString:URLEditDomain requestDictionary:@{@"id":_domainId,
@@ -116,7 +116,7 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
     cell = [[THNInfoTitleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:setInfoCellId];
     if (indexPath.section == 0) {
         NSArray *leftText = @[@"地盘头像", @"地盘标题", @"地盘副标题", @"地盘分类", @"地盘标签"];
-        NSArray *rightText = @[@"", self.infoData.title, self.infoData.subTitle, @"", @""];
+        NSArray *rightText = @[@"", self.infoData.title, self.infoData.subTitle, self.infoData.category.title, @""];
         [cell thn_setInfoTitleLeftText:leftText[indexPath.row] andRightText:rightText[indexPath.row]];
         if (indexPath.row == 0) {
             [cell thn_showImage:self.infoData.avatarUrl];
