@@ -67,14 +67,14 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 1) {
-        return 2;
-    } else
-        return 1;
+//    if (section == 1) {
+//        return 2;
+//    } else
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -93,13 +93,15 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
             }
             
         } else if (indexPath.section == 1) {
-            NSArray *leftText = @[@"地盘简介", @"地盘亮点"];
+            //  @"地盘亮点"
+            NSArray *leftText = @[@"地盘简介"];
             [cell thn_setInfoTitleLeftText:leftText[indexPath.row] andRightText:@""];
             
-        } else if (indexPath.section == 3) {
-            [cell thn_setInfoTitleLeftText:@"添加商品到地盘" andRightText:@""];
-            [cell thn_showLeftButton];
         }
+//        else if (indexPath.section == 3) {
+//            [cell thn_setInfoTitleLeftText:@"添加商品到地盘" andRightText:@""];
+//            [cell thn_showLeftButton];
+//        }
         
         return cell;
     }
