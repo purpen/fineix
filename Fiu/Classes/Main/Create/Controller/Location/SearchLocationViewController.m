@@ -26,6 +26,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     _poiSearch.delegate = self;
     _locationSearch.delegate = self;
     _geoCodeSearch.delegate = self;

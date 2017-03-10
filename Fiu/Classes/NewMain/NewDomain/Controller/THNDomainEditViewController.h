@@ -64,4 +64,9 @@ typedef NS_ENUM(NSInteger , DomainSetInfoType) {
  */
 @property (nonatomic, strong) UILabel *hintLabel;
 
+/**
+ 保存编辑后的信息
+ */
+@property (nonatomic, strong) FBRequest *saveInfoRequest;
+
 @end

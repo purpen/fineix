@@ -18,7 +18,7 @@
 
 @end
 
-typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSString * latitude, NSString * longitude);
+typedef void(^SelectedLocationBlock)(NSString *location, NSString *city, NSString *latitude, NSString *longitude);
 
 @interface SearchLocationViewController : FBPictureViewController <
     FBSearchDelegate,
@@ -36,20 +36,24 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
     CGFloat                 longitude;      //  经度
 }
 
-@pro_strong NSString            *   type;
-@pro_strong UIButton            *   positioningBtn;         //  定位按钮
-@pro_strong UIButton            *   cancelVCBtn;            //  确定按钮
-@pro_strong FBSearchView        *   searchView;             //  搜索框
-@pro_strong UITableView         *   locationTableView;      //  地理位置列表
-@pro_strong NSMutableArray      *   locationNameMarr;       //  搜索结果
-@pro_strong NSMutableArray      *   locationCityMarr;       //  搜索城市
-@pro_strong NSMutableArray      *   locationAddressMarr;    //  搜索地址
-@pro_strong NSMutableArray      *   latitudeMarr;           //  纬度
-@pro_strong NSMutableArray      *   longitudeMarr;          //  纬度
+
+/**
+ 返回类型／pop／diss
+ */
+@property (nonatomic, strong) NSString            *   type;
+@property (nonatomic, strong) UIButton            *   positioningBtn;         //  定位按钮
+@property (nonatomic, strong) UIButton            *   cancelVCBtn;            //  确定按钮
+@property (nonatomic, strong) FBSearchView        *   searchView;             //  搜索框
+@property (nonatomic, strong) UITableView         *   locationTableView;      //  地理位置列表
+@property (nonatomic, strong) NSMutableArray      *   locationNameMarr;       //  搜索结果
+@property (nonatomic, strong) NSMutableArray      *   locationCityMarr;       //  搜索城市
+@property (nonatomic, strong) NSMutableArray      *   locationAddressMarr;    //  搜索地址
+@property (nonatomic, strong) NSMutableArray      *   latitudeMarr;           //  纬度
+@property (nonatomic, strong) NSMutableArray      *   longitudeMarr;          //  纬度
 
 /**  */
 @property (nonatomic, weak) id<SearDelaget> delegeta;
 
-@pro_strong SelectedLocationBlock selectedLocationBlock;
+@property (nonatomic, strong) SelectedLocationBlock selectedLocationBlock;
 
 @end

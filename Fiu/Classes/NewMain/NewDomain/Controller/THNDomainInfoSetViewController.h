@@ -9,12 +9,22 @@
 #import "THNViewController.h"
 #import "THNDomainManageInfoData.h"
 
+typedef NS_ENUM(NSInteger , SaveEditType) {
+    SaveEditTypeHeaderImage = 1,    // 头像
+    SaveEditTypeLocation,           // 地理位置
+};
+
 @interface THNDomainInfoSetViewController : THNViewController <
     UITableViewDelegate,
-    UITableViewDataSource
+    UITableViewDataSource,
+    UIImagePickerControllerDelegate,
+    UINavigationControllerDelegate
 >
 
 @property (nonatomic, strong) THNDomainManageInfoData *infoData;
 @property (nonatomic, strong) UITableView *infoTableView;
+
+@property (nonatomic, strong) FBRequest *infoRequest;
+@property (nonatomic, strong) FBRequest *domainEditRequest;
 
 @end

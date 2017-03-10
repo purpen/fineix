@@ -26,15 +26,16 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
     [super viewWillAppear:animated];
     
     [self thn_setNavigationViewUI];
+    
+    if (self.domainId.length) {
+        [self thn_networkDomainInfoData];
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    if (self.domainId.length) {
-        [self thn_networkDomainInfoData];
-        [self.view addSubview:self.setTableView];
-    }
+    [self.view addSubview:self.setTableView];
 }
 
 #pragma mark 地盘详情数据
@@ -43,12 +44,10 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
     self.infoRequest = [FBAPI getWithUrlString:URLDomainInfo requestDictionary:@{@"id":self.domainId, @"is_edit":@"1"} delegate:self];
     [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"======= %@", [NSString jsonStringWithObject:result]);
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSDictionary *dict =  [result valueForKey:@"data"];
-            self.infoData = [[THNDomainManageInfoData alloc] initWithDictionary:dict];
-            [self.setTableView reloadData];
-            [SVProgressHUD dismiss];
-        }
+        NSDictionary *dict =  [result valueForKey:@"data"];
+        self.infoData = [[THNDomainManageInfoData alloc] initWithDictionary:dict];
+        [self.setTableView reloadData];
+        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@" ---- %@ ----", error);

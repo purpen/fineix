@@ -11,10 +11,14 @@
 static NSInteger const MaxTextCount = 140;
 static NSInteger const categoryBtnTag = 532;
 static NSInteger const categorySpace = ((SCREEN_WIDTH - ((105 * 3) - 15)) / 2);
+
 static NSString *const URLCategory = @"/category/getlist";
+static NSString *const URLEditDomain = @"/scene_scene/save";
 
 @interface THNDomainEditViewController () {
     NSString *_oldCategoryTitle;
+    NSString *_domainId;
+    NSString *_newCategoryId;
 }
 
 @end
@@ -26,7 +30,10 @@ static NSString *const URLCategory = @"/category/getlist";
     
     [self thn_setNavigationViewUI];
     
-    [self setViewUI];
+    if (self.infoData) {
+        _domainId = [NSString stringWithFormat:@"%zi", self.infoData.idField];
+        [self setViewUI];
+    }
 }
 
 - (void)viewDidLoad {
@@ -37,6 +44,19 @@ static NSString *const URLCategory = @"/category/getlist";
     } else {
         [self.editInputBox becomeFirstResponder];
     }
+}
+
+- (void)thn_networkSaveEditInfoKey:(NSString *)key andObject:(NSString *)object {
+    [SVProgressHUD show];
+    self.saveInfoRequest = [FBAPI postWithUrlString:URLEditDomain requestDictionary:@{@"id":_domainId, key:object} delegate:self];
+    [self.saveInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [SVProgressHUD dismiss];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SaveEditInfoSucceed" object:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"--- %@ ---", error);
+    }];
 }
 
 - (void)setViewUI {
@@ -226,6 +246,9 @@ static NSString *const URLCategory = @"/category/getlist";
 }
 
 - (void)categoryBtnClick:(UIButton *)button {
+    NSInteger index = button.tag - categoryBtnTag;
+    _newCategoryId = self.idMarr[index];
+    
     if (button.selected == NO) {
         self.nowCategoryBtn.selected = NO;
         self.nowCategoryBtn.backgroundColor = [UIColor whiteColor];
@@ -259,7 +282,35 @@ static NSString *const URLCategory = @"/category/getlist";
 }
 
 - (void)thn_rightBarItemSelected {
-    NSLog(@"=== 保存");
+    if (self.writeBox.text.length > 0 || self.editInputBox.text.length > 0 || _newCategoryId.length > 0) {
+        DomainSetInfoType editType = (DomainSetInfoType)self.setInfoType;
+        switch (editType) {
+            case DomainSetInfoTypeDes:
+                [self thn_networkSaveEditInfoKey:@"des" andObject:self.writeBox.text];
+                break;
+            case DomainSetInfoTypeTitle:
+                [self thn_networkSaveEditInfoKey:@"title" andObject:self.editInputBox.text];
+                break;
+            case DomainSetInfoTypeSubTitle:
+                [self thn_networkSaveEditInfoKey:@"sub_title" andObject:self.editInputBox.text];
+                break;
+            case DomainSetInfoTypeCategory:
+                [self thn_networkSaveEditInfoKey:@"category_id" andObject:_newCategoryId];
+                break;
+            case DomainSetInfoTypeTags:
+                [self thn_networkSaveEditInfoKey:@"tags" andObject:self.editInputBox.text];
+                break;
+            case DomainSetInfoTypeAddress:
+                NSLog(@"==== 地址");
+                break;
+            case DomainSetInfoTypePhoneNum:
+                [self thn_networkSaveEditInfoKey:@"extra_tel" andObject:self.editInputBox.text];
+                break;
+            case DomainSetInfoTypeOpenTime:
+                [self thn_networkSaveEditInfoKey:@"extra_shop_hours" andObject:self.editInputBox.text];
+                break;
+        }
+    }
 }
 
 - (void)changeSaveButtonAlpha:(CGFloat)alpha {
