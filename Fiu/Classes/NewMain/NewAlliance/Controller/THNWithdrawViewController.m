@@ -69,7 +69,6 @@ static NSString *const URLApply = @"/withdraw_cash/apply_cash";
         }];
         
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"-- %@", [error localizedDescription]);
     }];
 }
 
@@ -77,15 +76,15 @@ static NSString *const URLApply = @"/withdraw_cash/apply_cash";
 - (void)thn_networkApplyCash {
     [SVProgressHUD show];
     NSString *money = self.withdrawView.moneyTextField.text;
-    if (self.dataModel.idField.length > 0 && [money floatValue] > 100) {
+    if (self.dataModel.idField.length > 0 && [money floatValue] >= 10) {
         self.applyRequest = [FBAPI postWithUrlString:URLApply
-                                   requestDictionary:@{@"id":self.dataModel.idField, @"amount":self.withdrawView.moneyTextField.text}
+                                   requestDictionary:@{@"id":self.dataModel.idField,
+                                                       @"amount":self.withdrawView.moneyTextField.text,
+                                                       @"payment_card_id" : self.zhangHuView.model._id
+                                                       }
                                             delegate:self];
         [self.applyRequest startRequestSuccess:^(FBRequest *request, id result) {
-            if ([[result valueForKey:@"success"] integerValue] == 1) {
-                [self thn_showAlertViewTitle:@"申请成功" text:@"可在提现记录中查看提现进度" buttonTitle:@"确认" type:1];
-            }
-            
+            [self thn_showAlertViewTitle:@"申请成功" text:@"可在提现记录中查看提现进度" buttonTitle:@"确认" type:1];
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
         }];
@@ -124,6 +123,7 @@ static NSString *const URLApply = @"/withdraw_cash/apply_cash";
         make.top.equalTo(_withdrawView.mas_bottom).with.offset(106/2);
     }];
 }
+
 
 -(THNZhangHuView *)zhangHuView{
     if (!_zhangHuView) {

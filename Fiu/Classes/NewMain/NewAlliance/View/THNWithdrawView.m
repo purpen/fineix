@@ -38,14 +38,6 @@
 - (void)thn_setCanWithdrawMoneyData:(CGFloat)money {
     _maxMoney = money;
     NSString *maxMoney = [NSString stringWithFormat:@"可提现金额:￥%.2f", money];
-    NSLog(@"dasdasd  %@",maxMoney);
-    CGFloat width = [maxMoney boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 20)
-                                           options:(NSStringDrawingUsesDeviceMetrics)
-                                        attributes:nil
-                                           context:nil].size.width *1.22;
-    [self.maxMoneyLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(@(width));
-    }];
     self.maxMoneyLabel.text = maxMoney;
 }
 
@@ -83,7 +75,7 @@
     
     [self addSubview:self.maxMoneyLabel];
     [_maxMoneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(100, 15));
+//        make.size.mas_equalTo(CGSizeMake(100, 15));
         make.left.equalTo(self.mas_left).with.offset(15);
         make.bottom.equalTo(self.mas_bottom).with.offset(-10);
     }];
@@ -193,7 +185,7 @@
 #pragma mark - 小于最低提现金额
 - (void)isWithdrawalMonryLessThanMin {
     self.errorLabel.text = @"* 每次提现金额不得少于10元";
-    if ([self.moneyTextField.text floatValue] >= 100.00) {
+    if ([self.moneyTextField.text floatValue] >= 10.00) {
         self.errorLabel.hidden = YES;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"canWithdrawalMoney" object:nil];
     } else {

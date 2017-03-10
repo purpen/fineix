@@ -9,6 +9,7 @@
 #import "THNZhangHuView.h"
 #import "Fiu.h"
 #import "THNBangDingTiXianZhangHuViewController.h"
+#import "UIView+FSExtension.h"
 
 @interface THNZhangHuView () <THNBangDingTiXianZhangHuViewControllerDelaget>
 
@@ -71,7 +72,17 @@
         [self.noneView addSubview:tipLabel];
         tipLabel.font = [UIFont systemFontOfSize:13];
         [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self.noneView.mas_centerY).mas_offset(0);
+            make.centerY.mas_equalTo(self.noneView.mas_centerY).mas_offset(-10);
+            make.left.mas_equalTo(tuBiao.mas_right).mas_offset(10);
+        }];
+        
+        UILabel *zhangHuLabel = [[UILabel alloc] init];
+        zhangHuLabel.text = [NSString stringWithFormat:@"支付宝帐号（%@）",self.model.account];
+        zhangHuLabel.textColor = [UIColor colorWithWhite:0 alpha:0.6];
+        [self.noneView addSubview:zhangHuLabel];
+        zhangHuLabel.font = [UIFont systemFontOfSize:13];
+        [zhangHuLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.noneView.mas_centerY).mas_offset(10);
             make.left.mas_equalTo(tuBiao.mas_right).mas_offset(10);
         }];
         
@@ -104,7 +115,17 @@
         [self.noneView addSubview:tipLabel];
         tipLabel.font = [UIFont systemFontOfSize:13];
         [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self.noneView.mas_centerY).mas_offset(0);
+            make.centerY.mas_equalTo(self.noneView.mas_centerY).mas_offset(-10);
+            make.left.mas_equalTo(tuBiao.mas_right).mas_offset(10);
+        }];
+        
+        UILabel *zhangHuLabel = [[UILabel alloc] init];
+        zhangHuLabel.text = [NSString stringWithFormat:@"储蓄卡（尾号%@）",[self.model.account substringFromIndex:self.model.account.length-4]];
+        zhangHuLabel.textColor = [UIColor colorWithWhite:0 alpha:0.6];
+        [self.noneView addSubview:zhangHuLabel];
+        zhangHuLabel.font = [UIFont systemFontOfSize:13];
+        [zhangHuLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.noneView.mas_centerY).mas_offset(10);
             make.left.mas_equalTo(tuBiao.mas_right).mas_offset(10);
         }];
         
@@ -133,6 +154,20 @@
     }
     [self setModel:model];
     [self setZhangHu:zhangHu];
+    switch (self.zhangHu) {
+        case none:
+        {self.height = 44;}
+            break;
+        case zhiFuBao:
+        {self.height = 60;}
+            break;
+        case YingHangKa:
+        {self.height = 60;}
+            break;
+            
+        default:
+            break;
+    }
 }
 
 -(void)viewTap{

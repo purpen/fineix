@@ -179,6 +179,7 @@
                 } else if ([_selectedCell.model.kind isEqualToString:@"2"]) {
                     //支付宝
                     THNZhiFuXinXiViewController *vc = [[THNZhiFuXinXiViewController alloc] init];
+                    vc.model = self.selectedCell.model;
                     [self.navigationController pushViewController:vc animated:YES];
                 } else{
                 

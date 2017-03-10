@@ -7,7 +7,10 @@
 //
 
 #import "THNViewController.h"
+#import "THNZhangHuModel.h"
 
 @interface THNZhiFuXinXiViewController : THNViewController
+
+@property (nonatomic, strong) THNZhangHuModel *model;
 
 @end

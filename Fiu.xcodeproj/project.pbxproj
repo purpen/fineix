@@ -401,6 +401,9 @@
 		1F5E9FCB1E6FA40D00822312 /* THNDiPanGuanLiCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5E9FCA1E6FA40D00822312 /* THNDiPanGuanLiCollectionViewCell.m */; };
 		1F5E9FCE1E6FF70300822312 /* THNZhangHuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5E9FCD1E6FF70200822312 /* THNZhangHuTableViewCell.m */; };
 		1F6644431E71091800C1DC46 /* THNYinHangKaXinXiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6644421E71091800C1DC46 /* THNYinHangKaXinXiViewController.m */; };
+		1F6644491E72837200C1DC46 /* THNYinHangModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6644481E72837200C1DC46 /* THNYinHangModel.m */; };
+		1F6644521E72A20600C1DC46 /* THNYinHangXuanZeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6644511E72A20600C1DC46 /* THNYinHangXuanZeViewController.m */; };
+		1F6644551E72A5E900C1DC46 /* THNBankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6644541E72A5E900C1DC46 /* THNBankTableViewCell.m */; };
 		1F69CE201CF70BFA00AE3271 /* OfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */; };
 		1F69CE211CF70BFA00AE3271 /* OfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */; };
 		1F6CA25D1D5B0FA600DFB79E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6CA25C1D5B0FA600DFB79E /* MediaPlayer.framework */; };
@@ -1522,6 +1525,12 @@
 		1F5E9FCD1E6FF70200822312 /* THNZhangHuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNZhangHuTableViewCell.m; sourceTree = "<group>"; };
 		1F6644411E71091800C1DC46 /* THNYinHangKaXinXiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNYinHangKaXinXiViewController.h; sourceTree = "<group>"; };
 		1F6644421E71091800C1DC46 /* THNYinHangKaXinXiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNYinHangKaXinXiViewController.m; sourceTree = "<group>"; };
+		1F6644471E72837200C1DC46 /* THNYinHangModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNYinHangModel.h; sourceTree = "<group>"; };
+		1F6644481E72837200C1DC46 /* THNYinHangModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNYinHangModel.m; sourceTree = "<group>"; };
+		1F6644501E72A20500C1DC46 /* THNYinHangXuanZeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNYinHangXuanZeViewController.h; sourceTree = "<group>"; };
+		1F6644511E72A20600C1DC46 /* THNYinHangXuanZeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNYinHangXuanZeViewController.m; sourceTree = "<group>"; };
+		1F6644531E72A5E900C1DC46 /* THNBankTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBankTableViewCell.h; sourceTree = "<group>"; };
+		1F6644541E72A5E900C1DC46 /* THNBankTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBankTableViewCell.m; sourceTree = "<group>"; };
 		1F69CE1D1CF70BFA00AE3271 /* OfficialCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfficialCertificationViewController.h; sourceTree = "<group>"; };
 		1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficialCertificationViewController.m; sourceTree = "<group>"; };
 		1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfficialCertificationViewController.xib; sourceTree = "<group>"; };
@@ -4590,6 +4599,8 @@
 				1F5E9FC71E6EA19000822312 /* THNZhiFuXinXiViewController.m */,
 				1F6644411E71091800C1DC46 /* THNYinHangKaXinXiViewController.h */,
 				1F6644421E71091800C1DC46 /* THNYinHangKaXinXiViewController.m */,
+				1F6644501E72A20500C1DC46 /* THNYinHangXuanZeViewController.h */,
+				1F6644511E72A20600C1DC46 /* THNYinHangXuanZeViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4603,6 +4614,8 @@
 				D857C4891E2F3E8600569B3D /* Withdraw */,
 				1F5E9FC01E6E578500822312 /* THNZhangHuModel.h */,
 				1F5E9FC11E6E578500822312 /* THNZhangHuModel.m */,
+				1F6644471E72837200C1DC46 /* THNYinHangModel.h */,
+				1F6644481E72837200C1DC46 /* THNYinHangModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4629,6 +4642,8 @@
 				1F5E9FBE1E6E4EB500822312 /* THNZhangHuView.m */,
 				1F5E9FCC1E6FF70100822312 /* THNZhangHuTableViewCell.h */,
 				1F5E9FCD1E6FF70200822312 /* THNZhangHuTableViewCell.m */,
+				1F6644531E72A5E900C1DC46 /* THNBankTableViewCell.h */,
+				1F6644541E72A5E900C1DC46 /* THNBankTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5927,6 +5942,7 @@
 				1FD10CB21D62E89D005898EE /* THNContentViewController.m in Sources */,
 				D8117AC91E5A89D50094E7EB /* RollImageData.m in Sources */,
 				D85174571D587917005F5722 /* THNMyCenterViewController.m in Sources */,
+				1F6644551E72A5E900C1DC46 /* THNBankTableViewCell.m in Sources */,
 				1F2A8FDF1CF40277005116C7 /* InfoGoodsHighlightsTableViewCell.m in Sources */,
 				1F2362511E643D9200A6178C /* THNQingJingZhuanTiViewController.m in Sources */,
 				D80669781D6EF8FA007FD81E /* DiscoverSearchViewController.m in Sources */,
@@ -6353,6 +6369,7 @@
 				1F2AFC8F1D88170B00DA6035 /* BotView.m in Sources */,
 				1F2AFC981D88170B00DA6035 /* MyPageBGCollectionViewCell.m in Sources */,
 				D868090F1D6349B0002714B2 /* THNMarkGoodsView.m in Sources */,
+				1F6644521E72A20600C1DC46 /* THNYinHangXuanZeViewController.m in Sources */,
 				1F2A8F351CF40277005116C7 /* MarkGoodsViewController.m in Sources */,
 				1F2A8FB41CF40277005116C7 /* BrandInfoData.m in Sources */,
 				1F5E9FC21E6E578500822312 /* THNZhangHuModel.m in Sources */,
@@ -6374,6 +6391,7 @@
 				1F2AFC871D88170B00DA6035 /* FiuSceneRow.m in Sources */,
 				1F2A8F3E1CF40277005116C7 /* FindGoodsModelData.m in Sources */,
 				D857AC411DE8373500F924E8 /* THNApplyRefundView.m in Sources */,
+				1F6644491E72837200C1DC46 /* THNYinHangModel.m in Sources */,
 				D85F16B01E5EB0850038E0BB /* THND3inExplainViewController.m in Sources */,
 				D8E800711D7958E600DDC3E0 /* THNHotUserFlowLayout.m in Sources */,
 				1F2AFD1A1D8817CC00DA6035 /* THNCuXiaoDetalContentTableViewCell.m in Sources */,

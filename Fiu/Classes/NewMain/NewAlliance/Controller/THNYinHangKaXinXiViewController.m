@@ -9,8 +9,11 @@
 #import "THNYinHangKaXinXiViewController.h"
 #import "Fiu.h"
 #import "NSString+Helper.h"
+#import "THNYinHangModel.h"
+#import "MJExtension.h"
+#import "THNYinHangXuanZeViewController.h"
 
-@interface THNYinHangKaXinXiViewController ()<THNNavigationBarItemsDelegate>
+@interface THNYinHangKaXinXiViewController ()<THNNavigationBarItemsDelegate, THNYinHangXuanZeViewControllerDelegate>
 
 @property (nonatomic, strong) UIView *topView;
 @property (nonatomic, strong) UIView *kaiHuHangView;
@@ -29,6 +32,11 @@
 @property (nonatomic, strong) UITextField *yanZhengMaTF;
 @property (nonatomic, strong) UISwitch *moRenSwitch;
 @property (nonatomic, strong) UIView *moRenView;
+@property (nonatomic, strong) UIView *yinHangView;
+/**  */
+@property (nonatomic, strong) UILabel *bankLabel;
+/**  */
+@property (nonatomic, strong) THNYinHangModel *selectedYinHangModel;
 
 @end
 
@@ -60,6 +68,8 @@ static NSString *const URLAliance = @"/alliance/view";
         [SVProgressHUD showInfoWithStatus:@"请输入手机号"];
     } else if (self.kaiHuHangTF.text.length == 0) {
         [SVProgressHUD showInfoWithStatus:@"请输入开户银行"];
+    } else if (self.bankLabel.text.length == 0) {
+        [SVProgressHUD showInfoWithStatus:@"请选择对应银行"];
     } else if (self.yanZhengMaTF.text.length == 0) {
         [SVProgressHUD showInfoWithStatus:@"请输入验证码"];
     } else {
@@ -76,7 +86,8 @@ static NSString *const URLAliance = @"/alliance/view";
                                                                                                        @"username" : self.nameTF.text,
                                                                                                        @"phone" : self.phoneTF.text,
                                                                                                        @"verify_code" : self.yanZhengMaTF.text,
-                                                                                                       @"is_default" : @(self.moRenSwitch.isOn)
+                                                                                                       @"is_default" : @(self.moRenSwitch.isOn),
+                                                                                                       @"pay_type" : self.selectedYinHangModel.bankId
                                                                                                        } delegate:self];
             [requestTwo startRequestSuccess:^(FBRequest *request, id result) {
                 [SVProgressHUD showSuccessWithStatus:@"成功绑定账户"];
@@ -95,6 +106,7 @@ static NSString *const URLAliance = @"/alliance/view";
     self.zhangHuTF.text = model.account;
     self.phoneTF.text = model.phone;
     [self.moRenSwitch setOn:[model.is_default integerValue]];
+    self.bankLabel.text = model.pay_type_label;
 }
 
 - (void)viewDidLoad {
@@ -108,10 +120,17 @@ static NSString *const URLAliance = @"/alliance/view";
         make.height.mas_equalTo(120/2*SCREEN_HEIGHT/667.0);
     }];
     
+    [self.view addSubview:self.yinHangView];
+    [_yinHangView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view).mas_offset(0);
+        make.top.mas_equalTo(self.topView.mas_bottom).mas_offset(15);
+        make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
+    }];
+    
     [self.view addSubview:self.kaiHuHangView];
     [_kaiHuHangView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view).mas_offset(0);
-        make.top.mas_equalTo(self.topView.mas_bottom).mas_offset(15);
+        make.top.mas_equalTo(self.yinHangView.mas_bottom).mas_offset(1);
         make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
     }];
     
@@ -149,6 +168,8 @@ static NSString *const URLAliance = @"/alliance/view";
         make.top.mas_equalTo(self.yanZhengView.mas_bottom).mas_offset(10);
         make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
     }];
+    
+    [self setModel:self.model];
 }
 
 -(UIView *)moRenView{
@@ -386,7 +407,7 @@ static NSString *const URLAliance = @"/alliance/view";
         
         self.kaiHuHangTF = [[UITextField alloc] init];
         _kaiHuHangTF.borderStyle = UITextBorderStyleNone;
-        _kaiHuHangTF.placeholder = @"输入开户银行";
+        _kaiHuHangTF.placeholder = @"输入开户银行名称";
         [_kaiHuHangView addSubview:_kaiHuHangTF];
         _kaiHuHangTF.font = [UIFont systemFontOfSize:14];
         [_kaiHuHangTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -395,6 +416,56 @@ static NSString *const URLAliance = @"/alliance/view";
         }];
     }
     return _kaiHuHangView;
+}
+
+-(UIView *)yinHangView{
+    if (!_yinHangView) {
+        _yinHangView = [[UIView alloc] init];
+        _yinHangView.backgroundColor = [UIColor whiteColor];
+        
+        UILabel *label = [[UILabel alloc] init];
+        label.font = [UIFont systemFontOfSize:14];
+        label.textColor = [UIColor blackColor];
+        label.text = @"银行";
+        [_yinHangView addSubview:label];
+        [label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(_yinHangView.mas_centerY).mas_offset(0);
+            make.left.mas_equalTo(_yinHangView.mas_left).mas_offset(15);
+            make.width.mas_equalTo(65);
+        }];
+        
+        UIImageView *goImageView = [[UIImageView alloc] init];
+        goImageView.image = [UIImage imageNamed:@"entr"];
+        [_yinHangView addSubview:goImageView];
+        [goImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(_yinHangView.mas_centerY).mas_offset(0);
+            make.right.mas_equalTo(_yinHangView.mas_right).mas_offset(-15);
+        }];
+        
+        _bankLabel = [[UILabel alloc] init];
+        _bankLabel.font = [UIFont systemFontOfSize:14];
+        _bankLabel.textColor = [UIColor colorWithWhite:0 alpha:0.6];
+        [_yinHangView addSubview:_bankLabel];
+        [_bankLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(_yinHangView.mas_centerY).mas_offset(0);
+            make.right.mas_equalTo(goImageView.mas_left).mas_offset(-15);
+        }];
+        
+        _yinHangView.userInteractionEnabled = YES;
+        [_yinHangView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectBank)]];
+    }
+    return _yinHangView;
+}
+
+-(void)selectBank{
+    THNYinHangXuanZeViewController *vc = [[THNYinHangXuanZeViewController alloc] init];
+    vc.bankDelegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)setSelectedBank:(THNYinHangModel *)model{
+    self.selectedYinHangModel = model;
+    self.bankLabel.text = model.name;
 }
 
 -(UIView *)topView{
