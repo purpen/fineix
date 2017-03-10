@@ -54,7 +54,7 @@
         [_textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.bgView.mas_centerX).mas_offset(0);
             make.centerY.mas_equalTo(self.bgView.mas_centerY).mas_offset(0);
-            make.width.mas_lessThanOrEqualTo(self.contentView.width/2 + 20);
+            make.width.mas_lessThanOrEqualTo(2*self.contentView.width/3);
         }];
     }
     return self;

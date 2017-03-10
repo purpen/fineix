@@ -85,6 +85,14 @@ static NSString *const URLAliance = @"/alliance/view";
     }
 }
 
+-(void)setModel:(THNZhangHuModel *)model{
+    _model = model;
+    self.nameTF.text = model.username;
+    self.zhangHuTF.text = model.account;
+    self.phoneTF.text = model.phone;
+    [self.moRenSwitch setOn:[model.is_default integerValue]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#f8f8f8"];
@@ -130,6 +138,8 @@ static NSString *const URLAliance = @"/alliance/view";
         make.top.mas_equalTo(self.yanZhengView.mas_bottom).mas_offset(10);
         make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
     }];
+    
+    [self setModel:self.model];
 }
 
 -(UIView *)moRenView{

@@ -17,6 +17,8 @@
 @property (nonatomic, strong) UIImageView *tuBiao;
 /**  */
 @property (nonatomic, strong) UIView *lineView;
+/**  */
+@property (nonatomic, strong) UILabel *zhangHuLabel;
 
 @end
 
@@ -40,7 +42,16 @@
         _nameLabel.textColor = [UIColor colorWithHexString:@"#232323"];
         [self.contentView addSubview:_nameLabel];
         [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(0);
+            make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(-10);
+            make.left.mas_equalTo(self.tuBiao.mas_right).mas_offset(15);
+        }];
+        
+        _zhangHuLabel = [[UILabel alloc] init];
+        _zhangHuLabel.textColor = [UIColor colorWithWhite:0 alpha:0.6];
+        [self.contentView addSubview:_zhangHuLabel];
+        _zhangHuLabel.font = [UIFont systemFontOfSize:13];
+        [_zhangHuLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(10);
             make.left.mas_equalTo(self.tuBiao.mas_right).mas_offset(15);
         }];
         
@@ -93,10 +104,12 @@
         //支付宝
         self.nameLabel.text = @"支付宝";
         self.tuBiao.image = [UIImage imageNamed:@"alipayBig"];
+        _zhangHuLabel.text = [NSString stringWithFormat:@"支付宝帐号（%@）",self.model.account];
     } else if ([model.kind isEqualToString:@"1"]) {
         //银行卡
         self.nameLabel.text = model.pay_type_label;
         self.tuBiao.image = [UIImage imageNamed:@"yinHangKaBig"];
+        _zhangHuLabel.text = [NSString stringWithFormat:@"储蓄卡（尾号%@）",[self.model.account substringFromIndex:self.model.account.length-4]];
     } else{
         
     }
