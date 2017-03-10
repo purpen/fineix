@@ -8,6 +8,13 @@
 
 #import "THNDomainSetViewController.h"
 #import "THNDomainInfoSetViewController.h"
+#import "THNInfoTitleTableViewCell.h"
+#import "THNDomainImagesTableViewCell.h"
+#import "THNDomainEditViewController.h"
+
+static NSString *const URLDomainInfo = @"/scene_scene/view";
+static NSString *const infoCellId = @"THNInfoTitleTableViewCellId";
+static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
 
 @interface THNDomainSetViewController ()
 
@@ -23,8 +30,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.view addSubview:self.setTableView];
+
+    if (self.domainId.length) {
+        [self thn_networkDomainInfoData];
+        [self.view addSubview:self.setTableView];
+    }
+}
+
+#pragma mark 地盘详情数据
+- (void)thn_networkDomainInfoData {
+    [SVProgressHUD show];
+    self.infoRequest = [FBAPI getWithUrlString:URLDomainInfo requestDictionary:@{@"id":self.domainId, @"is_edit":@"1"} delegate:self];
+    [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"======= %@", [NSString jsonStringWithObject:result]);
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSDictionary *dict =  [result valueForKey:@"data"];
+            self.infoData = [[THNDomainManageInfoData alloc] initWithDictionary:dict];
+            [self.setTableView reloadData];
+            [SVProgressHUD dismiss];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@" ---- %@ ----", error);
+    }];
 }
 
 #pragma mark - 设置界面UI 
@@ -50,9 +78,32 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
-    cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"CellID"];
-    return cell;
+    if (indexPath.section == 2) {
+        THNDomainImagesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:imageCellId];
+        cell = [[THNDomainImagesTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:imageCellId];
+        return cell;
+        
+    } else {
+        THNInfoTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:infoCellId];
+        cell = [[THNInfoTitleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:infoCellId];
+        if (indexPath.section == 0) {
+            [cell thn_setInfoTitleLeftText:@"地盘基本信息" andRightText:@""];
+            if (self.infoData) {
+                [cell thn_showImage:self.infoData.avatarUrl];
+            }
+            
+        } else if (indexPath.section == 1) {
+            NSArray *leftText = @[@"地盘简介", @"地盘亮点"];
+            [cell thn_setInfoTitleLeftText:leftText[indexPath.row] andRightText:@""];
+            
+        } else if (indexPath.section == 3) {
+            [cell thn_setInfoTitleLeftText:@"添加商品到地盘" andRightText:@""];
+            [cell thn_showLeftButton];
+        }
+        
+        return cell;
+    }
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -75,8 +126,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        THNDomainInfoSetViewController *infoSetVC = [[THNDomainInfoSetViewController alloc] init];
-        [self.navigationController pushViewController:infoSetVC animated:YES];
+        if (self.infoData) {
+            THNDomainInfoSetViewController *infoSetVC = [[THNDomainInfoSetViewController alloc] init];
+            infoSetVC.infoData = self.infoData;
+            [self.navigationController pushViewController:infoSetVC animated:YES];
+        }
+    
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            THNDomainEditViewController *editVC = [[THNDomainEditViewController alloc] init];
+            editVC.setInfoType = 8;
+            editVC.infoData = self.infoData;
+            [self.navigationController pushViewController:editVC animated:YES];
+        }
     }
 }
 
@@ -86,5 +148,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
     self.navViewTitle.text = @"地盘管理";
 }
+
+#pragma mark - 
 
 @end

@@ -54,6 +54,7 @@
     
     userInfo.is_bonus = self.is_bonus;
     userInfo.allianceId = self.allianceId;
+    userInfo.storageId = self.storageId;
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [userInfo saveOrUpdate];
@@ -87,6 +88,7 @@
     self.assets = @"";
     self.interest_scene_cate = nil;
     self.allianceId = @"";
+    self.storageId = @"";
 }
 
 @end

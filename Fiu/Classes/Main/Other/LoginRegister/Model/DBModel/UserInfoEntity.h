@@ -53,6 +53,11 @@
  */
 @property (nonatomic, strong) NSString *allianceId;
 
+/**
+ 地盘id
+ */
+@property (nonatomic, strong) NSString *storageId;
+
 + (instancetype)defaultUserInfoEntity;
 - (void)updateUserInfo;
 - (void)clear;
