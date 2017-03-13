@@ -75,12 +75,12 @@
         }];
         
         self.label = [[UILabel alloc] init];
-        _label.font = [UIFont systemFontOfSize:14];
+        _label.font = [UIFont systemFontOfSize:12];
         _label.textColor = [UIColor colorWithHexString:@"#a5a5a5"];
         _label.text = @"默认提现账户";
         [self.contentView addSubview:_label];
         [_label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(0);
+            make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(-5);
             make.right.mas_equalTo(self.circleBtn.mas_left).mas_offset(-10);
         }];
     }

@@ -46,7 +46,7 @@
         [self.contentView addSubview:self.textLabel];
         [_textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.contentView.mas_left).mas_offset(16);
-            make.top.mas_equalTo(self.contentView.mas_top).mas_offset(8);
+            make.top.mas_equalTo(self.contentView.mas_top).mas_offset(8/667.0*SCREEN_HEIGHT);
         }];
         
         self.tipLabel = [[UILabel alloc] init];
@@ -56,7 +56,7 @@
         [self.contentView addSubview:self.tipLabel];
         [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.textLabel.mas_left).mas_offset(0);
-            make.top.mas_equalTo(self.textLabel.mas_bottom).mas_offset(3);
+            make.top.mas_equalTo(self.textLabel.mas_bottom).mas_offset(3*SCREEN_HEIGHT/667.0);
         }];
         
         self.numberLabel = [[UILabel alloc] init];
