@@ -46,15 +46,6 @@
             make.left.mas_equalTo(self.tuBiao.mas_right).mas_offset(15);
         }];
         
-        _zhangHuLabel = [[UILabel alloc] init];
-        _zhangHuLabel.textColor = [UIColor colorWithWhite:0 alpha:0.6];
-        [self.contentView addSubview:_zhangHuLabel];
-        _zhangHuLabel.font = [UIFont systemFontOfSize:13];
-        [_zhangHuLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(10);
-            make.left.mas_equalTo(self.tuBiao.mas_right).mas_offset(15);
-        }];
-        
         self.lineView = [[UIView alloc] init];
         self.lineView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
         [self.contentView addSubview:self.lineView];
@@ -72,6 +63,16 @@
         [_circleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(0);
             make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-15);
+        }];
+        
+        _zhangHuLabel = [[UILabel alloc] init];
+        _zhangHuLabel.textColor = [UIColor colorWithWhite:0 alpha:0.6];
+        [self.contentView addSubview:_zhangHuLabel];
+        _zhangHuLabel.font = [UIFont systemFontOfSize:13];
+        [_zhangHuLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(10);
+            make.left.mas_equalTo(self.tuBiao.mas_right).mas_offset(15);
+            make.width.mas_equalTo(SCREEN_WIDTH-110);
         }];
         
         self.label = [[UILabel alloc] init];
