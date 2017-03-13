@@ -176,7 +176,6 @@
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        
         NSDictionary *dataDict = result[@"data"];
         _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
@@ -268,6 +267,9 @@
     }else if (section == 4) {
         return UIEdgeInsetsMake(0, 0, 10, 0);
     } else if (section == 3) {
+        if (_userInfo.storageId.length == 0) {
+            return UIEdgeInsetsMake(0, 0, 0, 0);
+        }
         return UIEdgeInsetsMake(0, 0, 10, 0);
     }
     else{
@@ -295,6 +297,13 @@
         cell.moneyStr = self.moneyStr;
         return cell;
     } else if (indexPath.section == 3) {
+        if (_userInfo.storageId.length == 0) {
+            THNDiPanGuanLiCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNDIPanGuanLiCollectionViewCell forIndexPath:indexPath];
+            cell.textLabel.hidden = YES;
+            cell.imageV.hidden = YES;
+            cell.bgImageV.hidden = YES;
+            return cell;
+        }
         THNDiPanGuanLiCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNDIPanGuanLiCollectionViewCell forIndexPath:indexPath];
         return cell;
     }
@@ -315,7 +324,6 @@
             [self.tipNumView1 removeFromSuperview];
         }else{
             //显示
-            
             self.tipNumView1.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.message_total_count];
             CGSize size = [self.tipNumView1.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
             [cell.btn1 addSubview:self.tipNumView1];
@@ -351,14 +359,6 @@
                 make.top.mas_equalTo(cell.btn7.mas_top).with.offset(0/667.0*SCREEN_HEIGHT);
             }];
         }
-        
-//        if ( _userInfo.allianceId.length == 0) {
-//            cell.allianceLabel.hidden = YES;
-//            cell.allianceBtn.hidden = YES;
-//        } else {
-//            cell.allianceLabel.hidden = NO;
-//            cell.allianceBtn.hidden = NO;
-//        }
         
         [cell.btn1 addTarget:self action:@selector(messageBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn2 addTarget:self action:@selector(subscribeBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -463,6 +463,9 @@
         return CGSizeMake(SCREEN_WIDTH, 44/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 3) {
+        if (_userInfo.storageId.length == 0) {
+            return CGSizeMake(SCREEN_WIDTH, 0.00001);
+        }
         return CGSizeMake(SCREEN_WIDTH, 44/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 4) {
