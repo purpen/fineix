@@ -225,7 +225,7 @@
     [_qrImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(60, 60));
         make.centerX.equalTo(self).with.offset(-2);
-        make.bottom.equalTo(self.mas_bottom).with.offset(-38);
+        make.bottom.equalTo(_describe.mas_top).with.offset(10);
     }];
 }
 
