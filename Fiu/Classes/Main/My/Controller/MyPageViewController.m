@@ -305,6 +305,9 @@
             return cell;
         }
         THNDiPanGuanLiCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNDIPanGuanLiCollectionViewCell forIndexPath:indexPath];
+        cell.textLabel.hidden = NO;
+        cell.imageV.hidden = NO;
+        cell.bgImageV.hidden = NO;
         return cell;
     }
     else if(indexPath.section == 4){
