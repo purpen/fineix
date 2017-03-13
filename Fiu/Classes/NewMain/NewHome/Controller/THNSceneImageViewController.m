@@ -8,6 +8,7 @@
 
 #import "THNSceneImageViewController.h"
 #import "THNDomainImageCollectionViewCell.h"
+#import <TYAlertController/UIView+TYAlertView.h>
 
 static NSString *const domainImageCellId = @"DomainImageCollectionViewCellId";
 
@@ -15,6 +16,8 @@ static NSString *const URLUserIsEditor = @"/user/is_editor";
 static NSString *const URLSceneFine = @"/user/do_fine";
 static NSString *const URLSceneStick = @"/user/do_stick";
 static NSString *const URLSceneCheck = @"/user/do_check";
+static NSString *const URLDeleteAsset = @"/common/delete_asset";
+static NSString *const URLSetCover = @"/common/set_default_cover";
 
 @interface THNSceneImageViewController () {
     UIImage *_sceneImage;
@@ -25,6 +28,8 @@ static NSString *const URLSceneCheck = @"/user/do_check";
     NSString *_sceneFine;
     NSString *_sceneStick;
     NSString *_sceneCheck;
+    NSString *_imageId;
+    NSInteger _imageIndex;
 }
 
 @end
@@ -244,13 +249,51 @@ static NSString *const URLSceneCheck = @"/user/do_check";
     return _imageView;
 }
 
+#pragma mark - ----------
+#pragma mark 删除地盘图片
+- (void)thn_networkDeleteDomainImage {
+    self.deleteAsset = [FBAPI postWithUrlString:URLDeleteAsset requestDictionary:@{@"id":_imageId} delegate:self];
+    [self.deleteAsset startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] integerValue] == 1) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"uploadImageSucceed" object:nil];
+            
+            [self.domainImagesMarr removeObjectAtIndex:_imageIndex];
+            [self.imageCollection deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:_imageIndex inSection:0]]];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"--- %@ ---", [error localizedDescription]);
+    }];
+}
+
+#pragma mark 设为封面
+- (void)thn_networkSetCoverDomainImage {
+    self.setDefaultCover = [FBAPI postWithUrlString:URLSetCover requestDictionary:@{@"type":@"1", @"id":self.domainId, @"asset_id":_imageId} delegate:self];
+    [self.setDefaultCover startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] integerValue] == 1) {
+            [SVProgressHUD showSuccessWithStatus:@"设置成功"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"--- %@ ---", [error localizedDescription]);
+    }];
+}
+
 #pragma mark - 展示地盘图片的集合
 - (void)thn_showDomainImagesOfSet:(NSMutableArray *)images withIndex:(NSInteger)index {
+    _imageId = self.imagesIdMarr[index];
+    _imageIndex = index;
+    
     self.domainImagesMarr = images;
     [self.view addSubview:self.closeButton];
+    [self.view addSubview:self.moreButton];
+    
     [self.view addSubview:self.imageCollection];
     [self.imageCollection reloadData];
     [self.imageCollection scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0] atScrollPosition:(UICollectionViewScrollPositionNone) animated:NO];
+    
+    [self.view addSubview:self.imageCountLab];
+    [self setImageIndexLable:index];
 }
 
 #pragma mark - 地盘图片
@@ -287,6 +330,37 @@ static NSString *const URLSceneCheck = @"/user/do_check";
     return cell;
 }
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (scrollView == self.imageCollection) {
+        NSInteger index = scrollView.contentOffset.x / SCREEN_WIDTH;
+        [self setImageIndexLable:index];
+        _imageId = self.imagesIdMarr[index];
+        _imageIndex = index;
+    }
+}
+
+#pragma mark - 图片数量显示
+- (UILabel *)imageCountLab {
+    if (!_imageCountLab) {
+        _imageCountLab = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 70, SCREEN_HEIGHT - 44, 60, 40)];
+        _imageCountLab.textAlignment = NSTextAlignmentRight;
+        _imageCountLab.textColor = [UIColor whiteColor];
+    }
+    return _imageCountLab;
+}
+
+- (void)setImageIndexLable:(NSInteger)index {
+    NSString *imagesCount = [NSString stringWithFormat:@"%zi", self.domainImagesMarr.count];
+    NSString *indexString = [NSString stringWithFormat:@"%zi", index + 1];
+    NSString *defaultString = [NSString stringWithFormat:@"%@／%@", indexString, imagesCount];
+    
+    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:defaultString];
+    [attributedStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:16] range:NSMakeRange(0, indexString.length)];
+    [attributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(indexString.length, imagesCount.length + 1)];
+    
+    self.imageCountLab.attributedText = attributedStr;
+}
+
 #pragma mark - 关闭查看地盘大图
 - (UIButton *)closeButton {
     if (!_closeButton) {
@@ -301,12 +375,49 @@ static NSString *const URLSceneCheck = @"/user/do_check";
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - 设置地盘图片
+- (UIButton *)moreButton {
+    if (!_moreButton) {
+        _moreButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 0, 44, 44)];
+        [_moreButton setImage:[UIImage imageNamed:@"icon_more_white"] forState:(UIControlStateNormal)];
+        [_moreButton addTarget:self action:@selector(moreButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _moreButton;
+}
+
+- (void)moreButtonClick:(UIButton *)button {
+    TYAlertView *alertView = [TYAlertView alertViewWithTitle:nil message:nil];
+    alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
+    alertView.buttonCancelBgColor = [UIColor colorWithHexString:@"#666666"];
+    [alertView addAction:[TYAlertAction actionWithTitle:@"设为地盘详情封面" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
+        [self thn_networkSetCoverDomainImage];
+    }]];
+    
+    [alertView addAction:[TYAlertAction actionWithTitle:@"删除图片" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
+        [self thn_networkDeleteDomainImage];
+    }]];
+    
+    [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:^(TYAlertAction *action) {
+        //        NSLog(@"--- 取消 ---");
+    }]];
+    
+    TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle:TYAlertControllerStyleActionSheet];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 #pragma mark - 
 - (NSMutableArray *)domainImagesMarr {
     if (!_domainImagesMarr) {
         _domainImagesMarr = [NSMutableArray array];
     }
     return _domainImagesMarr;
+}
+
+- (NSMutableArray *)imagesIdMarr {
+    if (!_imagesIdMarr) {
+        _imagesIdMarr = [NSMutableArray array];
+    }
+    return _imagesIdMarr;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
