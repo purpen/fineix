@@ -389,7 +389,7 @@ static NSString *const URLSetCover = @"/common/set_default_cover";
     TYAlertView *alertView = [TYAlertView alertViewWithTitle:nil message:nil];
     alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
     alertView.buttonCancelBgColor = [UIColor colorWithHexString:@"#666666"];
-    [alertView addAction:[TYAlertAction actionWithTitle:@"设为地盘详情封面" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
+    [alertView addAction:[TYAlertAction actionWithTitle:@"设为地盘封面" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
         [self thn_networkSetCoverDomainImage];
     }]];
     
