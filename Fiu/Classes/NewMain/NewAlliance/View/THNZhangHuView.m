@@ -76,6 +76,14 @@
             make.left.mas_equalTo(tuBiao.mas_right).mas_offset(10);
         }];
         
+        UIImageView *goImageView = [[UIImageView alloc] init];
+        goImageView.image = [UIImage imageNamed:@"entr"];
+        [self.noneView addSubview:goImageView];
+        [goImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.noneView.mas_centerY).mas_offset(0);
+            make.right.mas_equalTo(self.noneView.mas_right).mas_offset(-15);
+        }];
+        
         UILabel *zhangHuLabel = [[UILabel alloc] init];
         zhangHuLabel.text = [NSString stringWithFormat:@"支付宝帐号（%@）",self.model.account];
         zhangHuLabel.textColor = [UIColor colorWithWhite:0 alpha:0.6];
@@ -84,15 +92,9 @@
         [zhangHuLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(self.noneView.mas_centerY).mas_offset(10);
             make.left.mas_equalTo(tuBiao.mas_right).mas_offset(10);
+            make.right.mas_equalTo(goImageView.mas_left).mas_offset(-10);
         }];
         
-        UIImageView *goImageView = [[UIImageView alloc] init];
-        goImageView.image = [UIImage imageNamed:@"entr"];
-        [self.noneView addSubview:goImageView];
-        [goImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self.noneView.mas_centerY).mas_offset(0);
-            make.right.mas_equalTo(self.noneView.mas_right).mas_offset(-15);
-        }];
         [self addSubview:self.noneView];
         [_noneView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.top.bottom.mas_equalTo(self).mas_offset(0);
