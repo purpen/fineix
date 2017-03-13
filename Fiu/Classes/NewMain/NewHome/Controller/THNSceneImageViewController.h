@@ -24,8 +24,14 @@
 @property (nonatomic, strong) THNSceneImageScrollView *imageView;
 
 @property (nonatomic, strong) UIButton *closeButton;
+@property (nonatomic, strong) UIButton *moreButton;
+@property (nonatomic, strong) UILabel *imageCountLab;
 @property (nonatomic, strong) UICollectionView *imageCollection;
 @property (nonatomic, strong) NSMutableArray *domainImagesMarr;
+@property (nonatomic, strong) NSMutableArray *imagesIdMarr;
+@property (nonatomic, strong) NSString *domainId;
+@property (nonatomic, strong) FBRequest *setDefaultCover;
+@property (nonatomic, strong) FBRequest *deleteAsset;
 
 /**
  加载情境原图

@@ -40,7 +40,6 @@ static NSString *const imageCellId = @"THNDomainImageCollectionViewCellId";
     [self.uploadImageRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] integerValue] == 1) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"uploadImageSucceed" object:nil];
-            [SVProgressHUD dismiss];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -124,6 +123,8 @@ static NSString *const imageCellId = @"THNDomainImageCollectionViewCellId";
             THNSceneImageViewController *sceneImageVC = [[THNSceneImageViewController alloc] init];
             sceneImageVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
             sceneImageVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            sceneImageVC.domainId = _domainId;
+            sceneImageVC.imagesIdMarr = self.imageIdMarr;
             [sceneImageVC thn_showDomainImagesOfSet:self.imageUrlMarr withIndex:indexPath.row - 1];
             [self.vc presentViewController:sceneImageVC animated:YES completion:nil];
         }
