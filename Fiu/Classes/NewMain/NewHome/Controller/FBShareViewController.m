@@ -10,6 +10,7 @@
 #import "ShareStyleCollectionViewCell.h"
 #import "FBEditShareInfoViewController.h"
 #import "THNShareActionView.h"
+#import "UIImage+QRCode.h"
 
 static NSString *const URLShareTextNum = @"/scene_sight/add_share_context_num";
 static NSString *const URLGiveExp = @"/user/send_exp";
@@ -43,6 +44,10 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     [self setShareVcUI];
+    
+    if (self.sceneId.length) {
+        [self thn_networkShareInfoData];
+    }
 }
 
 - (FBPopupView *)sharePopView {
@@ -58,6 +63,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
     self.shareTextNumRequest = [FBAPI postWithUrlString:URLShareTextNum requestDictionary:@{@"id":oid} delegate:self];
     [self.shareTextNumRequest startRequestSuccess:^(FBRequest *request, id result) {
 //        NSLog(@"%@", result);
+        
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"---%@---", error);
     }];
@@ -70,9 +76,11 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             NSDictionary *dict =  [result valueForKey:@"data"];
             _linkUrl = [dict valueForKey:@"url"];
+            [self.shareTopView setQRCodeImagewithLink:_linkUrl];
+            [self.styleOneView setQRCodeImagewithLink:_linkUrl];
+            [self.styleTwoView setQRCodeImagewithLink:_linkUrl];
+            [self.styleThreeView setQRCodeImagewithLink:_linkUrl];
         }
-        [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:_linkUrl];
-        [self saveImageToPhotoAlbum];
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@" ---- %@ ----", error);
@@ -276,13 +284,15 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 }
 
 - (void)shareItemSelected {
-    if (self.sceneId.length) {
-        [self thn_networkShareInfoData];
+    if (_linkUrl.length) {
+        [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:_linkUrl];
     }
     
     if (_oid.length > 0) {
         [self networkShareTextNumData:_oid];
     }
+    
+    [self saveImageToPhotoAlbum];
 }
 
 #pragma mark - 创建分享消息对象
@@ -320,7 +330,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 }
 
 #pragma mark - 分享完成后获取积分
-- (void)afterShare{
+- (void)afterShare {
     [self networkGiveExp];
 }
 

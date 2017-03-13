@@ -773,6 +773,7 @@
 		D8932E461D17FE8100428FC7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8932E451D17FE8100428FC7 /* Launch Screen.storyboard */; };
 		D89478D91D867D9A00200ACD /* THNSceneImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D89478D81D867D9A00200ACD /* THNSceneImageScrollView.m */; };
 		D89CFE031D041819002701B8 /* GoodsDesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89CFE021D041819002701B8 /* GoodsDesTableViewCell.m */; };
+		D8A37B041E76529D00FFC388 /* UIImage+QRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A37B031E76529D00FFC388 /* UIImage+QRCode.m */; };
 		D8A9ADC91CD9E34600A9FCFB /* FBFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADC81CD9E34600A9FCFB /* FBFootView.m */; };
 		D8A9AE401CE304FF00A9FCFB /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE3F1CE304FF00A9FCFB /* NSTimer+Addition.m */; };
 		D8AC3DFB1D2CFFA000148522 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AC3DFA1D2CFFA000148522 /* CoreData.framework */; };
@@ -2213,6 +2214,8 @@
 		D89478D81D867D9A00200ACD /* THNSceneImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSceneImageScrollView.m; sourceTree = "<group>"; };
 		D89CFE011D041819002701B8 /* GoodsDesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsDesTableViewCell.h; sourceTree = "<group>"; };
 		D89CFE021D041819002701B8 /* GoodsDesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDesTableViewCell.m; sourceTree = "<group>"; };
+		D8A37B021E76529D00FFC388 /* UIImage+QRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+QRCode.h"; sourceTree = "<group>"; };
+		D8A37B031E76529D00FFC388 /* UIImage+QRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+QRCode.m"; sourceTree = "<group>"; };
 		D8A9ADC71CD9E34600A9FCFB /* FBFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFootView.h; sourceTree = "<group>"; };
 		D8A9ADC81CD9E34600A9FCFB /* FBFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFootView.m; sourceTree = "<group>"; };
 		D8A9AE3E1CE304FF00A9FCFB /* NSTimer+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Addition.h"; sourceTree = "<group>"; };
@@ -4489,6 +4492,8 @@
 				D8A9AE3F1CE304FF00A9FCFB /* NSTimer+Addition.m */,
 				1FA204E31D378AAB00B89699 /* UIView+Size.h */,
 				1FA204E41D378AAB00B89699 /* UIView+Size.m */,
+				D8A37B021E76529D00FFC388 /* UIImage+QRCode.h */,
+				D8A37B031E76529D00FFC388 /* UIImage+QRCode.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -6086,6 +6091,7 @@
 				1F2A8F4E1CF40277005116C7 /* PhotoAlbumsTableViewCell.m in Sources */,
 				D8117B2F1E5AAEA70094E7EB /* THNSceneTagsCollectionViewCell.m in Sources */,
 				D80878E21D6AE3DF00C1FFA0 /* MallListGoodsCollectionViewCell.m in Sources */,
+				D8A37B041E76529D00FFC388 /* UIImage+QRCode.m in Sources */,
 				D857C4C61E3067AE00569B3D /* THNRecordTableHeaderView.m in Sources */,
 				1F2AFC9E1D88170B00DA6035 /* ScenarioNonView.m in Sources */,
 				D813181D1D928DD4007CE71C /* ShareStyleViewOne.m in Sources */,

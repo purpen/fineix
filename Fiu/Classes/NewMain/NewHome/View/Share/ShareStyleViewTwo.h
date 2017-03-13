@@ -28,4 +28,10 @@
 
 - (void)setShareSceneData:(HomeSceneListRow *)sceneModel;
 
+/**
+ 动态二维码
+ */
+@property (nonatomic, strong) UIImageView *qrImageView;
+- (void)setQRCodeImagewithLink:(NSString *)link;
+
 @end

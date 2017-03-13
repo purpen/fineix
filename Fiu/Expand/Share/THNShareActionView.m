@@ -206,12 +206,6 @@ static const NSInteger shareButtonTag = 810;
         [self thn_removeFromSuperview];
         [SVProgressHUD showSuccessWithStatus:@"复制成功"];
         
-//        TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"" message:@"已复制到剪切板"];
-//        alertView.layer.cornerRadius = 10;
-//        alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
-//        [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"sure", nil) style:(TYAlertActionStyleDefault) handler:^(TYAlertAction *action) {
-//        }]];
-//        [alertView showInWindowWithBackgoundTapDismissEnable:YES];
     } else {
         [SVProgressHUD showErrorWithStatus:@"没有链接内容"];
     }

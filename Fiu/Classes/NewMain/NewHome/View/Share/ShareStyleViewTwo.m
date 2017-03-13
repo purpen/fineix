@@ -9,6 +9,7 @@
 #import "ShareStyleViewTwo.h"
 #import "UILable+Frame.h"
 #import "NSString+TimeDate.h"
+#import "UIImage+QRCode.h"
 
 @implementation ShareStyleViewTwo
 
@@ -21,6 +22,11 @@
         self.clipsToBounds = YES;
     }
     return self;
+}
+
+#pragma mark - 动态二维码
+- (void)setQRCodeImagewithLink:(NSString *)link {
+    self.qrImageView.image = [UIImage creatQRCodeImageForLinkUrl:link width:60];
 }
 
 #pragma mark - 视图信息
@@ -192,6 +198,13 @@
         make.top.equalTo(_title.mas_bottom).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(-SCREEN_WIDTH *0.053);
     }];
+    
+    [self addSubview:self.qrImageView];
+    [_qrImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(60, 60));
+        make.right.equalTo(self.mas_right).with.offset(-38);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-10);
+    }];
 }
 
 #pragma mark - 样式背景
@@ -357,6 +370,14 @@
         _sendText.textAlignment = NSTextAlignmentRight;
     }
     return _sendText;
+}
+
+#pragma mark - 二维码
+- (UIImageView *)qrImageView {
+    if (!_qrImageView) {
+        _qrImageView = [[UIImageView alloc] init];
+    }
+    return _qrImageView;
 }
 
 
