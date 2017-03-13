@@ -283,7 +283,6 @@ UITableViewDataSource
         NSArray *ary = self.collectionDatas[1];
         return ary.count;
     } else if (section == 2) {
-//        NSArray *ary = self.collectionDatas[2];
         return 1;
     } else if (section == 3) {
         return 1;
@@ -473,8 +472,10 @@ UITableViewDataSource
     } else if (indexPath.section == 5) {
         if (SCREEN_HEIGHT == 736) {
             return CGSizeMake((SCREEN_WIDTH-90-36*2-3)/2*SCREEN_HEIGHT/667.0, 135/2.0*SCREEN_HEIGHT/667.0);
+        }else if (SCREEN_HEIGHT == 667.0) {
+            return CGSizeMake(120*SCREEN_HEIGHT/667.0, 135/2.0*SCREEN_HEIGHT/667.0);
         }
-        return CGSizeMake(120*SCREEN_HEIGHT/667.0, 135/2.0*SCREEN_HEIGHT/667.0);
+        return CGSizeMake(95, 135/2.0*SCREEN_HEIGHT/667.0);
     } else if (indexPath.section == 6) {
         return CGSizeMake(SCREEN_WIDTH-80,
                           300/2*SCREEN_HEIGHT/667.0);
