@@ -26,7 +26,7 @@
 
 #pragma mark - 动态二维码
 - (void)setQRCodeImagewithLink:(NSString *)link {
-    self.qrImageView.image = [UIImage creatQRCodeImageForLinkUrl:link width:60];
+    self.qrImageView.image = [UIImage creatQRCodeImageForLinkUrl:link width:IS_PHONE5 ? 50 : 60];
 }
 
 #pragma mark - 视图信息
@@ -199,11 +199,12 @@
         make.right.equalTo(self.mas_right).with.offset(-SCREEN_WIDTH *0.053);
     }];
     
+    CGFloat width = IS_PHONE5 ? 50 : 60;
     [self addSubview:self.qrImageView];
     [_qrImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(60, 60));
-        make.left.equalTo(_describe.mas_right).with.offset(30);
-        make.bottom.equalTo(_describe.mas_bottom).with.offset(0);
+        make.size.mas_equalTo(CGSizeMake(width, width));
+        make.right.equalTo(self.mas_right).with.offset(-SCREEN_WIDTH *0.103);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-SCREEN_WIDTH *0.03);
     }];
 }
 
