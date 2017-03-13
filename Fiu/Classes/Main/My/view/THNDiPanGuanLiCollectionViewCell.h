@@ -12,4 +12,8 @@
 
 @interface THNDiPanGuanLiCollectionViewCell : UICollectionViewCell
 
+@property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic, strong) UIImageView *imageV;
+@property (nonatomic, strong) UIImageView *bgImageV;
+
 @end
