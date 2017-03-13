@@ -27,6 +27,11 @@
     [self.domainImageView downloadImage:imageUrl place:[UIImage imageNamed:@""]];
 }
 
+- (void)thn_setDomainDetailsImage:(NSString *)imageUrl {
+    [self.domainImageView downloadImage:imageUrl place:[UIImage imageNamed:@""]];
+}
+
+#pragma mark - 图片
 - (UIImageView *)domainImageView {
     if (!_domainImageView) {
         _domainImageView = [[UIImageView alloc] initWithFrame:self.bounds];
