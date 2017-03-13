@@ -63,6 +63,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
     self.shareTextNumRequest = [FBAPI postWithUrlString:URLShareTextNum requestDictionary:@{@"id":oid} delegate:self];
     [self.shareTextNumRequest startRequestSuccess:^(FBRequest *request, id result) {
 //        NSLog(@"%@", result);
+        
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"---%@---", error);
     }];
@@ -290,6 +291,8 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
     if (_oid.length > 0) {
         [self networkShareTextNumData:_oid];
     }
+    
+    [self saveImageToPhotoAlbum];
 }
 
 #pragma mark - 创建分享消息对象
@@ -327,9 +330,8 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 }
 
 #pragma mark - 分享完成后获取积分
-- (void)afterShare{
+- (void)afterShare {
     [self networkGiveExp];
-    [self saveImageToPhotoAlbum];
 }
 
 @end

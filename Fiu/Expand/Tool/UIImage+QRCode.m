@@ -14,7 +14,7 @@
     NSData *urlData = [url dataUsingEncoding:NSUTF8StringEncoding];
     CIFilter *qrFilter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
     [qrFilter setValue:urlData forKey:@"inputMessage"];
-    [qrFilter setValue:@"H" forKey:@"inputCorrectionLevel"];
+    [qrFilter setValue:@"M" forKey:@"inputCorrectionLevel"];
     CIImage *ciImage = [qrFilter outputImage];
     return [self generateQRCodeimagesForCIImage:ciImage width:width];
 }

@@ -202,8 +202,8 @@
     [self addSubview:self.qrImageView];
     [_qrImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(60, 60));
-        make.left.equalTo(self.mas_left).with.offset(20);
-        make.bottom.equalTo(self.mas_bottom).with.offset(-13);
+        make.right.equalTo(self.mas_right).with.offset(-38);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-10);
     }];
 }
 
