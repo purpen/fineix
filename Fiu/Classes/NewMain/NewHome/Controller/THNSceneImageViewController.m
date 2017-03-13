@@ -7,6 +7,9 @@
 //
 
 #import "THNSceneImageViewController.h"
+#import "THNDomainImageCollectionViewCell.h"
+
+static NSString *const domainImageCellId = @"DomainImageCollectionViewCellId";
 
 static NSString *const URLUserIsEditor = @"/user/is_editor";
 static NSString *const URLSceneFine = @"/user/do_fine";
@@ -36,6 +39,7 @@ static NSString *const URLSceneCheck = @"/user/do_check";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self setViewUI];
     
     if ([self isUserLogin]) {
@@ -74,7 +78,6 @@ static NSString *const URLSceneCheck = @"/user/do_check";
 - (void)thn_networkUserIsEditor {
     self.userRequest = [FBAPI getWithUrlString:URLUserIsEditor requestDictionary:@{} delegate:self];
     [self.userRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"=== %@", result);
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             _isEditor = [[[result valueForKey:@"data"] valueForKey:@"is_editor"] integerValue];
         }
@@ -139,8 +142,10 @@ static NSString *const URLSceneCheck = @"/user/do_check";
 
 - (void)setViewUI {
     self.view.backgroundColor = [UIColor blackColor];
-    [self addGestureRecognizer];
-    [self.view addSubview:self.imageView];
+    if (self.domainImagesMarr.count == 0) {
+        [self.view addSubview:self.imageView];
+        [self addGestureRecognizer];
+    }
 }
 
 #pragma mark - 添加手势操作
@@ -237,6 +242,71 @@ static NSString *const URLSceneCheck = @"/user/do_check";
         _imageView.clipsToBounds = YES;
     }
     return _imageView;
+}
+
+#pragma mark - 展示地盘图片的集合
+- (void)thn_showDomainImagesOfSet:(NSMutableArray *)images withIndex:(NSInteger)index {
+    self.domainImagesMarr = images;
+    [self.view addSubview:self.closeButton];
+    [self.view addSubview:self.imageCollection];
+    [self.imageCollection reloadData];
+    [self.imageCollection scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0] atScrollPosition:(UICollectionViewScrollPositionNone) animated:NO];
+}
+
+#pragma mark - 地盘图片
+- (UICollectionView *)imageCollection {
+    if (!_imageCollection) {
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.itemSize = CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH);
+        flowLayout.minimumLineSpacing = 0.01f;
+        flowLayout.minimumInteritemSpacing = 0.01f;
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        
+        _imageCollection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, (SCREEN_HEIGHT - SCREEN_WIDTH) / 2, SCREEN_WIDTH, SCREEN_WIDTH) collectionViewLayout:flowLayout];
+        _imageCollection.delegate = self;
+        _imageCollection.dataSource = self;
+        _imageCollection.pagingEnabled = YES;
+        _imageCollection.backgroundColor = [UIColor blackColor];
+        _imageCollection.showsVerticalScrollIndicator = NO;
+        _imageCollection.showsHorizontalScrollIndicator = NO;
+        [_imageCollection registerClass:[THNDomainImageCollectionViewCell class] forCellWithReuseIdentifier:domainImageCellId];
+    }
+    return _imageCollection;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.domainImagesMarr.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    THNDomainImageCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:domainImageCellId
+                                                                                       forIndexPath:indexPath];
+    if (self.domainImagesMarr.count) {
+        [cell thn_setDomainDetailsImage:self.domainImagesMarr[indexPath.row]];
+    }
+    return cell;
+}
+
+#pragma mark - 关闭查看地盘大图
+- (UIButton *)closeButton {
+    if (!_closeButton) {
+        _closeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+        [_closeButton setImage:[UIImage imageNamed:@"icon_cancel"] forState:(UIControlStateNormal)];
+        [_closeButton addTarget:self action:@selector(closeButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _closeButton;
+}
+
+- (void)closeButtonClick:(UIButton *)button {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - 
+- (NSMutableArray *)domainImagesMarr {
+    if (!_domainImagesMarr) {
+        _domainImagesMarr = [NSMutableArray array];
+    }
+    return _domainImagesMarr;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

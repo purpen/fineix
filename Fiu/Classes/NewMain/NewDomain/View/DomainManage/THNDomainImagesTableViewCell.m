@@ -120,10 +120,13 @@ static NSString *const imageCellId = @"THNDomainImageCollectionViewCellId";
     if (indexPath.row == 0) {
         [self openImagePickerChooseHeader];
     } else {
-        THNSceneImageViewController *sceneImageVC = [[THNSceneImageViewController alloc] init];
-        sceneImageVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
-        sceneImageVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self.vc presentViewController:sceneImageVC animated:YES completion:nil];
+        if (self.imageUrlMarr.count) {
+            THNSceneImageViewController *sceneImageVC = [[THNSceneImageViewController alloc] init];
+            sceneImageVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
+            sceneImageVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [sceneImageVC thn_showDomainImagesOfSet:self.imageUrlMarr withIndex:indexPath.row - 1];
+            [self.vc presentViewController:sceneImageVC animated:YES completion:nil];
+        }
     }
 }
 
