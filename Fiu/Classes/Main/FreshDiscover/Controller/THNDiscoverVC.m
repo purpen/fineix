@@ -374,11 +374,13 @@ UITableViewDataSource
     if (section == 1) {
         return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 0, 18*SCREEN_HEIGHT/667.0);
     } else if (section == 2) {
-        return UIEdgeInsetsMake(0, (self.collectionView.width-120*SCREEN_HEIGHT/667.0)/2, 0, (self.collectionView.width-120*SCREEN_HEIGHT/667.0)/2);
+        return UIEdgeInsetsMake(0, 5*SCREEN_HEIGHT/667.0, 0, 5*SCREEN_HEIGHT/667.0);
     } else if (section == 4) {
         return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 0, 18*SCREEN_HEIGHT/667.0);
     } else if (section == 5) {
         return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 14, 18*SCREEN_HEIGHT/667.0);
+    } else if (section == 0) {
+        return UIEdgeInsetsMake(0, 5*SCREEN_HEIGHT/667.0, 0, 5*SCREEN_HEIGHT/667.0);
     }
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
@@ -442,14 +444,14 @@ UITableViewDataSource
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return CGSizeMake(531.4/2*SCREEN_HEIGHT/667.0,
+        return CGSizeMake(SCREEN_WIDTH-90-10,
                           299/2*SCREEN_HEIGHT/667.0);
     } else if (indexPath.section == 1) {
         return CGSizeMake(60*SCREEN_HEIGHT/667.0,
                           80*SCREEN_HEIGHT/667.0);
     } else if (indexPath.section == 2) {
         if (indexPath.row <= 1) {
-            return CGSizeMake(531.4/2*SCREEN_HEIGHT/667.0,
+            return CGSizeMake(SCREEN_WIDTH-90-10,
                               299/2*SCREEN_HEIGHT/667.0);
         } else {
             return CGSizeMake(60*SCREEN_HEIGHT/667.0,
