@@ -50,7 +50,6 @@
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dict = result[@"data"];
         NSArray *ary = dict[@"rows"];
-        NSLog(@"asdasdsa  %@",ary);
         self.modelAry = [THNZhangHuModel mj_objectArrayWithKeyValuesArray:ary];
         [self.tabelView reloadData];
     } failure:^(FBRequest *request, NSError *error) {
