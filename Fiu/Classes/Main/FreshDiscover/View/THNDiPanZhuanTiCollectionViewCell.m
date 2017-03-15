@@ -28,7 +28,6 @@
     if (self = [super initWithFrame:frame])
     {
         self.imageV = [[UIImageView alloc] init];
-//        self.imageV.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:self.imageV];
         self.imageV.layer.masksToBounds = YES;
         self.imageV.layer.cornerRadius = 3*SCREEN_HEIGHT/667.0;
@@ -54,7 +53,7 @@
         [_textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.bgView.mas_centerX).mas_offset(0);
             make.centerY.mas_equalTo(self.bgView.mas_centerY).mas_offset(0);
-            make.width.mas_lessThanOrEqualTo(4*self.contentView.width/5);
+            make.width.mas_lessThanOrEqualTo(5*self.contentView.width/6);
         }];
     }
     return self;
