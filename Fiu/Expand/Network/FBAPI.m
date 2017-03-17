@@ -78,6 +78,7 @@
     return kClientSecret;
 }
 
+
 // 获取签名
 - (NSString *)getSign:(NSDictionary *)params {
 
@@ -100,6 +101,9 @@
     }
     if ([keys containsObject:@"banners_url"]) {
         [keys removeObject:@"banners_url"];
+    }
+    if ([keys containsObject:@"avatar_tmp"]) {
+        [keys removeObject:@"avatar_tmp"];
     }
     
     NSArray *sortedKeys = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
@@ -163,6 +167,7 @@
     [fullDictionary setValue:[self uuid] forKey:@"uuid"];
     [fullDictionary setValue:[self time] forKey:@"time"];
     [fullDictionary setValue:[self apptype] forKey:@"app_type"];
+    
     
     // 添加签名参数
     NSString *sign = [self getSign:fullDictionary];

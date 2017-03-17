@@ -155,9 +155,9 @@ static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
     [SVProgressHUD show];
     NSDictionary *requestDic = @{@"page":@"1",
                                  @"size":@"5",
-                                 @"sort":@"0",
+                                 @"sort":@"1",
                                  @"type":@"5",
-//                                 @"stick":@"1",
+                                 @"stick":@"1",
                                  @"use_cache":@"1"};
     self.subjectRequest = [FBAPI getWithUrlString:URLMallSubject requestDictionary:requestDic delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -221,7 +221,7 @@ static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
     NSDictionary *requestDic = @{@"category_id":categoryId,
                                  @"page":@"1",
                                  @"size":size,
-                                 @"sort":@"2",
+                                 @"sort":@"0",
                                  @"type":@"5",
                                  @"use_cache":@"1"};
     
@@ -258,8 +258,8 @@ static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
     [SVProgressHUD show];
     NSDictionary *requestDic = @{@"page":@(self.sceneCurrentpage + 1),
                                  @"size":@"10",
-                                 @"sort":@"2",
-                                 @"fine":@"1",
+                                 @"sort":@"1",
+                                 @"fine":@"0",
                                  @"use_cache":@"1",
                                  @"is_product":@"1"};
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestDic delegate:self];
