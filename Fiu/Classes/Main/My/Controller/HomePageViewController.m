@@ -96,9 +96,6 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    UITabBarItem * item=[self.tabBarController.tabBar.items objectAtIndex:3];
-//    item.badgeValue=@" ";
-    
     _fiuSceneList = [NSMutableArray array];
     _fiuSceneIdList = [NSMutableArray array];
     _sceneListMarr = [NSMutableArray array];
@@ -106,14 +103,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
     // Do any additional setup after loading the view.
     self.automaticallyAdjustsScrollViewInsets = NO;
 
-    //
     _chanelV = [ChanelView getChanelView];
-    //情景
-//    _chanelV.scenarioView.userInteractionEnabled = YES;
-//    _scenarioTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap:)];
-//    _scenarioTap.numberOfTapsRequired = 1;
-//    _scenarioTap.numberOfTouchesRequired = 1;
-//    [_chanelV.scenarioView addGestureRecognizer:_scenarioTap];
     //情境
     _chanelV.fieldView.userInteractionEnabled = YES;
     UITapGestureRecognizer *scenarioTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap1:)];
@@ -140,6 +130,8 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
     //  添加渐变层
     [self.view.layer addSublayer:self.shadow];
     
+    [self setUpRefresh];
+    [self netGetData];
 }
 
 -(CAGradientLayer *)shadow{
@@ -216,10 +208,6 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.navigationController.navigationBarHidden = YES;
     self.tabBarController.tabBar.hidden = YES;
-
-    
-    [self setUpRefresh];
-    [self netGetData];
 }
 
 -(void)setUpRefresh{
@@ -246,8 +234,11 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
         self.current_page = [result[@"data"][@"current_page"] integerValue];
         self.total_rows = [result[@"data"][@"total_rows"] integerValue];
         NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        NSLog(@"sceneArr  %@",sceneArr);
-        for (NSDictionary * sceneDic in sceneArr) {
+        NSMutableArray *indexAry = [NSMutableArray array];
+        for (int i=0; i<sceneArr.count;i++) {
+            NSDictionary * sceneDic = sceneArr[i];
+            NSIndexPath *index = [NSIndexPath indexPathForRow:_sceneListMarr.count+i inSection:2];
+            [indexAry addObject:index];
             HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
             [_sceneListMarr addObject:homeSceneModel];
             [_sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
@@ -257,7 +248,9 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
             return;
         }
         [self.commentsMarr addObjectsFromArray:[sceneArr valueForKey:@"comments"]];
-        [self.myCollectionView reloadData];
+        [UIView performWithoutAnimation:^{
+            [self.myCollectionView reloadData]; 
+        }];
         [self.myCollectionView.mj_footer endRefreshing];
         [self checkFooterState];
     } failure:^(FBRequest *request, NSError *error) {
@@ -332,7 +325,6 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
     [request startRequestSuccess:^(FBRequest *request, id result) {
         
         NSDictionary *dataDict = result[@"data"];
-        NSLog(@"情境个数 %@", [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]]);
         _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
         _chanelV.focusNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"follow_count"]];

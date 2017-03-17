@@ -283,7 +283,6 @@ UITableViewDataSource
         NSArray *ary = self.collectionDatas[1];
         return ary.count;
     } else if (section == 2) {
-//        NSArray *ary = self.collectionDatas[2];
         return 1;
     } else if (section == 3) {
         return 1;
@@ -375,11 +374,13 @@ UITableViewDataSource
     if (section == 1) {
         return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 0, 18*SCREEN_HEIGHT/667.0);
     } else if (section == 2) {
-        return UIEdgeInsetsMake(0, (self.collectionView.width-120*SCREEN_HEIGHT/667.0)/2, 0, (self.collectionView.width-120*SCREEN_HEIGHT/667.0)/2);
+        return UIEdgeInsetsMake(0, 5*SCREEN_HEIGHT/667.0, 0, 5*SCREEN_HEIGHT/667.0);
     } else if (section == 4) {
         return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 0, 18*SCREEN_HEIGHT/667.0);
     } else if (section == 5) {
         return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 14, 18*SCREEN_HEIGHT/667.0);
+    } else if (section == 0) {
+        return UIEdgeInsetsMake(0, 5*SCREEN_HEIGHT/667.0, 0, 5*SCREEN_HEIGHT/667.0);
     }
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
@@ -443,14 +444,14 @@ UITableViewDataSource
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return CGSizeMake(531.4/2*SCREEN_HEIGHT/667.0,
+        return CGSizeMake(SCREEN_WIDTH-90-10,
                           299/2*SCREEN_HEIGHT/667.0);
     } else if (indexPath.section == 1) {
         return CGSizeMake(60*SCREEN_HEIGHT/667.0,
                           80*SCREEN_HEIGHT/667.0);
     } else if (indexPath.section == 2) {
         if (indexPath.row <= 1) {
-            return CGSizeMake(531.4/2*SCREEN_HEIGHT/667.0,
+            return CGSizeMake(SCREEN_WIDTH-90-10,
                               299/2*SCREEN_HEIGHT/667.0);
         } else {
             return CGSizeMake(60*SCREEN_HEIGHT/667.0,
@@ -473,8 +474,10 @@ UITableViewDataSource
     } else if (indexPath.section == 5) {
         if (SCREEN_HEIGHT == 736) {
             return CGSizeMake((SCREEN_WIDTH-90-36*2-3)/2*SCREEN_HEIGHT/667.0, 135/2.0*SCREEN_HEIGHT/667.0);
+        }else if (SCREEN_HEIGHT == 667.0) {
+            return CGSizeMake(120*SCREEN_HEIGHT/667.0, 135/2.0*SCREEN_HEIGHT/667.0);
         }
-        return CGSizeMake(120*SCREEN_HEIGHT/667.0, 135/2.0*SCREEN_HEIGHT/667.0);
+        return CGSizeMake(95, 135/2.0*SCREEN_HEIGHT/667.0);
     } else if (indexPath.section == 6) {
         return CGSizeMake(SCREEN_WIDTH-80,
                           300/2*SCREEN_HEIGHT/667.0);

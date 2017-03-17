@@ -136,6 +136,9 @@
         [_zhaoMuTu mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.contentView.mas_centerX);
             make.top.mas_equalTo(self.btn9.mas_bottom).with.offset(50/667.0*SCREEN_HEIGHT);
+            make.left.mas_equalTo(self.contentView.mas_left).mas_offset(5/667.0*SCREEN_HEIGHT);
+            make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-5/667.0*SCREEN_HEIGHT);
+            make.height.mas_equalTo((SCREEN_WIDTH-10/667.0*SCREEN_HEIGHT)*120/345);
         }];
         self.zhaoMuTu.userInteractionEnabled = YES;
         [self.zhaoMuTu addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapZhaoMu)]];
