@@ -42,8 +42,13 @@ static CGFloat const itemHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
     
     if ([self isUserLogin]) {
         [self networkGoodsCarList];
+        
     } else {
         [self showDefaultBackView:0];
+        if (self.carItemList.count > 0) {
+            [self.carItemList removeAllObjects];
+            [self.carItemTabel reloadData];
+        }
     }
     
     self.chooseAllBtn.selected = NO;
