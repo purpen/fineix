@@ -31,19 +31,6 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
 
 #pragma mark - setModel
 - (void)thn_setSceneContentData:(HomeSceneListRow *)contentModel {
-//    if (contentModel.title.length == 0) {
-//        self.titleLab.hidden = YES;
-//    } else {
-//        self.titleLab.hidden = NO;
-//    }
-//    
-//    if (contentModel.des.length == 0) {
-//        self.graybackView.hidden = YES;
-//        self.content.hidden = YES;
-//    } else {
-//        self.graybackView.hidden = NO;
-//        self.content.hidden = NO;
-//    }
     
     self.titleLab.text = contentModel.title;
     [self getContentWithTags:contentModel.des];
@@ -54,6 +41,23 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
         self.defaultCellHigh = 90;
     }
     self.cellHigh = size.height*1.5 + 25;
+    if (contentModel.title.length == 0) {
+        self.titleLab.hidden = YES;
+        self.defaultCellHigh -= 40*SCREEN_HEIGHT/667.0;
+        self.cellHigh -= 40*SCREEN_HEIGHT/667.0;
+    } else {
+        self.titleLab.hidden = NO;
+    }
+    
+    if (contentModel.des.length == 0) {
+        self.graybackView.hidden = YES;
+        self.content.hidden = YES;
+        self.defaultCellHigh -= 5*SCREEN_HEIGHT/667.0;
+        self.cellHigh -= 5*SCREEN_HEIGHT/667.0;
+    } else {
+        self.graybackView.hidden = NO;
+        self.content.hidden = NO;
+    }
 }
 
 //  检索描述内容中的标签

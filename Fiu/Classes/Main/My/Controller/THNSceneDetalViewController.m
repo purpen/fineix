@@ -203,6 +203,10 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
             [cell thn_setSceneContentData:self.model];
             _contentHigh = cell.cellHigh;
             _defaultContentHigh = cell.defaultCellHigh+10*SCREEN_HEIGHT/667.0;
+            if (SCREEN_HEIGHT < 667.0) {
+                _contentHigh = cell.cellHigh;
+                _defaultContentHigh = cell.defaultCellHigh+20;
+            }
             cell.nav = self.navigationController;
         }
         return cell;

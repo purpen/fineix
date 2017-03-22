@@ -96,8 +96,6 @@
     [_chanelV.fansView addGestureRecognizer:scenarioTap3];
     [self.view addSubview:self.myCollectionView];
     
-    //网络请求
-    [self netGetData];
     self.tabBarController.tabBar.hidden = NO;
     FBRequest *request = [FBAPI postWithUrlString:@"/alliance/view" requestDictionary:@{} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
@@ -150,6 +148,8 @@
     self.navView.backgroundColor = [UIColor clearColor];
     //  添加渐变层
     [self.navView.layer insertSublayer:self.shadowLayer below:self.logoImg.layer];
+    //网络请求
+    [self netGetData];
 }
 
 -(CAGradientLayer *)shadowLayer{
@@ -222,7 +222,6 @@
         }else{
             [self.tabBarController.tabBar hideBadgeWithIndex:4];
         }
-        
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"加载失败"];
     }];
@@ -263,11 +262,14 @@
     if (section == 0) {
         return UIEdgeInsetsMake(0, 0, 0, 0);
     } else if (section == 2) {
+        if ((long)[_userInfo.storageId integerValue] == 0) {
+            return UIEdgeInsetsMake(8, 0, 10, 0);
+        }
         return UIEdgeInsetsMake(8, 0, 0, 0);
     }else if (section == 4) {
         return UIEdgeInsetsMake(0, 0, 10, 0);
     } else if (section == 3) {
-        if (_userInfo.storageId.length == 0) {
+        if ((long)[_userInfo.storageId integerValue] == 0) {
             return UIEdgeInsetsMake(0, 0, 0, 0);
         }
         return UIEdgeInsetsMake(0, 0, 10, 0);
@@ -297,7 +299,7 @@
         cell.moneyStr = self.moneyStr;
         return cell;
     } else if (indexPath.section == 3) {
-        if (_userInfo.storageId.length == 0) {
+        if ((long)[_userInfo.storageId integerValue] == 0) {
             THNDiPanGuanLiCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNDIPanGuanLiCollectionViewCell forIndexPath:indexPath];
             cell.textLabel.hidden = YES;
             cell.imageV.hidden = YES;
@@ -466,7 +468,7 @@
         return CGSizeMake(SCREEN_WIDTH, 44/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 3) {
-        if (_userInfo.storageId.length == 0) {
+        if ((long)[_userInfo.storageId integerValue] == 0) {
             return CGSizeMake(SCREEN_WIDTH, 0.00001);
         }
         return CGSizeMake(SCREEN_WIDTH, 44/667.0*SCREEN_HEIGHT);
@@ -494,7 +496,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 3) {
         //地盘管理
-        if (_userInfo.storageId.length > 0) {
+        if ((long)[_userInfo.storageId integerValue] > 0) {
             THNDomainSetViewController *domainSetVC = [[THNDomainSetViewController alloc] init];
             domainSetVC.domainId = _userInfo.storageId;
             [self.navigationController pushViewController:domainSetVC animated:YES];
