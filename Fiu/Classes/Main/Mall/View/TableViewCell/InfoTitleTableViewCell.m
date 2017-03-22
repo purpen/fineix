@@ -45,7 +45,7 @@
             make.width.equalTo(@(oldPriceWidth *1.5));
         }];
         
-        if (model.orderReduce == 1) {
+        if (model.orderReduce == 1 && model.extra.disabledAppReduce == 0) {
             self.activityLab.hidden = NO;
         }
         
