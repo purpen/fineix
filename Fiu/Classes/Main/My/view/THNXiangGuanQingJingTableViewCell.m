@@ -404,7 +404,6 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
             }
             
         } failure:^(FBRequest *request, NSError *error) {
-            NSLog(@"%@", error);
         }];
     }
     
