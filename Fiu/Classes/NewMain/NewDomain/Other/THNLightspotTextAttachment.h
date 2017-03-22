@@ -10,4 +10,6 @@
 
 @interface THNLightspotTextAttachment : NSTextAttachment
 
+@property (nonatomic, assign) CGSize imageSize;
+
 @end

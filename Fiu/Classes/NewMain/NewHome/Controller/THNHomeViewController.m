@@ -359,9 +359,9 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             [self.subjectIdMarr addObject:[NSString stringWithFormat:@"%zi", subModel.idField]];
         }
 
-        if (self.sceneListMarr.count) {
+        if (self.sceneListMarr.count > 6) {
             NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:6];
-            [self.homeTable reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.homeTable reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -384,7 +384,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             [self.hotUserMarr addObject:userModel];
         }
         
-        if (self.hotUserMarr.count && self.sceneListMarr.count) {
+        if (self.hotUserMarr.count && self.sceneListMarr.count > _hotUserListIndex) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:_hotUserListIndex];
             [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationBottom)];
         }
@@ -488,6 +488,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     [self.subjectInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
         if (![[[result valueForKey:@"data"] valueForKey:@"type"] isKindOfClass:[NSNull class]]) {
             _subjectType = [[[result valueForKey:@"data"] valueForKey:@"type"] integerValue];
+
             [self thn_openSubjectTypeController:self.navigationController type:_subjectType subjectId:idx];
         }
         
