@@ -98,7 +98,9 @@
 
 
 -(void)setPaopaoview:(BMKPinAnnotationView*)newAnnotationView{
-    UIView *popView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 154, 45)];
+    UIView *popView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 270, 47)];
+    popView.userInteractionEnabled = YES;
+    [popView addGestureRecognizer:[self singleRecognizer]];
     popView.backgroundColor = [UIColor clearColor];
     [self setpopView:popView];
     BMKActionPaopaoView *pView = [[BMKActionPaopaoView alloc]initWithCustomView:popView];
@@ -106,7 +108,7 @@
     pView.frame = popView.frame;
     newAnnotationView.paopaoView = nil;
     newAnnotationView.paopaoView = pView;
-    newAnnotationView.calloutOffset = CGPointMake(-44, -5);
+    newAnnotationView.calloutOffset = CGPointMake(5, -5);
 }
 
 -(void)setpopView:(UIView*)popView{
@@ -117,7 +119,6 @@
 }
 
 -(void)setViewView:(UIView*)view{
-    
     UIImageView *imgV = [[UIImageView alloc] initWithFrame:view.frame];
     imgV.image = [UIImage imageNamed:@"paopaoTu"];
     [view addSubview:imgV];
@@ -126,8 +127,6 @@
     [imgV addSubview:image];
     UIImageView *imgVV = [[UIImageView alloc] initWithFrame:CGRectMake(view.frame.size.width-8 - 65, 8, 65, 30)];
     imgVV.image = [UIImage imageNamed:@"daoHangBtn"];
-    imgVV.userInteractionEnabled = YES;
-    [imgVV addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTapFrom)]];
     [view addSubview:imgVV];
     
     [self setLabel:CGRectMake(50, 10, 110, 10) andText:self.model.title andFont:13 andView:imgV andtextColor:[UIColor blackColor]];
@@ -140,8 +139,6 @@
     titlelabel.font = [UIFont systemFontOfSize:font];
     titlelabel.textColor = color;
     [view addSubview:titlelabel];
-    view.userInteractionEnabled = YES;
-    [view addGestureRecognizer:[self singleRecognizer]];
 }
 
 -(UITapGestureRecognizer*)singleRecognizer{
@@ -187,7 +184,7 @@
                 
                 MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:endCoor addressDictionary:nil]];
                 
-                toLocation.name = [NSString stringWithFormat:@"到 %@", self.model.title];
+                toLocation.name = [NSString stringWithFormat:@" %@", self.model.title];
                 
                 [MKMapItem openMapsWithItems:@[currentLocation, toLocation]
                  

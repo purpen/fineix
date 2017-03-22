@@ -48,6 +48,7 @@
         self.textLabel.font = [UIFont systemFontOfSize:13];
         self.textLabel.numberOfLines = 0;
         self.textLabel.textAlignment = NSTextAlignmentCenter;
+        self.textLabel.adjustsFontSizeToFitWidth = NO;
         self.textLabel.textColor = [UIColor whiteColor];
         [self.bgView addSubview:self.textLabel];
         [_textLabel mas_makeConstraints:^(MASConstraintMaker *make) {

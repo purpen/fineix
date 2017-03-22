@@ -44,7 +44,6 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[THNQingJingOneCell class] forCellReuseIdentifier:THNQINGJingOneCell];
     [self.tableView registerClass:[THNXiangGuanQingJingTableViewCell class] forCellReuseIdentifier:THNXIANGGuanQingJingTableViewCell];
-    // Do any additional setup after loading the view.
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{@"id":self.qingJingZhuanTiID} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         [self.modelAry removeAllObjects];

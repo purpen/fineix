@@ -96,6 +96,7 @@
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
     [SVProgressHUD dismiss];
 }
+
 //网页加载失败，提示加载失败原因
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     [SVProgressHUD showInfoWithStatus:error.localizedDescription];
@@ -109,7 +110,6 @@
     {
         NSURL *url = [request URL];
         NSString *str = [url absoluteString];
-        NSLog(@"str  %@",str);
         if([str rangeOfString:@"taihuoniao.com"].location == NSNotFound && [str rangeOfString:@"infoType"].location == NSNotFound){
             //打开浏览器
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
