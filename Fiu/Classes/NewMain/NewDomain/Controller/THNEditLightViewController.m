@@ -10,6 +10,7 @@
 #import <TYAlertController/TYAlertController.h>
 #import "THNLightspotTextAttachment.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
+#import <SDWebImage/UIImage+MultiFormat.h>
 
 @interface THNEditLightViewController () {
     CGFloat   _keyboardH;         //  弹出的键盘高度
@@ -52,6 +53,73 @@
     [self setViewUI];
 }
 
+#pragma mark - 默认展示亮点
+- (void)thn_setBrightSpotData:(NSArray *)model beginEdit:(BOOL)edit {
+    if (edit) {
+        [self.contentInputBox becomeFirstResponder];
+    }
+    
+    [SVProgressHUD show];
+    self.contentPlaceholder.hidden = YES;
+    
+    NSMutableArray *strMarr = [NSMutableArray array];
+    
+    for (NSString *str in model) {
+        if ([str containsString:@"[text]:!"]) {
+            NSString *textStr;
+            textStr = [str substringFromIndex:8];
+            [self.textMarr addObject:textStr];
+            [strMarr addObject:textStr];
+        }
+        
+        if ([str containsString:@"[img]:!"]) {
+            NSString *imageStr;
+            imageStr = [str substringFromIndex:7];
+            [self.imageMarr addObject:imageStr];
+            [strMarr addObject:imageStr];
+        }
+    }
+    
+    NSString *totalText = [strMarr componentsJoinedByString:@""] ;
+    for (NSInteger idx = 0; idx < self.imageMarr.count; ++ idx) {
+        NSString *str = self.imageMarr[idx];
+        NSInteger location = [totalText rangeOfString:str].location;
+        totalText = [totalText stringByReplacingOccurrencesOfString:str withString:@"\n\n"];
+        [self.imageIndexMarr addObject:[NSString stringWithFormat:@"%zi", location]];
+    }
+    
+    
+    [self thn_crearBrightSpotInfoUI:self.textMarr image:self.imageMarr];
+}
+
+- (void)thn_crearBrightSpotInfoUI:(NSMutableArray *)textMarr image:(NSMutableArray *)imageMarr {
+    NSString *textStr = [textMarr componentsJoinedByString:@"\n"];
+    
+    [self getAttributedStringWithString:textStr];
+}
+
+- (void)getAttributedStringWithString:(NSString *)string {
+    NSDictionary *attributesDict = [self set_attributesDictionary];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string attributes:attributesDict];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        for (NSInteger idx = 0; idx < self.imageMarr.count; ++ idx) {
+            // 插入图片
+            THNLightspotTextAttachment *attach = [[THNLightspotTextAttachment alloc] init];
+            attach.image = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.imageMarr[idx]]]];
+            NSAttributedString *attachString = [NSAttributedString attributedStringWithAttachment:attach];
+            [attributedString insertAttributedString:attachString atIndex:[self.imageIndexMarr[idx] integerValue]];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.contentInputBox.attributedText = attributedString;
+            [self set_initAttributedString];
+            [SVProgressHUD dismiss];
+        });
+    });
+    
+}
+
 #pragma mark 输入监测的代理
 - (void)textViewDidChange:(UITextView *)textView {
     if (textView.attributedText.length > 0) {
@@ -80,6 +148,7 @@
     UITextPosition *isHighlight = [textView positionFromPosition:selectedRange.start offset:0];
     //  没有高亮表示输入完成
     if (!isHighlight) {
+        [self showEditDoneButton];
         [self setContentInputBoxTextStyle:textView];
     }
 }
@@ -115,6 +184,8 @@
 
 #pragma mark - 设置视图
 - (void)setViewUI {
+    [self.navView addSubview:self.doneButton];
+    
     [self.view addSubview:self.contentInputBox];
 
     [self.view addSubview:self.contentPlaceholder];
@@ -274,7 +345,6 @@
     self.contentAttributed = [[NSMutableAttributedString alloc] initWithAttributedString:self.contentInputBox.attributedText];
     if (self.contentInputBox.textStorage.length > 0) {
         self.contentPlaceholder.hidden = YES;
-        [self.contentInputBox becomeFirstResponder];
     } else {
         self.contentPlaceholder.hidden = NO;
     }
@@ -301,13 +371,33 @@
     [self changeContentInputBoxHeight:0.0f];
 }
 
+#pragma mark - 发布按钮
+- (UIButton *)doneButton {
+    if (!_doneButton) {
+        _doneButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 54, 20, 44, 44)];
+        _doneButton.titleLabel.font = [UIFont systemFontOfSize:17.0f];
+        [_doneButton setTitle:@"发布" forState:(UIControlStateNormal)];
+        [_doneButton setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:(UIControlStateNormal)];
+        _doneButton.userInteractionEnabled = NO;
+        [_doneButton addTarget:self action:@selector(doneButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _doneButton;
+}
+
+- (void)doneButtonClick:(UIButton *)button {
+    NSLog(@"发布");
+}
+
+- (void)showEditDoneButton {
+    [self.doneButton setTitleColor:[UIColor colorWithHexString:@"#FFFFFF"] forState:(UIControlStateNormal)];
+    self.doneButton.userInteractionEnabled = YES;
+}
+
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
     self.navViewTitle.text = @"亮点";
-    self.delegate = self;
-    [self thn_addBarItemRightBarButton:@"编辑" image:@""];
 }
 
 #pragma mark -
@@ -316,6 +406,27 @@
         _imageAttachmentMarr = [NSMutableArray array];
     }
     return _imageAttachmentMarr;
+}
+
+- (NSMutableArray *)textMarr {
+    if (!_textMarr) {
+        _textMarr = [NSMutableArray array];
+    }
+    return _textMarr;
+}
+
+- (NSMutableArray *)imageMarr {
+    if (!_imageMarr) {
+        _imageMarr = [NSMutableArray array];
+    }
+    return _imageMarr;
+}
+
+- (NSMutableArray *)imageIndexMarr {
+    if (!_imageIndexMarr) {
+        _imageIndexMarr = [NSMutableArray array];
+    }
+    return _imageIndexMarr;
 }
 
 - (void)dealloc {

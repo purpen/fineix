@@ -259,7 +259,7 @@ static NSString *const URLShareLink = @"/gateway/share_link";
         if (indexPath.row == 2) {
             THNDomianLightViewController *domainLightVC = [[THNDomianLightViewController alloc] init];
             domainLightVC.navViewTitle.text = self.infoModel.title;
-            [domainLightVC thn_setBrightSpotData:self.infoModel.brightSpot];
+            [domainLightVC thn_setBrightSpotData:self.infoModel.brightSpot edit:NO];
             [self presentViewController:domainLightVC animated:YES completion:nil];
         }
     }
