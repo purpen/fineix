@@ -21,6 +21,7 @@ NSString *const kFBGoodsInfoModelDataAppSnatchedTimeLag = @"app_snatched_time_la
 NSString *const kFBGoodsInfoModelDataAppSnatchedTotalCount = @"app_snatched_total_count";
 NSString *const kFBGoodsInfoModelDataAsset = @"asset";
 NSString *const kFBGoodsInfoModelDataBrand = @"brand";
+NSString *const kFBGoodsInfoModelDataExtra = @"extra";
 NSString *const kFBGoodsInfoModelDataBrandId = @"brand_id";
 NSString *const kFBGoodsInfoModelDataCanSaled = @"can_saled";
 NSString *const kFBGoodsInfoModelDataCategoryId = @"category_id";
@@ -135,9 +136,13 @@ NSString *const kFBGoodsInfoModelDataWapViewUrl = @"wap_view_url";
 	if(![dictionary[kFBGoodsInfoModelDataAsset] isKindOfClass:[NSNull class]]){
 		self.asset = dictionary[kFBGoodsInfoModelDataAsset];
 	}	
-	if(![dictionary[kFBGoodsInfoModelDataBrand] isKindOfClass:[NSNull class]]){
-		self.brand = [[FBGoodsInfoModelBrand alloc] initWithDictionary:dictionary[kFBGoodsInfoModelDataBrand]];
-	}
+    if(![dictionary[kFBGoodsInfoModelDataBrand] isKindOfClass:[NSNull class]]){
+        self.brand = [[FBGoodsInfoModelBrand alloc] initWithDictionary:dictionary[kFBGoodsInfoModelDataBrand]];
+    }
+    
+    if(![dictionary[kFBGoodsInfoModelDataExtra] isKindOfClass:[NSNull class]]){
+        self.extra = [[FBGoodsInfoModelExtra alloc] initWithDictionary:dictionary[kFBGoodsInfoModelDataExtra]];
+    }
 
 	if(![dictionary[kFBGoodsInfoModelDataBrandId] isKindOfClass:[NSNull class]]){
 		self.brandId = dictionary[kFBGoodsInfoModelDataBrandId];

@@ -649,6 +649,7 @@
 		D857C4C61E3067AE00569B3D /* THNRecordTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4C51E3067AE00569B3D /* THNRecordTableHeaderView.m */; };
 		D857C4C91E31F07000569B3D /* THNAllianceInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4C81E31F07000569B3D /* THNAllianceInfoViewController.m */; };
 		D857C4CC1E31F0E100569B3D /* THNAllianceFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4CB1E31F0E100569B3D /* THNAllianceFootView.m */; };
+		D859A9E91E7F82DE003E1F42 /* FBGoodsInfoModelExtra.m in Sources */ = {isa = PBXBuildFile; fileRef = D859A9E81E7F82DE003E1F42 /* FBGoodsInfoModelExtra.m */; };
 		D85F169D1E5C371B0038E0BB /* THNRecommendCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F169C1E5C371B0038E0BB /* THNRecommendCollectionReusableView.m */; };
 		D85F16A01E5D30220038E0BB /* THNCarServiceTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F169F1E5D30220038E0BB /* THNCarServiceTextView.m */; };
 		D85F16A31E5D636F0038E0BB /* THNHomeTableViewFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F16A21E5D636F0038E0BB /* THNHomeTableViewFooter.m */; };
@@ -2012,6 +2013,8 @@
 		D857C4C81E31F07000569B3D /* THNAllianceInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAllianceInfoViewController.m; sourceTree = "<group>"; };
 		D857C4CA1E31F0E100569B3D /* THNAllianceFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNAllianceFootView.h; sourceTree = "<group>"; };
 		D857C4CB1E31F0E100569B3D /* THNAllianceFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAllianceFootView.m; sourceTree = "<group>"; };
+		D859A9E71E7F82DE003E1F42 /* FBGoodsInfoModelExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGoodsInfoModelExtra.h; sourceTree = "<group>"; };
+		D859A9E81E7F82DE003E1F42 /* FBGoodsInfoModelExtra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGoodsInfoModelExtra.m; sourceTree = "<group>"; };
 		D85F169B1E5C371B0038E0BB /* THNRecommendCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRecommendCollectionReusableView.h; sourceTree = "<group>"; };
 		D85F169C1E5C371B0038E0BB /* THNRecommendCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRecommendCollectionReusableView.m; sourceTree = "<group>"; };
 		D85F169E1E5D30220038E0BB /* THNCarServiceTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNCarServiceTextView.h; sourceTree = "<group>"; };
@@ -5441,6 +5444,8 @@
 				D806697D1D6F3F82007FD81E /* FBGoodsInfoModel.m */,
 				D806697E1D6F3F82007FD81E /* FBGoodsInfoModelBrand.h */,
 				D806697F1D6F3F82007FD81E /* FBGoodsInfoModelBrand.m */,
+				D859A9E71E7F82DE003E1F42 /* FBGoodsInfoModelExtra.h */,
+				D859A9E81E7F82DE003E1F42 /* FBGoodsInfoModelExtra.m */,
 				D80669801D6F3F82007FD81E /* FBGoodsInfoModelData.h */,
 				D80669811D6F3F82007FD81E /* FBGoodsInfoModelData.m */,
 				D80669821D6F3F82007FD81E /* FBGoodsInfoModelRelationProduct.h */,
@@ -6091,6 +6096,7 @@
 				1F2A8F4E1CF40277005116C7 /* PhotoAlbumsTableViewCell.m in Sources */,
 				D8117B2F1E5AAEA70094E7EB /* THNSceneTagsCollectionViewCell.m in Sources */,
 				D80878E21D6AE3DF00C1FFA0 /* MallListGoodsCollectionViewCell.m in Sources */,
+				D859A9E91E7F82DE003E1F42 /* FBGoodsInfoModelExtra.m in Sources */,
 				D8A37B041E76529D00FFC388 /* UIImage+QRCode.m in Sources */,
 				D857C4C61E3067AE00569B3D /* THNRecordTableHeaderView.m in Sources */,
 				1F2AFC9E1D88170B00DA6035 /* ScenarioNonView.m in Sources */,

@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 #import "FBGoodsInfoModelBrand.h"
 #import "FBGoodsInfoModelRelationProduct.h"
+#import "FBGoodsInfoModelExtra.h"
 #import "FBGoodsInfoModelSku.h"
 
 @interface FBGoodsInfoModelData : NSObject
@@ -21,6 +22,7 @@
 @property (nonatomic, assign) NSInteger appSnatchedTotalCount;
 @property (nonatomic, strong) NSArray * asset;
 @property (nonatomic, strong) FBGoodsInfoModelBrand * brand;
+@property (nonatomic, strong) FBGoodsInfoModelExtra * extra;
 @property (nonatomic, strong) NSString * brandId;
 @property (nonatomic, strong) NSObject * canSaled;
 @property (nonatomic, assign) NSInteger categoryId;

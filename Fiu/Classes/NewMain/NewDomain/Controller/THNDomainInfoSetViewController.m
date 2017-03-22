@@ -190,7 +190,7 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
 #pragma mark - 打开相册选择头像
 - (void)openImagePickerChooseHeader {
     TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"选择地盘头像" message:@""];
-    alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
+    alertView.buttonDefaultBgColor = [UIColor colorWithHexString:@"#A04949"];
     alertView.buttonCancelBgColor = [UIColor colorWithHexString:@"#666666"];
     [alertView addAction:[TYAlertAction actionWithTitle:@"拍照" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
         [self takePhoto];

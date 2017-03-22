@@ -94,7 +94,6 @@
             // 插入图片
             THNLightspotTextAttachment *attach = [[THNLightspotTextAttachment alloc] init];
             attach.image = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.imageMarr[idx]]]];
-            attach.bounds = CGRectMake(0, 0, 15, 15);
             NSAttributedString *attachString = [NSAttributedString attributedStringWithAttachment:attach];
             [attributedString insertAttributedString:attachString atIndex:[self.imageIndexMarr[idx] integerValue]];
         }
