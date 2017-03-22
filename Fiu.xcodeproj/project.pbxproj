@@ -650,6 +650,8 @@
 		D857C4C91E31F07000569B3D /* THNAllianceInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4C81E31F07000569B3D /* THNAllianceInfoViewController.m */; };
 		D857C4CC1E31F0E100569B3D /* THNAllianceFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4CB1E31F0E100569B3D /* THNAllianceFootView.m */; };
 		D859A9E91E7F82DE003E1F42 /* FBGoodsInfoModelExtra.m in Sources */ = {isa = PBXBuildFile; fileRef = D859A9E81E7F82DE003E1F42 /* FBGoodsInfoModelExtra.m */; };
+		D859A9EF1E820A56003E1F42 /* THNEditLightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D859A9EE1E820A56003E1F42 /* THNEditLightViewController.m */; };
+		D859A9F21E8212FC003E1F42 /* THNAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = D859A9F11E8212FC003E1F42 /* THNAccessoryView.m */; };
 		D85F169D1E5C371B0038E0BB /* THNRecommendCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F169C1E5C371B0038E0BB /* THNRecommendCollectionReusableView.m */; };
 		D85F16A01E5D30220038E0BB /* THNCarServiceTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F169F1E5D30220038E0BB /* THNCarServiceTextView.m */; };
 		D85F16A31E5D636F0038E0BB /* THNHomeTableViewFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F16A21E5D636F0038E0BB /* THNHomeTableViewFooter.m */; };
@@ -2015,6 +2017,10 @@
 		D857C4CB1E31F0E100569B3D /* THNAllianceFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAllianceFootView.m; sourceTree = "<group>"; };
 		D859A9E71E7F82DE003E1F42 /* FBGoodsInfoModelExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGoodsInfoModelExtra.h; sourceTree = "<group>"; };
 		D859A9E81E7F82DE003E1F42 /* FBGoodsInfoModelExtra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGoodsInfoModelExtra.m; sourceTree = "<group>"; };
+		D859A9ED1E820A56003E1F42 /* THNEditLightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNEditLightViewController.h; sourceTree = "<group>"; };
+		D859A9EE1E820A56003E1F42 /* THNEditLightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNEditLightViewController.m; sourceTree = "<group>"; };
+		D859A9F01E8212FC003E1F42 /* THNAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNAccessoryView.h; sourceTree = "<group>"; };
+		D859A9F11E8212FC003E1F42 /* THNAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAccessoryView.m; sourceTree = "<group>"; };
 		D85F169B1E5C371B0038E0BB /* THNRecommendCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRecommendCollectionReusableView.h; sourceTree = "<group>"; };
 		D85F169C1E5C371B0038E0BB /* THNRecommendCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRecommendCollectionReusableView.m; sourceTree = "<group>"; };
 		D85F169E1E5D30220038E0BB /* THNCarServiceTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNCarServiceTextView.h; sourceTree = "<group>"; };
@@ -5522,6 +5528,8 @@
 				D8E1EB791E7108770041F010 /* THNDomainInfoSetViewController.m */,
 				D8E1EB951E7247D00041F010 /* THNDomainEditViewController.h */,
 				D8E1EB961E7247D00041F010 /* THNDomainEditViewController.m */,
+				D859A9ED1E820A56003E1F42 /* THNEditLightViewController.h */,
+				D859A9EE1E820A56003E1F42 /* THNEditLightViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5568,6 +5576,8 @@
 			children = (
 				D8884DFE1E57196A00CEE159 /* THNTitleTableViewCell.h */,
 				D8884DFF1E57196A00CEE159 /* THNTitleTableViewCell.m */,
+				D859A9F01E8212FC003E1F42 /* THNAccessoryView.h */,
+				D859A9F11E8212FC003E1F42 /* THNAccessoryView.m */,
 			);
 			path = Lightspot;
 			sourceTree = "<group>";
@@ -6541,6 +6551,7 @@
 				1F5C57BB1E5C4F0C003B585D /* THNNewSortCollectionViewCell.m in Sources */,
 				D81318011D9228BA007CE71C /* THNUserModelData.m in Sources */,
 				1F2A90651CF40277005116C7 /* SystemNoticeModel.m in Sources */,
+				D859A9EF1E820A56003E1F42 /* THNEditLightViewController.m in Sources */,
 				D80878D91D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.m in Sources */,
 				D8117ADF1E5A89D50094E7EB /* HomeSceneListRow.m in Sources */,
 				D8BE89DB1D33419000DE5029 /* FBBrandGoodsCollectionViewCell.m in Sources */,
@@ -6586,6 +6597,7 @@
 				1F2A8FDA1CF40277005116C7 /* GoodsImgCollectionViewCell.m in Sources */,
 				D8DD225B1DBA1809007D80CE /* THNProvinceModel.m in Sources */,
 				1F2AFD191D8817CC00DA6035 /* THNArticleModel.m in Sources */,
+				D859A9F21E8212FC003E1F42 /* THNAccessoryView.m in Sources */,
 				1F2A8F3D1CF40277005116C7 /* FindGoodsModel.m in Sources */,
 				D8117ACF1E5A89D50094E7EB /* HotUserListCounter.m in Sources */,
 				D869BD691D6036A000432423 /* QrShareSheetViewController.m in Sources */,
