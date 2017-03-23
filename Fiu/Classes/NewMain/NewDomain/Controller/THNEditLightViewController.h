@@ -19,6 +19,9 @@
 
 @property (nonatomic, strong) THNDomainManageInfoData *infoData;
 
+@property (nonatomic, strong) FBRequest *uploadRequest;
+@property (nonatomic, strong) FBRequest *saveRequest;
+
 /**
  键盘工具栏
  */

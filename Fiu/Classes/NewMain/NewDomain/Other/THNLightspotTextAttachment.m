@@ -13,7 +13,7 @@
 
 - (CGRect)attachmentBoundsForTextContainer:(NSTextContainer *)textContainer proposedLineFragment:(CGRect)lineFrag glyphPosition:(CGPoint)position characterIndex:(NSUInteger)charIndex {
 
-    return CGRectMake(0, 10, SCREEN_WIDTH - 40, (SCREEN_WIDTH - 40) *0.56);
+    return CGRectMake(0, 0, SCREEN_WIDTH - 40, (SCREEN_WIDTH - 40) *0.56);
 }
 
 @end
