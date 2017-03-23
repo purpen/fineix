@@ -130,6 +130,7 @@
             return (422)/2+rect.size.height;
         }
     } else {
+        NSLog(@"asdsad %ld",self.modelAry.count);
         if (SCREEN_HEIGHT == 667.0) {
             return (1150/2) * (self.modelAry.count - 1);
         } else if (SCREEN_HEIGHT > 667.0) {
