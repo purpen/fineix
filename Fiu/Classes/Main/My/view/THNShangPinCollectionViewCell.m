@@ -131,11 +131,11 @@
             make.bottom.mas_equalTo(self.iconImageView.mas_bottom).mas_offset(-7);
         }];
         
-        self.goImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_go_black"]];
+        self.goImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_go"]];
         [self.contentView addSubview:self.goImageView];
         [_goImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(0);
-            make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-23);
+            make.centerY.mas_equalTo(self.bgImageView.mas_centerY).mas_offset(0);
+            make.right.mas_equalTo(self.bgImageView.mas_right).mas_offset(-10);
         }];
     }
     return self;

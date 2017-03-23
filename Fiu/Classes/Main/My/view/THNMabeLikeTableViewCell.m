@@ -157,7 +157,11 @@
         [self addSubview:self.price];
         [_price mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(self.bounds.size.width, 15));
-            make.bottom.equalTo(_blackView).with.offset(-3);
+            if (SCREEN_HEIGHT<667.0) {
+                make.bottom.equalTo(_blackView).with.offset(0);
+            } else {
+                make.bottom.equalTo(_blackView).with.offset(-3);
+            }
             make.centerX.equalTo(_blackView);
         }];
     }
