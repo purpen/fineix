@@ -50,7 +50,7 @@
 /**
  *  是否登录
  */
-@pro_strong FBRequest   *   userLoginRequest;
+@property (nonatomic, strong) FBRequest   *   userLoginRequest;
 - (BOOL)isUserLogin;
 
 /**
@@ -123,7 +123,7 @@
 /**
  *  navigationItem点击事件
  */
-@pro_weak id <THNNavigationBarItemsDelegate> delegate;
+@property (nonatomic, weak) id <THNNavigationBarItemsDelegate> delegate;
 
 
 /**

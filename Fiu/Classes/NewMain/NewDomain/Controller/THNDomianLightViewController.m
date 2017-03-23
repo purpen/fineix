@@ -29,7 +29,13 @@
     
 }
 
-- (void)thn_setBrightSpotData:(NSArray *)model {
+- (void)thn_setBrightSpotData:(NSArray *)model edit:(BOOL)edit {
+    if (edit) {
+        //  [self thn_addBarItemLeftBarButton:@"" image:@"icon_back_white"];
+    } else {
+        [self thn_addBarItemLeftBarButton:@"" image:@"icon_cancel"];
+    }
+    
     NSMutableArray *strMarr = [NSMutableArray array];
     
     for (NSString *str in model) {
@@ -145,17 +151,19 @@
     return _imageIndexMarr;
 }
 
-
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
     self.delegate = self;
-    [self thn_addBarItemLeftBarButton:@"" image:@"icon_cancel"];
 }
 
 - (void)thn_leftBarItemSelected {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (self.navigationController.viewControllers.count > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 @end

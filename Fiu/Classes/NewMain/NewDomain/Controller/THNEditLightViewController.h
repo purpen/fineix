@@ -11,7 +11,6 @@
 #import "THNAccessoryView.h"
 
 @interface THNEditLightViewController : THNViewController <
-    THNNavigationBarItemsDelegate,
     UITextViewDelegate,
     THNAccessoryViewDelegate,
     UINavigationControllerDelegate,
@@ -40,5 +39,18 @@
  记录改变字体的样式
  */
 @property (nonatomic, strong) NSMutableAttributedString *contentAttributed;
+
+/**
+ 发布按钮
+ */
+@property (nonatomic, strong) UIButton *doneButton;
+
+/**
+ 设置默认亮点内容
+ */
+- (void)thn_setBrightSpotData:(NSArray *)model beginEdit:(BOOL)edit;
+@property (nonatomic, strong) NSMutableArray *textMarr;
+@property (nonatomic, strong) NSMutableArray *imageMarr;
+@property (nonatomic, strong) NSMutableArray *imageIndexMarr;
 
 @end

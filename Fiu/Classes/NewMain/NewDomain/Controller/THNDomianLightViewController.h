@@ -17,6 +17,6 @@
 @property (nonatomic, strong) NSMutableArray *imageMarr;
 @property (nonatomic, strong) NSMutableArray *imageIndexMarr;
 
-- (void)thn_setBrightSpotData:(NSArray *)model;
+- (void)thn_setBrightSpotData:(NSArray *)model edit:(BOOL)edit;
 
 @end
