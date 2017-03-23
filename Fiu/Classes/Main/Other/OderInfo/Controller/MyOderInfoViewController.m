@@ -98,7 +98,11 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
                 }else{
                     make.size.mas_equalTo(CGSizeMake(14, 14));
                 }
-                make.right.mas_equalTo(label.mas_right).with.offset(-10);
+                if (SCREEN_HEIGHT<667.0) {
+                    make.right.mas_equalTo(label.mas_right).with.offset(-5);
+                }else{
+                    make.right.mas_equalTo(label.mas_right).with.offset(-10);
+                }
                 make.top.mas_equalTo(label.mas_top).with.offset(5);
             }];
         }
@@ -120,7 +124,11 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
                 }else{
                     make.size.mas_equalTo(CGSizeMake(14, 14));
                 }
-                make.right.mas_equalTo(label.mas_right).with.offset(-10);
+                if (SCREEN_HEIGHT<667.0) {
+                    make.right.mas_equalTo(label.mas_right).with.offset(-5);
+                }else{
+                    make.right.mas_equalTo(label.mas_right).with.offset(-10);
+                }
                 make.top.mas_equalTo(label.mas_top).with.offset(5);
             }];
         }
@@ -141,7 +149,11 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
                 }else{
                     make.size.mas_equalTo(CGSizeMake(14, 14));
                 }
-                make.right.mas_equalTo(label.mas_right).with.offset(-10);
+                if (SCREEN_HEIGHT<667.0) {
+                    make.right.mas_equalTo(label.mas_right).with.offset(-5);
+                }else{
+                    make.right.mas_equalTo(label.mas_right).with.offset(-10);
+                }
                 make.top.mas_equalTo(label.mas_top).with.offset(5);
             }];
         }
@@ -162,7 +174,11 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
                 }else{
                     make.size.mas_equalTo(CGSizeMake(14, 14));
                 }
-                make.right.mas_equalTo(label.mas_right).with.offset(-10);
+                if (SCREEN_HEIGHT<667.0) {
+                    make.right.mas_equalTo(label.mas_right).with.offset(-5);
+                }else{
+                    make.right.mas_equalTo(label.mas_right).with.offset(-10);
+                }
                 make.top.mas_equalTo(label.mas_top).with.offset(5);
             }];
         }

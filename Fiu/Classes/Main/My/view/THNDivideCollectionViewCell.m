@@ -51,6 +51,9 @@
         
         self.tipLabel = [[UILabel alloc] init];
         self.tipLabel.font = [UIFont systemFontOfSize:10];
+        if (SCREEN_HEIGHT<667.0) {
+            self.tipLabel.font = [UIFont systemFontOfSize:9];
+        }
         self.tipLabel.text = @"可提现金额";
         self.tipLabel.textColor = [UIColor colorWithHexString:@"#717171"];
         [self.contentView addSubview:self.tipLabel];
