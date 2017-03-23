@@ -44,7 +44,13 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
     if (contentModel.title.length == 0) {
         self.titleLab.hidden = YES;
         self.defaultCellHigh -= 40*SCREEN_HEIGHT/667.0;
+        if (self.defaultCellHigh<0) {
+            self.defaultCellHigh = 0;
+        }
         self.cellHigh -= 40*SCREEN_HEIGHT/667.0;
+        if (self.cellHigh<0) {
+            self.cellHigh = 0;
+        }
     } else {
         self.titleLab.hidden = NO;
     }
@@ -54,6 +60,12 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
         self.content.hidden = YES;
         self.defaultCellHigh -= 5*SCREEN_HEIGHT/667.0;
         self.cellHigh -= 5*SCREEN_HEIGHT/667.0;
+        if (self.defaultCellHigh<0) {
+            self.defaultCellHigh = 0;
+        }
+        if (self.cellHigh<0) {
+            self.cellHigh = 0;
+        }
     } else {
         self.graybackView.hidden = NO;
         self.content.hidden = NO;

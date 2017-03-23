@@ -173,10 +173,9 @@
         _label1 = [[UILabel alloc] init];
         _label1.text = @"未付款";
         _label1.textAlignment = NSTextAlignmentCenter;
-        if (IS_iOS9) {
-            _label1.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
-        } else {
-            _label1.font = [UIFont systemFontOfSize:13];
+        _label1.font = [UIFont systemFontOfSize:13];
+        if (SCREEN_HEIGHT<667.0) {
+            _label1.font = [UIFont systemFontOfSize:11];
         }
         _label1.textColor = [UIColor darkGrayColor];
     }
@@ -196,10 +195,9 @@
         _label2 = [[UILabel alloc] init];
         _label2.text = @"待发货";
         _label2.textAlignment = NSTextAlignmentCenter;
-        if (IS_iOS9) {
-            _label2.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
-        } else {
-            _label2.font = [UIFont systemFontOfSize:13];
+        _label2.font = [UIFont systemFontOfSize:13];
+        if (SCREEN_HEIGHT<667.0) {
+            _label2.font = [UIFont systemFontOfSize:11];
         }
         _label2.textColor = [UIColor darkGrayColor];
     }
@@ -220,10 +218,9 @@
         _label3 = [[UILabel alloc] init];
         _label3.text = @"待收货";
         _label3.textAlignment = NSTextAlignmentCenter;
-        if (IS_iOS9) {
-            _label3.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
-        } else {
-            _label3.font = [UIFont systemFontOfSize:13];
+        _label3.font = [UIFont systemFontOfSize:13];
+        if (SCREEN_HEIGHT<667.0) {
+            _label3.font = [UIFont systemFontOfSize:11];
         }
         _label3.textColor = [UIColor darkGrayColor];
     }
@@ -243,10 +240,9 @@
         _label4 = [[UILabel alloc] init];
         _label4.text = @"待评价";
         _label4.textAlignment = NSTextAlignmentCenter;
-        if (IS_iOS9) {
-            _label4.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
-        } else {
-            _label4.font = [UIFont systemFontOfSize:13];
+        _label4.font = [UIFont systemFontOfSize:13];
+        if (SCREEN_HEIGHT<667.0) {
+            _label4.font = [UIFont systemFontOfSize:11];
         }
         _label4.textColor = [UIColor darkGrayColor];
     }
@@ -267,10 +263,9 @@
         _label5 = [[UILabel alloc] init];
         _label5.text = @"退款售后";
         _label5.textAlignment = NSTextAlignmentCenter;
-        if (IS_iOS9) {
-            _label5.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
-        } else {
-            _label5.font = [UIFont systemFontOfSize:13];
+        _label5.font = [UIFont systemFontOfSize:13];
+        if (SCREEN_HEIGHT<667.0) {
+            _label5.font = [UIFont systemFontOfSize:11];
         }
         _label5.textColor = [UIColor darkGrayColor];
     }

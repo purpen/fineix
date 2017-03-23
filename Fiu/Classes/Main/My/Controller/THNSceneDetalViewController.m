@@ -430,37 +430,12 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
             return 0.01f;
         }
     } else if (indexPath.row == 7) {
+        if (SCREEN_HEIGHT<667.0) {
+            return 400;
+        }
         return 450;
     } else if (indexPath.row == 8) {
-        NSMutableArray *ary = [NSMutableArray array];
-        if (self.model.category_ids.count > 1) {
-            [ary addObjectsFromArray:self.model.category_ids];
-        }
-        NSString *string = [ary componentsJoinedByString:@","];
-        NSMutableArray *numAry = [NSMutableArray array];
-        __block CGFloat height;
-        FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/getlist" requestDictionary:@{
-                                                                                                  @"page" : @(1),
-                                                                                                  @"size" : @(6),
-                                                                                                  @"category_ids" : string,
-                                                                                                  @"stick" : @(1),
-                                                                                                  @"sort" : @(1)
-                                                                                                  } delegate:(id<FBRequestDelegate>)self];
-        [request startRequestSuccess:^(FBRequest *request, id result) {
-            NSArray *rows = result[@"data"][@"rows"];
-            [numAry removeAllObjects];
-            for (NSDictionary * sceneDic in rows) {
-                HomeSceneListRow *model = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
-                [numAry addObject:model];
-            }
-            height = (1100/2+10)*numAry.count;
-        } failure:^(FBRequest *request, NSError *error) {
-            nil;
-        }];
-        if (height > 0) {
-            _hh = height;
-        }
-        return (1100/2+10)*6;
+        return (144+40+SCREEN_WIDTH)*6;
     }
     return 44;
 }
