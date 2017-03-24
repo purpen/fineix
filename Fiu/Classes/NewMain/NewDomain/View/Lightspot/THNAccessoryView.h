@@ -32,4 +32,16 @@
  */
 @property (nonatomic, strong) UIButton *closeKeybord;
 
+/**
+ 正在上传
+ */
+@property (nonatomic, strong) UILabel *uploadImage;
+
+/**
+ 正在上传提示
+
+ @param hidden 是否显示
+ */
+- (void)thn_hiddenUploadImage:(BOOL)hidden;
+
 @end

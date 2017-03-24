@@ -35,6 +35,17 @@
         make.top.bottom.right.equalTo(self).with.offset(0);
         make.width.mas_equalTo(@44);
     }];
+    
+    [self addSubview:self.uploadImage];
+}
+
+- (void)thn_hiddenUploadImage:(BOOL)hidden {
+    self.uploadImage.hidden = hidden;
+    if (hidden == NO) {
+        self.insertImage.hidden = YES;
+    } else {
+        self.insertImage.hidden = NO;
+    }
 }
 
 - (UIButton *)insertImage {
@@ -65,6 +76,19 @@
     if ([self.delegate respondsToSelector:@selector(thn_writeInputBoxResignFirstResponder)]) {
         [self.delegate thn_writeInputBoxResignFirstResponder];
     }
+}
+
+- (UILabel *)uploadImage {
+    if (!_uploadImage) {
+        _uploadImage = [[UILabel alloc] initWithFrame:CGRectMake(0, 1, SCREEN_WIDTH - 44, 43)];
+        _uploadImage.text = @"图片正在上传...";
+        _uploadImage.font = [UIFont systemFontOfSize:14];
+        _uploadImage.textColor = [UIColor colorWithHexString:@"#666666"];
+        _uploadImage.backgroundColor = [UIColor whiteColor];
+        _uploadImage.hidden = YES;
+        _uploadImage.textAlignment = NSTextAlignmentCenter;
+    }
+    return _uploadImage;
 }
 
 @end

@@ -11,8 +11,8 @@
 #import "THNInfoTitleTableViewCell.h"
 #import "THNDomainImagesTableViewCell.h"
 #import "THNDomainEditViewController.h"
-#import "THNEditLightViewController.h"
 #import "THNDomianLightViewController.h"
+#import "THNWriteLightViewController.h"
 
 static NSString *const URLDomainInfo = @"/scene_scene/view";
 static NSString *const infoCellId = @"THNInfoTitleTableViewCellId";
@@ -150,9 +150,9 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
             [self.navigationController pushViewController:editVC animated:YES];
             
         } else if (indexPath.row == 1) {
-            THNEditLightViewController *editLightVC = [[THNEditLightViewController alloc] init];
+            THNWriteLightViewController *editLightVC = [[THNWriteLightViewController alloc] init];
             editLightVC.infoData = self.infoData;
-            [editLightVC thn_setBrightSpotData:self.infoData.brightSpot beginEdit:NO];
+            [editLightVC thn_setBrightSpotData:self.infoData.brightSpot];
             [self.navigationController pushViewController:editLightVC animated:YES];
         }
     }

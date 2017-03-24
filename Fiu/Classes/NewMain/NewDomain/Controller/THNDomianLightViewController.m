@@ -94,19 +94,20 @@
     [SVProgressHUD showWithStatus:@"图片加载中..."];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSInteger index = 0;
-        for (NSString *imageUrl in self.imageMarr) {
-            THNLightspotTextAttachment *attach = [[THNLightspotTextAttachment alloc] init];
-            attach.image = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
+        for (NSInteger idx = 0; idx < self.imageMarr.count; ++ idx) {
+            NSString *imageUrl = self.imageMarr[idx];
             
-            NSAttributedString *attachString = [self insertImageDoneAutoReturn:[NSAttributedString attributedStringWithAttachment:attach]];
-            [attributedString insertAttributedString:attachString atIndex:[self.imageIndexMarr[index] integerValue] + (index * 3)];
-            index ++;
+            THNLightspotTextAttachment *attachment = [[THNLightspotTextAttachment alloc] init];
+            attachment.image = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
+            
+            NSAttributedString *imageAttributedString = [NSAttributedString attributedStringWithAttachment:attachment];
+            [attributedString insertAttributedString:imageAttributedString atIndex:[self.imageIndexMarr[idx] integerValue]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.textView.attributedText = attributedString;
+                [SVProgressHUD dismiss];
+            });
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.textView.attributedText = attributedString;
-            [SVProgressHUD dismiss];
-        });
     });
 }
 

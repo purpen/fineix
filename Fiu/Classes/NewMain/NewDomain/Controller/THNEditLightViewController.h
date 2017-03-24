@@ -34,11 +34,6 @@
 @property (nonatomic, strong) UILabel *contentPlaceholder;
 
 /**
- 保存插入图片的数组
- */
-@property (nonatomic, strong) NSMutableArray *imageAttachmentMarr;
-
-/**
  记录改变字体的样式
  */
 @property (nonatomic, strong) NSMutableAttributedString *contentAttributed;

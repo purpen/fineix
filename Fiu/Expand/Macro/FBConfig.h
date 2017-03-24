@@ -10,9 +10,9 @@
 #define FBConfig_h
 
 // API ROOT URL
-#define kDomainBaseUrl @"https://m.taihuoniao.com/app/api"           //生产环境
+//#define kDomainBaseUrl @"https://m.taihuoniao.com/app/api"           //生产环境
 //#define kDomainBaseUrl @"https://api.taihuoniao.com"          //  上线正式环境
-//#define kDomainBaseUrl @"http://t.taihuoniao.com/app/api"     //  开发环境
+#define kDomainBaseUrl @"http://t.taihuoniao.com/app/api"     //  开发环境
 
 #define kAppDebug 1
 #define KAppType              @"2"

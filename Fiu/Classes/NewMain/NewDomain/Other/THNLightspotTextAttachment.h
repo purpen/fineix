@@ -11,5 +11,6 @@
 @interface THNLightspotTextAttachment : NSTextAttachment
 
 @property (nonatomic, assign) CGSize imageSize;
+@property (nonatomic, strong) NSString *imageURL;
 
 @end
