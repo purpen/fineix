@@ -318,6 +318,11 @@
         [cell.btn3 addTarget:self action:@selector(oderActionBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn4 addTarget:self action:@selector(oderActionBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn5 addTarget:self action:@selector(refundAction) forControlEvents:UIControlEventTouchUpInside];
+        [cell.label1 addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(weifukuanTap)]];
+        [cell.label2 addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(daifahuoTap)]];
+        [cell.label3 addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(daishouhuoTap)]];
+        [cell.label4 addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(daipingjiaTap)]];
+        [cell.label5 addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tuikuanTap)]];
         return cell;
     }
     else if(indexPath.section == 5){
@@ -400,6 +405,11 @@
 
 #pragma mark - 退款售后
 -(void)refundAction{
+    THNRefundListViewController *refundListVC = [[THNRefundListViewController alloc] init];
+    [self.navigationController pushViewController:refundListVC animated:YES];
+}
+    
+-(void)tuikuanTap{
     THNRefundListViewController *refundListVC = [[THNRefundListViewController alloc] init];
     [self.navigationController pushViewController:refundListVC animated:YES];
 }
@@ -502,6 +512,31 @@
         }
     }
 }
+    
+-(void)daishouhuoTap{
+    MyOderInfoViewController *vc = [[MyOderInfoViewController alloc] init];
+    vc.type = @(3);
+    [self.navigationController pushViewController:vc animated:YES];
+}
+    
+-(void)daipingjiaTap{
+    MyOderInfoViewController *vc = [[MyOderInfoViewController alloc] init];
+    vc.type = @(4);
+    [self.navigationController pushViewController:vc animated:YES];
+}
+    
+-(void)weifukuanTap{
+    MyOderInfoViewController *vc = [[MyOderInfoViewController alloc] init];
+    vc.type = @(1);
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)daifahuoTap{
+    MyOderInfoViewController *vc = [[MyOderInfoViewController alloc] init];
+    vc.type = @(2);
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 #pragma mark - 订单的不同action
 -(void)oderActionBtn:(UIButton*)sender{
