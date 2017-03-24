@@ -39,6 +39,9 @@
         
         self.textLabel = [[UILabel alloc] init];
         self.textLabel.font = [UIFont systemFontOfSize:13];
+        if (SCREEN_HEIGHT>667.0) {
+            self.textLabel.font = [UIFont systemFontOfSize:14];
+        }
         self.textLabel.textAlignment = NSTextAlignmentCenter;
         self.textLabel.textColor = [UIColor whiteColor];
         [self.contentView addSubview:self.textLabel];

@@ -318,6 +318,9 @@ UITableViewDataSource
             StickModel *model = ary[indexPath.row];
             cell.model = model;
             cell.textLabel.font = [UIFont systemFontOfSize:16];
+            if (SCREEN_HEIGHT>667.0) {
+                cell.textLabel.font = [UIFont systemFontOfSize:17];
+            }
             return cell;
         } else {
             THNSortCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNSORTCollectionViewCell forIndexPath:indexPath];
