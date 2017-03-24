@@ -75,7 +75,6 @@
     self.params = params;
     FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"粉丝列表  %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
         for (NSDictionary *rowsDict in rowsAry) {
@@ -117,7 +116,6 @@
         if (self.params != params) {
             return;
         }
-        NSLog(@"总数 %ld",self.total_rows);
         [self.mytableView.mj_header endRefreshing];
         [self checkFooterState];
         
@@ -161,7 +159,6 @@
         if (self.params != params) {
             return;
         }
-        NSLog(@"总数 %ld",self.total_rows);
         [self checkFooterState];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -284,7 +281,14 @@
                 model.level = @1;
             }
             [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
-
+            FBRequest *numRequest = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":self.userId} delegate:self];
+            [numRequest startRequestSuccess:^(FBRequest *request, id result) {
+                NSDictionary *dataDict = result[@"data"];
+                if ([self.fansQuantityDelegate respondsToSelector:@selector(updateTheFansQuantity:)]) {
+                    [self.fansQuantityDelegate updateTheFansQuantity:[dataDict[@"follow_count"] integerValue]];
+                }
+            } failure:^(FBRequest *request, NSError *error) {
+            }];
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         }];
@@ -303,10 +307,14 @@
     [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        if ([result objectForKey:@"success"]) {
-            
-        }else{
-        }
+        FBRequest *numRequest = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":self.userId} delegate:self];
+        [numRequest startRequestSuccess:^(FBRequest *request, id result) {
+            NSDictionary *dataDict = result[@"data"];
+            if ([self.fansQuantityDelegate respondsToSelector:@selector(updateTheFansQuantity:)]) {
+                [self.fansQuantityDelegate updateTheFansQuantity:[dataDict[@"follow_count"] integerValue]];
+            }
+        } failure:^(FBRequest *request, NSError *error) {
+        }];
     } failure:nil];
 }
 

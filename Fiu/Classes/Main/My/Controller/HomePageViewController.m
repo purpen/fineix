@@ -34,7 +34,7 @@
 #define UserHeadTag 1
 #define BgTag 2
 
-@interface HomePageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,FBRequestDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,FBNavigationBarItemsDelegate>
+@interface HomePageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,FBRequestDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,FBNavigationBarItemsDelegate,MyPageFocusOnViewControllerDelegate,MyFansViewControllerDelegate,THNSceneDetalViewControllerDelegate>
 {
     ChanelView *_chanelV;
     NSMutableArray *_fiuSceneList;
@@ -325,7 +325,6 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
     [request startRequestSuccess:^(FBRequest *request, id result) {
         
         NSDictionary *dataDict = result[@"data"];
-        _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
         _chanelV.focusNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"follow_count"]];
         _fansN = [dataDict[@"fans_count"] integerValue];
@@ -380,16 +379,26 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 }
 
 -(void)signleTap2:(UITapGestureRecognizer*)sender{
-    MyPageFocusOnViewController *view = [[MyPageFocusOnViewController alloc] init];
-    view.userId = self.userId;
-    [self.navigationController pushViewController:view animated:YES];
+    MyPageFocusOnViewController *vc = [[MyPageFocusOnViewController alloc] init];
+    vc.userId = self.userId;
+    vc.focusQuantityDelegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+    
+-(void)updateTheFocusQuantity:(NSInteger)num{
+    _chanelV.focusNumLabel.text = [NSString stringWithFormat:@"%ld",num];
 }
 
 -(void)signleTap3:(UITapGestureRecognizer*)sender{
-    MyFansViewController *view = [[MyFansViewController alloc] init];
-    view.userId = self.userId;
-    view.cleanRemind = @"0";
-    [self.navigationController pushViewController:view animated:YES];
+    MyFansViewController *vc = [[MyFansViewController alloc] init];
+    vc.userId = self.userId;
+    vc.cleanRemind = @"0";
+    vc.fansQuantityDelegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+    
+-(void)updateTheFansQuantity:(NSInteger)num{
+    _chanelV.focusNumLabel.text = [NSString stringWithFormat:@"%ld",num];
 }
 
 -(UICollectionView *)myCollectionView{
@@ -593,12 +602,24 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
                     if ([result[@"success"] isEqualToNumber:@1]) {
                         THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
                         vc.sceneDetalId = _sceneIdMarr[indexPath.row];
+                        vc.referenceNo = indexPath.row;
+                        vc.sceneDelegate = self;
                         [self.navigationController pushViewController:vc animated:YES];
                     }
                 } failure:nil];
             }
         }
     }
+}
+    
+-(void)updatScenceNum:(NSInteger)num andDeleteReferenceNo:(NSInteger)reference{
+    _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%ld",num];
+    [_sceneListMarr removeObjectAtIndex:reference];
+    [_sceneIdMarr removeObjectAtIndex:reference];
+    [self.commentsMarr removeObjectAtIndex:reference];
+    [self.userIdMarr removeObjectAtIndex:reference];
+    [self.myCollectionView reloadData];
+//    [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:reference inSection:2], nil]];
 }
 
 
