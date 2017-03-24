@@ -12,7 +12,11 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <SDWebImage/UIImage+MultiFormat.h>
 
+static NSString *const URLUploadAsset = @"/common/upload_asset";
+static NSString *const URLSceneSave = @"/scene_scene/save";
+
 @interface THNEditLightViewController () {
+    NSString *_domainId;          //  地盘id
     CGFloat   _keyboardH;         //  弹出的键盘高度
 }
 
@@ -30,6 +34,11 @@
  删除文字
  */
 @property (nonatomic, assign) BOOL isDelete;
+
+/**
+ 保存更改的图片URL
+ */
+@property (nonatomic, strong) NSMutableArray *uploadImageMarr;
 
 @end
 
@@ -49,7 +58,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _domainId = self.infoData ? [NSString stringWithFormat:@"%zi", self.infoData.idField] : @"";
+    
     [self set_addNotification];
+    [self set_initAttributedString];
     [self setViewUI];
 }
 
@@ -62,53 +74,62 @@
     [SVProgressHUD show];
     self.contentPlaceholder.hidden = YES;
     
-    NSMutableArray *strMarr = [NSMutableArray array];
+    NSMutableArray *totalTextMarr = [NSMutableArray array];
     
     for (NSString *str in model) {
+        //  文字内容
         if ([str containsString:@"[text]:!"]) {
             NSString *textStr;
             textStr = [str substringFromIndex:8];
             [self.textMarr addObject:textStr];
-            [strMarr addObject:textStr];
+            [totalTextMarr addObject:textStr];
         }
         
+        //  图片内容
         if ([str containsString:@"[img]:!"]) {
             NSString *imageStr;
             imageStr = [str substringFromIndex:7];
             [self.imageMarr addObject:imageStr];
-            [strMarr addObject:imageStr];
+            [totalTextMarr addObject:imageStr];
         }
     }
+
+    NSString *totalText = [totalTextMarr componentsJoinedByString:@"\n"];
     
-    NSString *totalText = [strMarr componentsJoinedByString:@""] ;
-    for (NSInteger idx = 0; idx < self.imageMarr.count; ++ idx) {
-        NSString *str = self.imageMarr[idx];
-        NSInteger location = [totalText rangeOfString:str].location;
-        totalText = [totalText stringByReplacingOccurrencesOfString:str withString:@"\n\n"];
-        [self.imageIndexMarr addObject:[NSString stringWithFormat:@"%zi", location]];
+    if (self.imageMarr.count == 0) {
+        [self thn_setLightSporText:totalText];
+        
+    } else {
+        for (NSString *imageUrl in self.imageMarr) {
+            NSInteger imageLocation = [totalText rangeOfString:imageUrl].location;
+            [self.imageIndexMarr addObject:[NSString stringWithFormat:@"%zi", imageLocation]];
+            totalText = [totalText stringByReplacingOccurrencesOfString:imageUrl withString:@""];
+        }
+        
+        [self thn_setLightSporText:totalText];
     }
-    
-    
-    [self thn_crearBrightSpotInfoUI:self.textMarr image:self.imageMarr];
 }
 
-- (void)thn_crearBrightSpotInfoUI:(NSMutableArray *)textMarr image:(NSMutableArray *)imageMarr {
-    NSString *textStr = [textMarr componentsJoinedByString:@"\n"];
-    
-    [self getAttributedStringWithString:textStr];
+- (void)thn_setLightSporText:(NSString *)text {
+    [self getAttributedStringWithString:text];
 }
 
 - (void)getAttributedStringWithString:(NSString *)string {
     NSDictionary *attributesDict = [self set_attributesDictionary];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string attributes:attributesDict];
+    self.contentInputBox.attributedText = attributedString;
+    
+    [SVProgressHUD showWithStatus:@"图片加载中..."];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        for (NSInteger idx = 0; idx < self.imageMarr.count; ++ idx) {
-            // 插入图片
+        NSInteger index = 0;
+        for (NSString *imageUrl in self.imageMarr) {
             THNLightspotTextAttachment *attach = [[THNLightspotTextAttachment alloc] init];
-            attach.image = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.imageMarr[idx]]]];
-            NSAttributedString *attachString = [NSAttributedString attributedStringWithAttachment:attach];
-            [attributedString insertAttributedString:attachString atIndex:[self.imageIndexMarr[idx] integerValue]];
+            attach.image = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
+            
+            NSAttributedString *attachString = [self insertImageDoneAutoReturn:[NSAttributedString attributedStringWithAttachment:attach]];
+            [attributedString insertAttributedString:attachString atIndex:[self.imageIndexMarr[index] integerValue] + (index * 3)];
+            index ++;
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -172,7 +193,6 @@
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.alignment = NSTextAlignmentLeft;
     paragraphStyle.lineSpacing = 4.0f;
-    paragraphStyle.paragraphSpacing = 10.f;
     
     NSDictionary *attributesDict = @{
                                      NSParagraphStyleAttributeName:paragraphStyle,
@@ -309,8 +329,9 @@
     
     NSAttributedString *imageAttributedString = [self insertImageDoneAutoReturn:[NSAttributedString attributedStringWithAttachment:attachment]];
     [textView.textStorage insertAttributedString:imageAttributedString atIndex:textView.selectedRange.location];
-    textView.selectedRange = NSMakeRange(textView.selectedRange.location + 3, 0);
+    textView.selectedRange = NSMakeRange(textView.selectedRange.location, 0);
     
+    [self showEditDoneButton];
     [self set_initAttributedString];
 }
 
@@ -320,12 +341,11 @@
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:imageAttributedString];
     [attributedString appendAttributedString:returnAttributedString];
     [attributedString insertAttributedString:returnAttributedString atIndex:0];
-    [attributedString addAttributes:[self set_attributesDictionary] range:NSMakeRange(0, 3)];
     return attributedString;
 }
 
-#pragma mark - 遍历获取文本内容中的图片数量
-- (NSInteger)getTextAttachmentImageCount {
+#pragma mark - 遍历获取文本内容中的图片
+- (NSMutableArray *)getTextAttachmentImageObject {
     [self.imageAttachmentMarr removeAllObjects];
     [self.contentInputBox.attributedText enumerateAttribute:NSAttachmentAttributeName
                                                     inRange:NSMakeRange(0, self.contentInputBox.attributedText.length)
@@ -335,7 +355,7 @@
                                                          [self.imageAttachmentMarr addObject:value];
                                                      }
                                                  }];
-    return self.imageAttachmentMarr.count;
+    return self.imageAttachmentMarr;
 }
 
 #pragma mark - 初始化字体样式
@@ -372,6 +392,11 @@
 }
 
 #pragma mark - 发布按钮
+- (void)showEditDoneButton {
+    [self.doneButton setTitleColor:[UIColor colorWithHexString:@"#FFFFFF"] forState:(UIControlStateNormal)];
+    self.doneButton.userInteractionEnabled = YES;
+}
+
 - (UIButton *)doneButton {
     if (!_doneButton) {
         _doneButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 54, 20, 44, 44)];
@@ -385,12 +410,48 @@
 }
 
 - (void)doneButtonClick:(UIButton *)button {
-    NSLog(@"发布");
+    if ([_domainId isEqualToString:@""]) {
+        [SVProgressHUD showErrorWithStatus:@"获取地盘信息失败，请重试"];
+        return;
+    }
+    
+    for (THNLightspotTextAttachment *attachment in [self getTextAttachmentImageObject]) {
+        UIImage *lightImage = attachment.image;
+        [self thn_networkUploadAsset:lightImage];
+    }
 }
 
-- (void)showEditDoneButton {
-    [self.doneButton setTitleColor:[UIColor colorWithHexString:@"#FFFFFF"] forState:(UIControlStateNormal)];
-    self.doneButton.userInteractionEnabled = YES;
+#pragma mark - 上传图片
+- (void)thn_networkUploadAsset:(UIImage *)image {
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
+    NSString *img64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
+    self.uploadRequest = [FBAPI postWithUrlString:URLUploadAsset requestDictionary:@{@"type":@"2", @"id":_domainId, @"tmp":img64Str} delegate:self];
+    [self.uploadRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"====== %@", result);
+        NSDictionary *data = [result valueForKey:@"data"];
+        NSString *uploadImageUrl = data[@"filepath"][@"huge"];
+        if (uploadImageUrl.length) {
+            [self.uploadImageMarr addObject:uploadImageUrl];
+        }
+        
+        NSLog(@"更新的图片%@", self.uploadImageMarr);
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"-- %@ --", error);
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark - 发布更新的内容
+- (void)thn_networlUploadLightData {
+    self.saveRequest = [FBAPI postWithUrlString:URLSceneSave requestDictionary:@{@"bright_spot":@"s"} delegate:self];
+    [self.saveRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"==== 发布更新%@", result);
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"-- %@ --", [error localizedDescription]);
+    }];
 }
 
 #pragma mark - 设置Nav
@@ -427,6 +488,13 @@
         _imageIndexMarr = [NSMutableArray array];
     }
     return _imageIndexMarr;
+}
+
+- (NSMutableArray *)uploadImageMarr {
+    if (!_uploadImageMarr) {
+        _uploadImageMarr = [NSMutableArray array];
+    }
+    return _uploadImageMarr;
 }
 
 - (void)dealloc {

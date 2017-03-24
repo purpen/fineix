@@ -25,8 +25,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [SVProgressHUD show];
-    
+    [self.view addSubview:self.textView];
+}
+
+- (UITextView *)textView {
+    if (!_textView) {
+        _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        _textView.showsVerticalScrollIndicator = NO;
+        _textView.editable = NO;
+        _textView.backgroundColor = [UIColor whiteColor];
+        _textView.textContainerInset = UIEdgeInsetsMake(15, 15, 15, 15);
+    }
+    return _textView;
 }
 
 - (void)thn_setBrightSpotData:(NSArray *)model edit:(BOOL)edit {
@@ -36,96 +46,101 @@
         [self thn_addBarItemLeftBarButton:@"" image:@"icon_cancel"];
     }
     
-    NSMutableArray *strMarr = [NSMutableArray array];
-    
+    NSMutableArray *totalTextMarr = [NSMutableArray array];
+
     for (NSString *str in model) {
+        //  文字内容
         if ([str containsString:@"[text]:!"]) {
             NSString *textStr;
             textStr = [str substringFromIndex:8];
             [self.textMarr addObject:textStr];
-            [strMarr addObject:textStr];
+            [totalTextMarr addObject:textStr];
         }
         
+        //  图片内容
         if ([str containsString:@"[img]:!"]) {
             NSString *imageStr;
             imageStr = [str substringFromIndex:7];
             [self.imageMarr addObject:imageStr];
-            [strMarr addObject:imageStr];
+            [totalTextMarr addObject:imageStr];
         }
     }
-
-    NSString *totalText = [strMarr componentsJoinedByString:@""] ;
-    for (NSInteger idx = 0; idx < self.imageMarr.count; ++ idx) {
-        NSString *str = self.imageMarr[idx];
-        NSInteger location = [totalText rangeOfString:str].location;
-        totalText = [totalText stringByReplacingOccurrencesOfString:str withString:@"\n\n"];
-        [self.imageIndexMarr addObject:[NSString stringWithFormat:@"%zi", location]];
-    }
     
+    NSString *totalText = [totalTextMarr componentsJoinedByString:@"\n"];
     
-    [self thn_crearBrightSpotInfoUI:self.textMarr image:self.imageMarr];
-}
-
-- (void)thn_crearBrightSpotInfoUI:(NSMutableArray *)textMarr image:(NSMutableArray *)imageMarr {
-    NSString *textStr = [textMarr componentsJoinedByString:@"\n"];
+    if (self.imageMarr.count == 0) {
+        [self thn_setLightSporText:totalText];
     
-    [self getAttributedStringWithString:textStr lineSpace:5.0f];
-    
-    [self.view addSubview:self.textView];
-}
-
-- (UITextView *)textView {
-    if (!_textView) {
-        _textView = [[UITextView alloc] initWithFrame:CGRectMake(15, 74, SCREEN_WIDTH - 30, SCREEN_HEIGHT - 74)];
-        _textView.showsVerticalScrollIndicator = NO;
-        _textView.editable = NO;
-        _textView.backgroundColor = [UIColor whiteColor];
-    }
-    return _textView;
-}
-
-- (void)getAttributedStringWithString:(NSString *)string lineSpace:(CGFloat)lineSpace {
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.alignment = NSTextAlignmentLeft;
-    paragraphStyle.lineSpacing = lineSpace;
-    
-    NSRange range = NSMakeRange(0, [string length]);
-    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:range];
-    [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#666666"] range:range];
-    [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:range];
-
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        for (NSInteger idx = 0; idx < self.imageMarr.count; ++ idx) {
-            // 插入图片
-            THNLightspotTextAttachment *attach = [[THNLightspotTextAttachment alloc] init];
-            attach.image = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.imageMarr[idx]]]];
-            NSAttributedString *attachString = [NSAttributedString attributedStringWithAttachment:attach];
-            [attributedString insertAttributedString:attachString atIndex:[self.imageIndexMarr[idx] integerValue]];
+    } else {
+        for (NSString *imageUrl in self.imageMarr) {
+            NSInteger imageLocation = [totalText rangeOfString:imageUrl].location;
+            [self.imageIndexMarr addObject:[NSString stringWithFormat:@"%zi", imageLocation]];
+            totalText = [totalText stringByReplacingOccurrencesOfString:imageUrl withString:@""];
         }
         
+        [self thn_setLightSporText:totalText];
+    }
+}
+
+- (void)thn_setLightSporText:(NSString *)text {
+    [self getAttributedStringWithString:text];
+}
+
+- (void)getAttributedStringWithString:(NSString *)string {
+    NSDictionary *attributesDict = [self set_attributesDictionary];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string attributes:attributesDict];
+    self.textView.attributedText = attributedString;
+    
+    [SVProgressHUD showWithStatus:@"图片加载中..."];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSInteger index = 0;
+        for (NSString *imageUrl in self.imageMarr) {
+            THNLightspotTextAttachment *attach = [[THNLightspotTextAttachment alloc] init];
+            attach.image = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
+            
+            NSAttributedString *attachString = [self insertImageDoneAutoReturn:[NSAttributedString attributedStringWithAttachment:attach]];
+            [attributedString insertAttributedString:attachString atIndex:[self.imageIndexMarr[index] integerValue] + (index * 3)];
+            index ++;
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
             self.textView.attributedText = attributedString;
             [SVProgressHUD dismiss];
         });
     });
+}
 
+#pragma mark - 插入图片后换行
+- (NSAttributedString *)insertImageDoneAutoReturn:(NSAttributedString *)imageAttributedString {
+    NSAttributedString *returnAttributedString = [[NSAttributedString alloc] initWithString:@"\n"];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:imageAttributedString];
+    [attributedString appendAttributedString:returnAttributedString];
+    [attributedString insertAttributedString:returnAttributedString atIndex:0];
+    return attributedString;
+}
+
+#pragma mark - 正文样式
+- (NSDictionary *)set_attributesDictionary {
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.alignment = NSTextAlignmentLeft;
+    paragraphStyle.lineSpacing = 4.0f;
+    
+    NSDictionary *attributesDict = @{
+                                     NSParagraphStyleAttributeName:paragraphStyle,
+                                     NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#222222"],
+                                     NSFontAttributeName:[UIFont systemFontOfSize:14.0f]
+                                     };
+    return attributesDict;
 }
 
 - (CGFloat)getTextFrameHeight:(NSString *)text {
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.alignment = NSTextAlignmentLeft;
-    paragraphStyle.lineSpacing = 5.0;
-    
-    NSDictionary *attribute = @{NSFontAttributeName:[UIFont systemFontOfSize:14], NSParagraphStyleAttributeName:paragraphStyle};
-    
     CGFloat textHeight = [text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)
                                             options:\
                           NSStringDrawingTruncatesLastVisibleLine |
                           NSStringDrawingUsesLineFragmentOrigin |
                           NSStringDrawingUsesFontLeading |
                           NSStringDrawingUsesDeviceMetrics
-                                         attributes:attribute
+                                         attributes:[self set_attributesDictionary]
                                             context:nil].size.height;
     return textHeight;
 }
@@ -164,6 +179,12 @@
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [SVProgressHUD dismiss];
 }
 
 @end
