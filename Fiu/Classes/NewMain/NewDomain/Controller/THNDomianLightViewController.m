@@ -105,9 +105,12 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.textView.attributedText = attributedString;
-                [SVProgressHUD dismiss];
             });
         }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
     });
 }
 

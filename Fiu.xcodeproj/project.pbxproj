@@ -807,7 +807,6 @@
 		D8AEC7541CA8E3C700A868B6 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451C1C805CBD005F5C2E /* libsqlite3.0.tbd */; };
 		D8B855C21D3F6BA10008BD57 /* AddLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B855C11D3F6BA10008BD57 /* AddLocationView.m */; };
 		D8B855CE1D3F7F1F0008BD57 /* AddContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B855CD1D3F7F1F0008BD57 /* AddContentView.m */; };
-		D8BCE4CA1E8575ED0034E92C /* THNWriteLightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BCE4C91E8575ED0034E92C /* THNWriteLightViewController.m */; };
 		D8BE89D81D33401C00DE5029 /* FBBrandGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BE89D71D33401C00DE5029 /* FBBrandGoodsView.m */; };
 		D8BE89DB1D33419000DE5029 /* FBBrandGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BE89DA1D33419000DE5029 /* FBBrandGoodsCollectionViewCell.m */; };
 		D8BE89DE1D334ADD00DE5029 /* BrandsListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BE89DD1D334ADD00DE5029 /* BrandsListTableViewCell.m */; };
@@ -2274,8 +2273,6 @@
 		D8B855C11D3F6BA10008BD57 /* AddLocationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddLocationView.m; sourceTree = "<group>"; };
 		D8B855CC1D3F7F1F0008BD57 /* AddContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddContentView.h; sourceTree = "<group>"; };
 		D8B855CD1D3F7F1F0008BD57 /* AddContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddContentView.m; sourceTree = "<group>"; };
-		D8BCE4C81E8575ED0034E92C /* THNWriteLightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNWriteLightViewController.h; sourceTree = "<group>"; };
-		D8BCE4C91E8575ED0034E92C /* THNWriteLightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNWriteLightViewController.m; sourceTree = "<group>"; };
 		D8BE89D61D33401C00DE5029 /* FBBrandGoodsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBBrandGoodsView.h; sourceTree = "<group>"; };
 		D8BE89D71D33401C00DE5029 /* FBBrandGoodsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBBrandGoodsView.m; sourceTree = "<group>"; };
 		D8BE89D91D33419000DE5029 /* FBBrandGoodsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBBrandGoodsCollectionViewCell.h; sourceTree = "<group>"; };
@@ -5533,8 +5530,6 @@
 				D8E1EB961E7247D00041F010 /* THNDomainEditViewController.m */,
 				D859A9ED1E820A56003E1F42 /* THNEditLightViewController.h */,
 				D859A9EE1E820A56003E1F42 /* THNEditLightViewController.m */,
-				D8BCE4C81E8575ED0034E92C /* THNWriteLightViewController.h */,
-				D8BCE4C91E8575ED0034E92C /* THNWriteLightViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -6044,7 +6039,6 @@
 				1F2A8FDF1CF40277005116C7 /* InfoGoodsHighlightsTableViewCell.m in Sources */,
 				1F2362511E643D9200A6178C /* THNQingJingZhuanTiViewController.m in Sources */,
 				D80669781D6EF8FA007FD81E /* DiscoverSearchViewController.m in Sources */,
-				D8BCE4CA1E8575ED0034E92C /* THNWriteLightViewController.m in Sources */,
 				1F2AFD181D8817CC00DA6035 /* THNArticleDetalModel.m in Sources */,
 				D8ACF44B1D6BFE0300DB79D8 /* THNMallGoodsModelData.m in Sources */,
 				D8C095241D75344000908491 /* ShareSearchTextTableViewCell.m in Sources */,

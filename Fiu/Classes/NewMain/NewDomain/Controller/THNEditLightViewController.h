@@ -46,7 +46,7 @@
 /**
  设置默认亮点内容
  */
-- (void)thn_setBrightSpotData:(NSArray *)model beginEdit:(BOOL)edit;
+- (void)thn_setBrightSpotData:(NSArray *)model;
 @property (nonatomic, strong) NSMutableArray *textMarr;
 @property (nonatomic, strong) NSMutableArray *imageMarr;
 @property (nonatomic, strong) NSMutableArray *imageIndexMarr;

@@ -12,7 +12,7 @@
 #import "THNDomainImagesTableViewCell.h"
 #import "THNDomainEditViewController.h"
 #import "THNDomianLightViewController.h"
-#import "THNWriteLightViewController.h"
+#import "THNEditLightViewController.h"
 
 static NSString *const URLDomainInfo = @"/scene_scene/view";
 static NSString *const infoCellId = @"THNInfoTitleTableViewCellId";
@@ -150,7 +150,7 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
             [self.navigationController pushViewController:editVC animated:YES];
             
         } else if (indexPath.row == 1) {
-            THNWriteLightViewController *editLightVC = [[THNWriteLightViewController alloc] init];
+            THNEditLightViewController *editLightVC = [[THNEditLightViewController alloc] init];
             editLightVC.infoData = self.infoData;
             [editLightVC thn_setBrightSpotData:self.infoData.brightSpot];
             [self.navigationController pushViewController:editLightVC animated:YES];
@@ -168,6 +168,12 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
 #pragma mark - 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"uploadImageSucceed" object:self];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [SVProgressHUD dismiss];
 }
 
 @end
