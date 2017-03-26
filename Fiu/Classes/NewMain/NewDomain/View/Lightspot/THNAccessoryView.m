@@ -36,15 +36,18 @@
         make.width.mas_equalTo(@44);
     }];
     
-    [self addSubview:self.uploadImage];
+    [self addSubview:self.uploadState];
+    [self addSubview:self.uploadActivity];
 }
 
 - (void)thn_hiddenUploadImage:(BOOL)hidden {
-    self.uploadImage.hidden = hidden;
+    self.uploadState.hidden = hidden;
     if (hidden == NO) {
         self.insertImage.hidden = YES;
+        [self.uploadActivity startAnimating];
     } else {
         self.insertImage.hidden = NO;
+        [self.uploadActivity stopAnimating];
     }
 }
 
@@ -78,17 +81,25 @@
     }
 }
 
-- (UILabel *)uploadImage {
-    if (!_uploadImage) {
-        _uploadImage = [[UILabel alloc] initWithFrame:CGRectMake(0, 1, SCREEN_WIDTH - 44, 43)];
-        _uploadImage.text = @"图片正在上传...";
-        _uploadImage.font = [UIFont systemFontOfSize:14];
-        _uploadImage.textColor = [UIColor colorWithHexString:@"#666666"];
-        _uploadImage.backgroundColor = [UIColor whiteColor];
-        _uploadImage.hidden = YES;
-        _uploadImage.textAlignment = NSTextAlignmentCenter;
+- (UILabel *)uploadState {
+    if (!_uploadState) {
+        _uploadState = [[UILabel alloc] initWithFrame:CGRectMake(50, 1, SCREEN_WIDTH - 90, 43)];
+        _uploadState.text = @"图片正在上传...";
+        _uploadState.font = [UIFont systemFontOfSize:14];
+        _uploadState.textColor = [UIColor colorWithHexString:@"#666666"];
+        _uploadState.backgroundColor = [UIColor whiteColor];
+        _uploadState.hidden = YES;
     }
-    return _uploadImage;
+    return _uploadState;
+}
+
+- (UIActivityIndicatorView *)uploadActivity {
+    if (!_uploadActivity) {
+        _uploadActivity = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(10, 2, 40, 40)];
+        _uploadActivity.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+        _uploadActivity.backgroundColor = [UIColor whiteColor];
+    }
+    return _uploadActivity;
 }
 
 @end

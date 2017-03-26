@@ -35,7 +35,12 @@
 /**
  正在上传
  */
-@property (nonatomic, strong) UILabel *uploadImage;
+@property (nonatomic, strong) UILabel *uploadState;
+
+/**
+ 加载等待
+ */
+@property (nonatomic, strong) UIActivityIndicatorView *uploadActivity;
 
 /**
  正在上传提示

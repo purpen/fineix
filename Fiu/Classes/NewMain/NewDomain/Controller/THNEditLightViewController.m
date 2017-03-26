@@ -89,11 +89,8 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
 
 #pragma mark - 默认展示亮点
 - (void)thn_setBrightSpotData:(NSArray *)model {
-    [self.uploadDataMarr removeAllObjects];
-    [self.insertIndexMarr removeAllObjects];
-    
-    [SVProgressHUD show];
-    
+    [self thn_removeAllObjects];
+
     NSMutableArray *totalTextMarr = [NSMutableArray array];
     
     for (NSString *str in model) {
@@ -129,15 +126,15 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
 }
 
 - (void)getAttributedStringWithString:(NSString *)string {
-     [self thn_removeAllObjects];
-    
     string = [string stringByReplacingOccurrencesOfString:@"^" withString:@""];
     
     NSDictionary *attributesDict = [self set_attributesDictionary];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string attributes:attributesDict];
     self.contentInputBox.attributedText = attributedString;
     
-    [SVProgressHUD showWithStatus:@"图片加载中..."];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [SVProgressHUD showWithStatus:@"图片加载中..."];
+    });
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         for (NSInteger idx = 0; idx < self.imageMarr.count; ++ idx) {
@@ -254,6 +251,8 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
 - (void)thn_removeAllObjects {
     [self.insertImageMarr removeAllObjects];
     [self.imageAttachmentMarr removeAllObjects];
+    [self.uploadDataMarr removeAllObjects];
+    [self.insertIndexMarr removeAllObjects];
 }
 
 #pragma mark - 设置视图
@@ -380,20 +379,15 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
     THNLightspotTextAttachment *attachment = [[THNLightspotTextAttachment alloc] init];
     attachment.image = image;
     
-    dispatch_queue_t queue = dispatch_queue_create("uploadImage", DISPATCH_QUEUE_SERIAL);
-    dispatch_async(queue, ^{
-        [self addInsertImageLocation:textView.selectedRange.location withAttachment:attachment];
-    });
+    [self addInsertImageLocation:textView.selectedRange.location withAttachment:attachment];
     
-    dispatch_async(queue, ^{
-        NSAttributedString *imageAttributedString = [NSAttributedString attributedStringWithAttachment:attachment];
-        [textView.textStorage insertAttributedString:imageAttributedString atIndex:textView.selectedRange.location];
-        textView.selectedRange = NSMakeRange(textView.selectedRange.location + 1, 0);
-        [self.contentInputBox becomeFirstResponder];
-        
-        [self showEditDoneButton];
-        [self set_initAttributedString];
-    });
+    NSAttributedString *imageAttributedString = [NSAttributedString attributedStringWithAttachment:attachment];
+    [textView.textStorage insertAttributedString:imageAttributedString atIndex:textView.selectedRange.location];
+    textView.selectedRange = NSMakeRange(textView.selectedRange.location + 1, 0);
+    [self.contentInputBox becomeFirstResponder];
+    
+    [self showEditDoneButton];
+    [self set_initAttributedString];
 }
 
 #pragma mark - 插入图片并保存位置
@@ -513,12 +507,10 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
         NSDictionary *data = [result valueForKey:@"data"];
         NSString *uploadImageUrl = data[@"filepath"][@"huge"];
         if (uploadImageUrl.length) {
-            [self.insertImageMarr insertObject:[NSString stringWithFormat:@"[img]:!%@", uploadImageUrl] atIndex:index];
+            [self.insertImageMarr insertObject:uploadImageUrl atIndex:index];
         }
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.accessoryView thn_hiddenUploadImage:YES];
-        });
+        [self.accessoryView thn_hiddenUploadImage:YES];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
