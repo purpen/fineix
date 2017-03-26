@@ -271,6 +271,14 @@
         [request startRequestSuccess:^(FBRequest *request, id result) {
             model.is_love = 1;
             [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
+            FBRequest *numRequest = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":self.userId} delegate:self];
+            [numRequest startRequestSuccess:^(FBRequest *request, id result) {
+                NSDictionary *dataDict = result[@"data"];
+                if ([self.focusQuantityDelegate respondsToSelector:@selector(updateTheFocusQuantity:)]) {
+                    [self.focusQuantityDelegate updateTheFocusQuantity:[dataDict[@"follow_count"] integerValue]];
+                }
+            } failure:^(FBRequest *request, NSError *error) {
+            }];
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         }];
@@ -284,13 +292,14 @@
     [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        if ([result objectForKey:@"success"]) {
-//            FocusOnTableViewCell *cell = [self.mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
-//            cell.focusOnBtn.backgroundColor = [UIColor whiteColor];
-//            cell.focusOnBtn.layer.borderWidth = 1;
-//            cell.focusOnBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        }else{
-        }
+        FBRequest *numRequest = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":self.userId} delegate:self];
+        [numRequest startRequestSuccess:^(FBRequest *request, id result) {
+            NSDictionary *dataDict = result[@"data"];
+            if ([self.focusQuantityDelegate respondsToSelector:@selector(updateTheFocusQuantity:)]) {
+                [self.focusQuantityDelegate updateTheFocusQuantity:[dataDict[@"follow_count"] integerValue]];
+            }
+        } failure:^(FBRequest *request, NSError *error) {
+        }];
     } failure:nil];
 }
 

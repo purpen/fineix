@@ -171,6 +171,7 @@
 -(UILabel *)label1{
     if (!_label1) {
         _label1 = [[UILabel alloc] init];
+        _label1.userInteractionEnabled = YES;
         _label1.text = @"未付款";
         _label1.textAlignment = NSTextAlignmentCenter;
         _label1.font = [UIFont systemFontOfSize:13];
@@ -193,6 +194,7 @@
 -(UILabel *)label2{
     if (!_label2) {
         _label2 = [[UILabel alloc] init];
+        _label2.userInteractionEnabled = YES;
         _label2.text = @"待发货";
         _label2.textAlignment = NSTextAlignmentCenter;
         _label2.font = [UIFont systemFontOfSize:13];
@@ -216,6 +218,7 @@
 -(UILabel *)label3{
     if (!_label3) {
         _label3 = [[UILabel alloc] init];
+        _label3.userInteractionEnabled = YES;
         _label3.text = @"待收货";
         _label3.textAlignment = NSTextAlignmentCenter;
         _label3.font = [UIFont systemFontOfSize:13];
@@ -238,6 +241,7 @@
 -(UILabel *)label4{
     if (!_label4) {
         _label4 = [[UILabel alloc] init];
+        _label4.userInteractionEnabled = YES;
         _label4.text = @"待评价";
         _label4.textAlignment = NSTextAlignmentCenter;
         _label4.font = [UIFont systemFontOfSize:13];
@@ -261,6 +265,7 @@
 -(UILabel *)label5{
     if (!_label5) {
         _label5 = [[UILabel alloc] init];
+        _label5.userInteractionEnabled = YES;
         _label5.text = @"退款售后";
         _label5.textAlignment = NSTextAlignmentCenter;
         _label5.font = [UIFont systemFontOfSize:13];

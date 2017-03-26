@@ -46,6 +46,11 @@
         
         self.textLabel = [[UILabel alloc] init];
         self.textLabel.font = [UIFont systemFontOfSize:13];
+        if (SCREEN_HEIGHT>667.0) {
+            self.textLabel.font = [UIFont systemFontOfSize:14];
+        } else if (SCREEN_HEIGHT<667.0) {
+            self.textLabel.font = [UIFont systemFontOfSize:12];
+        }
         self.textLabel.numberOfLines = 0;
         self.textLabel.textAlignment = NSTextAlignmentCenter;
         self.textLabel.adjustsFontSizeToFitWidth = NO;

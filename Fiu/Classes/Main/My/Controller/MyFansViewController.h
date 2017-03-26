@@ -8,6 +8,12 @@
 
 #import "FBViewController.h"
 
+@protocol MyFansViewControllerDelegate <NSObject>
+
+-(void)updateTheFansQuantity:(NSInteger)num;
+
+@end
+
 @interface MyFansViewController : FBViewController
 
 @property(nonatomic,strong) UITableView *mytableView;
@@ -19,5 +25,6 @@
  *  0:不清除／1:清除
  */
 @property (nonatomic, strong) NSString *cleanRemind;
+@property(nonatomic,weak) id<MyFansViewControllerDelegate>fansQuantityDelegate;
 
 @end

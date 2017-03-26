@@ -42,8 +42,8 @@
         self.labelView.backgroundColor = [UIColor blackColor];
         [self.contentView addSubview:self.labelView];
         [_labelView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.contentView.mas_top).mas_offset(96/2);
-            make.height.mas_equalTo(58/2);
+            make.top.mas_equalTo(self.contentView.mas_top).mas_offset(96/2*SCREEN_HEIGHT/667.0);
+            make.height.mas_equalTo(58/2*SCREEN_HEIGHT/667.0);
             make.centerX.mas_equalTo(self.contentView.mas_centerX).mas_offset(0);
         }];
         

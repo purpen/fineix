@@ -10,9 +10,17 @@
 
 #import "FBViewController.h"
 
+@protocol THNSceneDetalViewControllerDelegate <NSObject>
+
+-(void)updatScenceNum:(NSInteger)num andDeleteReferenceNo:(NSInteger)reference;
+
+@end
+
 @interface THNSceneDetalViewController : FBViewController
 
 /**  */
 @property(nonatomic,copy) NSString *sceneDetalId;
+@property(nonatomic,assign) NSInteger referenceNo;
+@property(nonatomic,weak) id<THNSceneDetalViewControllerDelegate> sceneDelegate;
 
 @end

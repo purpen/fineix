@@ -318,7 +318,15 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             [self.navigationController popViewControllerAnimated:YES];
         }
-        
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        FBRequest *numRequest = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+        [numRequest startRequestSuccess:^(FBRequest *request, id result) {
+            NSDictionary *dataDict = result[@"data"];
+            if ([self.sceneDelegate respondsToSelector:@selector(updatScenceNum:andDeleteReferenceNo:)]) {
+                [self.sceneDelegate updatScenceNum:[dataDict[@"sight_count"] integerValue] andDeleteReferenceNo:self.referenceNo];
+            }
+        } failure:^(FBRequest *request, NSError *error) {
+        }];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
