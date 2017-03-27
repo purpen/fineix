@@ -181,7 +181,7 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BbZ-bm-7Rb">
-                    <rect key="frame" x="0.0" y="398" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="353" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分享给好友" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVY-gD-PNx">
                             <rect key="frame" x="15" y="12" width="82" height="21"/>
@@ -228,7 +228,7 @@
                         </mask>
                     </variation>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如果你要关闭或开启新消息通知，请在iPhone的&quot;设置&quot;-&quot;通知&quot;功能中，找到应用程序&quot;D3IN&quot;更改" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exT-t7-6XE">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如果你要关闭或开启新消息通知，请在iPhone的&quot;设置&quot;-&quot;通知&quot;功能中，找到应用程序&quot;D³IN&quot;更改" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exT-t7-6XE">
                     <rect key="frame" x="15" y="169" width="343" height="41"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="41" id="qci-8q-wKd"/>
@@ -334,10 +334,10 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xqq-DT-dIN">
-                    <rect key="frame" x="15" y="457" width="345" height="44"/>
+                    <rect key="frame" x="15" y="412" width="345" height="44"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="退出当前账户" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSU-WJ-cVc">
-                            <rect key="frame" x="131" y="14" width="84" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退出当前账户" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSU-WJ-cVc">
+                            <rect key="frame" x="130" y="14" width="86" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -387,72 +387,21 @@
                         </mask>
                     </variation>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C2d-lV-E4g">
-                    <rect key="frame" x="0.0" y="353" width="375" height="44"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服务条款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAV-CI-UEA">
-                            <rect key="frame" x="15" y="12" width="82" height="21"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="21" id="vbq-lm-sYI"/>
-                                <constraint firstAttribute="width" constant="82" id="vwN-zE-7C7"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="go" translatesAutoresizingMaskIntoConstraints="NO" id="ffa-qE-axZ">
-                            <rect key="frame" x="351" y="15" width="8" height="15"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="8" id="QaL-jO-tzM"/>
-                                <constraint firstAttribute="height" constant="15" id="Y6O-1e-L6I"/>
-                            </constraints>
-                        </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6NC-cA-mQ4">
-                            <rect key="frame" x="8" y="9" width="352" height="30"/>
-                            <connections>
-                                <action selector="service:" destination="-1" eventType="touchUpInside" id="NE3-Id-CEV"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="6NC-cA-mQ4" secondAttribute="trailing" constant="15" id="2JQ-se-9PO"/>
-                        <constraint firstItem="dAV-CI-UEA" firstAttribute="centerY" secondItem="C2d-lV-E4g" secondAttribute="centerY" id="5Lc-ae-dzP"/>
-                        <constraint firstItem="6NC-cA-mQ4" firstAttribute="leading" secondItem="C2d-lV-E4g" secondAttribute="leading" constant="8" id="5f3-Po-o1r"/>
-                        <constraint firstItem="ffa-qE-axZ" firstAttribute="centerY" secondItem="C2d-lV-E4g" secondAttribute="centerY" id="TVX-0M-vlp"/>
-                        <constraint firstItem="6NC-cA-mQ4" firstAttribute="top" secondItem="C2d-lV-E4g" secondAttribute="top" constant="9" id="Uik-Kc-8x6"/>
-                        <constraint firstAttribute="height" constant="44" id="Vkf-sh-ynE"/>
-                        <constraint firstAttribute="height" constant="44" id="VuT-Iq-gdO"/>
-                        <constraint firstAttribute="trailing" secondItem="ffa-qE-axZ" secondAttribute="trailing" constant="16" id="Wuu-nL-amX"/>
-                        <constraint firstItem="dAV-CI-UEA" firstAttribute="leading" secondItem="C2d-lV-E4g" secondAttribute="leading" constant="15" id="b0m-02-m31"/>
-                        <constraint firstAttribute="width" secondItem="C2d-lV-E4g" secondAttribute="height" multiplier="375:44" id="cax-ZQ-toj"/>
-                        <constraint firstAttribute="bottom" secondItem="6NC-cA-mQ4" secondAttribute="bottom" constant="5" id="n2l-8b-dJf"/>
-                    </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="Vkf-sh-ynE"/>
-                            <exclude reference="cax-ZQ-toj"/>
-                        </mask>
-                    </variation>
-                </view>
             </subviews>
             <color key="backgroundColor" red="0.95973086350000003" green="0.95973086350000003" blue="0.95973086350000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="HKf-Af-dJb" firstAttribute="width" secondItem="HKf-Af-dJb" secondAttribute="height" multiplier="375:44" id="0ag-Uk-Xhm"/>
                 <constraint firstItem="h1o-oN-8gb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="68" id="4AZ-9b-eCZ"/>
                 <constraint firstItem="AdS-gT-f4j" firstAttribute="width" secondItem="AdS-gT-f4j" secondAttribute="height" multiplier="375:44" id="5oH-N9-kh0"/>
-                <constraint firstItem="C2d-lV-E4g" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5wq-Ha-2MW"/>
                 <constraint firstItem="HKf-Af-dJb" firstAttribute="top" secondItem="h1o-oN-8gb" secondAttribute="bottom" constant="1" id="7Dh-sO-TGN"/>
                 <constraint firstItem="exT-t7-6XE" firstAttribute="top" secondItem="GhL-LK-yNz" secondAttribute="bottom" constant="8" id="87K-58-Sgv"/>
                 <constraint firstItem="GhL-LK-yNz" firstAttribute="top" secondItem="exT-t7-6XE" secondAttribute="bottom" constant="7" id="8jC-X0-hiV"/>
-                <constraint firstItem="BbZ-bm-7Rb" firstAttribute="top" secondItem="C2d-lV-E4g" secondAttribute="bottom" constant="1" id="95p-wk-9h9"/>
                 <constraint firstItem="h1o-oN-8gb" firstAttribute="width" secondItem="h1o-oN-8gb" secondAttribute="height" multiplier="375:44" id="AZd-md-mMn"/>
                 <constraint firstItem="h1o-oN-8gb" firstAttribute="top" secondItem="BbZ-bm-7Rb" secondAttribute="bottom" constant="1" id="Dtf-vH-iDY"/>
                 <constraint firstItem="h1o-oN-8gb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ET2-iU-6H2"/>
                 <constraint firstAttribute="trailing" secondItem="AdS-gT-f4j" secondAttribute="trailing" id="FMe-Hd-P9p"/>
                 <constraint firstItem="Qr4-Jw-Mse" firstAttribute="top" secondItem="AdS-gT-f4j" secondAttribute="bottom" constant="1" id="Fwb-5E-tpB"/>
                 <constraint firstItem="BbZ-bm-7Rb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Jdh-xF-Hmf"/>
-                <constraint firstItem="C2d-lV-E4g" firstAttribute="top" secondItem="Qr4-Jw-Mse" secondAttribute="bottom" constant="1" id="Khd-kz-ynf"/>
                 <constraint firstAttribute="trailing" secondItem="Xqq-DT-dIN" secondAttribute="trailing" constant="15" id="N6V-SK-DdD"/>
                 <constraint firstAttribute="trailing" secondItem="h1o-oN-8gb" secondAttribute="trailing" id="PE2-Um-xug"/>
                 <constraint firstItem="HKf-Af-dJb" firstAttribute="top" secondItem="exT-t7-6XE" secondAttribute="bottom" constant="8" id="Pb4-Vb-Chq"/>
@@ -476,6 +425,7 @@
                 <constraint firstItem="GhL-LK-yNz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jQ8-qC-aSB"/>
                 <constraint firstItem="Qr4-Jw-Mse" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jj0-f4-EcZ"/>
                 <constraint firstItem="HKf-Af-dJb" firstAttribute="top" secondItem="exT-t7-6XE" secondAttribute="bottom" constant="51" id="mjK-ld-dGW"/>
+                <constraint firstItem="BbZ-bm-7Rb" firstAttribute="top" secondItem="Qr4-Jw-Mse" secondAttribute="bottom" constant="1" id="qRW-Vw-Wg6"/>
                 <constraint firstItem="Xqq-DT-dIN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="r4J-Dy-jZL"/>
                 <constraint firstItem="exT-t7-6XE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="u0M-8P-2pz"/>
                 <constraint firstItem="h1o-oN-8gb" firstAttribute="top" secondItem="exT-t7-6XE" secondAttribute="bottom" constant="7" id="v1s-aK-2Kg"/>
@@ -483,7 +433,6 @@
                 <constraint firstItem="h1o-oN-8gb" firstAttribute="width" secondItem="h1o-oN-8gb" secondAttribute="height" multiplier="375:44" id="xIW-QM-1U2"/>
                 <constraint firstItem="BbZ-bm-7Rb" firstAttribute="width" secondItem="BbZ-bm-7Rb" secondAttribute="height" multiplier="375:44" id="xd9-Oe-yD8"/>
                 <constraint firstItem="exT-t7-6XE" firstAttribute="top" secondItem="GhL-LK-yNz" secondAttribute="bottom" constant="8" id="yn6-kV-435"/>
-                <constraint firstAttribute="trailing" secondItem="C2d-lV-E4g" secondAttribute="trailing" id="zoM-ub-B0C"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">

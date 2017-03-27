@@ -57,7 +57,7 @@ static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textCol
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
             
             [SVProgressHUD showSuccessWithStatus:message];
-//            [self.navigationController popViewControllerAnimated:YES];
+            [self.navigationController popViewControllerAnimated:YES];
         } else {
             [SVProgressHUD showInfoWithStatus:message];
         }
