@@ -24,6 +24,8 @@
 #import "THNSceneDetalViewController.h"
 #import "THNActiveDetalTwoViewController.h"
 #import <UMSocialCore/UMSocialCore.h>
+#import "BonusViewController.h"
+#import "THNLoginRegisterViewController.h"
 
 @interface THNArticleDetalViewController ()<FBNavigationBarItemsDelegate,UIWebViewDelegate>
 
@@ -223,6 +225,20 @@
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;
+                case 16:
+                //领取红包
+                {
+                    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+                    if (entity.isLogin) {
+                        BonusViewController *vc = [[BonusViewController alloc] init];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    } else {
+                        THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
+                        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:vc];
+                        [self presentViewController:navi animated:YES completion:nil];
+                    }
+                }
+                break;
                 case 20:
                     //搜索
                 {
