@@ -56,7 +56,6 @@
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{@"id":self.articleDetalid} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
-//            NSLog(@"文章详情 %@",result);
             self.model = [THNArticleDetalModel mj_objectWithKeyValues:result[@"data"]];
             [self.lookBtn setTitle:[NSString stringWithFormat:@"%@",self.model.view_count] forState:UIControlStateNormal];
             [self.commentBtn setTitle:[NSString stringWithFormat:@"%@",self.model.comment_count] forState:UIControlStateNormal];
@@ -71,7 +70,6 @@
                                                                                              } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
-//            NSLog(@"文章详情 %@",result);
             self.model = [THNArticleDetalModel mj_objectWithKeyValues:result[@"data"]];
             self.navViewTitle.text = self.model.title;
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",self.model.content_view_url]];
