@@ -48,7 +48,7 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
 
 #pragma mark 地盘详情数据
 - (void)thn_networkDomainInfoData {
-    [SVProgressHUD show];
+    [SVProgressHUD showWithMaskType:(SVProgressHUDMaskTypeClear)];
     self.infoRequest = [FBAPI getWithUrlString:URLDomainInfo requestDictionary:@{@"id":self.domainId, @"is_edit":@"1"} delegate:self];
     [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dict =  [result valueForKey:@"data"];

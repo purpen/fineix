@@ -14,15 +14,15 @@
     UICollectionViewDataSource
 >
 
-@pro_assign NSInteger index;
-@pro_strong FBRequest *searchListRequest;
-@pro_assign NSInteger currentpageNum;
-@pro_assign NSInteger totalPageNum;
+@property (nonatomic, assign) NSInteger index;
+@property (nonatomic, strong) FBRequest *searchListRequest;
+@property (nonatomic, assign) NSInteger currentpageNum;
+@property (nonatomic, assign) NSInteger totalPageNum;
 
-@pro_strong UILabel *noneLab;
-@pro_strong UICollectionView *goodsList;
-@pro_strong NSMutableArray *goodsListMarr;
-@pro_strong NSMutableArray *goodsIdMarr;
+@property (nonatomic, strong) UILabel *noneLab;
+@property (nonatomic, strong) UICollectionView *goodsList;
+@property (nonatomic, strong) NSMutableArray *goodsListMarr;
+@property (nonatomic, strong) NSMutableArray *goodsIdMarr;
 
 - (void)searchAgain:(NSString *)keyword;
 

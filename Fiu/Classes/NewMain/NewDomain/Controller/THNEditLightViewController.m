@@ -16,6 +16,9 @@ static NSInteger const MAX_IMAGE = 10;
 static NSString *const URLUploadAsset = @"/common/upload_asset";
 static NSString *const URLSceneSave = @"/scene_scene/save";
 
+static NSString *const TEXT_TAG = @"[text]:!";
+static NSString *const IMAGE_TAG = @"[img]:!";
+
 @interface THNEditLightViewController () {
     NSString *_domainId;          //  地盘id
     CGFloat   _keyboardH;         //  弹出的键盘高度
@@ -40,24 +43,44 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
 @property (nonatomic, assign) BOOL isDelete;
 
 /**
- 保存更改的图片URL
- */
-@property (nonatomic, strong) NSMutableArray *insertImageMarr;
-
-/**
- 保存图文数据的数组
+ 图文数据
  */
 @property (nonatomic, strong) NSMutableArray *uploadDataMarr;
 
 /**
  图片插入的位置
  */
-@property (nonatomic, strong) NSMutableArray *insertIndexMarr;
+@property (nonatomic, strong) NSMutableArray *imageLocationMarr;
 
 /**
- 保存图片元素的数组
+ 图片插入的位置
+ */
+@property (nonatomic, strong) NSMutableDictionary *insertImageDict;
+
+/**
+ 插入的图片元素
  */
 @property (nonatomic, strong) NSMutableArray *imageAttachmentMarr;
+
+/**
+ 每段文字末尾的位置
+ */
+@property (nonatomic, strong) NSMutableArray *textLocationMarr;
+
+/**
+ 所有数据所占的位置
+ */
+@property (nonatomic, strong) NSMutableArray *dataLocationMarr;
+
+/**
+ 插入的文字
+ */
+@property (nonatomic, strong) NSMutableArray *insertTextMarr;
+
+/**
+ 插入的文字
+ */
+@property (nonatomic, strong) NSMutableDictionary *insertTextDict;
 
 @end
 
@@ -87,25 +110,26 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
     [self setViewUI];
 }
 
-#pragma mark - 默认展示亮点
+#pragma mark - 初始展示的亮点内容
 - (void)thn_setBrightSpotData:(NSArray *)model {
+    NSLog(@"默认展示的亮点内容================= %@", model);
+    
     [self thn_removeAllObjects];
 
     NSMutableArray *totalTextMarr = [NSMutableArray array];
-    
     for (NSString *str in model) {
         //  文字内容
-        if ([str containsString:@"[text]:!"]) {
+        if ([str containsString:TEXT_TAG]) {
             NSString *textStr;
-            textStr = [str substringFromIndex:8];
+            textStr = [str substringFromIndex:TEXT_TAG.length];
             [self.textMarr addObject:textStr];
             [totalTextMarr addObject:textStr];
         }
         
         //  图片内容
-        if ([str containsString:@"[img]:!"]) {
+        if ([str containsString:IMAGE_TAG]) {
             NSString *imageStr;
-            imageStr = [str substringFromIndex:7];
+            imageStr = [str substringFromIndex:IMAGE_TAG.length];
             [self.imageMarr addObject:imageStr];
             [totalTextMarr addObject:imageStr];
         }
@@ -116,16 +140,16 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
     if (self.imageMarr.count > 0) {
         for (NSString *imageUrl in self.imageMarr) {
             NSInteger imageLocation = [totalText rangeOfString:imageUrl].location;
-            [self.insertIndexMarr addObject:[NSString stringWithFormat:@"%zi", imageLocation]];
+            [self.imageLocationMarr addObject:[NSString stringWithFormat:@"%zi", imageLocation]];
             totalText = [totalText stringByReplacingOccurrencesOfString:imageUrl withString:@"^"];
         }
     }
     
     [self.uploadDataMarr addObjectsFromArray:model];
-    [self getAttributedStringWithString:totalText];
+    [self thn_getAttributedStringWithString:totalText];
 }
 
-- (void)getAttributedStringWithString:(NSString *)string {
+- (void)thn_getAttributedStringWithString:(NSString *)string {
     string = [string stringByReplacingOccurrencesOfString:@"^" withString:@""];
     
     NSDictionary *attributesDict = [self set_attributesDictionary];
@@ -133,7 +157,7 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
     self.contentInputBox.attributedText = attributedString;
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [SVProgressHUD showWithStatus:@"图片加载中..."];
+        [SVProgressHUD showWithStatus:@"图片加载中..." maskType:SVProgressHUDMaskTypeClear];
     });
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -143,12 +167,11 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
             THNLightspotTextAttachment *attachment = [[THNLightspotTextAttachment alloc] init];
             attachment.image = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
             attachment.imageURL = imageUrl;
-            
-            [self.insertImageMarr addObject:imageUrl];
+            ;
             [self.imageAttachmentMarr addObject:attachment];
             
             NSAttributedString *imageAttributedString = [NSAttributedString attributedStringWithAttachment:attachment];
-            [attributedString insertAttributedString:imageAttributedString atIndex:[self.insertIndexMarr[idx] integerValue]];
+            [attributedString insertAttributedString:imageAttributedString atIndex:[self.imageLocationMarr[idx] integerValue]];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.contentInputBox.attributedText = attributedString;
@@ -158,82 +181,16 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
     
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
+            [self thn_refreshInsertObjectLocation];
         });
     });
 }
 
-#pragma mark 输入监测的代理
-- (void)textViewDidChange:(UITextView *)textView {
-    if (textView.attributedText.length > 0) {
-        self.contentPlaceholder.hidden = YES;
-    } else {
-        self.contentPlaceholder.hidden = NO;
-    }
-    
-    NSInteger textLength = textView.attributedText.length - self.contentAttributed.length;
-    NSInteger selectedLoc = textView.selectedRange.location;
-    
-    if (textLength > 0) {
-        self.isDelete = NO;
-        self.contentNewRange = NSMakeRange(textView.selectedRange.location - textLength, textLength);
-        self.contentNewText = [textView.text substringWithRange:self.contentNewRange];
-        
-    } else {
-        [self deleteImage:selectedLoc];
-        self.isDelete = YES;
-    }
-    
-    [self thn_screeningInputHighlightingText:textView];
-}
+/**
+ 设置文字的样式
 
-#pragma mark - 删除指定位置的图片
-- (void)deleteImage:(NSInteger)index {
-    NSString *selecterIndex = [NSString stringWithFormat:@"%zi", index];
-    if ([self.insertIndexMarr containsObject:selecterIndex]) {
-        NSInteger arrIndex = [self.insertIndexMarr indexOfObject:selecterIndex];
-        NSString *imageURL = [NSString stringWithFormat:@"[img]:!%@", [self.insertImageMarr objectAtIndex:arrIndex]];
-        NSLog(@"4 删除的下标----- %zi", arrIndex);
-        NSLog(@"5 删除的URL----- %@", imageURL);
-        
-        [self.uploadDataMarr removeObject:imageURL];
-        [self.insertIndexMarr removeObject:selecterIndex];
-        [self.insertImageMarr removeObjectAtIndex:arrIndex];
-        [self.imageAttachmentMarr removeObjectAtIndex:arrIndex];
-    }
-    
-    NSLog(@"6 数据数组------ %@", self.uploadDataMarr);
-}
-
-- (void)thn_screeningInputHighlightingText:(UITextView *)textView {
-    UITextRange *selectedRange = [textView markedTextRange];
-    //  获取高亮部分
-    UITextPosition *isHighlight = [textView positionFromPosition:selectedRange.start offset:0];
-    //  没有高亮表示输入完成
-    if (!isHighlight) {
-        if (textView.text.length == 0) {
-            [self dismissEditDoneButton];
-        } else {
-            [self showEditDoneButton];
-        }
-        [self setContentInputBoxTextStyle:textView];
-    }
-}
-
-#pragma mark 设置正文内容的文本样式
-- (void)setContentInputBoxTextStyle:(UITextView *)textView {
-    [self set_initAttributedString];
-    
-    if (self.isDelete) {
-        return;
-    }
-    
-    NSDictionary *attributesDict = [self set_attributesDictionary];
-    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:self.contentNewText attributes:attributesDict];
-    [self.contentAttributed replaceCharactersInRange:self.contentNewRange withAttributedString:attributedString];
-    self.contentInputBox.attributedText = self.contentAttributed;
-    self.contentInputBox.selectedRange = NSMakeRange(self.contentNewRange.location + self.contentNewRange.length, 0);
-}
-
+ @return 设置样式
+ */
 - (NSDictionary *)set_attributesDictionary {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.alignment = NSTextAlignmentLeft;
@@ -247,12 +204,156 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
     return attributesDict;
 }
 
+#pragma mark - UITextViewDelegate
+#pragma mark 设置正文内容的文本样式
+- (void)textViewDidChange:(UITextView *)textView {
+    if (textView.attributedText.length > 0) {
+        self.contentPlaceholder.hidden = YES;
+    } else {
+        self.contentPlaceholder.hidden = NO;
+    }
+    
+    NSInteger textLength = textView.attributedText.length - self.contentAttributed.length;
+    
+    if (textLength > 0) {
+        self.isDelete = NO;
+        self.contentNewRange = NSMakeRange(textView.selectedRange.location - textLength, textLength);
+        self.contentNewText = [textView.text substringWithRange:self.contentNewRange];
+        
+    } else {
+        self.isDelete = YES;
+    }
+    
+    [self thn_screeningInputHighlightingText:textView];
+}
+
+- (void)thn_screeningInputHighlightingText:(UITextView *)textView {
+    UITextRange *selectedRange = [textView markedTextRange];
+    //  获取高亮部分
+    UITextPosition *isHighlight = [textView positionFromPosition:selectedRange.start offset:0];
+    //  没有高亮表示输入完成
+    if (!isHighlight) {
+        if (textView.text.length == 0) {
+            [self dismissEditDoneButton:YES];
+        } else {
+            [self dismissEditDoneButton:NO];
+        }
+    
+        [self thn_setContentInputBoxTextStyle:textView];
+    }
+}
+
+- (void)thn_setContentInputBoxTextStyle:(UITextView *)textView {
+    [self set_initAttributedString];
+
+    if (self.isDelete) {
+        return;
+    }
+    
+    NSDictionary *attributesDict = [self set_attributesDictionary];
+    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:self.contentNewText attributes:attributesDict];
+    [self.contentAttributed replaceCharactersInRange:self.contentNewRange withAttributedString:attributedString];
+    self.contentInputBox.attributedText = self.contentAttributed;
+    self.contentInputBox.selectedRange = NSMakeRange(self.contentNewRange.location + self.contentNewRange.length, 0);
+}
+
+/**
+ 刷新图片与文字的位置
+ */
+- (void)thn_refreshInsertObjectLocation {
+    [self.imageLocationMarr removeAllObjects];
+    [self.textLocationMarr removeAllObjects];
+    [self.imageAttachmentMarr removeAllObjects];
+    
+    [self.contentInputBox.attributedText enumerateAttribute:NSAttachmentAttributeName
+                                                    inRange:NSMakeRange(0, self.contentInputBox.attributedText.length)
+                                                    options:0
+                                                 usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
+                                                     if (value && [value isKindOfClass:[THNLightspotTextAttachment class]]) {
+                                                         [self.imageLocationMarr addObject:[NSString stringWithFormat:@"%zi", range.location]];
+                                                         [self.imageAttachmentMarr addObject:value];
+                                                     }
+                                                 }];
+    
+    [self.imageLocationMarr addObject:[NSString stringWithFormat:@"%zi", self.contentInputBox.attributedText.length]];
+    
+    NSInteger imageLocation = 0;
+    for (NSInteger idx = 0; idx < self.imageLocationMarr.count; ++ idx) {
+        NSInteger lastLocation = [self.imageLocationMarr[idx] integerValue];
+        BOOL isImageLocation = lastLocation - imageLocation > 0;
+        if (isImageLocation) {
+            [self.textLocationMarr addObject:[NSString stringWithFormat:@"%zi", lastLocation - 1]];
+        }
+        imageLocation = lastLocation;
+    }
+
+    NSLog(@"图片的位置-------------------- %@\n\n", self.imageLocationMarr);
+    NSLog(@"文字的位置-------------------- %@\n\n", self.textLocationMarr);
+    NSLog(@"---------------------------------------- \n");
+    
+    [self thn_refreshContentOfText];
+    [self thn_saveAllDataLocation:self.imageLocationMarr textLocation:self.textLocationMarr];
+}
+
+/**
+ 截取内容中每段的文字
+ */
+- (void)thn_refreshContentOfText {
+    [self.insertTextMarr removeAllObjects];
+    
+    NSInteger defauleLocation = 0;
+    for (NSInteger idx = 0; idx < self.imageLocationMarr.count; ++ idx) {
+        NSInteger lastLocation = [self.imageLocationMarr[idx] integerValue];
+        NSInteger textLength = lastLocation - defauleLocation;
+        if (textLength > 0) {
+            NSAttributedString *attributedText = [self.contentInputBox.attributedText attributedSubstringFromRange:NSMakeRange(defauleLocation, textLength)];
+            [self.insertTextMarr addObject:attributedText.string];
+        }
+        defauleLocation = lastLocation + 1;
+    }
+}
+
+/**
+ 保存每组数据在内容中占的位数
+
+ @param imageLocation 图片位置
+ @param textLocation 文字位置
+ */
+- (void)thn_saveAllDataLocation:(NSMutableArray *)imageLocation textLocation:(NSMutableArray *)textLocation {
+    [self.dataLocationMarr removeAllObjects];
+    
+    NSMutableArray *dataMarr = [NSMutableArray array];
+    [dataMarr removeAllObjects];
+    
+    [dataMarr addObjectsFromArray:imageLocation];
+    [dataMarr addObjectsFromArray:textLocation];
+    [dataMarr sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        if ([obj1 integerValue] > [obj2 integerValue]) {
+            return NSOrderedDescending;
+        } else if ([obj1 integerValue] < [obj2 integerValue]) {
+            return NSOrderedAscending;
+        } else
+            return NSOrderedSame;
+    }];
+    
+    for (NSString *string in dataMarr) {
+        if (![self.dataLocationMarr containsObject:string]) {
+            [self.dataLocationMarr addObject:string];
+        }
+    }
+    
+    NSLog(@"所有的位置-------------------- %@\n\n", self.dataLocationMarr);
+    NSLog(@"---------------------------------------- \n");
+}
+
+
 #pragma mark - 清空数据
 - (void)thn_removeAllObjects {
-    [self.insertImageMarr removeAllObjects];
-    [self.imageAttachmentMarr removeAllObjects];
     [self.uploadDataMarr removeAllObjects];
-    [self.insertIndexMarr removeAllObjects];
+    [self.imageAttachmentMarr removeAllObjects];
+    [self.imageLocationMarr removeAllObjects];
+    [self.insertTextMarr removeAllObjects];
+    [self.textLocationMarr removeAllObjects];
 }
 
 #pragma mark - 设置视图
@@ -263,8 +364,8 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
 
     [self.view addSubview:self.contentPlaceholder];
     [_contentPlaceholder mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(_contentInputBox);
-        make.top.right.equalTo(_contentInputBox).with.offset(15);
+        make.top.equalTo(_contentInputBox.mas_top).with.offset(15);
+        make.right.equalTo(_contentInputBox.mas_right).with.offset(-15);
         make.left.equalTo(_contentInputBox.mas_left).with.offset(19);
         make.height.mas_equalTo(@19);
     }];
@@ -379,38 +480,17 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
     THNLightspotTextAttachment *attachment = [[THNLightspotTextAttachment alloc] init];
     attachment.image = image;
     
-    [self addInsertImageLocation:textView.selectedRange.location withAttachment:attachment];
+    [self thn_networkUploadAsset:image saveAttachment:attachment];
     
     NSAttributedString *imageAttributedString = [NSAttributedString attributedStringWithAttachment:attachment];
     [textView.textStorage insertAttributedString:imageAttributedString atIndex:textView.selectedRange.location];
     textView.selectedRange = NSMakeRange(textView.selectedRange.location + 1, 0);
     [self.contentInputBox becomeFirstResponder];
     
-    [self showEditDoneButton];
     [self set_initAttributedString];
 }
 
-#pragma mark - 插入图片并保存位置
-- (void)addInsertImageLocation:(NSInteger)location withAttachment:(THNLightspotTextAttachment *)attachment {
-    NSString *locationStr = [NSString stringWithFormat:@"%zi", location];
-    [self.insertIndexMarr addObject:locationStr];
-
-    [self.insertIndexMarr sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        if ([obj1 integerValue] > [obj2 integerValue]) {
-            return NSOrderedDescending;
-        } else if ([obj1 integerValue] < [obj2 integerValue]) {
-            return NSOrderedAscending;
-        } else
-            return NSOrderedSame;
-    }];
-    
-    NSInteger marrIndex = [self.insertIndexMarr indexOfObject:locationStr];
-    [self.imageAttachmentMarr insertObject:attachment atIndex:marrIndex];
-    
-    [self thn_networkUploadAsset:attachment.image saveIndex:marrIndex];
-}
-
-#pragma mark - 初始化字体样式
+#pragma mark - 初始化内容文本
 - (void)set_initAttributedString {
     self.contentAttributed = nil;
     
@@ -450,56 +530,11 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
     self.contentInputBox.frame = inputBoxFrame;
 }
 
-#pragma mark - 遍历获取文本内容中的图片以及位置
-- (void)getTextAttachmentImageObject {
-    [self.imageAttachmentMarr removeAllObjects];
-    [self.insertIndexMarr removeAllObjects];
-    [self.contentInputBox.attributedText enumerateAttribute:NSAttachmentAttributeName
-                                                    inRange:NSMakeRange(0, self.contentInputBox.attributedText.length)
-                                                    options:NSAttributedStringEnumerationReverse
-                                                 usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
-                                                     if (value && [value isKindOfClass:[THNLightspotTextAttachment class]]) {
-                                                         [self.imageAttachmentMarr addObject:value];
-                                                         [self.insertIndexMarr addObject:[NSString stringWithFormat:@"%zi", range.location]];
-                                                     }
-                                                 }];
-}
-
-#pragma mark - 拆分编辑后的文字
-- (void)thn_splitTextAndImageDoneUpload {
-    //[self.uploadDataMarr removeAllObjects];
-    [self.contentInputBox resignFirstResponder];
-    
-    NSString *totalText = self.contentInputBox.text;
-    
-    if (self.imageAttachmentMarr.count == 0) {
-        [self.uploadDataMarr addObject:[NSString stringWithFormat:@"[text]:!%@", totalText]];
-        
-    } else {
-        NSInteger beginLocation = -1, textLength = 0, totalLength = self.contentInputBox.attributedText.length;
-        
-        for (NSInteger idx = self.insertIndexMarr.count; idx > 0; -- idx) {
-            
-            NSInteger imageLocation = [self.insertIndexMarr[idx - 1] integerValue];
-            NSInteger textlocation = imageLocation - 1;
-            textLength = textlocation - beginLocation;
-            
-            NSLog(@"textLength --- %zi,  ==%zi",textLength, totalLength - textLength);
-            
-            NSLog(@"imageLocation --- %zi,  textlocation === %zi, totalLength === %zi", imageLocation, textlocation, totalLength);
-            
-            NSString *text = [NSString stringWithFormat:@"[text]:!%@" ,[totalText substringWithRange:NSMakeRange(beginLocation + 1, textLength)]];
-            
-            beginLocation = imageLocation;
-            
-            [self.uploadDataMarr addObject:text];
-        }
-    }
-}
-
 #pragma mark - 上传图片
-- (void)thn_networkUploadAsset:(UIImage *)image saveIndex:(NSInteger)index {
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.7);
+- (void)thn_networkUploadAsset:(UIImage *)image saveAttachment:(THNLightspotTextAttachment *)attachment {
+    [self dismissEditDoneButton:YES];
+    
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
     NSString *img64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
     self.uploadRequest = [FBAPI postWithUrlString:URLUploadAsset requestDictionary:@{@"type":@"2", @"id":_domainId, @"tmp":img64Str} delegate:self];
@@ -507,10 +542,11 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
         NSDictionary *data = [result valueForKey:@"data"];
         NSString *uploadImageUrl = data[@"filepath"][@"huge"];
         if (uploadImageUrl.length) {
-            [self.insertImageMarr insertObject:uploadImageUrl atIndex:index];
+            attachment.imageURL = uploadImageUrl;
         }
         
         [self.accessoryView thn_hiddenUploadImage:YES];
+        [self dismissEditDoneButton:NO];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -519,6 +555,7 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
 
 #pragma mark - 发布更新的内容
 - (void)thn_networlUploadLightData:(NSMutableArray *)dataMarr {
+    NSLog(@"发布的内容-------------------- %@", dataMarr);
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataMarr options:0 error:nil];
     NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
@@ -526,7 +563,6 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
     [self.saveRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] integerValue] == 1) {
             [SVProgressHUD showSuccessWithStatus:@"发布成功" maskType:(SVProgressHUDMaskTypeBlack)];
-            [self dismissEditDoneButton];
             [self.contentInputBox resignFirstResponder];
         }
         
@@ -543,7 +579,81 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
     self.navViewTitle.text = @"亮点";
 }
 
-#pragma mark -
+#pragma mark - 发布按钮
+- (void)dismissEditDoneButton:(BOOL)dismiss {
+    self.doneButton.hidden = dismiss;
+}
+
+- (UIButton *)doneButton {
+    if (!_doneButton) {
+        _doneButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 54, 20, 44, 44)];
+        _doneButton.titleLabel.font = [UIFont systemFontOfSize:17.0f];
+        [_doneButton setTitle:@"发布" forState:(UIControlStateNormal)];
+        [_doneButton setTitleColor:[UIColor colorWithHexString:@"#FFFFFF"] forState:(UIControlStateNormal)];
+        [_doneButton addTarget:self action:@selector(doneButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        _doneButton.hidden = YES;
+    }
+    return _doneButton;
+}
+
+- (void)doneButtonClick:(UIButton *)button {
+    if ([_domainId isEqualToString:@""]) {
+        [SVProgressHUD showErrorWithStatus:@"获取地盘信息失败，请重试"];
+        return;
+    }
+    
+    [self thn_refreshInsertObjectLocation];
+    [self thn_saveUploadData];
+    
+    [self.contentInputBox resignFirstResponder];
+}
+
+- (void)thn_saveUploadData {
+    [self.insertTextDict removeAllObjects];
+    [self.insertImageDict removeAllObjects];
+    
+    for (NSInteger idx = 0 ; idx < self.insertTextMarr.count; ++ idx) {
+        NSString *text = self.insertTextMarr[idx];
+        NSString *location = self.textLocationMarr[idx];
+        [self.insertTextDict setValue:text forKey:location];
+    }
+    
+    for (NSInteger idx = 0; idx < self.imageAttachmentMarr.count; ++ idx) {
+        THNLightspotTextAttachment *attachment = self.imageAttachmentMarr[idx];
+        NSString *location = self.imageLocationMarr[idx];
+        [self.insertImageDict setValue:attachment.imageURL forKey:location];
+    }
+    
+    NSLog(@"图片的数据------------------ %@\n\n", self.insertImageDict);
+    NSLog(@"文字的数据------------------ %@\n\n", self.insertTextDict);
+    NSLog(@"------------------------------------\n");
+    [self thn_refreshUploadData];
+}
+
+- (void)thn_refreshUploadData {
+    [self.uploadDataMarr removeAllObjects];
+    
+    for (NSString *location in self.dataLocationMarr) {
+        if (self.insertImageDict[location]) {
+            NSInteger index = [self.dataLocationMarr indexOfObject:location];
+            NSString *imageData = [NSString stringWithFormat:@"%@%@", IMAGE_TAG, self.insertImageDict[location]];
+            [self.uploadDataMarr insertObject:imageData atIndex:index];
+        }
+        
+        if (self.insertTextDict[location]) {
+            NSInteger index = [self.dataLocationMarr indexOfObject:location];
+            NSString *textData = [NSString stringWithFormat:@"%@%@", TEXT_TAG, self.insertTextDict[location]];
+            [self.uploadDataMarr insertObject:textData atIndex:index];
+        }
+    }
+    
+    for (NSString *dataString in self.uploadDataMarr) {
+        NSLog(@"发布的内容数据--------------------- %@", dataString);
+    }
+//    [self thn_networlUploadLightData:self.uploadDataMarr];
+}
+
+#pragma mark - NSMutabelArray
 - (NSMutableArray *)imageAttachmentMarr {
     if (!_imageAttachmentMarr) {
         _imageAttachmentMarr = [NSMutableArray array];
@@ -565,20 +675,6 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
     return _imageMarr;
 }
 
-- (NSMutableArray *)imageIndexMarr {
-    if (!_imageIndexMarr) {
-        _imageIndexMarr = [NSMutableArray array];
-    }
-    return _imageIndexMarr;
-}
-
-- (NSMutableArray *)insertImageMarr {
-    if (!_insertImageMarr) {
-        _insertImageMarr = [NSMutableArray array];
-    }
-    return _insertImageMarr;
-}
-
 - (NSMutableArray *)uploadDataMarr {
     if (!_uploadDataMarr) {
         _uploadDataMarr = [NSMutableArray array];
@@ -586,11 +682,46 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
     return _uploadDataMarr;
 }
 
-- (NSMutableArray *)insertIndexMarr {
-    if (!_insertIndexMarr) {
-        _insertIndexMarr = [NSMutableArray array];
+- (NSMutableArray *)imageLocationMarr {
+    if (!_imageLocationMarr) {
+        _imageLocationMarr = [NSMutableArray array];
     }
-    return _insertIndexMarr;
+    return _imageLocationMarr;
+}
+
+- (NSMutableArray *)textLocationMarr {
+    if (!_textLocationMarr) {
+        _textLocationMarr = [NSMutableArray array];
+    }
+    return _textLocationMarr;
+}
+
+- (NSMutableArray *)insertTextMarr {
+    if (!_insertTextMarr) {
+        _insertTextMarr = [NSMutableArray array];
+    }
+    return _insertTextMarr;
+}
+
+- (NSMutableArray *)dataLocationMarr {
+    if (!_dataLocationMarr) {
+        _dataLocationMarr = [NSMutableArray array];
+    }
+    return _dataLocationMarr;
+}
+
+- (NSMutableDictionary *)insertTextDict {
+    if (!_insertTextDict) {
+        _insertTextDict = [NSMutableDictionary dictionary];
+    }
+    return _insertTextDict;
+}
+
+- (NSMutableDictionary *)insertImageDict {
+    if (!_insertImageDict) {
+        _insertImageDict = [NSMutableDictionary dictionary];
+    }
+    return _insertImageDict;
 }
 
 - (void)dealloc {
@@ -603,42 +734,5 @@ static NSString *const URLSceneSave = @"/scene_scene/save";
     
     [SVProgressHUD dismiss];
 }
-
-#pragma mark - 发布按钮
-- (void)showEditDoneButton {
-    self.doneButton.hidden = NO;
-}
-
-- (void)dismissEditDoneButton {
-    self.doneButton.hidden = YES;
-}
-
-- (UIButton *)doneButton {
-    if (!_doneButton) {
-        _doneButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 54, 20, 44, 44)];
-        _doneButton.titleLabel.font = [UIFont systemFontOfSize:17.0f];
-        [_doneButton setTitle:@"发布" forState:(UIControlStateNormal)];
-        [_doneButton setTitleColor:[UIColor colorWithHexString:@"#FFFFFF"] forState:(UIControlStateNormal)];
-        [_doneButton addTarget:self action:@selector(doneButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
-        _doneButton.hidden = YES;
-    }
-    return _doneButton;
-}
-
-- (void)doneButtonClick:(UIButton *)button {
-    if ([_domainId isEqualToString:@""]) {
-        [SVProgressHUD showErrorWithStatus:@"获取地盘信息失败，请重试"];
-        return;
-    }
-    
-    //[self thn_splitTextAndImageDoneUpload];
-    
-//    NSLog(@"发布的数据 ====== %@", self.uploadDataMarr);
-    NSLog(@"图片URL====== %@", self.insertImageMarr);
-    NSLog(@"插入元素====== %@", self.imageAttachmentMarr);
-    NSLog(@"图片位置====== %@", self.insertIndexMarr);
-
-}
-
 
 @end

@@ -51,11 +51,11 @@ static NSString *const URLSearchList = @"/search/getlist";
 
 #pragma mark - 设置视图UI 
 - (void)setSearchVcUI {
-    self.titleArr = @[NSLocalizedString(@"searchScene", nil),
-                      NSLocalizedString(@"searchUser", nil),
-                      NSLocalizedString(@"searchProduct", nil),
+    self.titleArr = @[NSLocalizedString(@"searchProduct", nil),
                       NSLocalizedString(@"searchBrand", nil),
-                      NSLocalizedString(@"searchTheme", nil)];
+                      NSLocalizedString(@"searchTheme", nil),
+                      NSLocalizedString(@"searchScene", nil),
+                      NSLocalizedString(@"searchUser", nil),];
     
     [self.view addSubview:self.menuView];
     
@@ -64,31 +64,32 @@ static NSString *const URLSearchList = @"/search/getlist";
 
 #pragma mark - 初始化搜索视图
 - (void)thn_setSearchResultsViewController {
-    _sceneVC = [[SearchSceneViewController alloc] init];
-    _sceneVC.index = 0;
-    [self addChildViewController:_sceneVC];
-    
-    _userVC = [[SearchUserViewController alloc] init];
-    _userVC.index = 1;
-    [self addChildViewController:_userVC];
-    
     _goodsVC = [[SearchGoodsViewController alloc] init];
-    _goodsVC.index = 2;
+    _goodsVC.index = 0;
     [self addChildViewController:_goodsVC];
     
     _brandVC = [[SearchBrandViewController alloc] init];
-    _brandVC.index = 3;
+    _brandVC.index = 1;
     [self addChildViewController:_brandVC];
     
     _themeVC = [[SearchThemeViewController alloc] init];
-    _themeVC.index = 4;
+    _themeVC.index = 2;
     [self addChildViewController:_themeVC];
     
-    [self.resultsView addSubview:_sceneVC.view];
-    [self.resultsView addSubview:_userVC.view];
+    _sceneVC = [[SearchSceneViewController alloc] init];
+    _sceneVC.index = 3;
+    [self addChildViewController:_sceneVC];
+    
+    _userVC = [[SearchUserViewController alloc] init];
+    _userVC.index = 4;
+    [self addChildViewController:_userVC];
+
     [self.resultsView addSubview:_goodsVC.view];
     [self.resultsView addSubview:_brandVC.view];
     [self.resultsView addSubview:_themeVC.view];
+    [self.resultsView addSubview:_sceneVC.view];
+    [self.resultsView addSubview:_userVC.view];
+    
     [self.view addSubview:self.resultsView];
 }
 
@@ -129,6 +130,17 @@ static NSString *const URLSearchList = @"/search/getlist";
 - (void)beginSearch:(NSString *)searchKeyword {
     switch (_searchType) {
         case 0:
+            [_goodsVC searchAgain:searchKeyword];
+            break;
+            
+        case 1:
+            [_brandVC searchAgain:searchKeyword];
+            break;
+            
+        case 2:
+            [_themeVC searchAgain:searchKeyword];
+            break;
+        case 3:
             if ([self.evtType isEqualToString:@"tag"]) {
                 [_sceneVC searchAgain:searchKeyword withType:self.evtType];
             } else {
@@ -136,20 +148,8 @@ static NSString *const URLSearchList = @"/search/getlist";
             }
             break;
             
-        case 1:
-            [_userVC searchAgain:searchKeyword];
-            break;
-            
-        case 2:
-            [_goodsVC searchAgain:searchKeyword];
-            break;
-            
-        case 3:
-            [_brandVC searchAgain:searchKeyword];
-            break;
-            
         case 4:
-            [_themeVC searchAgain:searchKeyword];
+            [_userVC searchAgain:searchKeyword];
             break;
             
         default:
@@ -179,6 +179,17 @@ static NSString *const URLSearchList = @"/search/getlist";
     if (searchKeyword.length) {
         switch (_searchType) {
             case 0:
+                [_goodsVC searchAgain:searchKeyword];
+                break;
+                
+            case 1:
+                [_brandVC searchAgain:searchKeyword];
+                break;
+                
+            case 2:
+                [_themeVC searchAgain:searchKeyword];
+                break;
+            case 3:
                 if ([self.evtType isEqualToString:@"tag"]) {
                     [_sceneVC searchAgain:searchKeyword withType:self.evtType];
                 } else {
@@ -186,22 +197,10 @@ static NSString *const URLSearchList = @"/search/getlist";
                 }
                 break;
                 
-            case 1:
+            case 4:
                 [_userVC searchAgain:searchKeyword];
                 break;
-                
-            case 2:
-                [_goodsVC searchAgain:searchKeyword];
-                break;
-                
-            case 3:
-                [_brandVC searchAgain:searchKeyword];
-                break;
-                
-            case 4:
-                [_themeVC searchAgain:searchKeyword];
-                break;
-                
+
             default:
                 break;
         }

@@ -15,27 +15,27 @@
     FBSearchDelegate
 >
 
-@pro_strong UIScrollView *resultsView;  //  搜索结果视图
-@pro_strong FBSearchView *searchView;   //  搜索框
-@pro_strong NSArray *titleArr;          //  分类标题
-@pro_strong SearchMenuView *menuView;   //  分类导航
+@property (nonatomic, strong) UIScrollView *resultsView;  //  搜索结果视图
+@property (nonatomic, strong) FBSearchView *searchView;   //  搜索框
+@property (nonatomic, strong) NSArray *titleArr;          //  分类标题
+@property (nonatomic, strong) SearchMenuView *menuView;   //  分类导航
 
 /**
  * index
- *  0:情境 ／ 1:用户 ／ 2:产品 ／ 3:品牌 ／ 4:专题
+ * 0:产品 ／ 1:品牌 ／ 2:专题 ／ 3:情境 ／ 4:用户 ／
  */
-@pro_assign NSInteger index;
+@property (nonatomic, assign) NSInteger index;
 
 /**
  *  keyword
  *  直接搜索传搜索关键字
  */
-@pro_strong NSString *keyword;
+@property (nonatomic, strong) NSString *keyword;
 
 /**
  *  evtType
  *  直接搜索的类型
  */
-@pro_strong NSString *evtType;
+@property (nonatomic, strong) NSString *evtType;
 
 @end
