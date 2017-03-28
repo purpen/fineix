@@ -323,6 +323,7 @@
         [cell.label3 addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(daishouhuoTap)]];
         [cell.label4 addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(daipingjiaTap)]];
         [cell.label5 addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tuikuanTap)]];
+        [cell.allOderBtn addTarget:self action:@selector(allOderBtnClick) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
     else if(indexPath.section == 5){
@@ -394,6 +395,13 @@
 
 -(void)qiye{
     THNQiYeQingDingZhiViewController *vc = [[THNQiYeQingDingZhiViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+  
+#pragma mark 全部订单
+-(void)allOderBtnClick{
+    MyOderInfoViewController *vc = [[MyOderInfoViewController alloc] init];
+    vc.type = @0;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -499,10 +507,6 @@
     if (indexPath.section == 2) {
         THNAllianceViewController *allianceVC = [[THNAllianceViewController alloc] init];
         [self.navigationController pushViewController:allianceVC animated:YES];
-    } else if (indexPath.section == 4) {
-        MyOderInfoViewController *vc = [[MyOderInfoViewController alloc] init];
-        vc.type = @0;
-        [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 3) {
         //地盘管理
         if ((long)[_userInfo.storageId integerValue] > 0) {
