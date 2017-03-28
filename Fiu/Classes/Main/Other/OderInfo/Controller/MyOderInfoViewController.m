@@ -63,23 +63,22 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
     return _segmentedControl;
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
     [self.view addSubview:self.segmentedControl];
-    [self.myTableView.mj_header beginRefreshing];
     [self requestDataForOderList];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"OrderInfoCell" bundle:nil] forCellReuseIdentifier:OrderInfoCellIdentifier];
+    _myTableView.estimatedRowHeight = 212.f;
+    _myTableView.rowHeight = UITableViewAutomaticDimension;
     
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-
+        
         NSDictionary *dataDict = result[@"data"];
         NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
         _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
-        
-        [self.myTableView registerNib:[UINib nibWithNibName:@"OrderInfoCell" bundle:nil] forCellReuseIdentifier:OrderInfoCellIdentifier];
-        _myTableView.estimatedRowHeight = 212.f;
-        _myTableView.rowHeight = UITableViewAutomaticDimension;
         
         
         //待付款
@@ -182,21 +181,17 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
                 make.top.mas_equalTo(label.mas_top).with.offset(5);
             }];
         }
-
+        
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"加载失败"];
     }];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
+    
+    
     self.delegate = self;
     self.navViewTitle.text = @"我的订单";
     self.myTableView.delegate = self;
     self.myTableView.dataSource = self;
-    //tableView每个row的高度
-//    self.myTableView.rowHeight = 222;
     
     // 下拉刷新
     _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{

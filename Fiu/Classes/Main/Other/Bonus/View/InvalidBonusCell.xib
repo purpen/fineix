@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="355" height="122"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="355" height="121.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="355" height="121"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ORE-tc-kvI" userLabel="MainView">
@@ -57,8 +57,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bonus_invalid" translatesAutoresizingMaskIntoConstraints="NO" id="YYZ-cA-pgd" userLabel="Invalid">
                                 <rect key="frame" x="134.5" y="13" width="76" height="76"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D3IN红包" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6E-nb-OKZ">
-                                <rect key="frame" x="15" y="10" width="69.5" height="19.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D³IN红包" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6E-nb-OKZ">
+                                <rect key="frame" x="15" y="10" width="66" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -91,10 +91,10 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="UqE-W4-Myi"/>
                                 <exclude reference="0wI-93-6rt"/>
                                 <exclude reference="dvG-dM-JfN"/>
                                 <exclude reference="h43-XP-M8Y"/>
-                                <exclude reference="UqE-W4-Myi"/>
                             </mask>
                         </variation>
                     </view>

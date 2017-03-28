@@ -83,6 +83,14 @@
             make.height.mas_equalTo(0.5);
         }];
         
+        self.allOderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.contentView addSubview:self.allOderBtn];
+        [_allOderBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.left.mas_equalTo(self.contentView).mas_offset(0);
+            make.top.mas_equalTo(self.contentView.mas_top).mas_offset(0);
+            make.bottom.mas_equalTo(self.lineImageV.mas_bottom).mas_offset(0);
+        }];
+        
         self.btnContentView = [[UIView alloc] init];
         [self.contentView addSubview:self.btnContentView];
         [_btnContentView mas_makeConstraints:^(MASConstraintMaker *make) {

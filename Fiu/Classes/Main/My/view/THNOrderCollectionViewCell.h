@@ -12,6 +12,7 @@
 
 @interface THNOrderCollectionViewCell : UICollectionViewCell
 
+@property(nonatomic,strong) UIButton *allOderBtn;
 @property(nonatomic,strong) UIButton *btn1;
 @property(nonatomic,strong) UILabel *label1;
 @property(nonatomic,strong) UIButton *btn2;

@@ -24,6 +24,8 @@
 #import "THNSceneDetalViewController.h"
 #import "THNActiveDetalTwoViewController.h"
 #import <UMSocialCore/UMSocialCore.h>
+#import "BonusViewController.h"
+#import "THNLoginRegisterViewController.h"
 
 @interface THNArticleDetalViewController ()<FBNavigationBarItemsDelegate,UIWebViewDelegate>
 
@@ -56,7 +58,6 @@
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{@"id":self.articleDetalid} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
-//            NSLog(@"文章详情 %@",result);
             self.model = [THNArticleDetalModel mj_objectWithKeyValues:result[@"data"]];
             [self.lookBtn setTitle:[NSString stringWithFormat:@"%@",self.model.view_count] forState:UIControlStateNormal];
             [self.commentBtn setTitle:[NSString stringWithFormat:@"%@",self.model.comment_count] forState:UIControlStateNormal];
@@ -71,7 +72,6 @@
                                                                                              } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
-//            NSLog(@"文章详情 %@",result);
             self.model = [THNArticleDetalModel mj_objectWithKeyValues:result[@"data"]];
             self.navViewTitle.text = self.model.title;
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",self.model.content_view_url]];
@@ -225,6 +225,20 @@
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;
+                case 16:
+                //领取红包
+                {
+                    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+                    if (entity.isLogin) {
+                        BonusViewController *vc = [[BonusViewController alloc] init];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    } else {
+                        THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
+                        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:vc];
+                        [self presentViewController:navi animated:YES completion:nil];
+                    }
+                }
+                break;
                 case 20:
                     //搜索
                 {
