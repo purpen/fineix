@@ -13,12 +13,15 @@
 #import "THNDomainEditViewController.h"
 #import "THNDomianLightViewController.h"
 #import "THNEditLightViewController.h"
+#import "THNDomainInfoViewController.h"
 
 static NSString *const URLDomainInfo = @"/scene_scene/view";
 static NSString *const infoCellId = @"THNInfoTitleTableViewCellId";
 static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
 
-@interface THNDomainSetViewController ()
+@interface THNDomainSetViewController () {
+    NSString *_domainId;
+}
 
 @end
 
@@ -53,6 +56,7 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
     [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dict =  [result valueForKey:@"data"];
         self.infoData = [[THNDomainManageInfoData alloc] initWithDictionary:dict];
+        _domainId = [NSString stringWithFormat:@"%zi", self.infoData.idField];
         [self.setTableView reloadData];
         [SVProgressHUD dismiss];
         
@@ -103,7 +107,7 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
             }
             
         } else if (indexPath.section == 1) {
-            NSArray *leftText = @[@"地盘简介", @"地盘亮点"];
+            NSArray *leftText = @[@"地盘简介", @"地盘特色"];
             [cell thn_setInfoTitleLeftText:leftText[indexPath.row] andRightText:@""];
         }
 //        else if (indexPath.section == 3) {
@@ -163,9 +167,22 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
     self.view.backgroundColor = [UIColor whiteColor];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
     self.navViewTitle.text = @"地盘管理";
+    self.delegate = self;
+    [self thn_addBarItemRightBarButton:@"预览" image:@""];
 }
 
-#pragma mark - 
+/**
+ 预览地盘信息
+ */
+- (void)thn_rightBarItemSelected {
+    if (_domainId.length) {
+        THNDomainInfoViewController *domainInfoVC = [[THNDomainInfoViewController alloc] init];
+        domainInfoVC.infoId = _domainId;
+        [self.navigationController pushViewController:domainInfoVC animated:YES];
+    }
+}
+
+#pragma mark -
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"uploadImageSucceed" object:self];
 }

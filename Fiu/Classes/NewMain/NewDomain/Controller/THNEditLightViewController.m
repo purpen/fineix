@@ -11,6 +11,7 @@
 #import "THNLightspotTextAttachment.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <SDWebImage/UIImage+MultiFormat.h>
+#import <TYAlertController/TYAlertView.h>
 
 static NSInteger const MAX_IMAGE = 10;
 static NSString *const URLUploadAsset = @"/common/upload_asset";
@@ -112,8 +113,6 @@ static NSString *const IMAGE_TAG = @"[img]:!";
 
 #pragma mark - 初始展示的亮点内容
 - (void)thn_setBrightSpotData:(NSArray *)model {
-    NSLog(@"默认展示的亮点内容================= %@", model);
-    
     [self thn_removeAllObjects];
 
     NSMutableArray *totalTextMarr = [NSMutableArray array];
@@ -144,16 +143,14 @@ static NSString *const IMAGE_TAG = @"[img]:!";
             totalText = [totalText stringByReplacingOccurrencesOfString:imageUrl withString:@"^"];
         }
     }
-    
-    [self.uploadDataMarr addObjectsFromArray:model];
+
     [self thn_getAttributedStringWithString:totalText];
 }
 
 - (void)thn_getAttributedStringWithString:(NSString *)string {
     string = [string stringByReplacingOccurrencesOfString:@"^" withString:@""];
     
-    NSDictionary *attributesDict = [self set_attributesDictionary];
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string attributes:attributesDict];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string attributes:[self set_attributesDictionary]];
     self.contentInputBox.attributedText = attributedString;
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -178,12 +175,23 @@ static NSString *const IMAGE_TAG = @"[img]:!";
                 [self set_initAttributedString];
             });
         }
-    
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
-            [self thn_refreshInsertObjectLocation];
         });
     });
+}
+
+#pragma mark - 初始化内容文本
+- (void)set_initAttributedString {
+    self.contentAttributed = nil;
+    
+    self.contentAttributed = [[NSMutableAttributedString alloc] initWithAttributedString:self.contentInputBox.attributedText];
+    if (self.contentInputBox.textStorage.length > 0) {
+        self.contentPlaceholder.hidden = YES;
+    } else {
+        self.contentPlaceholder.hidden = NO;
+    }
 }
 
 /**
@@ -195,6 +203,7 @@ static NSString *const IMAGE_TAG = @"[img]:!";
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.alignment = NSTextAlignmentLeft;
     paragraphStyle.lineSpacing = 5.0f;
+    paragraphStyle.minimumLineHeight = 15.0f;
     
     NSDictionary *attributesDict = @{
                                      NSParagraphStyleAttributeName:paragraphStyle,
@@ -250,8 +259,7 @@ static NSString *const IMAGE_TAG = @"[img]:!";
         return;
     }
     
-    NSDictionary *attributesDict = [self set_attributesDictionary];
-    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:self.contentNewText attributes:attributesDict];
+    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:self.contentNewText attributes:[self set_attributesDictionary]];
     [self.contentAttributed replaceCharactersInRange:self.contentNewRange withAttributedString:attributedString];
     self.contentInputBox.attributedText = self.contentAttributed;
     self.contentInputBox.selectedRange = NSMakeRange(self.contentNewRange.location + self.contentNewRange.length, 0);
@@ -277,20 +285,17 @@ static NSString *const IMAGE_TAG = @"[img]:!";
     
     [self.imageLocationMarr addObject:[NSString stringWithFormat:@"%zi", self.contentInputBox.attributedText.length]];
     
-    NSInteger imageLocation = 0;
+    NSInteger lastLocation = 0;
     for (NSInteger idx = 0; idx < self.imageLocationMarr.count; ++ idx) {
-        NSInteger lastLocation = [self.imageLocationMarr[idx] integerValue];
-        BOOL isImageLocation = lastLocation - imageLocation > 0;
-        if (isImageLocation) {
-            [self.textLocationMarr addObject:[NSString stringWithFormat:@"%zi", lastLocation - 1]];
+        NSInteger imageLocation = [self.imageLocationMarr[idx] integerValue];
+        BOOL isImage = imageLocation - lastLocation == 1;
+        
+        if (!isImage && imageLocation > 0) {
+            [self.textLocationMarr addObject:[NSString stringWithFormat:@"%zi", imageLocation - 1]];
         }
-        imageLocation = lastLocation;
+        lastLocation = imageLocation;
     }
 
-    NSLog(@"图片的位置-------------------- %@\n\n", self.imageLocationMarr);
-    NSLog(@"文字的位置-------------------- %@\n\n", self.textLocationMarr);
-    NSLog(@"---------------------------------------- \n");
-    
     [self thn_refreshContentOfText];
     [self thn_saveAllDataLocation:self.imageLocationMarr textLocation:self.textLocationMarr];
 }
@@ -341,9 +346,6 @@ static NSString *const IMAGE_TAG = @"[img]:!";
             [self.dataLocationMarr addObject:string];
         }
     }
-    
-    NSLog(@"所有的位置-------------------- %@\n\n", self.dataLocationMarr);
-    NSLog(@"---------------------------------------- \n");
 }
 
 
@@ -364,9 +366,9 @@ static NSString *const IMAGE_TAG = @"[img]:!";
 
     [self.view addSubview:self.contentPlaceholder];
     [_contentPlaceholder mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_contentInputBox.mas_top).with.offset(15);
+        make.top.equalTo(_contentInputBox.mas_top).with.offset(7);
         make.right.equalTo(_contentInputBox.mas_right).with.offset(-15);
-        make.left.equalTo(_contentInputBox.mas_left).with.offset(19);
+        make.left.equalTo(_contentInputBox.mas_left).with.offset(15);
         make.height.mas_equalTo(@19);
     }];
 }
@@ -381,7 +383,7 @@ static NSString *const IMAGE_TAG = @"[img]:!";
         _contentInputBox.textColor = [UIColor colorWithHexString:@"#222222"];
         _contentInputBox.delegate = self;
         _contentInputBox.showsVerticalScrollIndicator = NO;
-        _contentInputBox.textContainerInset = UIEdgeInsetsMake(15, 15, 15, 15);
+        _contentInputBox.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10);
     }
     return _contentInputBox;
 }
@@ -490,18 +492,6 @@ static NSString *const IMAGE_TAG = @"[img]:!";
     [self set_initAttributedString];
 }
 
-#pragma mark - 初始化内容文本
-- (void)set_initAttributedString {
-    self.contentAttributed = nil;
-    
-    self.contentAttributed = [[NSMutableAttributedString alloc] initWithAttributedString:self.contentInputBox.attributedText];
-    if (self.contentInputBox.textStorage.length > 0) {
-        self.contentPlaceholder.hidden = YES;
-    } else {
-        self.contentPlaceholder.hidden = NO;
-    }
-}
-
 #pragma mark - 监测键盘是否启用
 - (void)set_addNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(thn_getKeyboardFrameHeightOfShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -555,7 +545,6 @@ static NSString *const IMAGE_TAG = @"[img]:!";
 
 #pragma mark - 发布更新的内容
 - (void)thn_networlUploadLightData:(NSMutableArray *)dataMarr {
-    NSLog(@"发布的内容-------------------- %@", dataMarr);
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataMarr options:0 error:nil];
     NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
@@ -576,7 +565,28 @@ static NSString *const IMAGE_TAG = @"[img]:!";
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
-    self.navViewTitle.text = @"亮点";
+    self.navViewTitle.text = @"地盘特色";
+    self.navBackBtn.hidden = YES;
+    [self thn_addBarItemLeftBarButton:@"" image:@"icon_back_white"];
+    self.delegate = self;
+}
+
+#pragma mark - 返回按钮
+- (void)thn_leftBarItemSelected {
+    TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"要放弃本次编辑吗？" message:nil];
+    alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
+    alertView.buttonCancelBgColor = [UIColor colorWithHexString:@"#999999"];
+    alertView.layer.cornerRadius = 5.0f;
+    [alertView addAction:[TYAlertAction actionWithTitle:@"放弃" style:TYAlertActionStyleCancel handler:^(TYAlertAction *action) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }]];
+    
+    [alertView addAction:[TYAlertAction actionWithTitle:@"继续编辑" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
+        
+    }]];
+    
+    TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle:TYAlertControllerStyleAlert];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - 发布按钮
@@ -623,10 +633,7 @@ static NSString *const IMAGE_TAG = @"[img]:!";
         NSString *location = self.imageLocationMarr[idx];
         [self.insertImageDict setValue:attachment.imageURL forKey:location];
     }
-    
-    NSLog(@"图片的数据------------------ %@\n\n", self.insertImageDict);
-    NSLog(@"文字的数据------------------ %@\n\n", self.insertTextDict);
-    NSLog(@"------------------------------------\n");
+
     [self thn_refreshUploadData];
 }
 
@@ -647,10 +654,7 @@ static NSString *const IMAGE_TAG = @"[img]:!";
         }
     }
     
-    for (NSString *dataString in self.uploadDataMarr) {
-        NSLog(@"发布的内容数据--------------------- %@", dataString);
-    }
-//    [self thn_networlUploadLightData:self.uploadDataMarr];
+    [self thn_networlUploadLightData:self.uploadDataMarr];
 }
 
 #pragma mark - NSMutabelArray

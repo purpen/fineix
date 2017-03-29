@@ -12,11 +12,20 @@
     THNNavigationBarItemsDelegate
 >
 
-@property (nonatomic, strong) UITextView *textView;
+@property (nonatomic, strong) UITextView *contentInputBox;
 @property (nonatomic, strong) NSMutableArray *textMarr;
 @property (nonatomic, strong) NSMutableArray *imageMarr;
-@property (nonatomic, strong) NSMutableArray *imageIndexMarr;
 
-- (void)thn_setBrightSpotData:(NSArray *)model edit:(BOOL)edit;
+/**
+ 记录改变字体的样式
+ */
+@property (nonatomic, strong) NSMutableAttributedString *contentAttributed;
+
+/**
+ 图片插入的位置
+ */
+@property (nonatomic, strong) NSMutableArray *imageLocationMarr;
+
+- (void)thn_setBrightSpotData:(NSArray *)model;
 
 @end

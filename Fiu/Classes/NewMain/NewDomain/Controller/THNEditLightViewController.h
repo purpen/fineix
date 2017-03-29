@@ -14,7 +14,8 @@
     UITextViewDelegate,
     THNAccessoryViewDelegate,
     UINavigationControllerDelegate,
-    UIImagePickerControllerDelegate
+    UIImagePickerControllerDelegate,
+    THNNavigationBarItemsDelegate
 >
 
 @property (nonatomic, strong) THNDomainManageInfoData *infoData;

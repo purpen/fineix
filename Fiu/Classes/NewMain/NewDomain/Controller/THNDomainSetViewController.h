@@ -11,7 +11,8 @@
 
 @interface THNDomainSetViewController : THNViewController <
     UITableViewDelegate,
-    UITableViewDataSource
+    UITableViewDataSource,
+    THNNavigationBarItemsDelegate
 >
 
 

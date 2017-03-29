@@ -83,9 +83,10 @@
 
 - (UILabel *)uploadState {
     if (!_uploadState) {
-        _uploadState = [[UILabel alloc] initWithFrame:CGRectMake(50, 1, SCREEN_WIDTH - 90, 43)];
+        _uploadState = [[UILabel alloc] initWithFrame:CGRectMake(0, 1, 100, 43)];
+        _uploadState.center = self.center;
         _uploadState.text = @"图片正在上传...";
-        _uploadState.font = [UIFont systemFontOfSize:14];
+        _uploadState.font = [UIFont systemFontOfSize:14.0f];
         _uploadState.textColor = [UIColor colorWithHexString:@"#666666"];
         _uploadState.backgroundColor = [UIColor whiteColor];
         _uploadState.hidden = YES;
@@ -95,7 +96,7 @@
 
 - (UIActivityIndicatorView *)uploadActivity {
     if (!_uploadActivity) {
-        _uploadActivity = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(10, 2, 40, 40)];
+        _uploadActivity = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.uploadState.frame) - 40, 2, 40, 40)];
         _uploadActivity.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
         _uploadActivity.backgroundColor = [UIColor whiteColor];
     }
