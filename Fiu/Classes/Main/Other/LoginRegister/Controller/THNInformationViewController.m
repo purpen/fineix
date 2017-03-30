@@ -16,6 +16,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SVProgressHUD.h"
 #import "THNAgeViewController.h"
+#import "THNRedEnvelopeView.h"
 
 @interface THNInformationViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 /**  */
@@ -176,8 +177,20 @@ static NSString *const modifyUserInformation = @"/my/update_profile";
             UserInfoEntity *entiey = [UserInfoEntity defaultUserInfoEntity];
             entiey.nickname = [result objectForKey:@"data"][@"nickname"];
             entiey.sex = [result objectForKey:@"data"][@"sex"];
-            THNAgeViewController *vc = [[THNAgeViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+            FBRequest *updateRequest = [FBAPI postWithUrlString:@"/my/update_user_identify" requestDictionary:@{
+                                                                                                          @"type":@1
+                                                                                                          } delegate:self];
+            [updateRequest startRequestSuccess:^(FBRequest *request, id result) {
+                [self dismissViewControllerAnimated:YES completion:^{
+                    THNRedEnvelopeView *alartView = [[THNRedEnvelopeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+                    [alartView thn_showRedEnvelopeViewOnWindowWithText:NSLocalizedString(@"SendOldRed", nil)];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSceneData" object:nil];
+                }];
+            } failure:^(FBRequest *request, NSError *error) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }];
+//            THNAgeViewController *vc = [[THNAgeViewController alloc] init];
+//            [self.navigationController pushViewController:vc animated:YES];
         } else {
         }
     } failure:^(FBRequest *request, NSError *error) {
