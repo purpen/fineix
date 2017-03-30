@@ -68,8 +68,6 @@ static NSString *getList = @"/category/getlist";
                                                                               } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         
-        NSLog(@"result  %@",result);
-        
         NSArray *rowsAry = result[@"data"][@"rows"];
         self.modelAry = [THNTopicsModel mj_objectArrayWithKeyValuesArray:rowsAry];
         for (int i = 1; i <= self.modelAry.count; i ++) {
