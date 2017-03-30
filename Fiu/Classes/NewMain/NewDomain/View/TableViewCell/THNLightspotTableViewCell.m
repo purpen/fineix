@@ -8,10 +8,11 @@
 
 #import "THNLightspotTableViewCell.h"
 #import <SDWebImage/UIImage+MultiFormat.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "THNLightspotTextAttachment.h"
 
 @interface THNLightspotTableViewCell () {
-
+    CGFloat _imageHeight;
 }
 
 @end
@@ -24,46 +25,32 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
         self.viewHeiight = 0.0f;
-        
         [self setCellUI];
     }
     return self;
 }
 
 - (void)thn_setBrightSpotData:(NSArray *)model {
-//    NSMutableArray *strMarr = [NSMutableArray array];
+    [self.textMarr removeAllObjects];
+    [self.imageMarr removeAllObjects];
     
     for (NSString *str in model) {
         if ([str containsString:@"[text]:!"]) {
             NSString *textStr;
             textStr = [str substringFromIndex:8];
             [self.textMarr addObject:textStr];
-//            [strMarr addObject:textStr];
-//            self.viewHeiight += [self getTextFrameHeight:textStr];
         }
         
         if ([str containsString:@"[img]:!"]) {
             NSString *imageStr;
             imageStr = [str substringFromIndex:7];
             [self.imageMarr addObject:imageStr];
-//            [strMarr addObject:imageStr];
-//            self.viewHeiight += SCREEN_WIDTH *0.58 + 10;
         }
     }
     
     NSString *textStr = self.textMarr[0];
     NSString *imageStr = self.imageMarr[0];
-//
-//    NSString *totalText = [strMarr componentsJoinedByString:@""] ;
-//    for (NSInteger idx = 0; idx < self.imageMarr.count; ++ idx) {
-//        NSString *str = self.imageMarr[idx];
-//        NSInteger location = [totalText rangeOfString:str].location;
-//        totalText = [totalText stringByReplacingOccurrencesOfString:str withString:@"\n\n"];
-//        [self.imageIndexMarr addObject:[NSString stringWithFormat:@"%zi", location]];
-//    }
-//
-    
-//    [self thn_crearBrightSpotInfoUI:self.textMarr image:self.imageMarr];
+//    _imageHeight = [self scaleImageSize:imageStr].height;
     
     [self.textImage downloadImage:imageStr place:[UIImage imageNamed:@""]];
     [self getAttributedStringWithString:textStr lineSpace:5.0];
@@ -80,9 +67,10 @@
     
     [self addSubview:self.textImage];
     [_textImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, (SCREEN_WIDTH - 30) * 0.56));
+        make.width.mas_equalTo(@(SCREEN_WIDTH - 30));
         make.left.equalTo(self.mas_left).with.offset(15);
         make.top.equalTo(_textLable.mas_bottom).with.offset(10);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
     }];
 }
 
@@ -137,31 +125,26 @@
     [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#666666"] range:range];
     [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:range];
     
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        for (NSInteger idx = 0; idx < self.imageMarr.count; ++ idx) {
-//            // 插入图片
-//            THNLightspotTextAttachment *attach = [[THNLightspotTextAttachment alloc] init];
-//            attach.image = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.imageMarr[idx]]]];
-//            attach.bounds = CGRectMake(0, 0, 15, 15);
-//            NSAttributedString *attachString = [NSAttributedString attributedStringWithAttachment:attach];
-//            [attributedString insertAttributedString:attachString atIndex:[self.imageIndexMarr[idx] integerValue]];
-//        }
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            self.textView.attributedText = attributedString;
-//        });
-//    });
-    
     CGFloat textHeight = [self getTextFrameHeight:string];
     if (textHeight < 20) {
         textHeight = 20;
     }
     self.textLable.attributedText = attributedString;
+    
+    self.viewHeiight = textHeight + (SCREEN_WIDTH * 0.56);
+    
     [self.textLable mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(textHeight);
     }];
+}
+
+- (CGSize)scaleImageSize:(NSString *)imageUrl {
+    UIImage *firstImage = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.imageMarr[0]]]];
+    CGFloat imageScale = firstImage.size.width / firstImage.size.height;
+    CGFloat imageWidth = SCREEN_WIDTH - 30;
+    CGSize imageSize = CGSizeMake(imageWidth, imageWidth / imageScale);
     
-    self.viewHeiight = textHeight + (SCREEN_WIDTH - 30) * 0.56 + 10;
+    return imageSize;
 }
 
 - (CGFloat)getTextFrameHeight:(NSString *)text {

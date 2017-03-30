@@ -75,8 +75,8 @@ static NSString *const URLShareLink = @"/gateway/share_link";
                 [self.domainInfoTable reloadData];
                 self.headerImages.ary = self.infoModel.location.coordinates;
             }
-            [SVProgressHUD dismiss];
         }
+        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@" ---- %@ ----", error);
@@ -210,18 +210,22 @@ static NSString *const URLShareLink = @"/gateway/share_link";
             return cell;
         } else if (indexPath.row == 2) {
             THNMoreDesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:moreCellId];
-            cell = [[THNMoreDesTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:moreCellId];
-            if (self.infoModel) {
-                cell.nav = self.navigationController;
-                cell.infoModel = self.infoModel;
+            if (!cell) {
+                cell = [[THNMoreDesTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:moreCellId];
+                if (self.infoModel) {
+                    cell.nav = self.navigationController;
+                    cell.infoModel = self.infoModel;
+                }
             }
             return cell;
         } else {
             THNLightspotTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:lightspotCellId];
-            cell = [[THNLightspotTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:lightspotCellId];
-            if (self.infoModel.brightSpot.count) {
-                [cell thn_setBrightSpotData:self.infoModel.brightSpot];
-                _lightTextHeight = cell.viewHeiight;
+            if (!cell) {
+                cell = [[THNLightspotTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:lightspotCellId];
+                if (self.infoModel.brightSpot.count) {
+                    [cell thn_setBrightSpotData:self.infoModel.brightSpot];
+                    _lightTextHeight = cell.viewHeiight;
+                }
             }
             return cell;
         }

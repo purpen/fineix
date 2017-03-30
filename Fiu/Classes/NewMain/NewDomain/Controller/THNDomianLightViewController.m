@@ -172,16 +172,19 @@ static NSString *const IMAGE_TAG = @"[img]:!";
     self.contentInputBox.attributedText = attributedString;
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [SVProgressHUD showWithStatus:@"图片加载中..." maskType:SVProgressHUDMaskTypeClear];
+        [SVProgressHUD showWithStatus:@"图片加载中..."];
     });
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         for (NSInteger idx = 0; idx < self.imageMarr.count; ++ idx) {
             NSString *imageUrl = self.imageMarr[idx];
             
+            UIImage *insertImage = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
+            
             THNLightspotTextAttachment *attachment = [[THNLightspotTextAttachment alloc] init];
-            attachment.image = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
+            attachment.image = insertImage;
             attachment.imageURL = imageUrl;
+            attachment.imageSize = [self scaleImageSize:insertImage];
             
             NSAttributedString *imageAttributedString = [NSAttributedString attributedStringWithAttachment:attachment];
             [attributedString insertAttributedString:imageAttributedString atIndex:[self.imageLocationMarr[idx] integerValue]];
@@ -196,6 +199,19 @@ static NSString *const IMAGE_TAG = @"[img]:!";
             [SVProgressHUD dismiss];
         });
     });
+}
+
+/**
+ 缩放插入的图片尺寸
+ 
+ @param image 图片
+ @return 图片尺寸
+ */
+- (CGSize)scaleImageSize:(UIImage *)image {
+    CGFloat imageScale = image.size.width / image.size.height;
+    CGFloat imageWidth = SCREEN_WIDTH - 30;
+    CGSize imageSize = CGSizeMake(imageWidth, imageWidth / imageScale);
+    return imageSize;
 }
 
 #pragma mark - 初始化内容文本
@@ -214,7 +230,7 @@ static NSString *const IMAGE_TAG = @"[img]:!";
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.alignment = NSTextAlignmentLeft;
     paragraphStyle.lineSpacing = 5.0f;
-    paragraphStyle.minimumLineHeight = 15.0f;
+    paragraphStyle.minimumLineHeight = 20.0f;
     
     NSDictionary *attributesDict = @{
                                      NSParagraphStyleAttributeName:paragraphStyle,

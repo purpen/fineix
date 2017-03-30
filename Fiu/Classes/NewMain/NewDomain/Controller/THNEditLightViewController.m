@@ -114,7 +114,8 @@ static NSString *const IMAGE_TAG = @"[img]:!";
 #pragma mark - 初始展示的亮点内容
 - (void)thn_setBrightSpotData:(NSArray *)model {
     [self thn_removeAllObjects];
-
+    [self set_initAttributedString];
+   
     NSMutableArray *totalTextMarr = [NSMutableArray array];
     for (NSString *str in model) {
         //  文字内容
@@ -154,16 +155,20 @@ static NSString *const IMAGE_TAG = @"[img]:!";
     self.contentInputBox.attributedText = attributedString;
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [SVProgressHUD showWithStatus:@"图片加载中..." maskType:SVProgressHUDMaskTypeClear];
+        [SVProgressHUD showWithStatus:@"图片加载中..."];
+        self.contentInputBox.editable = NO;
     });
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         for (NSInteger idx = 0; idx < self.imageMarr.count; ++ idx) {
             NSString *imageUrl = self.imageMarr[idx];
             
+            UIImage *insertImage = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
+                                    
             THNLightspotTextAttachment *attachment = [[THNLightspotTextAttachment alloc] init];
-            attachment.image = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
+            attachment.image = insertImage;
             attachment.imageURL = imageUrl;
+            attachment.imageSize = [self scaleImageSize:insertImage];
             ;
             [self.imageAttachmentMarr addObject:attachment];
             
@@ -178,6 +183,7 @@ static NSString *const IMAGE_TAG = @"[img]:!";
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
+            self.contentInputBox.editable = YES;
         });
     });
 }
@@ -185,8 +191,8 @@ static NSString *const IMAGE_TAG = @"[img]:!";
 #pragma mark - 初始化内容文本
 - (void)set_initAttributedString {
     self.contentAttributed = nil;
-    
     self.contentAttributed = [[NSMutableAttributedString alloc] initWithAttributedString:self.contentInputBox.attributedText];
+    
     if (self.contentInputBox.textStorage.length > 0) {
         self.contentPlaceholder.hidden = YES;
     } else {
@@ -203,7 +209,7 @@ static NSString *const IMAGE_TAG = @"[img]:!";
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.alignment = NSTextAlignmentLeft;
     paragraphStyle.lineSpacing = 5.0f;
-    paragraphStyle.minimumLineHeight = 15.0f;
+    paragraphStyle.minimumLineHeight = 20.0f;
     
     NSDictionary *attributesDict = @{
                                      NSParagraphStyleAttributeName:paragraphStyle,
@@ -399,7 +405,7 @@ static NSString *const IMAGE_TAG = @"[img]:!";
     return _contentPlaceholder;
 }
 
-#pragma mark - 键盘工具操作
+#pragma mark - 键盘拓展工具操作
 - (THNAccessoryView *)accessoryView {
     if (!_accessoryView) {
         _accessoryView = [[THNAccessoryView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
@@ -408,12 +414,16 @@ static NSString *const IMAGE_TAG = @"[img]:!";
     return _accessoryView;
 }
 
-#pragma mark 取消键盘响应
+/**
+ 取消键盘响应
+ */
 - (void)thn_writeInputBoxResignFirstResponder {
     [self.contentInputBox resignFirstResponder];
 }
 
-#pragma mark 内容插入图片
+/**
+ 插入图片
+ */
 - (void)thn_writeInputBoxInsertImage {
     if (self.imageAttachmentMarr.count >= MAX_IMAGE) {
         [SVProgressHUD showInfoWithStatus:@"图片数量不能超过十张"];
@@ -422,6 +432,9 @@ static NSString *const IMAGE_TAG = @"[img]:!";
     [self openImagePickerChoosePhoto];
 }
 
+/**
+ 打开相机或相册
+ */
 - (void)openImagePickerChoosePhoto {
     TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"插入图片" message:nil];
     alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
@@ -440,14 +453,18 @@ static NSString *const IMAGE_TAG = @"[img]:!";
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-#pragma mark 拍照
+/**
+ 启动拍照
+ */
 - (void)takePhoto {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [self presentImagePickerController:UIImagePickerControllerSourceTypeCamera];
     }
 }
 
-#pragma mark 打开相册
+/**
+ 打开相册
+ */
 - (void)openPhotoLibrary {
     [self presentImagePickerController:UIImagePickerControllerSourceTypePhotoLibrary];
 }
@@ -471,7 +488,12 @@ static NSString *const IMAGE_TAG = @"[img]:!";
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark 内容位置插入图片对象
+/**
+ 插入图片对象
+
+ @param textView 输入框
+ @param image 图片
+ */
 - (void)insertImageOfTheTextView:(UITextView *)textView withImage:(UIImage *)image {
     if (image == nil || ![image isKindOfClass:[UIImage class]]) {
         return;
@@ -481,6 +503,7 @@ static NSString *const IMAGE_TAG = @"[img]:!";
     
     THNLightspotTextAttachment *attachment = [[THNLightspotTextAttachment alloc] init];
     attachment.image = image;
+    attachment.imageSize = [self scaleImageSize:image];
     
     [self thn_networkUploadAsset:image saveAttachment:attachment];
     
@@ -492,13 +515,30 @@ static NSString *const IMAGE_TAG = @"[img]:!";
     [self set_initAttributedString];
 }
 
-#pragma mark - 监测键盘是否启用
+/**
+ 缩放插入的图片尺寸
+
+ @param image 图片
+ @return 图片尺寸
+ */
+- (CGSize)scaleImageSize:(UIImage *)image {
+    CGFloat imageScale = image.size.width / image.size.height;
+    CGFloat imageWidth = SCREEN_WIDTH - 30;
+    CGSize imageSize = CGSizeMake(imageWidth, imageWidth / imageScale);
+    return imageSize;
+}
+
+#pragma mark - 监测键盘
 - (void)set_addNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(thn_getKeyboardFrameHeightOfShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(thn_getKeyboardFrameHeightOfHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
-#pragma mark 键盘弹出
+/**
+ 键盘弹起获取高度
+
+ @param aNotification 键盘启用通知
+ */
 - (void)thn_getKeyboardFrameHeightOfShow:(NSNotification *)aNotification {
     NSDictionary *userInfo = [aNotification userInfo];
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
@@ -508,7 +548,11 @@ static NSString *const IMAGE_TAG = @"[img]:!";
     [self changeContentInputBoxHeight:_keyboardH];
 }
 
-#pragma mark 键盘落下
+/**
+ 键盘落下恢复高度
+
+ @param aNotification 键盘关闭通知
+ */
 - (void)thn_getKeyboardFrameHeightOfHide:(NSNotification *)aNotification {
     [self changeContentInputBoxHeight:0.0f];
 }
@@ -557,7 +601,6 @@ static NSString *const IMAGE_TAG = @"[img]:!";
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"发布失败" maskType:(SVProgressHUDMaskTypeBlack)];
-        NSLog(@"-- %@ --", [error localizedDescription]);
     }];
 }
 
@@ -573,20 +616,7 @@ static NSString *const IMAGE_TAG = @"[img]:!";
 
 #pragma mark - 返回按钮
 - (void)thn_leftBarItemSelected {
-    TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"要放弃本次编辑吗？" message:nil];
-    alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
-    alertView.buttonCancelBgColor = [UIColor colorWithHexString:@"#999999"];
-    alertView.layer.cornerRadius = 5.0f;
-    [alertView addAction:[TYAlertAction actionWithTitle:@"放弃" style:TYAlertActionStyleCancel handler:^(TYAlertAction *action) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }]];
-    
-    [alertView addAction:[TYAlertAction actionWithTitle:@"继续编辑" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
-        
-    }]];
-    
-    TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle:TYAlertControllerStyleAlert];
-    [self presentViewController:alertController animated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 发布按钮
