@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *womenBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *headImage;
 @property (weak, nonatomic) IBOutlet UIView *sexView;
+@property (weak, nonatomic) IBOutlet UIButton *doneBtn;
 @end
 
 static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textColor";
@@ -38,6 +39,9 @@ static NSString *const modifyUserInformation = @"/my/update_profile";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.doneBtn.layer.masksToBounds = YES;
+    self.doneBtn.layer.cornerRadius = 3;
     
     [self.nameTF setValue:[UIColor colorWithHexString:@"#986E10"] forKeyPath:XMGPlacerholderColorKeyPath];
     self.nameTF.tintColor = [UIColor colorWithHexString:@"#986E10"];
