@@ -53,10 +53,9 @@ static const NSInteger menuBtnTag = 324;
 #pragma mark - 动态获取按钮宽度
 - (NSArray *)getMenuBtnWidthByTitle:(NSArray *)titles {
     NSMutableArray * allWidths = [[NSMutableArray alloc] init];
-    UIFont * font = [UIFont systemFontOfSize:14];
-    for (NSString * title in titles) {
-        CGSize size = [title sizeWithAttributes:@{font:NSFontAttributeName}];
-        NSNumber * width = [NSNumber numberWithFloat:size.width + 40];
+    for (NSString *title in titles) {
+        CGSize size = [title sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0f]}];
+        NSNumber *width = [NSNumber numberWithFloat:size.width + 30];
         [allWidths addObject:width];
     }
     return allWidths;
@@ -139,7 +138,10 @@ static const NSInteger menuBtnTag = 324;
 
 #pragma mark - 更新导航栏选项
 - (void)updateMenuButtonData {
-    self.widthArr = [self getMenuBtnWidthByTitle:self.menuTitle];
+    if (self.menuTitle.count) {
+        self.widthArr = [self getMenuBtnWidthByTitle:self.menuTitle];
+    }
+    
     if (self.widthArr.count) {
         CGFloat contentSize = [self getMenuViewWidth:self.widthArr];
         self.menuRollView.contentSize = CGSizeMake(contentSize, 0);
