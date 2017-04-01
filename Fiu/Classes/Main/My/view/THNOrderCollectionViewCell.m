@@ -53,6 +53,9 @@
         [self.contentView addSubview:self.imageV];
         [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self.contentView.mas_right).mas_offset(-15);
+            if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
+                make.top.mas_equalTo(self.contentView.mas_top).mas_offset(10/667.0*SCREEN_HEIGHT);
+            }
             make.top.mas_equalTo(self.contentView.mas_top).mas_offset(18);
         }];
         
@@ -81,6 +84,9 @@
             make.right.left.mas_equalTo(self.contentView).mas_offset(0);
             make.top.mas_equalTo(self.contentView.mas_top).mas_offset(44);
             make.height.mas_equalTo(0.5);
+            if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
+                make.top.mas_equalTo(self.contentView.mas_top).mas_offset(30);
+            }
         }];
         
         self.allOderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -99,9 +105,12 @@
         }];
         [self.btnContentView addSubview:self.btn1];
         [_btn1 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(50/667.0*SCREEN_HEIGHT, 40/667.0*SCREEN_HEIGHT));
-            make.left.mas_equalTo(self.mas_left).with.offset(20/667.0*SCREEN_HEIGHT);
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH/5, 40/667.0*SCREEN_HEIGHT));
+            make.left.mas_equalTo(self.mas_left).with.offset(0/667.0*SCREEN_HEIGHT);
             make.top.mas_equalTo(self.btnContentView.mas_top).with.offset(8/667.0*SCREEN_HEIGHT);
+            if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
+                make.top.mas_equalTo(self.btnContentView.mas_top).with.offset(-3);
+            }
         }];
         [self.contentView addSubview:self.label1];
         [_label1 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -112,9 +121,12 @@
         
         [self.contentView addSubview:self.btn2];
         [_btn2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(50/667.0*SCREEN_HEIGHT, 40/667.0*SCREEN_HEIGHT));
-            make.left.mas_equalTo(self.btn1.mas_right).with.offset(20/667.0*SCREEN_HEIGHT);
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH/5, 40/667.0*SCREEN_HEIGHT));
+            make.left.mas_equalTo(self.btn1.mas_right).with.offset(0/667.0*SCREEN_HEIGHT);
             make.top.mas_equalTo(self.btnContentView.mas_top).with.offset(8/667.0*SCREEN_HEIGHT);
+            if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
+                make.top.mas_equalTo(self.btnContentView.mas_top).with.offset(-3);
+            }
         }];
         [self.contentView addSubview:self.label2];
         [_label2 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -125,9 +137,12 @@
         
         [self.contentView addSubview:self.btn3];
         [_btn3 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(50/667.0*SCREEN_HEIGHT, 40/667.0*SCREEN_HEIGHT));
-            make.left.mas_equalTo(self.btn2.mas_right).with.offset(20/667.0*SCREEN_HEIGHT);
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH/5, 40/667.0*SCREEN_HEIGHT));
+            make.left.mas_equalTo(self.btn2.mas_right).with.offset(0/667.0*SCREEN_HEIGHT);
             make.top.mas_equalTo(self.btnContentView.mas_top).with.offset(8/667.0*SCREEN_HEIGHT);
+            if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
+                make.top.mas_equalTo(self.btnContentView.mas_top).with.offset(-3);
+            }
         }];
         [self.contentView addSubview:self.label3];
         [_label3 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -139,9 +154,12 @@
         
         [self.contentView addSubview:self.btn4];
         [_btn4 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(50/667.0*SCREEN_HEIGHT, 40/667.0*SCREEN_HEIGHT));
-            make.left.mas_equalTo(self.btn3.mas_right).with.offset(20/667.0*SCREEN_HEIGHT);
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH/5, 40/667.0*SCREEN_HEIGHT));
+            make.left.mas_equalTo(self.btn3.mas_right).with.offset(0/667.0*SCREEN_HEIGHT);
             make.top.mas_equalTo(self.btnContentView.mas_top).with.offset(8/667.0*SCREEN_HEIGHT);
+            if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
+                make.top.mas_equalTo(self.btnContentView.mas_top).with.offset(-3);
+            }
         }];
         [self.contentView addSubview:self.label4];
         [_label4 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -153,9 +171,13 @@
         
         [self.contentView addSubview:self.btn5];
         [_btn5 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(50/667.0*SCREEN_HEIGHT, 40/667.0*SCREEN_HEIGHT));
-            make.right.mas_equalTo(self.btnContentView.mas_right).with.offset(-20/667.0*SCREEN_HEIGHT);
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH/5, 40/667.0*SCREEN_HEIGHT));
+            make.left.mas_equalTo(self.btn4.mas_right).with.offset(0/667.0*SCREEN_HEIGHT);
+            make.right.mas_equalTo(self.btnContentView.mas_right).with.offset(0/667.0*SCREEN_HEIGHT);
             make.top.mas_equalTo(self.btnContentView.mas_top).with.offset(8/667.0*SCREEN_HEIGHT);
+            if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
+                make.top.mas_equalTo(self.btnContentView.mas_top).with.offset(-3);
+            }
         }];
         [self.contentView addSubview:self.label5];
         [_label5 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -219,7 +241,6 @@
         _btn3 = [[UIButton alloc] init];
         _btn3.tag = 3;
         [_btn3 setImage:[UIImage imageNamed:@"daishouhuo"] forState:UIControlStateNormal];
-        
     }
     return _btn3;
 }

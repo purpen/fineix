@@ -46,6 +46,9 @@
         [self.contentView addSubview:self.textLabel];
         [_textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.contentView.mas_left).mas_offset(16);
+            if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
+                make.top.mas_equalTo(self.contentView.mas_top).mas_offset(0/667.0*SCREEN_HEIGHT);
+            }
             make.top.mas_equalTo(self.contentView.mas_top).mas_offset(8/667.0*SCREEN_HEIGHT);
         }];
         

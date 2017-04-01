@@ -534,9 +534,11 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {
             UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
-            _chanelV.frame = CGRectMake(0, 0, SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
             _chanelV.fansNumLabel.text = [NSString stringWithFormat:@"%zi",_fansN];
             [cell.contentView addSubview:_chanelV];
+            [_chanelV mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.top.bottom.mas_equalTo(cell.contentView).mas_offset(0);
+            }];
             return cell;
         }
     }else if (indexPath.section == 2){
@@ -837,6 +839,9 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
         }
     }
     if (indexPath.section == 1) {
+        if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
+            return CGSizeMake(SCREEN_WIDTH, 80/667.0*SCREEN_HEIGHT);
+        }
         return CGSizeMake(SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 2) {

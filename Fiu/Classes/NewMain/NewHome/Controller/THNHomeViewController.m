@@ -118,7 +118,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     [self setHotUserListData];
     [self thn_registerNSNotification];
     [self thn_netWorkGroup];
-    [self getCity];
+//    [self getCity];
     [self.navView addSubview:self.addressCityLabel];
     [self.navView addSubview:self.downImage];
 }

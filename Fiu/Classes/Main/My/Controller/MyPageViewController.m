@@ -290,8 +290,10 @@
         return cell;
     }else if (indexPath.section == 1){
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
-        _chanelV.frame = CGRectMake(0, 0, SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
         [cell.contentView addSubview:_chanelV];
+        [_chanelV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.bottom.mas_equalTo(cell.contentView).mas_offset(0);
+        }];
         return cell;
     }else if (indexPath.section == 2){
         THNDivideCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNDIVIDECollectionViewCell forIndexPath:indexPath];
@@ -340,10 +342,10 @@
             [self.tipNumView1 mas_makeConstraints:^(MASConstraintMaker *make) {
                 if ((size.width+9) > 15) {
                     make.size.mas_equalTo(CGSizeMake(size.width+11, 17));
-                    make.right.mas_equalTo(cell.btn1.mas_right).with.offset(5);
+                    make.right.mas_equalTo(cell.btn1.mas_right).with.offset(-12);
                 }else{
                     make.size.mas_equalTo(CGSizeMake(17, 17));
-                    make.right.mas_equalTo(cell.btn1.mas_right).with.offset(2);
+                    make.right.mas_equalTo(cell.btn1.mas_right).with.offset(-15);
                 }
                 make.top.mas_equalTo(cell.btn1.mas_top).with.offset(0/667.0*SCREEN_HEIGHT);
             }];
@@ -360,10 +362,10 @@
             [self.tipNumView3 mas_makeConstraints:^(MASConstraintMaker *make) {
                 if ((size.width+9) > 15) {
                     make.size.mas_equalTo(CGSizeMake(size.width+11, 17));
-                    make.right.mas_equalTo(cell.btn7.mas_right).with.offset(5);
+                    make.right.mas_equalTo(cell.btn7.mas_right).with.offset(-12);
                 }else{
                     make.size.mas_equalTo(CGSizeMake(17, 17));
-                    make.right.mas_equalTo(cell.btn7.mas_right).with.offset(2);
+                    make.right.mas_equalTo(cell.btn7.mas_right).with.offset(-15);
                 }
                 
                 make.top.mas_equalTo(cell.btn7.mas_top).with.offset(0/667.0*SCREEN_HEIGHT);
@@ -386,6 +388,9 @@
         [self.botView.aboutBtn addTarget:self action:@selector(aboutBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self.botView.optionBtn addTarget:self action:@selector(optionBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self.botView.qiyeQingdingzhiBtn addTarget:self action:@selector(qiye) forControlEvents:UIControlEventTouchUpInside];
+        if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
+            self.botView.frame = CGRectMake(80, 0, SCREEN_WIDTH, 88);
+        }
         [cell.contentView addSubview:self.botView];
         return cell;
     }
@@ -479,6 +484,9 @@
         }
     }
     if (indexPath.section == 1) {
+        if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
+            return CGSizeMake(SCREEN_WIDTH, 80/667.0*SCREEN_HEIGHT);
+        }
         return CGSizeMake(SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 2) {
