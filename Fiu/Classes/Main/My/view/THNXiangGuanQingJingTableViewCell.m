@@ -379,7 +379,7 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
     FBRequest *cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
     [cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+//            NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
 //            [self.model setValue:loveCount forKey:@"loveCount"];
 //            [self.model setValue:@"0" forKey:@"isLove"];
         }
@@ -398,7 +398,7 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
         FBRequest *likeSceneRequest = [FBAPI postWithUrlString:@"/favorite/ajax_love" requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
         [likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
             if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-                NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+//                NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
 //                [self.model setValue:loveCount forKey:@"loveCount"];
 //                [self.model setValue:@"1" forKey:@"isLove"];
             }
