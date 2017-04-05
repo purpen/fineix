@@ -7,8 +7,8 @@
 //
 
 #import "FBRequest.h"
-#import "AFNetWorking.h"
-#import "UIKit+AFNetWorking.h"
+#import "AFNetworking.h"
+#import "UIKit+AFNetworking.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "FBConfig.h"

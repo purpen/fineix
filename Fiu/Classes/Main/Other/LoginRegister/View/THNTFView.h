@@ -36,7 +36,7 @@
 /**
  *  清除所有输入文字
  */
-- (void)clearText;
+//- (void)clearText;
 /**
  *  设置键盘输入是否明文可见
  */
