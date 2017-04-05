@@ -110,6 +110,7 @@
     {
         NSURL *url = [request URL];
         NSString *str = [url absoluteString];
+        NSLog(@"asdasd  %@",str);
         if([str rangeOfString:@"taihuoniao.com"].location == NSNotFound && [str rangeOfString:@"infoType"].location == NSNotFound){
             //打开浏览器
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
