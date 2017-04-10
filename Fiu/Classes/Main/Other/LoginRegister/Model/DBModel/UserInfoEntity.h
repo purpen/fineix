@@ -38,13 +38,9 @@
 @property(nonatomic,copy) NSString *assets;
 /** 订阅的情境主题 */
 @property (nonatomic, copy) NSString *interest_scene_cate;
-/**
- 
- */
 
 /**
- * is_bonus 是否送红包
- * 0:否／ 1:是
+ 是否送红包
  */
 @property (nonatomic, assign) NSInteger is_bonus;
 
@@ -57,6 +53,11 @@
  地盘id
  */
 @property (nonatomic, strong) NSString *storageId;
+
+/**
+ 注册日期
+ */
+@property (nonatomic, strong) NSString *created_on;
 
 + (instancetype)defaultUserInfoEntity;
 - (void)updateUserInfo;

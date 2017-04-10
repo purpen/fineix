@@ -41,6 +41,7 @@
 #import "NiceDomainRow.h"
 #import "HomeGoodsRow.h"
 
+#import "NSString+TimeDate.h"
 #import "MJRefresh.h"
 #import "FBRefresh.h"
 #import "THNHotUserFlowLayout.h"
@@ -76,8 +77,8 @@ static NSString *const sceneImgCellId       = @"SceneImgCellId";
 static NSString *const dataInfoCellId       = @"DataInfoCellId";
 static NSString *const sceneInfoCellId      = @"SceneInfoCellId";
 
-//  归档地址
-static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathComponent:@"homeData.archiver"];
+//  判断用户注册时效
+static NSInteger const saveTime = 1 * 24 * 60;
 
 @interface THNHomeViewController () <locationManagerDelegate, selectedCityDelegate>{
     NSIndexPath *_selectedIndexPath;
@@ -86,8 +87,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     CGFloat _commentHigh;
     NSString *_sceneId;
     NSString *_userId;
-    NSInteger _hotUserListIndex;
-    CGFloat _hotUserCellHeight;
     NSInteger _subjectType;
     BOOL _rollDown;                  //  是否下拉
     CGFloat _lastContentOffset;      //  滚动的偏移量
@@ -106,24 +105,43 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     [super viewWillAppear:animated];
     
     [self thn_setReceiveUmengNotice];
-//    [self thn_setFirstAppStart];
     [self thn_setNavigationViewUI];
-    
+    //    [self thn_setFirstAppStart];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _isNewUser = YES;
-    
-    [self setHotUserListData];
-    [self thn_registerNSNotification];
+    [self thn_getUserLoginInfo];
     [self thn_netWorkGroup];
-//    [self getCity];
     [self.navView addSubview:self.addressCityLabel];
     [self.navView addSubview:self.downImage];
+    
+    //    [self getCity];
 }
 
+#pragma mark - 获取登录信息
+- (void)thn_getUserLoginInfo {
+    if ([self isUserLogin]) {
+        NSLog(@"===========  已登录 %@", [self getLoginUserID]);
+        [self thn_systemTimeDate];
+    } else {
+        NSLog(@"===========  未登录");
+        _isNewUser = YES;
+    }
+}
+
+//  获取当前时间
+- (void)thn_systemTimeDate {
+    NSString *getTime = [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]];
+    NSInteger registerTime = [[self getRegisterTime] integerValue];
+    NSInteger nowTime = [getTime integerValue];
+    if (nowTime - registerTime > saveTime) {
+        _isNewUser = NO;
+    } else {
+        _isNewUser = YES;
+    }
+}
 
 #pragma mark - 推送通知
 - (void)thn_setReceiveUmengNotice {
@@ -184,29 +202,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     [self.navigationController pushViewController:userHomeVC animated:YES];
 }
 
-#pragma mark - 归档缓存请求到的数据
-//- (void)thn_cacheData {
-//    NSMutableData *data = [[NSMutableData alloc] init];
-//    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-//    [archiver encodeObject:self.rollList forKey:@"rollList"];
-//    [archiver finishEncoding];
-//    [data writeToFile:homeDataPath atomically:YES];
-//    NSLog(@"缓存轮播图数据");
-//}
-
-#pragma mark - 取本地缓存的数据
-//- (NSMutableArray *)thn_gettingCacheData {
-//    NSMutableData *data = [[NSMutableData alloc] initWithContentsOfFile:homeDataPath];
-//    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-//    if (![unarchiver containsValueForKey:@"rollList"]) {
-//        NSLog(@"还没有缓存");
-//    }
-//    NSMutableArray *rollList = [unarchiver decodeObjectForKey:@"rollList"];
-//    [unarchiver finishDecoding];
-//    NSLog(@"取出缓存的轮播图数据：===== %@", rollList);
-//    return rollList;
-//}
-
 #pragma mark - 网络请求
 - (void)thn_netWorkGroup {
     [self thn_networkRollImageData];
@@ -216,7 +211,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     [self thn_networkGoodsSubjectListData];
     [self thn_networkNewGoodsData];
     [self thn_networkSubjectData];
-    [self thn_networkHotUserListData];
     [self thn_networkSceneListData];
 }
 
@@ -301,7 +295,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
 #pragma mark 最新商品
 - (void)thn_networkNewGoodsData {
-    self.goodsRequest = [FBAPI getWithUrlString:URLGoodsList requestDictionary:@{@"fine":@"1", @"size":@"4", @"sort":@"5"} delegate:self];
+    self.goodsRequest = [FBAPI getWithUrlString:URLGoodsList requestDictionary:@{@"fine":@"1", @"size":@"8", @"sort":@"5"} delegate:self];
     [self.goodsRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary *dict in dataArr) {
@@ -357,39 +351,10 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             [self.subjectMarr addObject:subModel];
             [self.subjectIdMarr addObject:[NSString stringWithFormat:@"%zi", subModel.idField]];
         }
-
-        if (self.sceneListMarr.count > 6) {
-            NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:6];
-            [self.homeTable reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
-        }
+        [self.homeTable reloadData];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
-}
-
-#pragma mark 热门用户推荐
-- (void)thn_networkHotUserListData {
-    NSDictionary *requestDic = @{@"page":@"1",
-                                 @"edit_stick":@"1",
-                                 @"sort":@"1",
-                                 @"type":@"1",
-                                 @"use_cache":@"1"};
-    self.hotUserRequest = [FBAPI getWithUrlString:URLHotUserList requestDictionary:requestDic delegate:self];
-    [self.hotUserRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray *userArr = [[result valueForKey:@"data"] valueForKey:@"users"];
-        for (NSDictionary *userDic in userArr) {
-            HotUserListUser *userModel = [[HotUserListUser alloc] initWithDictionary:userDic];
-            [self.hotUserMarr addObject:userModel];
-        }
-        
-        if (self.hotUserMarr.count && self.sceneListMarr.count > _hotUserListIndex) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:_hotUserListIndex];
-            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationBottom)];
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", error);
     }];
 }
 
@@ -517,7 +482,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 - (void)thn_networkSceneListData {
     [SVProgressHUD show];
     NSDictionary *requestDic = @{@"page":@"1",
-                                 @"size":@"10",
+                                 @"size":@"5",
                                  @"sort":@"2",
                                  @"fine":@"1",
                                  @"use_cache":@"1",
@@ -568,7 +533,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     [self.userIdMarr removeAllObjects];
     [self.subjectMarr removeAllObjects];
     [self.subjectIdMarr removeAllObjects];
-    [self.hotUserMarr removeAllObjects];
 //    [self.domainCategoryMarr removeAllObjects];
     [self.userHelpMarr removeAllObjects];
     [self.niceDomainMarr removeAllObjects];
@@ -580,7 +544,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     [self thn_networkSceneListData];
     [self thn_networkRollImageData];
     [self thn_networkSubjectData];
-    [self thn_networkHotUserListData];
     [self thn_networkNewUserData];
 //    [self thn_networkDomainCategoryData];
     [self thn_networkNiceDomainData];
@@ -617,10 +580,11 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     return _footerImageView;
 }
 
-#pragma mark - 设置"发现用户"的位置和高度
-- (void)setHotUserListData {
-    _hotUserListIndex = 5;
-    _hotUserCellHeight = 245.0f;
+#pragma mark - 商品的数量
+- (NSInteger)thn_setGoodsListCount:(NSMutableArray *)goodsData {
+    NSInteger count = 0;
+    count = goodsData.count%2 == 0 ? goodsData.count/2 : (goodsData.count + 1)/2;
+    return count;
 }
 
 #pragma mark - 初始化轮播图&点击跳转事件
@@ -634,25 +598,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         };
     }
     return _homerollView;
-}
-
-#pragma mark - 首页推荐的热门用户列表
-- (UIView *)hotUserView {
-    if (!_hotUserView) {
-        _hotUserView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, _hotUserCellHeight)];
-        _hotUserView.backgroundColor = [UIColor whiteColor];
-        [_hotUserView addSubview:self.hotUserList];
-    }
-    return _hotUserView;
-}
-
-- (THNHotUserView *)hotUserList {
-    if (!_hotUserList) {
-        THNHotUserFlowLayout *flowLayout = [[THNHotUserFlowLayout alloc] init];
-        _hotUserList = [[THNHotUserView alloc] initWithFrame:CGRectMake(0, 15, SCREEN_WIDTH, _hotUserCellHeight - 15) collectionViewLayout:flowLayout];
-        _hotUserList.nav = self.navigationController;
-    }
-    return _hotUserList;
 }
 
 #pragma mark - tableView
@@ -673,7 +618,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
 #pragma mark tableViewDelegate & dataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.sceneListMarr.count + 4;
+    return self.sceneListMarr.count + 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -685,8 +630,8 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         return 1;
     } else if (section == 3) {
         return 1;
-    } else if (section == 7 || section == 10) {
-        return 5;
+    } else if (section == self.sceneListMarr.count + 4) {
+        return self.subjectMarr.count;
     } else {
         return 4;
     }
@@ -752,6 +697,14 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             [cell thn_setGoodsSubjectData:self.goodsSubjectMarr];
         }
         cell.nav = self.navigationController;
+        return cell;
+    
+    } else if (indexPath.section == self.sceneListMarr.count + 4) {
+        THNHomeSubjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:subjectCellId];
+        cell = [[THNHomeSubjectTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:subjectCellId];
+        if (self.subjectMarr.count) {
+            [cell thn_setSubjectModel:self.subjectMarr[indexPath.row]];
+        }
         return cell;
     }
     
@@ -828,17 +781,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             cell.nav = self.navigationController;
             return cell;
         }
-        
-        if (indexPath.section == 7 || indexPath.section == 10) {
-            if (indexPath.row == 4) {
-                THNHomeSubjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:subjectCellId];
-                cell = [[THNHomeSubjectTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:subjectCellId];
-                if (self.subjectMarr.count) {
-                    [cell thn_setSubjectModel:self.subjectMarr[(indexPath.section - 7) / 3]];
-                }
-                return cell;
-            }
-        }
     }
     return nil;
 }
@@ -858,11 +800,15 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         return 195;
 
     } else if (indexPath.section == 2) {
-        return (goodsCellHeight * 2) + 10;
+        NSInteger newGoodsCount = [self thn_setGoodsListCount:self.goodsMarr];
+        return (goodsCellHeight * newGoodsCount) + (newGoodsCount * 15);
         
     } else if (indexPath.section == 3) {
         return 366;
         
+    } else if (indexPath.section == self.sceneListMarr.count + 4) {
+        return (SCREEN_WIDTH * 0.56) + 10;
+    
     } else {
         if (indexPath.row == 0) {
             return SCREEN_WIDTH;
@@ -879,12 +825,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             
         } else if (indexPath.row == 3) {
             return 50;
-        }
-        
-        if (indexPath.section == 7 || indexPath.section == 10) {
-            if (indexPath.row == 4) {
-                return (SCREEN_WIDTH * 0.56) + 20;
-            }
         }
     }
     return 0;
@@ -915,7 +855,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
                                   withRightMore:@""
                                    withMoreType:0];
     } else if (section == 3) {
-        self.headerView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        self.headerView.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
         [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
                                       withTitle:@"好货合集"
                                    withSubtitle:@""
@@ -932,16 +872,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     return self.headerView;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (section == _hotUserListIndex) {
-        if (self.hotUserMarr.count) {
-            [self.hotUserList thn_setHotUserListData:self.hotUserMarr];
-            return self.hotUserView;
-        }
-    }
-    return nil;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         if (_isNewUser) {
@@ -956,23 +886,14 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == 0 || section == 1) {
+    if (section == 0 || section == 1 || section == 2) {
         return 0.01;
-        
-    } else if (section == _hotUserListIndex) {
-        if (self.hotUserMarr.count) {
-            return _hotUserCellHeight;
-        } else {
-            return 15.0f;
-        }
-        
-    } else {
+    } else
         return 10.0f;
-    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section != 0 && indexPath.section != 1 && indexPath.section != 2 && indexPath.section != 3) {
+    if (indexPath.section > 3 && indexPath.section < self.sceneListMarr.count + 4) {
         if (indexPath.row == 2) {
             if (_contentHigh > 90.0f) {
                 if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
@@ -984,16 +905,13 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             }
         }
         
-        if (indexPath.section == 7 || indexPath.section == 10) {
-            if (indexPath.row == 4) {
-                [self thn_networkSubjectInfoData:self.subjectIdMarr[(indexPath.section - 7) / 3]];
-            }
-        }
-        
     } else if (indexPath.section == 3) {
         NSInteger type = [self.goodsSubjectTypeMarr[indexPath.row] integerValue];
         NSString *idx = self.goodsSubjectIdMarr[indexPath.row];
         [self thn_openSubjectTypeController:self.navigationController type:type subjectId:idx];
+    
+    } else if (indexPath.section == self.sceneListMarr.count + 4) {
+        [self thn_networkSubjectInfoData:self.subjectIdMarr[indexPath.row]];
     }
 }
 
@@ -1122,36 +1040,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     }
 }
 
-#pragma mark - 注册观察者接收消息通知
-- (void)thn_registerNSNotification {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHotUserListData:) name:@"reloadHotUserListData" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(followHotUserAction:) name:@"followHotUser" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelFollowHotUserAction:) name:@"cancelFollowHotUser" object:nil];
-}
-
-//  删除全部热门用户
-- (void)reloadHotUserListData:(NSNotification *)reload {
-    _hotUserCellHeight = 15.0f;
-    NSIndexSet *hotUserIndexSet = [NSIndexSet indexSetWithIndex:_hotUserListIndex];
-    [self.homeTable reloadSections:hotUserIndexSet withRowAnimation:(UITableViewRowAnimationFade)];
-}
-
-//  关注热门用户
-- (void)followHotUserAction:(NSNotification *)userId {
-    [self thn_networkBeginFollowUserData:[userId object]];
-}
-
-//  取消关注热门用户
-- (void)cancelFollowHotUserAction:(NSNotification *)userId {
-    [self thn_networkCancelFollowUserData:[userId object]];
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"reloadHotUserListData" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"followHotUser" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cancelFollowHotUser" object:nil];
-}
-
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [SVProgressHUD dismiss];
@@ -1200,13 +1088,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         _userIdMarr = [NSMutableArray array];
     }
     return _userIdMarr;
-}
-
-- (NSMutableArray *)hotUserMarr {
-    if (!_hotUserMarr) {
-        _hotUserMarr = [NSMutableArray array];
-    }
-    return _hotUserMarr;
 }
 
 - (NSMutableArray *)domainCategoryMarr {

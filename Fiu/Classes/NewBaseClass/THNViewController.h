@@ -58,6 +58,11 @@
 - (NSString *)getLoginUserID;
 
 /**
+ *  获取登录用户注册时间
+ */
+- (NSString *)getRegisterTime;
+
+/**
  *  是否是用户本人
  */
 - (BOOL)isLoginUserSelf:(NSString *)userId;

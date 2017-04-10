@@ -93,13 +93,13 @@ static NSInteger const saveTime = 30 * 24 * 60;
 
 #pragma mark - 获取用户登录信息
 - (BOOL)isUserLogin {
-    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     return entity.isLogin;
 }
 
 #pragma mark - 获取用户登录id
 - (NSString *)getLoginUserID {
-    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     return entity.userId;
 }
 

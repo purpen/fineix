@@ -42,6 +42,7 @@
     entity.is_bonus = userInfo.is_bonus;
     entity.allianceId = userInfo.allianceId;
     entity.storageId = userInfo.storageId;
+    entity.created_on = userInfo.created_on;
 }
 
 @end

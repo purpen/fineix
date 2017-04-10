@@ -38,7 +38,6 @@
 @property (nonatomic, strong) FBRequest *favoriteRequest;
 @property (nonatomic, strong) FBRequest *cancelFavoriteRequest;
 @property (nonatomic, strong) FBRequest *deleteRequest;
-@property (nonatomic, strong) FBRequest *hotUserRequest;
 
 @property (nonatomic, strong) FBRollImages *homerollView;
 @property (nonatomic, strong) GroupHeaderView *headerView;
@@ -50,7 +49,7 @@
 @property (nonatomic, strong) NSMutableArray *rollList;
 @property (nonatomic, strong) NSMutableArray *subjectMarr;
 @property (nonatomic, strong) NSMutableArray *subjectIdMarr;
-@property (nonatomic, strong) NSMutableArray *hotUserMarr;
+
 @property (nonatomic, strong) NSMutableArray *domainCategoryMarr;
 @property (nonatomic, strong) NSMutableArray *userHelpMarr;
 @property (nonatomic, strong) NSMutableArray *niceDomainMarr;
@@ -59,8 +58,6 @@
 @property (nonatomic, strong) NSMutableArray *goodsSubjectIdMarr;
 @property (nonatomic, strong) NSMutableArray *goodsSubjectTypeMarr;
 
-@property (nonatomic, strong) THNHotUserView *hotUserList;
-@property (nonatomic, strong) UIView *hotUserView;
 @property (nonatomic, strong) BuyCarDefault *defaultHomeView;
 @property (nonatomic, strong) THNHomeTableViewFooter *footerImageView;
 

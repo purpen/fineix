@@ -39,7 +39,7 @@ static CGFloat const itemHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
     [super viewWillAppear:animated];
     
     [self setNavigationViewUI];
-    
+
     if ([self isUserLogin]) {
         [self networkGoodsCarList];
         
@@ -66,35 +66,36 @@ static CGFloat const itemHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
 #pragma mark 购物车列表
 - (void)networkGoodsCarList {
     [SVProgressHUD show];
-    [self clearMarr];
+    
     self.goodsCarRequest = [FBAPI getWithUrlString:URLGoodsCar requestDictionary:nil delegate:self];
     [self.goodsCarRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self clearMarr];
+        
         //  合计价格
         self.payPrice = 0.0f;
         self.sumPrice.text = [NSString stringWithFormat:@"￥%.2f", self.payPrice];
         
         NSArray *carItems = [[result valueForKey:@"data"] valueForKey:@"items"];
-        //  没有购物车数据的时候默认背景
-        [self showDefaultBackView:carItems.count];
         
         for (NSDictionary * carItemDict in carItems) {
-            CarGoodsModelItem * carModel = [[CarGoodsModelItem alloc] initWithDictionary:carItemDict];
-            [self.carItemList addObject:carModel];
-            [self.goodsIdList addObject:[NSString stringWithFormat:@"%zi", carModel.productId]];
-            
+            CarGoodsModelItem *carModel = [[CarGoodsModelItem alloc] initWithDictionary:carItemDict];
             //  是否有京东的商品,给出提示
             if (carModel.vopId > 0) {
                 self.carItemTabel.tableHeaderView = self.haveJDGoodsLab;
             }
+            
+            [self.carItemList addObject:carModel];
+            [self.goodsIdList addObject:[NSString stringWithFormat:@"%zi", carModel.productId]];
         }
         
         [self getCarItemMarrSort:self.carItemList];
-        
         for (NSInteger idx = 0; idx < self.carItemList.count; ++ idx) {
             [self.carGoodsCount addObject:[NSString stringWithFormat:@"%zi", [[self.carItemList valueForKey:@"n"][idx] integerValue]]];
         }
-        
         self.priceMarr = [NSMutableArray arrayWithArray:[self.carItemList valueForKey:@"price"]];
+        
+        //  没有购物车数据的时候默认背景
+        [self showDefaultBackView:self.carItemList.count];
         
         [self.carItemTabel reloadData];
         [SVProgressHUD dismiss];
@@ -196,6 +197,7 @@ static CGFloat const itemHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
     if (carItem.count > 1) {
         NSMutableArray *JDGoodsMarr = [NSMutableArray array];
         NSMutableArray *JDGoodsIdMarr = [NSMutableArray array];
+        
         for (NSUInteger idx = 0; idx < carItem.count; ++ idx) {
             CarGoodsModelItem *model = carItem[idx];
             if (model.vopId > 0) {

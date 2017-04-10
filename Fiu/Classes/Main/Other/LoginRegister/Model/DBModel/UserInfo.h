@@ -62,6 +62,11 @@
  */
 @property (nonatomic, strong) NSString *storageId;
 
+/**
+ 注册日期
+ */
+@property (nonatomic, strong) NSString *created_on;
+
 - (void)updateUserInfoEntity;
 
 @end

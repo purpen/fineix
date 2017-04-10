@@ -214,14 +214,20 @@ static NSInteger const saveTime = 30 * 24 * 60;
 
 #pragma mark - 获取用户登录信息
 - (BOOL)isUserLogin {
-    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     return entity.isLogin;
 }
 
 #pragma mark - 获取用户登录id
 - (NSString *)getLoginUserID {
-    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     return entity.userId;
+}
+
+#pragma mark - 获取注册时间
+- (NSString *)getRegisterTime {
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    return entity.created_on;
 }
 
 #pragma mark - 是否用户本人
