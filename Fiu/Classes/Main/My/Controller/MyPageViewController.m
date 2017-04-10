@@ -384,12 +384,12 @@
         
     } else if (indexPath.section == 6) {
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell1" forIndexPath:indexPath];
-        self.botView.frame = CGRectMake(146/667.0*SCREEN_HEIGHT, 0, SCREEN_WIDTH, 88);
-        [self.botView.aboutBtn addTarget:self action:@selector(aboutBtn:) forControlEvents:UIControlEventTouchUpInside];
+        self.botView.frame = CGRectMake(146/667.0*SCREEN_HEIGHT, 0, SCREEN_WIDTH, 44*3);
+        [self.botView.welfareBtn addTarget:self action:@selector(welfareClick) forControlEvents:UIControlEventTouchUpInside];
         [self.botView.optionBtn addTarget:self action:@selector(optionBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self.botView.qiyeQingdingzhiBtn addTarget:self action:@selector(qiye) forControlEvents:UIControlEventTouchUpInside];
         if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
-            self.botView.frame = CGRectMake(80, 0, SCREEN_WIDTH, 88);
+            self.botView.frame = CGRectMake(80, 0, SCREEN_WIDTH, 44*3);
         }
         [cell.contentView addSubview:self.botView];
         return cell;
@@ -401,6 +401,11 @@
 -(void)qiye{
     THNQiYeQingDingZhiViewController *vc = [[THNQiYeQingDingZhiViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark 新人福利
+-(void)welfareClick{
+    
 }
   
 #pragma mark 全部订单
@@ -465,11 +470,6 @@
         _tipNumView3 = [TipNumberView getTipNumView];
     }
     return _tipNumView3;
-}
-
--(void)aboutBtn:(UIButton*)sender{
-    AboutViewController *vc = [[AboutViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)optionBtn:(UIButton*)sender{

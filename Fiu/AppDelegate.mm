@@ -215,7 +215,6 @@ static NSString *const RedirectURL           = @"http://www.taihuoniao.com";
         }
         
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@",error);
     }];
 }
 
@@ -265,19 +264,21 @@ static NSString *const RedirectURL           = @"http://www.taihuoniao.com";
         self.window.rootViewController = tabBarC;
         
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
-        [request startRequestSuccess:^(FBRequest *request, id result) {
-            NSDictionary *dataDict = result[@"data"];
-            NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
-            _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
-            
-            [tabBarC thn_showTabBarItemBadgeWithItem:[tabBarC.tabBar.items objectAtIndex:3]
-                                           likeValue:[NSString stringWithFormat:@"%@", _counterModel.fiu_alert_count]
-                                           fansValue:[NSString stringWithFormat:@"%@", _counterModel.fans_count]];
-        
-        } failure:^(FBRequest *request, NSError *error) {
-        
-        }];
+        if (entity.isLogin) {
+            FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+            [request startRequestSuccess:^(FBRequest *request, id result) {
+                NSDictionary *dataDict = result[@"data"];
+                NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
+                _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
+                
+                [tabBarC thn_showTabBarItemBadgeWithItem:[tabBarC.tabBar.items objectAtIndex:3]
+                                               likeValue:[NSString stringWithFormat:@"%@", _counterModel.fiu_alert_count]
+                                               fansValue:[NSString stringWithFormat:@"%@", _counterModel.fans_count]];
+                
+            } failure:^(FBRequest *request, NSError *error) {
+                
+            }];
+        }
         
     } else if(!userIsFirstInstalled){
         GuidePageViewController *vc = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[THNTabBarController alloc] init]];
@@ -287,24 +288,25 @@ static NSString *const RedirectURL           = @"http://www.taihuoniao.com";
     } else if (userIsFirstInstalled && !codeFlag){
         if (flag) {
             self.window.rootViewController = [[InviteCCodeViewController alloc] init];
-        
         } else{
             THNTabBarController * tabBarC = [[THNTabBarController alloc] init];
             self.window.rootViewController = tabBarC;
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-            FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
-            [request startRequestSuccess:^(FBRequest *request, id result) {
-                NSDictionary *dataDict = result[@"data"];
-                NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
-                _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
-
-                [tabBarC thn_showTabBarItemBadgeWithItem:[tabBarC.tabBar.items objectAtIndex:3]
-                                               likeValue:[NSString stringWithFormat:@"%@", _counterModel.fiu_alert_count]
-                                               fansValue:[NSString stringWithFormat:@"%@", _counterModel.fans_count]];
-            
-            } failure:^(FBRequest *request, NSError *error) {
-            
-            }];
+            if (entity.isLogin) {
+                FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+                [request startRequestSuccess:^(FBRequest *request, id result) {
+                    NSDictionary *dataDict = result[@"data"];
+                    NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
+                    _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
+                    
+                    [tabBarC thn_showTabBarItemBadgeWithItem:[tabBarC.tabBar.items objectAtIndex:3]
+                                                   likeValue:[NSString stringWithFormat:@"%@", _counterModel.fiu_alert_count]
+                                                   fansValue:[NSString stringWithFormat:@"%@", _counterModel.fans_count]];
+                    
+                } failure:^(FBRequest *request, NSError *error) {
+                    
+                }];
+            }
         }
     }
 }
@@ -545,7 +547,6 @@ static NSString *const RedirectURL           = @"http://www.taihuoniao.com";
         }
         
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@",error);
     }];
 }
 

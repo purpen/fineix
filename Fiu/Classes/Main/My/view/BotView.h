@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface BotView : UIView
-@property (weak, nonatomic) IBOutlet UIButton *aboutBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *optionBtn;
 @property (weak, nonatomic) IBOutlet UIButton *qiyeQingdingzhiBtn;
+@property (weak, nonatomic) IBOutlet UIButton *welfareBtn;
 
 +(instancetype)getBotView;
+
 @end

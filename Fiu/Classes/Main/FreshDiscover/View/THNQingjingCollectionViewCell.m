@@ -52,6 +52,11 @@
     if (section == 1) {
         return UIEdgeInsetsMake(20*SCREEN_HEIGHT/667.0, 25*SCREEN_HEIGHT/667.0, 0, 25*SCREEN_HEIGHT/667.0);
     } else if (section == 0) {
+        if (SCREEN_HEIGHT<667.0) {
+            return UIEdgeInsetsMake(0, 26.5*SCREEN_HEIGHT/667.0, 0, 26.5*SCREEN_HEIGHT/667.0);
+        } else if (SCREEN_HEIGHT>667.0) {
+            return UIEdgeInsetsMake(0, 24*SCREEN_HEIGHT/667.0, 0, 24*SCREEN_HEIGHT/667.0);
+        }
         return UIEdgeInsetsMake(0, 25*SCREEN_HEIGHT/667.0, 0, 25*SCREEN_HEIGHT/667.0);
     }
     return UIEdgeInsetsMake(0, 0, 0, 0);

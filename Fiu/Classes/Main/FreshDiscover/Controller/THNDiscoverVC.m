@@ -109,7 +109,7 @@ UITableViewDataSource
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.collectionView];
     
-    NSArray *ary = @[@"为你推荐", @"分类", @"地盘", @"情境", @"品牌",@"好货合集",@"发现好友"];
+    NSArray *ary = @[@"推荐", @"分类", @"地盘", @"情境", @"品牌",@"专辑",@"好友"];
     for (int i = 0; i < ary.count; i ++) {
         THNClassificationModel *model = [THNClassificationModel new];
         model.name = ary[i];
@@ -283,7 +283,7 @@ UITableViewDataSource
         NSArray *ary = self.collectionDatas[1];
         return ary.count;
     } else if (section == 2) {
-        return 1;
+        return 2;
     } else if (section == 3) {
         return 1;
     } else if (section == 4) {
@@ -317,10 +317,6 @@ UITableViewDataSource
             NSArray *ary = self.collectionDatas[2];
             StickModel *model = ary[indexPath.row];
             cell.model = model;
-            cell.textLabel.font = [UIFont systemFontOfSize:16];
-            if (SCREEN_HEIGHT>667.0) {
-                cell.textLabel.font = [UIFont systemFontOfSize:17];
-            }
             return cell;
         } else {
             THNSortCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNSORTCollectionViewCell forIndexPath:indexPath];
@@ -377,7 +373,7 @@ UITableViewDataSource
     if (section == 1) {
         return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 0, 18*SCREEN_HEIGHT/667.0);
     } else if (section == 2) {
-        return UIEdgeInsetsMake(0, 5*SCREEN_HEIGHT/667.0, 0, 5*SCREEN_HEIGHT/667.0);
+        return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 14, 18*SCREEN_HEIGHT/667.0);
     } else if (section == 4) {
         return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 0, 18*SCREEN_HEIGHT/667.0);
     } else if (section == 5) {
@@ -395,7 +391,7 @@ UITableViewDataSource
     if (section == 1) {
         return 18*SCREEN_HEIGHT/667.0;
     } else if (section == 2) {
-        return 18*SCREEN_HEIGHT/667.0;
+        return 3*SCREEN_HEIGHT/667.0;
     } else if (section == 4) {
         return 18*SCREEN_HEIGHT/667.0;
     } else if (section == 5) {
@@ -405,6 +401,9 @@ UITableViewDataSource
 }
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    if (section == 2) {
+        return 4*SCREEN_HEIGHT/667.0;
+    }
     if (section == 5) {
         return 4*SCREEN_HEIGHT/667.0;
     }
@@ -454,8 +453,12 @@ UITableViewDataSource
                           80*SCREEN_HEIGHT/667.0);
     } else if (indexPath.section == 2) {
         if (indexPath.row <= 1) {
-            return CGSizeMake(SCREEN_WIDTH-90-10,
-                              299/2*SCREEN_HEIGHT/667.0);
+            if (SCREEN_HEIGHT == 736) {
+                return CGSizeMake((SCREEN_WIDTH-90-36*2-3)/2*SCREEN_HEIGHT/667.0, 135/2.0*SCREEN_HEIGHT/667.0);
+            }else if (SCREEN_HEIGHT == 667.0) {
+                return CGSizeMake(120*SCREEN_HEIGHT/667.0, 135/2.0*SCREEN_HEIGHT/667.0);
+            }
+            return CGSizeMake(95, 135/2.0*SCREEN_HEIGHT/667.0);
         } else {
             return CGSizeMake(60*SCREEN_HEIGHT/667.0,
                               100*SCREEN_HEIGHT/667.0);
