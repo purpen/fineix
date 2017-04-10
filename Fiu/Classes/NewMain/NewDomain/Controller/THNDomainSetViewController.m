@@ -156,10 +156,20 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
         } else if (indexPath.row == 1) {
             THNEditLightViewController *editLightVC = [[THNEditLightViewController alloc] init];
             editLightVC.infoData = self.infoData;
-            [editLightVC thn_setBrightSpotData:self.infoData.brightSpot];
+            [editLightVC thn_setBrightSpotData:[self thn_checkHasLightDraft]];
             [self.navigationController pushViewController:editLightVC animated:YES];
         }
     }
+}
+
+- (NSArray *)thn_checkHasLightDraft {
+    NSArray *lightDataArr;
+    if([USERDEFAULT valueForKey:@"lightSaveDraft"]){
+        lightDataArr = [[NSUserDefaults standardUserDefaults] valueForKey:@"lightSaveDraft"];
+    } else {
+        lightDataArr = self.infoData.brightSpot;
+    }
+    return lightDataArr;
 }
 
 #pragma mark - 设置Nav

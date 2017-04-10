@@ -50,7 +50,6 @@
 /**
  *  是否登录
  */
-@property (nonatomic, strong) FBRequest   *   userLoginRequest;
 - (BOOL)isUserLogin;
 
 /**

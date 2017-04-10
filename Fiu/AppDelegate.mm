@@ -243,7 +243,6 @@ static NSString *const RedirectURL           = @"http://www.taihuoniao.com";
     }];
     
     [self lanch:invitation];
-    
 }
 
 - (void)lanch:(BOOL)flag {

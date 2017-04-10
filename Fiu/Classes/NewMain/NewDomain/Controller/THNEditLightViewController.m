@@ -249,7 +249,7 @@ static NSString *const IMAGE_TAG = @"[img]:!";
     //  没有高亮表示输入完成
     if (!isHighlight) {
         if (textView.text.length == 0) {
-            [self dismissEditDoneButton:YES];
+            [self dismissEditDoneButton:NO];
         } else {
             [self dismissEditDoneButton:NO];
         }
@@ -616,6 +616,21 @@ static NSString *const IMAGE_TAG = @"[img]:!";
 
 #pragma mark - 返回按钮
 - (void)thn_leftBarItemSelected {
+    [self thn_saveContentDraft];
+}
+
+#pragma mark - 保存当前内容为草稿
+- (void)thn_saveContentDraft {
+    if (self.contentInputBox.attributedText.length == 0) {
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+    
+    [self thn_refreshInsertObjectLocation];
+    [self thn_saveUploadData];
+    if (self.uploadDataMarr.count) {
+         [USERDEFAULT setValue:self.uploadDataMarr forKey:@"lightSaveDraft"];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -644,6 +659,9 @@ static NSString *const IMAGE_TAG = @"[img]:!";
     
     [self thn_refreshInsertObjectLocation];
     [self thn_saveUploadData];
+    if (self.uploadDataMarr.count) {
+        [self thn_networlUploadLightData:self.uploadDataMarr];
+    }
     
     [self.contentInputBox resignFirstResponder];
 }
@@ -683,8 +701,6 @@ static NSString *const IMAGE_TAG = @"[img]:!";
             [self.uploadDataMarr insertObject:textData atIndex:index];
         }
     }
-    
-    [self thn_networlUploadLightData:self.uploadDataMarr];
 }
 
 #pragma mark - NSMutabelArray
@@ -766,6 +782,7 @@ static NSString *const IMAGE_TAG = @"[img]:!";
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
+    [self.contentInputBox resignFirstResponder];
     [SVProgressHUD dismiss];
 }
 

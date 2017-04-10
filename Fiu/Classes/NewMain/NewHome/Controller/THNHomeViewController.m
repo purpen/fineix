@@ -101,6 +101,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
 @implementation THNHomeViewController
 
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -208,17 +209,15 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
 #pragma mark - 网络请求
 - (void)thn_netWorkGroup {
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [self thn_networkRollImageData];
-        [self thn_networkNewUserData];
-//        [self thn_networkDomainCategoryData];
-        [self thn_networkNiceDomainData];
-        [self thn_networkGoodsSubjectListData];
-        [self thn_networkNewGoodsData];
-        [self thn_networkSubjectData];
-        [self thn_networkHotUserListData];
-        [self thn_networkSceneListData];
-    });
+    [self thn_networkRollImageData];
+    [self thn_networkNewUserData];
+    //        [self thn_networkDomainCategoryData];
+    [self thn_networkNiceDomainData];
+    [self thn_networkGoodsSubjectListData];
+    [self thn_networkNewGoodsData];
+    [self thn_networkSubjectData];
+    [self thn_networkHotUserListData];
+    [self thn_networkSceneListData];
 }
 
 #pragma mark 轮播图

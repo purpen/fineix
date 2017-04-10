@@ -53,7 +53,6 @@ static NSString *const brandCellId = @"BrandCellId";
                                                                                        @"t":@"13",
                                                                                        @"q":keyword} delegate:self];
     [self.searchListRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝ %@", result);
         NSArray *brandArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * brandDic in brandArr) {
             BrandListModel *brandModel = [[BrandListModel alloc] initWithDictionary:brandDic];
