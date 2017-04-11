@@ -12,9 +12,9 @@
 
 @interface BrandsListTableViewCell : UITableViewCell
 
-@pro_strong UIImageView     *   brandImg;
-@pro_strong UILabel         *   brandName;
-@pro_strong UILabel         *   content;
+@property (nonatomic, strong) UIImageView     *   brandImg;
+@property (nonatomic, strong) UILabel         *   brandName;
+@property (nonatomic, strong) UILabel         *   content;
 
 - (void)setBrandListData:(BrandListModel *)model;
 

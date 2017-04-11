@@ -129,6 +129,7 @@
         [self.nav pushViewController:projectVC animated:YES];
     } else if (self.openType == 3) {
         THNNiceGoodsViewController *niceGoodsVC = [[THNNiceGoodsViewController alloc] init];
+        niceGoodsVC.isIndex = 0;
         [self.nav pushViewController:niceGoodsVC animated:YES];
 
     }

@@ -84,7 +84,6 @@ static NSInteger const saveTime = 2 * 24 * 60;
     NSIndexPath *_selectedIndexPath;
     CGFloat _contentHigh;
     CGFloat _defaultContentHigh;
-    CGFloat _commentHigh;
     NSString *_sceneId;
     NSString *_userId;
     NSInteger _subjectType;
@@ -124,10 +123,8 @@ static NSInteger const saveTime = 2 * 24 * 60;
 #pragma mark - 获取登录信息
 - (void)thn_getUserLoginInfo {
     if ([self isUserLogin]) {
-        NSLog(@"===========  已登录 %@", [self getLoginUserID]);
         [self thn_systemTimeDate];
     } else {
-        NSLog(@"===========  未登录");
         _isNewUser = YES;
     }
 }

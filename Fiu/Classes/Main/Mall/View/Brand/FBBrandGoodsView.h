@@ -12,9 +12,9 @@
 
 @interface FBBrandGoodsView : UIView <UICollectionViewDelegate, UICollectionViewDataSource>
 
-@pro_strong UINavigationController  *   nav;
-@pro_strong UICollectionView        *   selfBrandList;
-@pro_strong UIButton                *   allselfBrand;
+@property (nonatomic, strong) UINavigationController  *   nav;
+@property (nonatomic, strong) UICollectionView        *   selfBrandList;
+@property (nonatomic, strong) UIButton                *   allselfBrand;
 
 - (void)setBrandData:(NSMutableArray *)dataMarr withIdData:(NSMutableArray *)idMarr;
 

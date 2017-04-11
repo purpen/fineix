@@ -76,7 +76,7 @@ static NSString *const URLBrandList = @"/scene_brands/getlist";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     FBBrandGoodsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FBBrandGoodsCollectionViewCellID" forIndexPath:indexPath];
-    [cell setSelfBrandData:self.selfBrandListMarr[indexPath.row]];
+    [cell thn_setBrandData:self.selfBrandListMarr[indexPath.row]];
     return cell;
 }
 

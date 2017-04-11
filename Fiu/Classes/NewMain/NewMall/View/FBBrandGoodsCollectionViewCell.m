@@ -23,7 +23,7 @@
     return self;
 }
 
-- (void)setSelfBrandData:(BrandListModel *)model {
+- (void)thn_setBrandData:(BrandListModel *)model {
     [self.brandImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
 }
 

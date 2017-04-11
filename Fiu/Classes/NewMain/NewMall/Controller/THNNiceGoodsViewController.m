@@ -30,8 +30,8 @@ static NSString *const URLMallSubject = @"/scene_subject/getlist";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    self.view.frame = CGRectMake(SCREEN_WIDTH * self.isIndex, -64 * self.isIndex, SCREEN_WIDTH, SCREEN_HEIGHT - (157 * self.isIndex));
     [self thn_setNavigationViewUI];
-    
 }
 
 - (void)viewDidLoad {
@@ -124,7 +124,7 @@ static NSString *const URLMallSubject = @"/scene_subject/getlist";
         UICollectionViewFlowLayout *flowLayou = [[UICollectionViewFlowLayout alloc] init];
         flowLayou.scrollDirection = UICollectionViewScrollDirectionVertical;
         
-        _mallList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)
+        _mallList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - (self.isIndex == 0 ? 64 : 157))
                                        collectionViewLayout:flowLayou];
         _mallList.showsVerticalScrollIndicator = NO;
         _mallList.delegate = self;

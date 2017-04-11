@@ -22,4 +22,9 @@
 @property (nonatomic, strong) NSMutableArray *subjectIdMarr;
 @property (nonatomic, strong) NSMutableArray *subjectTypeMarr;
 
+/**
+ 是否作为子视图
+ */
+@property (nonatomic, assign) NSInteger isIndex;
+
 @end
