@@ -78,7 +78,7 @@ static NSString *const dataInfoCellId       = @"DataInfoCellId";
 static NSString *const sceneInfoCellId      = @"SceneInfoCellId";
 
 //  判断用户注册时效
-static NSInteger const saveTime = 1 * 24 * 60;
+static NSInteger const saveTime = 2 * 24 * 60;
 
 @interface THNHomeViewController () <locationManagerDelegate, selectedCityDelegate>{
     NSIndexPath *_selectedIndexPath;
@@ -113,6 +113,7 @@ static NSInteger const saveTime = 1 * 24 * 60;
     [super viewDidLoad];
     
     [self thn_getUserLoginInfo];
+    
     [self thn_netWorkGroup];
     [self.navView addSubview:self.addressCityLabel];
     [self.navView addSubview:self.downImage];
