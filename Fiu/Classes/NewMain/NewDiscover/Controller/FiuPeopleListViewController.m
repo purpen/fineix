@@ -10,6 +10,7 @@
 #import "FiuPeopleListTableViewCell.h"
 #import "FiuPeopleListRow.h"
 #import "HomePageViewController.h"
+#import "THNUserData.h"
 
 static NSString *const FiuPeople = @"/user/activity_user";
 
@@ -89,8 +90,8 @@ static NSString *const FiuPeople = @"/user/activity_user";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     HomePageViewController * peopleHomeVC = [[HomePageViewController alloc] init];
     peopleHomeVC.userId = self.fiuPeopleIdMarr[indexPath.row];
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if ([entity.userId intValue] == [self.fiuPeopleIdMarr[indexPath.row] intValue]) {
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    if ([userdata.userId intValue] == [self.fiuPeopleIdMarr[indexPath.row] intValue]) {
         peopleHomeVC.isMySelf = YES;
     }else{
         peopleHomeVC.isMySelf = NO;

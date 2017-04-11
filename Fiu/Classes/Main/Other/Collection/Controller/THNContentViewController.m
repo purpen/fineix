@@ -9,7 +9,6 @@
 #import "THNContentViewController.h"
 #import "UIView+FSExtension.h"
 #import "FBRefresh.h"
-#import "UserInfoEntity.h"
 #import "GoodsRow.h"
 #import "THNGoodsCollectionViewCell.h"
 #import "FBGoodsInfoViewController.h"
@@ -18,6 +17,7 @@
 #import "THNSceneDetalViewController.h"
 #import "THNSenceModel.h"
 #import "THNSenecCollectionViewCell.h"
+#import "THNUserData.h"
 
 @interface THNContentViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -88,7 +88,7 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
     // 结束下拉
     [self.contenView.mj_header endRefreshing];
     
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    THNUserData *userData = [[THNUserData findAll] lastObject];
     NSInteger page = self.page + 1;
     // 参数
     NSDictionary *params = @{
@@ -97,7 +97,7 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
                              @"sort":@"0",
                              @"type" : @(self.type),
                              @"event":@"1",
-                             @"user_id":entity.userId
+                             @"user_id":userData.userId
                                     };
     self.params = params;
     
@@ -180,7 +180,7 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
 {
     // 结束上啦
     [self.contenView.mj_footer endRefreshing];
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    THNUserData *userData = [[THNUserData findAll] lastObject];
     // 参数
     NSDictionary *params = @{
                              @"page" : @(1),
@@ -188,7 +188,7 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
                                     @"sort":@"0",
                                     @"type" : @(self.type),
                                     @"event":@"1",
-                                    @"user_id":entity.userId
+                                    @"user_id":userData.userId
                                     };
     self.params = params;
     FBRequest *request = [FBAPI postWithUrlString:URLFiuGoods requestDictionary:params delegate:self];

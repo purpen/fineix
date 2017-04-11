@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "UIBarButtonItem+Helper.h"
 #import "Fiu.h"
-#import "UserInfo.h"
-#import "UserInfoEntity.h"
 
 @protocol FBNavigationBarItemsDelegate <NSObject>
 

@@ -18,8 +18,7 @@
 #import "WXApi.h"
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
-#import "UserInfo.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "THNInformationViewController.h"
 #import "THNBingViewController.h"
 #import "THNRedEnvelopeView.h"
@@ -137,12 +136,10 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
         NSDictionary *dataDic = [result objectForKey:@"data"];
         if ([[dataDic objectForKey:@"has_user"] isEqualToNumber:@1]){
             //用户存在，更新当前用户的信息
-            UserInfo *userinfo = [UserInfo mj_objectWithKeyValues:[dataDic objectForKey:@"user"]];
+            THNUserData *userinfo = [THNUserData mj_objectWithKeyValues:[dataDic objectForKey:@"user"]];
+            userinfo.isLogin = YES;
             [userinfo saveOrUpdate];
-            [userinfo updateUserInfoEntity];
             
-            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-            entity.isLogin = YES;
             NSString *str = dataDic[@"user"][@"identify"][@"is_scene_subscribe"];
             if ([str integerValue] == 0){
                 //完善个人信息
@@ -150,7 +147,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
                 [self.navigationController pushViewController:vc animated:YES];
             }else{
                 [self dismissViewControllerAnimated:YES completion:^{
-                    if (entity.is_bonus == 1) {
+                    if (userinfo.is_bonus == 1) {
                         THNRedEnvelopeView *alartView = [[THNRedEnvelopeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
                         [alartView thn_showRedEnvelopeViewOnWindowWithText:NSLocalizedString(@"SendOldRed", nil)];
                     }

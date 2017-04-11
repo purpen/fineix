@@ -16,7 +16,7 @@
 #import "GoodsCarViewController.h"
 #import "MyPageViewController.h"
 
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "THNLoginRegisterViewController.h"
 #import "PictureToolViewController.h"
 #import "THNLoginRegisterViewController.h"
@@ -44,16 +44,16 @@
 {
     //这里我判断的是当前点击的tabBarItem的标题
     if ([viewController.tabBarItem.title isEqualToString:NSLocalizedString(@"TabBar_MyCenter", nil)]) {
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        THNUserData *userdata = [[THNUserData findAll] lastObject];
         FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
             NSDictionary * dataDic = [result objectForKey:@"data"];
-            entity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
+            userdata.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
         }];
         
-        if (entity.isLogin) {
+        if (userdata.isLogin) {
             [self thn_clearTabBarItemBadge];
             return YES;
         } else {

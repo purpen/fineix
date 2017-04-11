@@ -7,7 +7,7 @@
 //
 
 #import "THNHotUserCollectionViewCell.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 
 @interface THNHotUserCollectionViewCell () {
     NSString *_userId;
@@ -209,8 +209,8 @@
 
 #pragma mark - 获取用户登录信息
 - (BOOL)isUserLogin {
-    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
-    return entity.isLogin;
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    return userdata.isLogin;
 }
 
 @end

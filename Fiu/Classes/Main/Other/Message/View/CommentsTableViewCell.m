@@ -9,7 +9,7 @@
 #import "CommentsTableViewCell.h"
 #import "Fiu.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "UserInfo.h"
+#import "THNUserData.h"
 #import "TipNumberView.h"
 #import "THNSceneDetalViewController.h"
 
@@ -164,7 +164,7 @@
     return _lineView;
 }
 
--(void)setUIWithModel:(UserInfo *)model{
+-(void)setUIWithModel:(THNUserData *)model{
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:model.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"user"]];
     self.timeLabel.text = model.birthday;
     self.timeLabelTwo.text = model.birthday;

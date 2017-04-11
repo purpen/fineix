@@ -10,14 +10,13 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVFoundation/AVMediaFormat.h>
 #import <AudioToolbox/AudioToolbox.h>
-#import "UserInfo.h"
+#import "THNUserData.h"
 #import "Fiu.h"
 #import "SVProgressHUD.h"
 #import "HomePageViewController.h"
 #import "MyQrCodeViewController.h"
 #import "FBGoodsInfoViewController.h"
 #import "FBGoodsInfoViewController.h"
-#import "UserInfoEntity.h"
 #import "THNSceneDetalViewController.h"
 #import "THNDomainInfoViewController.h"
 
@@ -36,7 +35,7 @@ static NSString *const referral_code = @"referral_code=";
 @property(nonatomic,strong) AVCaptureMetadataOutput *output;
 @property(nonatomic,strong) AVCaptureSession *session;
 @property(nonatomic,strong) AVCaptureVideoPreviewLayer *preview;//预览图层
-@property(nonatomic,strong) UserInfo *model;//二维码扫描结果
+@property(nonatomic,strong) THNUserData *model;//二维码扫描结果
 @property(nonatomic,strong) UIImageView *line;//动画线
 @property(nonatomic,strong) UIImageView *imageView;//边框
 @property(nonatomic,copy) NSString *resultStr;//记录扫描结果
@@ -320,8 +319,8 @@ static NSString *const referral_code = @"referral_code=";
             HomePageViewController *homeOpage = [[HomePageViewController alloc] init];
             homeOpage.type = @2;
             homeOpage.userId = infoId;
-            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-            if ([entity.userId isEqualToString:infoId]) {
+            THNUserData *userdata = [[THNUserData findAll] lastObject];
+            if ([userdata.userId isEqualToString:infoId]) {
                 homeOpage.isMySelf = YES;
             }else{
                 homeOpage.isMySelf = NO;

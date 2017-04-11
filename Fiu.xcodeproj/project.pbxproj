@@ -332,8 +332,6 @@
 		1F2AFD871D88186C00DA6035 /* THNSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2AFD4E1D88186C00DA6035 /* THNSignUpViewController.xib */; };
 		1F2AFD881D88186C00DA6035 /* NSNumber+UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2AFD521D88186C00DA6035 /* NSNumber+UserModel.m */; };
 		1F2AFD891D88186C00DA6035 /* NSString+UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2AFD541D88186C00DA6035 /* NSString+UserModel.m */; };
-		1F2AFD8A1D88186C00DA6035 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2AFD561D88186C00DA6035 /* UserInfo.m */; };
-		1F2AFD8B1D88186C00DA6035 /* UserInfoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2AFD581D88186C00DA6035 /* UserInfoEntity.m */; };
 		1F2AFD8C1D88186C00DA6035 /* RecommendedScenarioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2AFD5B1D88186C00DA6035 /* RecommendedScenarioModel.m */; };
 		1F2AFD8D1D88186C00DA6035 /* THNFocusUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2AFD5D1D88186C00DA6035 /* THNFocusUserModel.m */; };
 		1F2AFD8E1D88186C00DA6035 /* THNTopicsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2AFD5F1D88186C00DA6035 /* THNTopicsModel.m */; };
@@ -853,6 +851,7 @@
 		D8E8FFCE1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFCD1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.m */; };
 		D8F80B8E1DD30F2700C086FA /* THNAdjustView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F80B8D1DD30F2700C086FA /* THNAdjustView.m */; };
 		D8F80B911DD3103500C086FA /* THNAdjustCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F80B901DD3103500C086FA /* THNAdjustCollectionViewCell.m */; };
+		F52C5E9E1E9C6B1900DF12A8 /* THNUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = F52C5E9D1E9C6B1900DF12A8 /* THNUserData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1428,10 +1427,6 @@
 		1F2AFD521D88186C00DA6035 /* NSNumber+UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+UserModel.m"; sourceTree = "<group>"; };
 		1F2AFD531D88186C00DA6035 /* NSString+UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UserModel.h"; sourceTree = "<group>"; };
 		1F2AFD541D88186C00DA6035 /* NSString+UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UserModel.m"; sourceTree = "<group>"; };
-		1F2AFD551D88186C00DA6035 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
-		1F2AFD561D88186C00DA6035 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
-		1F2AFD571D88186C00DA6035 /* UserInfoEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoEntity.h; sourceTree = "<group>"; };
-		1F2AFD581D88186C00DA6035 /* UserInfoEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoEntity.m; sourceTree = "<group>"; };
 		1F2AFD5A1D88186C00DA6035 /* RecommendedScenarioModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendedScenarioModel.h; sourceTree = "<group>"; };
 		1F2AFD5B1D88186C00DA6035 /* RecommendedScenarioModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendedScenarioModel.m; sourceTree = "<group>"; };
 		1F2AFD5C1D88186C00DA6035 /* THNFocusUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNFocusUserModel.h; sourceTree = "<group>"; };
@@ -2366,6 +2361,8 @@
 		D8F80B8D1DD30F2700C086FA /* THNAdjustView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAdjustView.m; sourceTree = "<group>"; };
 		D8F80B8F1DD3103500C086FA /* THNAdjustCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNAdjustCollectionViewCell.h; sourceTree = "<group>"; };
 		D8F80B901DD3103500C086FA /* THNAdjustCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAdjustCollectionViewCell.m; sourceTree = "<group>"; };
+		F52C5E9C1E9C6B1900DF12A8 /* THNUserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNUserData.h; sourceTree = "<group>"; };
+		F52C5E9D1E9C6B1900DF12A8 /* THNUserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNUserData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3855,10 +3852,8 @@
 				1F2AFD521D88186C00DA6035 /* NSNumber+UserModel.m */,
 				1F2AFD531D88186C00DA6035 /* NSString+UserModel.h */,
 				1F2AFD541D88186C00DA6035 /* NSString+UserModel.m */,
-				1F2AFD551D88186C00DA6035 /* UserInfo.h */,
-				1F2AFD561D88186C00DA6035 /* UserInfo.m */,
-				1F2AFD571D88186C00DA6035 /* UserInfoEntity.h */,
-				1F2AFD581D88186C00DA6035 /* UserInfoEntity.m */,
+				F52C5E9C1E9C6B1900DF12A8 /* THNUserData.h */,
+				F52C5E9D1E9C6B1900DF12A8 /* THNUserData.m */,
 			);
 			path = DBModel;
 			sourceTree = "<group>";
@@ -6263,7 +6258,6 @@
 				1F2A908D1CF40277005116C7 /* WXSignParams.m in Sources */,
 				D87035301DEC1B17001FBBF1 /* THNRefundTimeTableViewCell.m in Sources */,
 				D8C095021D752DEC00908491 /* FiuPeopleListViewController.m in Sources */,
-				1F2AFD8B1D88186C00DA6035 /* UserInfoEntity.m in Sources */,
 				D87035271DEC14DE001FBBF1 /* THNRefundListViewController.m in Sources */,
 				1F2AFD901D88186C00DA6035 /* THNFucosPeopleView.m in Sources */,
 				1F2AFD7E1D88186C00DA6035 /* THNLoginRegisterViewController.m in Sources */,
@@ -6300,7 +6294,6 @@
 				D840F0941D93B57700CE9FB7 /* THNRemindModelTargetObj.m in Sources */,
 				D8884DF21E57007800CEE159 /* DominInfoLocation.m in Sources */,
 				D857AC3C1DE836F000F924E8 /* THNOrderOperationView.m in Sources */,
-				1F2AFD8A1D88186C00DA6035 /* UserInfo.m in Sources */,
 				D80878E51D6B015100C1FFA0 /* THNCategoryViewController.m in Sources */,
 				D8117B2D1E5AAEA70094E7EB /* THNSceneImageTableViewCell.m in Sources */,
 				1F18041F1E55976100722AF5 /* THNClassificationModel.m in Sources */,
@@ -6426,6 +6419,7 @@
 				D857C4951E2F427B00569B3D /* THNTradingData.m in Sources */,
 				1F2AFD951D88186C00DA6035 /* THNTopicView.m in Sources */,
 				1F2A90371CF40277005116C7 /* IntegralRulesView.m in Sources */,
+				F52C5E9E1E9C6B1900DF12A8 /* THNUserData.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
 				D80669891D6F3F82007FD81E /* FBGoodsInfoModelRelationProduct.m in Sources */,
 				1F2AFCAB1D88170B00DA6035 /* TipNumberView.m in Sources */,

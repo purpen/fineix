@@ -8,9 +8,8 @@
 
 #import "FocusOnTableViewCell.h"
 #import "Fiu.h"
-#import "UserInfo.h"
+#import "THNUserData.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "UserInfoEntity.h"
 #import "TalentView.h"
 #import "TipNumberView.h"
 
@@ -117,11 +116,11 @@
     return _lineView;
 }
 
--(void)setUIWithModel:(UserInfo *)model andType:(NSNumber *)type{
+-(void)setUIWithModel:(THNUserData *)model andType:(NSNumber *)type{
     
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
     if ([type isEqualToNumber:@1]) {
-        if ([entity.userId intValue] == [model.userId intValue]) {
+        if ([userdata.userId intValue] == [model.userId intValue]) {
             self.focusOnBtn.hidden = YES;
         }else{
             self.focusOnBtn.hidden = NO;
@@ -138,7 +137,7 @@
         }
 
     }else if ([type isEqualToNumber:@0]){
-        if ([entity.userId intValue] == [model.userId intValue]) {
+        if ([userdata.userId intValue] == [model.userId intValue]) {
             self.focusOnBtn.hidden = YES;
         }else{
             self.focusOnBtn.hidden = NO;

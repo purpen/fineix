@@ -12,9 +12,8 @@
 #import "Fiu.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
-#import "UserInfo.h"
-#import "UserInfoEntity.h"
 #import "THNInformationViewController.h"
+#import "THNUserData.h"
 
 @interface BindIngViewController ()<UITextFieldDelegate>
 
@@ -73,11 +72,9 @@ static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textCo
             [request startRequestSuccess:^(FBRequest *request, id result) {
                 //请求成功，进行用户信息关联
                 NSDictionary *dataDic = [result objectForKey:@"data"];
-                UserInfo *info = [UserInfo mj_objectWithKeyValues:dataDic];
-                [info saveOrUpdate];
-                [info updateUserInfoEntity];
-                UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-                entity.isLogin = YES;
+                THNUserData *userData = [THNUserData mj_objectWithKeyValues:dataDic];
+                userData.isLogin = YES;
+                [userData saveOrUpdate];
                 
                 [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"loginSuccessful", nil)];
                 //推荐感兴趣的情景
@@ -141,11 +138,10 @@ static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textCo
     [request startRequestSuccess:^(FBRequest *request, id result) {
         //如果请求成功，并获取用户信息来更新当前用户信息
         NSDictionary *dataDic = [result objectForKey:@"data"];
-        UserInfo *info = [UserInfo mj_objectWithKeyValues:dataDic];
-        [info saveOrUpdate];
-        [info updateUserInfoEntity];
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        entity.isLogin = YES;
+        THNUserData *userData = [THNUserData mj_objectWithKeyValues:dataDic];
+        userData.isLogin = YES;
+        [userData saveOrUpdate];
+        
         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
         NSString *str = dataDic[@"identify"][@"is_scene_subscribe"];
         if ([str integerValue] == 0) {

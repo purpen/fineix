@@ -26,6 +26,7 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import "BonusViewController.h"
 #import "THNLoginRegisterViewController.h"
+#import "THNUserData.h"
 
 @interface THNArticleDetalViewController ()<FBNavigationBarItemsDelegate,UIWebViewDelegate>
 
@@ -161,8 +162,8 @@
                     HomePageViewController *homeOpage = [[HomePageViewController alloc] init];
                     homeOpage.type = @2;
                     homeOpage.userId = infoId;
-                    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-                    if ([entity.userId isEqualToString:infoId]) {
+                    THNUserData *userdata = [[THNUserData findAll] lastObject];
+                    if ([userdata.userId isEqualToString:infoId]) {
                         homeOpage.isMySelf = YES;
                     }else{
                         homeOpage.isMySelf = NO;
@@ -228,8 +229,8 @@
                 case 16:
                 //领取红包
                 {
-                    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-                    if (entity.isLogin) {
+                    THNUserData *userdata = [[THNUserData findAll] lastObject];
+                    if (userdata.isLogin) {
                         BonusViewController *vc = [[BonusViewController alloc] init];
                         [self.navigationController pushViewController:vc animated:YES];
                     } else {

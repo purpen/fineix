@@ -8,7 +8,7 @@
 
 #import "MyFansActionSheetViewController.h"
 #import "Fiu.h"
-#import "UserInfo.h"
+#import "THNUserData.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "FindFriendModel.h"
 
@@ -49,7 +49,7 @@
     self.sheetLabel.text = [NSString stringWithFormat:@"停止关注 %@",findFriendModel.nickName];
 }
 
--(void)setUIWithModel:(UserInfo *)model{
+-(void)setUIWithModel:(THNUserData *)model{
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:model.mediumAvatarUrl]];
     self.sheetLabel.text = [NSString stringWithFormat:@"停止关注 %@",model.nickname];
 }

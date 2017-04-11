@@ -7,7 +7,7 @@
 //
 
 #import "SubscribeViewController.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "SVProgressHUD.h"
 #import "FiuSceneRow.h"
 #import "FBAPI.h"
@@ -69,11 +69,11 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 - (void)requestDataForOderListOperation
 {
     [SVProgressHUD show];
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if (entity.interest_scene_cate.length == 0) {
-        entity.interest_scene_cate = @"null";
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    if (userdata.interest_scene_cate.length == 0) {
+        userdata.interest_scene_cate = @"null";
     }
-    self.allSceneListRequest = [FBAPI getWithUrlString:@"/scene_sight/getlist" requestDictionary:@{@"size":@"10", @"page":@(_currentPageNumber + 1),@"category_ids" : entity.interest_scene_cate} delegate:self];
+    self.allSceneListRequest = [FBAPI getWithUrlString:@"/scene_sight/getlist" requestDictionary:@{@"size":@"10", @"page":@(_currentPageNumber + 1),@"category_ids" : userdata.interest_scene_cate} delegate:self];
     
     [self.allSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -84,8 +84,8 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
         }
         
         [self.view addSubview:self.headView];
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        FBRequest *request1 = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+        THNUserData *userdata = [[THNUserData findAll] lastObject];
+        FBRequest *request1 = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":userdata.userId} delegate:self];
         [request1 startRequestSuccess:^(FBRequest *request, id result) {
             NSArray *ary = [result objectForKey:@"data"][@"interest_scene_cate"];
             self.headView.num = ary.count;

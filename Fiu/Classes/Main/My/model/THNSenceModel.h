@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class UserInfo;
+@class THNUserData;
 
 @interface THNSenceModel : NSObject
 
@@ -18,7 +18,7 @@
 /**  */
 @property(nonatomic,copy) NSString *title;
 /**  */
-@property (nonatomic, strong) UserInfo *user_info;
+@property (nonatomic, strong) THNUserData *user_info;
 /**  */
 @property (nonatomic, strong) NSNumber *is_love;
 

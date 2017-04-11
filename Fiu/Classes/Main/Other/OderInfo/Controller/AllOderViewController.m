@@ -12,12 +12,12 @@
 #import "Fiu.h"
 #import "CounterModel.h"
 #import "ReturnViewController.h"
-#import "UserInfoEntity.h"
 #import "NSObject+MJKeyValue.h"
 #import "SVProgressHUD.h"
 #import "TaoBaoOrderViewController.h"
 #import "JDOrderViewController.h"
 #import "TianMaoOrderViewController.h"
+#import "THNUserData.h"
 
 @interface AllOderViewController ()<FBNavigationBarItemsDelegate>
 
@@ -46,8 +46,8 @@
 }
 
 -(void)netGetData{
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+    THNUserData *userData = [[THNUserData findAll] lastObject];
+    FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":userData.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dataDict = result[@"data"];
         NSDictionary *counterDict = [dataDict objectForKey:@"counter"];

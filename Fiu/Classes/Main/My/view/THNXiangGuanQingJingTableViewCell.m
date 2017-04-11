@@ -22,6 +22,7 @@
 #import "THNDataInfoTableViewCell.h"
 #import "THNLoginRegisterViewController.h"
 #import "FBAlertViewController.h"
+#import "THNUserData.h"
 
 static NSString *const sceneImgCellId = @"SceneImgCellId";
 static NSString *const userInfoCellId = @"UserInfoCellId";
@@ -136,20 +137,20 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 
 #pragma mark - 获取用户登录信息
 - (BOOL)isUserLogin {
-    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
-    return entity.isLogin;
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    return userdata.isLogin;
 }
 
 #pragma mark - 获取用户登录id
 - (NSString *)getLoginUserID {
-    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
-    return entity.userId;
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    return userdata.userId;
 }
 
 #pragma mark - 是否用户本人
 - (BOOL)isLoginUserSelf:(NSString *)userId {
-    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
-    if ([userId isEqualToString:entity.userId])
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    if ([userId isEqualToString:userdata.userId])
         return YES;
     else
         return NO;
@@ -308,8 +309,8 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 
 //  收藏
 - (void)thn_networkFavoriteData:(NSString *)idx {
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if (entity.isLogin == NO) {
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    if (userdata.isLogin == NO) {
         THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
         [self.vc presentViewController:vc animated:YES completion:nil];
     }else{
@@ -343,8 +344,8 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 
 #pragma mark 收藏情境
 - (void)thn_networkFavoriteData{
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if (entity.isLogin == NO) {
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    if (userdata.isLogin == NO) {
         THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
         [self.vc presentViewController:vc animated:YES completion:nil];
     }else{
@@ -390,8 +391,8 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 //  点赞
 - (void)thn_networkLikeSceneData:(NSString *)idx {
     
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if (entity.isLogin == NO) {
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    if (userdata.isLogin == NO) {
         THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
         [self.vc presentViewController:vc animated:YES completion:nil];
     }else{

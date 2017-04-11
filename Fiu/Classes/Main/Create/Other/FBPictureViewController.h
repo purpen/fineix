@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
 #import "Masonry.h"
-#import "UserInfo.h"
-#import "UserInfoEntity.h"
 
 @protocol FBPictureViewControllerDelegate <NSObject>
 

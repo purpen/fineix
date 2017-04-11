@@ -11,10 +11,9 @@
 #import "SVProgressHUD.h"
 #import "ShareViewController.h"
 #import "Fiu.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
-#import "UserInfo.h"
 #import "OptionViewController.h"
 #import "AboutViewController.h"
 #import "Fiu.h"
@@ -246,10 +245,7 @@ static NSString *const logOut = @"/auth/logout";
     //退出登录操作
     if ([request.flag isEqualToString:logOut]) {
         //更新用户信息，并且登录状态改变
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        entity.isLogin = NO;
-        [entity clear];
-        [UserInfo clearTable];
+        [THNUserData clearTable];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSceneData" object:nil];
         [SVProgressHUD showSuccessWithStatus:@"登出成功"];
         //回到首页

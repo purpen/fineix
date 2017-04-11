@@ -15,13 +15,12 @@
 #import "ShieldingViewController.h"
 #import "Fiu.h"
 #import "AccountManagementViewController.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "DirectMessagesViewController.h"
 #import "SVProgressHUD.h"
 #import "MJRefresh.h"
 #import "HomeSceneListRow.h"
 #import "MyFansActionSheetViewController.h"
-#import "UserInfo.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIImage+Helper.h"
 #import "HomePageViewController.h"
@@ -41,7 +40,7 @@
     NSMutableArray *_fiuSceneIdList;
     NSMutableArray *_sceneListMarr;
     NSMutableArray *_sceneIdMarr;
-    UserInfo *_model;
+    THNUserData *_model;
     NSInteger _fansN;
     UITapGestureRecognizer *_scenarioTap;
 }
@@ -330,7 +329,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
         _fansN = [dataDict[@"fans_count"] integerValue];
         
         if (self.isMySelf) {
-            UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+            THNUserData *userInfo = [THNUserData mj_objectWithKeyValues:[result objectForKey:@"data"]];
             userInfo.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
             NSArray *areasAry = [NSArray arrayWithArray:dataDict[@"areas"]];
             if (areasAry.count) {
@@ -338,14 +337,12 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
                 userInfo.city = areasAry[1];
             }
             userInfo.is_expert = [result objectForKey:@"data"][@"identify"][@"is_expert"];
+            userInfo.isLogin = YES;
             [userInfo saveOrUpdate];
-            [userInfo updateUserInfoEntity];
-            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-            entity.isLogin = YES;
-            self.titleLabel.text = entity.nickname;
+            self.titleLabel.text = userInfo.nickname;
             //背景图
         }else{
-            _model = [UserInfo mj_objectWithKeyValues:dataDict];
+            _model = [THNUserData mj_objectWithKeyValues:dataDict];
             if (![dataDict[@"label"] isKindOfClass:[NSNull class]]) {
                 _model.label = dataDict[@"label"];
             }
@@ -719,9 +716,10 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
             if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
                 
                 NSString * fileUrl = [[result objectForKey:@"data"] objectForKey:@"file_url"];
-                UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
-                userEntity.mediumAvatarUrl = fileUrl;
-                [userEntity updateUserInfo];
+                THNUserData *userdata = [[THNUserData findAll] lastObject];
+                userdata.mediumAvatarUrl = fileUrl;
+                userdata.isLogin = YES;
+                [userdata saveOrUpdate];
                 BackgroundCollectionViewCell *cell = (BackgroundCollectionViewCell*)[self.myCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
                 [cell.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:fileUrl] placeholderImage:nil];
                 
@@ -763,11 +761,11 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
         NSString * message = [result objectForKey:@"message"];
         if ([result objectForKey:@"success"]) {
             NSString * fileUrl = [[result objectForKey:@"data"] objectForKey:@"head_pic_url"];
-            UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
-            userEntity.head_pic_url = fileUrl;
-            [userEntity updateUserInfo];
+            THNUserData *userdata = [[THNUserData findAll] lastObject];
+            userdata.head_pic_url = fileUrl;
+            [userdata saveOrUpdate];
             BackgroundCollectionViewCell *cell = (BackgroundCollectionViewCell*)[self.myCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-            [cell.bgImageView sd_setImageWithURL:[NSURL URLWithString:userEntity.head_pic_url] placeholderImage:nil];
+            [cell.bgImageView sd_setImageWithURL:[NSURL URLWithString:userdata.head_pic_url] placeholderImage:nil];
             [SVProgressHUD showSuccessWithStatus:message];
         } else {
             [SVProgressHUD showInfoWithStatus:message];

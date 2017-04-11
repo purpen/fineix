@@ -11,11 +11,10 @@
 #import "HomePageViewController.h"
 #import "FBAPI.h"
 #import "FBRequest.h"
-#import "UserInfo.h"
+#import "THNUserData.h"
 #import "SVProgressHUD.h"
 #import "MJRefresh.h"
 #import "MyFansActionSheetViewController.h"
-#import "UserInfoEntity.h"
 #import "FocusNonView.h"
 #import "TipNumberView.h"
 
@@ -74,7 +73,7 @@
                 
             } else if ([[rowsDict objectForKey:@"follows"] isKindOfClass:[NSDictionary class]]){
                 NSDictionary *followsDict = [rowsDict objectForKey:@"follows"];
-                UserInfo *model = [[UserInfo alloc] init];
+                THNUserData *model = [[THNUserData alloc] init];
                 
                 model.is_love = [followsDict[@"is_love"] integerValue];
                 model.userId = followsDict[@"user_id"];
@@ -120,7 +119,7 @@
                 
             } else if ([[rowsDict objectForKey:@"follows"] isKindOfClass:[NSDictionary class]]){
                 NSDictionary *followsDict = [rowsDict objectForKey:@"follows"];
-                UserInfo *model = [[UserInfo alloc] init];
+                THNUserData *model = [[THNUserData alloc] init];
                 
                 model.is_love = [followsDict[@"is_love"] integerValue];
                 model.userId = followsDict[@"user_id"];
@@ -136,8 +135,8 @@
         }
         if (_modelAry.count == 0) {
             [self.view addSubview:self.scenarioNonView];
-            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-            if ([self.userId isEqual:entity.userId]) {
+            THNUserData *userdata = [[THNUserData findAll] lastObject];
+            if ([self.userId isEqual:userdata.userId]) {
                 self.scenarioNonView.tipLabel.text = @"偷偷告诉你：关注越多，推送越精准哦";
             }else{
                 self.scenarioNonView.tipLabel.text = @"你一定是想关注我，才点进来的对吧";
@@ -239,10 +238,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     HomePageViewController *v = [[HomePageViewController alloc] init];
-    UserInfo *model = _modelAry[indexPath.row];
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    v.userId = model.userId;
-    if ([entity.userId integerValue] == [model.userId integerValue]) {
+    THNUserData *model = _modelAry[indexPath.row];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    v.userId = userdata.userId;
+    if ([userdata.userId integerValue] == [model.userId integerValue]) {
         v.isMySelf = YES;
     }else{
         v.isMySelf = NO;
@@ -255,7 +254,7 @@
     
     if (sender.selected) {
         MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
-        UserInfo *model = _modelAry[sender.tag];
+        THNUserData *model = _modelAry[sender.tag];
         [sheetVC setUIWithModel:model];
         sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -264,7 +263,7 @@
         [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
         [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
     }else{
-        UserInfo *model = _modelAry[sender.tag];
+        THNUserData *model = _modelAry[sender.tag];
         
         //请求数据
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
@@ -287,7 +286,7 @@
 
 -(void)clickStopBtn:(UIButton*)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
-    UserInfo *model = _modelAry[sender.tag];
+    THNUserData *model = _modelAry[sender.tag];
     model.is_love = 0;
     [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];

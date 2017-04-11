@@ -1,17 +1,17 @@
 //
-//  UserInfoEntity.h
-//  fineix
+//  THNUserModel.h
+//  Fiu
 //
-//  Created by THN-Dong on 16/3/22.
-//  Copyright © 2016年 taihuoniao. All rights reserved.
+//  Created by dong on 2017/4/11.
+//  Copyright © 2017年 taihuoniao. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "JKDBModel.h"
+#import "MJExtension.h"
 
-@interface UserInfoEntity : NSObject
+@interface THNUserData : JKDBModel
 
-@property (nonatomic, assign) int pk;
-@property (nonatomic, assign) BOOL isLogin;
+@property(nonatomic,copy) NSString *_id;
 @property (nonatomic, copy) NSString * userId;
 @property (nonatomic, copy) NSString * account;
 @property (nonatomic, copy) NSString * nickname;
@@ -24,11 +24,13 @@
 @property (nonatomic, copy) NSString * label;
 @property (nonatomic, strong) NSNumber * birdCoin;
 @property (nonatomic, copy) NSString * summary;
+@property (nonatomic, assign) BOOL whetherFocusOn;
 @property(nonatomic,copy) NSString *city;
 @property(nonatomic,copy) NSString *prin;
 @property(nonatomic,copy) NSString *follow_count;
 @property(nonatomic,copy) NSString *head_pic_url;
 @property(nonatomic,assign) NSInteger is_love;
+@property(nonatomic,assign) BOOL isLogin;
 @property(nonatomic,copy) NSString *is_expert;
 @property(nonatomic,copy) NSString *expert_label;
 @property(nonatomic,copy) NSString *expert_info;
@@ -38,9 +40,14 @@
 @property(nonatomic,copy) NSString *assets;
 /** 订阅的情境主题 */
 @property (nonatomic, copy) NSString *interest_scene_cate;
-
+@property(nonatomic,assign) NSInteger sceneCateCount;
+/** 小的头像 */
+@property(nonatomic,copy) NSString *avatar_url;
+/**  */
+@property(nonatomic,copy) NSString *province_id;
 /**
- 是否送红包
+ * is_bonus 是否送红包
+ * 0:否／ 1:是
  */
 @property (nonatomic, assign) NSInteger is_bonus;
 
@@ -58,9 +65,5 @@
  注册日期
  */
 @property (nonatomic, strong) NSString *created_on;
-
-+ (instancetype)defaultUserInfoEntity;
-- (void)updateUserInfo;
-- (void)clear;
 
 @end

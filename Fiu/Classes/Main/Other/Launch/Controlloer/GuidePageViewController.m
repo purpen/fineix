@@ -8,7 +8,6 @@
 
 #import "GuidePageViewController.h"
 #import "Fiu.h"
-#import "UserInfoEntity.h"
 #import "THNTabBarController.h"
 #import "InviteCCodeViewController.h"
 #import <MediaPlayer/MediaPlayer.h>

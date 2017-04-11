@@ -52,7 +52,6 @@
 -(void)setUIWithModel:(SystemNoticeModel *)model{
     self.tipLabel.text = model.title;
     self.timeLabel.text = model.created_at;
-    NSLog(@"图像地址  %@",model.cover_url);
     if (model.cover_url) {
         [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.cover_url] placeholderImage:[UIImage imageNamed:@""]];
         self.titleLabelTwo.hidden = YES;

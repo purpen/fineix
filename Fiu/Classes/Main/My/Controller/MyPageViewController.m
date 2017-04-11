@@ -9,7 +9,7 @@
 #import "MyPageViewController.h"
 #import "MyPageBGCollectionViewCell.h"
 #import "HomePageViewController.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "ChanelView.h"
 #import "MyPageFocusOnViewController.h"
 #import "MyFansViewController.h"
@@ -23,7 +23,7 @@
 #import "BonusViewController.h"
 #import "DeliveryAddressViewController.h"
 #import "SVProgressHUD.h"
-#import "UserInfo.h"
+#import "THNUserData.h"
 #import "TipNumberView.h"
 #import "BotView.h"
 #import "AboutViewController.h"
@@ -52,7 +52,7 @@
 {
     ChanelView *_chanelV;
     CounterModel *_counterModel;
-    UserInfo *_userInfo;
+    THNUserData *_userInfo;
 }
 @property (nonatomic,strong) UICollectionView *myCollectionView;
 @property(nonatomic,strong) UITapGestureRecognizer *myTap;
@@ -107,9 +107,9 @@
 
 -(void)signleTap1:(UITapGestureRecognizer*)sender{
     //跳转到我的主页的情景的界面
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
     HomePageViewController *myHomeVC = [[HomePageViewController alloc] init];
-    myHomeVC.userId = entity.userId;
+    myHomeVC.userId = userdata.userId;
     myHomeVC.type = @2;
     myHomeVC.isMySelf = YES;
     [self.navigationController pushViewController:myHomeVC animated:YES];
@@ -117,17 +117,17 @@
 
 -(void)signleTap2:(UITapGestureRecognizer*)sender{
     //跳转到我的主页的情景的界面
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
     MyPageFocusOnViewController *view = [[MyPageFocusOnViewController alloc] init];
-    view.userId = entity.userId;
+    view.userId = userdata.userId;
     [self.navigationController pushViewController:view animated:YES];
 }
 
 -(void)signleTap3:(UITapGestureRecognizer*)sender{
     //跳转到我的主页的情景的界面
     MyFansViewController *view = [[MyFansViewController alloc] init];
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    view.userId = entity.userId;
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    view.userId = userdata.userId;
     view.cleanRemind = @"0";
     [self.navigationController pushViewController:view animated:YES];
 }
@@ -173,15 +173,15 @@
 
 
 -(void)netGetData{
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":userdata.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dataDict = result[@"data"];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
         _chanelV.focusNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"follow_count"]];
         _chanelV.fansNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"fans_count"]];
         
-        _userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+        _userInfo = [THNUserData mj_objectWithKeyValues:[result objectForKey:@"data"]];
         NSArray *ary = [result objectForKey:@"data"][@"interest_scene_cate"];
         NSMutableString *str = [NSMutableString string];
         for (int i = 0; i < ary.count; i ++) {
@@ -202,12 +202,9 @@
         _userInfo.is_expert = [result objectForKey:@"data"][@"identify"][@"is_expert"];
         _userInfo.allianceId = [result objectForKey:@"data"][@"identify"][@"alliance_id"];
         _userInfo.storageId = [NSString stringWithFormat:@"%zi", [[result objectForKey:@"data"][@"identify"][@"storage_id"] integerValue]];
-        
+        _userInfo.isLogin = YES;
         [_userInfo saveOrUpdate];
-        [_userInfo updateUserInfoEntity];
-        
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        entity.isLogin = YES;
+
         NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
         _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
         _counterModel.subscription_count = [result objectForKey:@"data"][@"subscription_count"];
@@ -625,9 +622,9 @@
 
 -(void)clickMyTap:(UITapGestureRecognizer*)gesture{
     //跳转到我的主页的情景的界面
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
     HomePageViewController *myHomeVC = [[HomePageViewController alloc] init];
-    myHomeVC.userId = entity.userId;
+    myHomeVC.userId = userdata.userId;
     myHomeVC.type = @2;
     myHomeVC.isMySelf = YES;
     [self.navigationController pushViewController:myHomeVC animated:YES];

@@ -11,7 +11,7 @@
 #import "FBRequest.h"
 #import "FBAPI.h"
 #import "SVProgressHUD.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "THNScenarioViewController.h"
 
 @interface THNAgeViewController ()
@@ -140,9 +140,10 @@ static NSString *updatInfo = @"/my/update_profile";
         [SVProgressHUD dismiss];
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
             
-            UserInfoEntity *entiey = [UserInfoEntity defaultUserInfoEntity];
-            entiey.age_group = [result objectForKey:@"data"][@"age_group"];
-            entiey.assets = [result objectForKey:@"data"][@"assets"];
+            THNUserData *userdata = [[THNUserData findAll] lastObject];
+            userdata.age_group = [result objectForKey:@"data"][@"age_group"];
+            userdata.assets = [result objectForKey:@"data"][@"assets"];
+            [userdata saveOrUpdate];
             THNScenarioViewController *vc = [[THNScenarioViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         } else {

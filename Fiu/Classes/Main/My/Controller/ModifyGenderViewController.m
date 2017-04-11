@@ -7,7 +7,7 @@
 //
 
 #import "ModifyGenderViewController.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "FBAPI.h"
 #import "SVProgressHUD.h"
 
@@ -29,8 +29,8 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    _sex = entity.sex;
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    _sex = userdata.sex;
     switch ([_sex intValue]) {
         case 0:
             self.secretBtn.selected = YES;
@@ -76,8 +76,8 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 
 
 -(void)leftBarItemSelected{
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if ([_sex intValue] != [entity.sex intValue]) {
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    if ([_sex intValue] != [userdata.sex intValue]) {
         //进行更新
         FBRequest *request = [FBAPI postWithUrlString:UpdateInfoURL requestDictionary:@{@"sex":_sex} delegate:self];
         [request startRequest];
@@ -90,9 +90,9 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 -(void)requestSucess:(FBRequest *)request result:(id)result{
     NSString *message = [result objectForKey:@"message"];
     if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        entity.sex = _sex;
-        [entity updateUserInfo];
+        THNUserData *userdata = [[THNUserData findAll] lastObject];
+        userdata.sex = _sex;
+        [userdata saveOrUpdate];
         [SVProgressHUD showSuccessWithStatus:message];
         request = nil;
         [self.navigationController popViewControllerAnimated:YES];

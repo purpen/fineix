@@ -10,6 +10,7 @@
 #import "IdentityTagModel.h"
 #import "TagsCollectionViewCell.h"
 #import "TheOfficialCertificationViewController.h"
+#import "THNUserData.h"
 
 #define ITEMS_COLLECTIONVIEW_TAG 7
 #define SELECTED_COLLECTIONVIEW_TAG 8
@@ -237,13 +238,10 @@
         FBRequest *request = [FBAPI postWithUrlString:@"/my/update_profile" requestDictionary:@{
                                                                                                 @"label":idStr
                                                                                                 } delegate:self];
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        entity.label = idStr;
-        [entity updateUserInfo];
         [request startRequestSuccess:^(FBRequest *request, id result) {
-            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-            entity.label = idStr;
-            [entity updateUserInfo];
+            THNUserData *userdata = [[THNUserData findAll] lastObject];
+            userdata.label = idStr;
+            [userdata saveOrUpdate];
         } failure:^(FBRequest *request, NSError *error) {
             
         }];

@@ -33,6 +33,7 @@
 #import "THNQingJingZhuanTiViewController.h"
 #import <UMSocialCore/UMSocialCore.h>
 #import "SVProgressHUD.h"
+#import "MJExtension.h"
 
 static NSString *const ShareURlText = @"我在D³IN寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！>>> https://m.taihuoniao.com/d3in";
 

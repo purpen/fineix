@@ -9,7 +9,7 @@
 #import "SubscribePeopleViewController.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
-#import "UserInfo.h"
+#import "THNUserData.h"
 #import "NSObject+MJKeyValue.h"
 #import "SubscribePeopleTableViewCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -59,7 +59,7 @@ static NSString *const subscribePeople = @"/favorite";
     if ([request.flag isEqualToString:subscribePeople]) {
         //获取到用户信息
         //数据转成模型
-        UserInfo *userinfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"user"]];
+        THNUserData *userinfo = [THNUserData mj_objectWithKeyValues:[result objectForKey:@"user"]];
         userinfo.whetherFocusOn = NO;
         //模型存进数组
         [_modelAry addObject:userinfo];
@@ -79,7 +79,7 @@ static NSString *const subscribePeople = @"/favorite";
     }
     cell.headImageView.layer.masksToBounds = YES;
     cell.headImageView.layer.cornerRadius = 21;
-    UserInfo *model = _modelAry[indexPath.row];
+    THNUserData *model = _modelAry[indexPath.row];
     [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:model.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"Dina Alexander"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
@@ -103,7 +103,7 @@ static NSString *const subscribePeople = @"/favorite";
 }
 
 -(void)clickFocusBtn:(UIButton*)sender{
-    UserInfo *model = _modelAry[sender.tag];
+    THNUserData *model = _modelAry[sender.tag];
     model.whetherFocusOn = !model.whetherFocusOn;
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:sender.tag inSection:0];
     [_mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];

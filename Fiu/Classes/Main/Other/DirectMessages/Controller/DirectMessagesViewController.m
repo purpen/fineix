@@ -10,7 +10,7 @@
 #import "AXModel.h"
 #import "ChatTableViewCell.h"
 #import "FBAPI.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "Fiu.h"
 #import "SVProgressHUD.h"
 #import <SDWebImage/UIImageView+WebCache.h>

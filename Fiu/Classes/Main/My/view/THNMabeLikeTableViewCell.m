@@ -13,6 +13,7 @@
 #import "UIImageView+WebCache.h"
 #import "THNProductDongModel.h"
 #import "FBGoodsInfoViewController.h"
+#import "THNUserData.h"
 
 @interface THNMabeLikeTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource>
 
