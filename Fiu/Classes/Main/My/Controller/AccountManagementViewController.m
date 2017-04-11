@@ -9,7 +9,6 @@
 #import "AccountManagementViewController.h"
 #import "AccountView.h"
 #import "UIImage+Helper.h"
-#import "UserInfoEntity.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SVProgressHUD.h"
 #import "EditNickNameViewController.h"
@@ -17,7 +16,7 @@
 #import "ChangeSumaryViewController.h"
 #import "Fiu.h"
 #import "MyQrCodeViewController.h"
-#import "UserInfo.h"
+#import "THNUserData.h"
 #import "DatePickerViewController.h"
 #import "AddreesPickerViewController.h"
 #import "AddreesModel.h"
@@ -48,8 +47,8 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     [super viewDidLoad];
     _provinceAry = [NSMutableArray array];
     _cityAry = [NSMutableArray array];
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    _sex = entity.sex;
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    _sex = userdata.sex;
     // Do any additional setup after loading the view.
     self.delegate = self;
     self.view.backgroundColor = [UIColor lightGrayColor];
@@ -127,10 +126,10 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 -(AddreesPickerViewController *)addreesPickerVC{
     if (!_addreesPickerVC) {
         _addreesPickerVC = [[AddreesPickerViewController alloc] init];
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        if (entity.city.length != 0 && entity.prin.length != 0) {
-            _addreesPickerVC.provinceStr = entity.prin;
-            _addreesPickerVC.cityStr = entity.city;
+        THNUserData *userdata = [[THNUserData findAll] lastObject];
+        if (userdata.city.length != 0 && userdata.prin.length != 0) {
+            _addreesPickerVC.provinceStr = userdata.prin;
+            _addreesPickerVC.cityStr = userdata.city;
         }
     }
     return _addreesPickerVC;
@@ -184,11 +183,11 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     //进行更新
     FBRequest *request = [FBAPI postWithUrlString:@"/my/update_profile" requestDictionary:@{@"sex":self.sexPickerVC.sexNum} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        entity.sex = self.sexPickerVC.sexNum;
-        [entity updateUserInfo];
+        THNUserData *userdata = [[THNUserData findAll] lastObject];
+        userdata.sex = self.sexPickerVC.sexNum;
+        [userdata saveOrUpdate];
         request = nil;
-        switch ([entity.sex intValue]) {
+        switch ([userdata.sex intValue]) {
             case 0:
                 _accountView.sex.text = NSLocalizedString(@"secret", nil);
                 break;
@@ -223,17 +222,16 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    entity.isLogin = YES;
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
     //更新头像
-    [_accountView.iconUrl sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"Circle + User"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [_accountView.iconUrl sd_setImageWithURL:[NSURL URLWithString:userdata.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"Circle + User"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
-    _accountView.nickName.text = entity.nickname;
-    if (entity.prin) {
-        _accountView.adress.text = [NSString stringWithFormat:@"%@ %@",entity.prin,entity.city];
+    _accountView.nickName.text = userdata.nickname;
+    if (userdata.prin) {
+        _accountView.adress.text = [NSString stringWithFormat:@"%@ %@",userdata.prin,userdata.city];
     }
-    switch ([entity.sex intValue]) {
+    switch ([userdata.sex intValue]) {
         case 0:
             _accountView.sex.text = NSLocalizedString(@"secret", nil);
             break;
@@ -247,11 +245,11 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
         default:
             break;
     }
-    _accountView.birthday.text = entity.birthday;
-    if (entity.summary.length == 0) {
-        _accountView.personalitySignatureLabel.text = [NSString stringWithFormat:@"%@",entity.label];
+    _accountView.birthday.text = userdata.birthday;
+    if (userdata.summary.length == 0) {
+        _accountView.personalitySignatureLabel.text = [NSString stringWithFormat:@"%@",userdata.label];
     }else{
-        _accountView.personalitySignatureLabel.text = [NSString stringWithFormat:@"%@ | %@",entity.label,entity.summary];
+        _accountView.personalitySignatureLabel.text = [NSString stringWithFormat:@"%@ | %@",userdata.label,userdata.summary];
     }
     FBRequest *request  =[FBAPI postWithUrlString:@"/my/fetch_talent" requestDictionary:nil delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
@@ -262,7 +260,7 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
         if ([verifiedNum isEqualToNumber:@1]){
             str = NSLocalizedString(@"refused", nil);
         }else if ([verifiedNum isEqualToNumber:@2]){
-            str = entity.expert_label;
+            str = userdata.expert_label;
         }
         _accountView.IdentityTagsLabel.text = str;
     } failure:^(FBRequest *request, NSError *error) {
@@ -277,8 +275,8 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 
 -(void)clickSexBtn:(UIButton*)sender{
     self.sexPickerVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    _sex = entity.sex;
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    _sex = userdata.sex;
     [self presentViewController:_sexPickerVC animated:NO completion:^{
         [self.sexPickerVC.sexPickerView selectRow:[_sex intValue] inComponent:0 animated:NO];
         self.sexPickerVC.sexNum = _sex;
@@ -346,9 +344,9 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
             
             NSString * fileUrl = [[result objectForKey:@"data"] objectForKey:@"file_url"];
-            UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
-            userEntity.mediumAvatarUrl = fileUrl;
-            [userEntity updateUserInfo];
+            THNUserData *userdata = [[THNUserData findAll] lastObject];
+            userdata.mediumAvatarUrl = fileUrl;
+            [userdata saveOrUpdate];
             [_accountView.iconUrl sd_setImageWithURL:[NSURL URLWithString:fileUrl] placeholderImage:nil];
             
             [SVProgressHUD showSuccessWithStatus:message];
@@ -361,13 +359,10 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     if ([request.flag isEqualToString:UpdateInfoURL]) {
         NSString * message = [result objectForKey:@"message"];
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
-            //            UserInfo * userInfo = [[UserInfo findAll] lastObject];
-            //            userInfo.birthday = self.birthdayLbl.text;
-            //            [userInfo update];
             
-            UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
-            userEntity.birthday = self.accountView.birthday.text;
-            [userEntity updateUserInfo];
+            THNUserData *userdata = [[THNUserData findAll] lastObject];
+            userdata.birthday = self.accountView.birthday.text;
+            [userdata saveOrUpdate];
             [SVProgressHUD showSuccessWithStatus:message];
         } else {
             [SVProgressHUD showInfoWithStatus:message];
@@ -377,14 +372,14 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     
     if ([request.flag isEqualToString:@"UpdateInfoURL"]) {
         NSDictionary *dataDict = result[@"data"];
-        UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
+        THNUserData *userdata = [[THNUserData findAll] lastObject];
         NSArray *areasAry = [NSArray arrayWithArray:dataDict[@"areas"]];
         if (areasAry.count) {
-            userEntity.prin = areasAry[0];
-            userEntity.city = areasAry[1];
+            userdata.prin = areasAry[0];
+            userdata.city = areasAry[1];
         }
-        [userEntity updateUserInfo];
-        _accountView.adress.text = [NSString stringWithFormat:@"%@ %@",userEntity.prin,userEntity.city];
+        [userdata saveOrUpdate];
+        _accountView.adress.text = [NSString stringWithFormat:@"%@ %@",userdata.prin,userdata.city];
         request = nil;
     }
 

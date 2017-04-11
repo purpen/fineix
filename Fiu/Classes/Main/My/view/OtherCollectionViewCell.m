@@ -8,9 +8,8 @@
 
 #import "OtherCollectionViewCell.h"
 #import "Fiu.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "UserInfo.h"
 #import "TalentView.h"
 
 @implementation OtherCollectionViewCell
@@ -134,7 +133,7 @@
 }
 
 
--(void)setUIWithModel:(UserInfo *)model{
+-(void)setUIWithModel:(THNUserData *)model{
     
     if (model.is_love == 0) {
         self.focusOnBtn.selected = NO;

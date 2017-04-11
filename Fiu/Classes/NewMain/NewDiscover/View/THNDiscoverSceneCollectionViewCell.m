@@ -8,9 +8,8 @@
 
 #import "THNDiscoverSceneCollectionViewCell.h"
 #import "THNSenceModel.h"
-#import "UserInfo.h"
+#import "THNUserData.h"
 #import "THNLoginRegisterViewController.h"
-#import "UserInfoEntity.h"
 
 @interface THNDiscoverSceneCollectionViewCell () {
     NSString *_sceneId;

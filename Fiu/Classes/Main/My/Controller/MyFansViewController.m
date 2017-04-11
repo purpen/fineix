@@ -10,13 +10,11 @@
 #import "FocusOnTableViewCell.h"
 #import "MyFansActionSheetViewController.h"
 #import "MJRefresh.h"
-#import "UserInfo.h"
+#import "THNUserData.h"
 #import "SVProgressHUD.h"
 #import "MJRefresh.h"
 #import "HomePageViewController.h"
-#import "UserInfoEntity.h"
 #import "FocusNonView.h"
-#import "UserInfoEntity.h"
 #import "TipNumberView.h"
 
 @interface MyFansViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
@@ -79,7 +77,7 @@
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
         for (NSDictionary *rowsDict in rowsAry) {
             NSDictionary *followsDict = [rowsDict objectForKey:@"follows"];
-            UserInfo *model = [[UserInfo alloc] init];
+            THNUserData *model = [[THNUserData alloc] init];
             
             model.userId = followsDict[@"user_id"];
             model.summary = followsDict[@"summary"];
@@ -95,8 +93,8 @@
         }
         if (_modelAry.count == 0) {
             [self.view addSubview:self.scenarioNonView];
-            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-            if ([self.userId isEqual:entity.userId]) {
+            THNUserData *userdata = [[THNUserData findAll] lastObject];
+            if ([self.userId isEqual:userdata.userId]) {
                 self.scenarioNonView.tipLabel.text = @"给你一首歌的时间就回来哦，粉丝们还等着你的新动态呢";
             }else{
                 self.scenarioNonView.tipLabel.text = @"众里寻他千百度，爱人之心不可无";
@@ -137,7 +135,7 @@
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
         for (NSDictionary *rowsDict in rowsAry) {
             NSDictionary *followsDict = [rowsDict objectForKey:@"follows"];
-            UserInfo *model = [[UserInfo alloc] init];
+            THNUserData *model = [[THNUserData alloc] init];
             
             model.userId = followsDict[@"user_id"];
             model.summary = followsDict[@"summary"];
@@ -245,10 +243,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     HomePageViewController *v = [[HomePageViewController alloc] init];
-    UserInfo *model = _modelAry[indexPath.row];
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    v.userId = model.userId;
-    if ([entity.userId integerValue] == [model.userId integerValue]) {
+    THNUserData *model = _modelAry[indexPath.row];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    v.userId = userdata.userId;
+    if ([userdata.userId integerValue] == [model.userId integerValue]) {
         v.isMySelf = YES;
     }else{
         v.isMySelf = NO;
@@ -261,7 +259,7 @@
     
     if (sender.selected) {
         MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
-        UserInfo *model = _modelAry[sender.tag];
+        THNUserData *model = _modelAry[sender.tag];
         [sheetVC setUIWithModel:model];
         sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -270,12 +268,12 @@
         [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
         [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
     }else{
-        UserInfo *model = _modelAry[sender.tag];
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        THNUserData *model = _modelAry[sender.tag];
+        THNUserData *userdata = [[THNUserData findAll] lastObject];
         //请求数据
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
-            if ([entity.userId isEqualToString:model.userId]) {
+            if ([userdata.userId isEqualToString:model.userId]) {
                 model.is_love = 2;
             }else{
                 model.level = @1;
@@ -297,9 +295,9 @@
 
 -(void)clickStopBtn:(UIButton*)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
-    UserInfo *model = _modelAry[sender.tag];
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if ([entity.userId isEqual:model.userId]) {
+    THNUserData *model = _modelAry[sender.tag];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    if ([userdata.userId isEqual:model.userId]) {
         model.is_love = 1;
     }else{
         model.level = @0;

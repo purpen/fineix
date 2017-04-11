@@ -11,7 +11,7 @@
 #import "HotUserListUser.h"
 #import "HomePageViewController.h"
 #import "THNLoginRegisterViewController.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 
 static NSString *const hotUserCellId = @"HotUserCellId";
 
@@ -49,8 +49,8 @@ static NSString *const hotUserCellId = @"HotUserCellId";
 
 -(void)setModel:(HomeSceneListRow *)userModel{
     _userModel = userModel;
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    _isLogin = entity.isLogin;
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    _isLogin = userdata.isLogin;
     [self.head downloadImage:userModel.user.avatarUrl place:[UIImage imageNamed:@""]];
     self.name.text = userModel.user.nickname;
     

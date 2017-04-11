@@ -7,7 +7,7 @@
 //
 
 #import "EditNickNameViewController.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "FBAPI.h"
 #import "SVProgressHUD.h"
 
@@ -29,8 +29,8 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     [self addBarItemRightBarButton:NSLocalizedString(@"save", nil) image:@"" isTransparent:NO];
     
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    self.nickNameTF.text = entity.nickname;
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    self.nickNameTF.text = userdata.nickname;
 }
 
 -(void)leftBarItemSelected{
@@ -38,8 +38,8 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 }
 
 -(void)rightBarItemSelected{
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if (![self.nickNameTF.text isEqualToString:entity.nickname]) {
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    if (![self.nickNameTF.text isEqualToString:userdata.nickname]) {
         //保存更改的信息
         FBRequest *request = [FBAPI postWithUrlString:UpdateInfoURL requestDictionary:@{@"nickname":self.nickNameTF.text} delegate:self];
         request.flag = UpdateInfoURL;
@@ -54,11 +54,11 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 -(void)requestSucess:(FBRequest *)request result:(id)result{
     NSString *message = [result objectForKey:@"message"];
     if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        entity.nickname = [[result objectForKey:@"data"] objectForKey:@"nickname"];
-        entity.trueNickname = [[result objectForKey:@"data"] objectForKey:@"true_nickname"];
+        THNUserData *userdata = [[THNUserData findAll] lastObject];
+        userdata.nickname = [[result objectForKey:@"data"] objectForKey:@"nickname"];
+        userdata.trueNickname = [[result objectForKey:@"data"] objectForKey:@"true_nickname"];
         [SVProgressHUD showSuccessWithStatus:message];
-        [entity updateUserInfo];
+        [userdata saveOrUpdate];
         [self.navigationController popViewControllerAnimated:YES];
     }else{
         [SVProgressHUD showInfoWithStatus:message];

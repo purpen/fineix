@@ -10,9 +10,8 @@
 #import "NSString+Helper.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
-#import "UserInfo.h"
+#import "THNUserData.h"
 #import "SVProgressHUD.h"
-#import "UserInfoEntity.h"
 #import "UIColor+Extension.h"
 
 @interface THNForgetViewController () <UITextFieldDelegate>
@@ -141,13 +140,9 @@ static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textCo
         }
     }else if ([request.flag isEqualToString:FindPwdURL]){
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
-            UserInfo * userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
-            [userInfo updateUserInfoEntity];
-            UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
-            userEntity.isLogin = YES;
-            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                [userInfo saveOrUpdate];
-            });
+            THNUserData * userInfo = [THNUserData mj_objectWithKeyValues:[result objectForKey:@"data"]];
+            userInfo.isLogin = YES;
+            [userInfo saveOrUpdate];
             [self.navigationController popViewControllerAnimated:YES];
             [SVProgressHUD showSuccessWithStatus:@"设置成功"];
         } else {

@@ -25,6 +25,7 @@
 #import "THNResoltCollectionViewCell.h"
 #import "RecipeCollectionHeaderView.h"
 #import "THNSceneDetalViewController.h"
+#import "THNUserData.h"
 
 @interface THNActiveDetalTwoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIWebViewDelegate>
 

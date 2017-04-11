@@ -14,14 +14,14 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "FBRequest.h"
 #import "FBAPI.h"
-#import "UserInfo.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "THNInformationViewController.h"
 #import "THNLoginViewController.h"
 #import "THNBingViewController.h"
 #import "THNRedEnvelopeView.h"
 #import <UMSocialCore/UMSocialCore.h>
 #import "UIView+TYAlertView.h"
+#import "THNUserData.h"
 
 @interface THNLoginRegisterViewController ()<FBRequestDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
@@ -131,12 +131,9 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
         NSDictionary *dataDic = [result objectForKey:@"data"];
         if ([[dataDic objectForKey:@"has_user"] isEqualToNumber:@1]){
             //用户存在，更新当前用户的信息
-            UserInfo *userinfo = [UserInfo mj_objectWithKeyValues:[dataDic objectForKey:@"user"]];
-            [userinfo saveOrUpdate];
-            [userinfo updateUserInfoEntity];
-            
-            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-            entity.isLogin = YES;
+            THNUserData *userData = [THNUserData mj_objectWithKeyValues:[dataDic objectForKey:@"user"]];
+            userData.isLogin = YES;
+            [userData saveOrUpdate];
             NSString *str = dataDic[@"user"][@"identify"][@"is_scene_subscribe"];
             if ([str integerValue] == 0){
                 //完善个人信息
@@ -144,7 +141,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
                 [self.navigationController pushViewController:vc animated:YES];
             }else{
                 [self dismissViewControllerAnimated:YES completion:^{
-                    if (entity.is_bonus == 1) {
+                    if (userData.is_bonus == 1) {
                         THNRedEnvelopeView *alartView = [[THNRedEnvelopeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
                         [alartView thn_showRedEnvelopeViewOnWindowWithText:NSLocalizedString(@"SendOldRed", nil)];
                     }

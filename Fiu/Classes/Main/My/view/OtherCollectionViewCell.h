@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class UserInfo;
+@class THNUserData;
 @class TalentView;
 
 @interface OtherCollectionViewCell : UICollectionViewCell
@@ -27,5 +27,5 @@
 @property(nonatomic,strong) UILabel *idTagsLabel;
 @property(nonatomic,strong) TalentView *talentView;
 
--(void)setUIWithModel:(UserInfo*)model;
+-(void)setUIWithModel:(THNUserData*)model;
 @end

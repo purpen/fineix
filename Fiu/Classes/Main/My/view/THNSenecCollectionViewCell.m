@@ -9,7 +9,7 @@
 #import "THNSenecCollectionViewCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "THNSenceModel.h"
-#import "UserInfo.h"
+#import "THNUserData.h"
 #import "Masonry.h"
 #import "FBRequest.h"
 #import "FBAPI.h"

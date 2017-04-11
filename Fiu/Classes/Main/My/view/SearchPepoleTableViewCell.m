@@ -8,7 +8,7 @@
 
 #import "SearchPepoleTableViewCell.h"
 #import <SDWebImage/UIButton+WebCache.h>
-#import "UserInfo.h"
+#import "THNUserData.h"
 
 @interface SearchPepoleTableViewCell ()
 
@@ -22,7 +22,7 @@
     self.headBtn.layer.cornerRadius = 35 * 0.5;
 }
 
--(void)setModel:(UserInfo *)model{
+-(void)setModel:(THNUserData *)model{
     _model = model;
     [self.headBtn sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_head"]];
     self.nickNameLabel.text = model.nickname;

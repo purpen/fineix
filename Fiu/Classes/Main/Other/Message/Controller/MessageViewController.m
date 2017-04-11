@@ -14,7 +14,7 @@
 #import "TipNumberView.h"
 #import "CounterModel.h"
 #import "SVProgressHUD.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "NSObject+MJKeyValue.h"
 
 @interface MessageViewController ()<FBNavigationBarItemsDelegate>
@@ -80,8 +80,8 @@
 }
 
 -(void)netGetData{
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":userdata.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dataDict = result[@"data"];
         NSDictionary *counterDict = [dataDict objectForKey:@"counter"];

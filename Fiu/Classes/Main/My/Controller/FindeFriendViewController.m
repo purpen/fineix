@@ -27,6 +27,7 @@
 #import "SearchPepoleTableViewCell.h"
 #import "THNMacro.h"
 #import <UMSocialCore/UMSocialCore.h>
+#import "THNUserData.h"
 
 static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！>>> http://m.taihuoniao.com/fiu";
 
@@ -239,7 +240,7 @@ static NSString *searchCellId = @"search";
             [SVProgressHUD dismiss];
             NSLog(@"用户  %@",result);
             NSArray *rows = result[@"data"][@"rows"];
-            self.findUserAry = [UserInfo mj_objectArrayWithKeyValuesArray:rows];
+            self.findUserAry = [THNUserData mj_objectArrayWithKeyValuesArray:rows];
             [self.searchTableView reloadData];
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD dismiss];
@@ -444,7 +445,7 @@ static NSString *searchCellId = @"search";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (tableView.tag == 10) {
-        UserInfo *model = self.findUserAry[indexPath.row];
+        THNUserData *model = self.findUserAry[indexPath.row];
         NSString *id = model._id;
         self.findUserAry = nil;
         self.searchView.searchTF.text = nil;

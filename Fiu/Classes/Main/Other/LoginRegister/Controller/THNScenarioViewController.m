@@ -17,7 +17,7 @@
 #import "FBRequest.h"
 #import "FBAPI.h"
 #import "SVProgressHUD.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "THNFocusViewController.h"
 
 @interface THNScenarioViewController ()

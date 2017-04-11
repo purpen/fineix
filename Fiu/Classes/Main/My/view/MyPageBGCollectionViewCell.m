@@ -8,7 +8,7 @@
 
 #import "MyPageBGCollectionViewCell.h"
 #import "Fiu.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "TalentView.h"
 #import "UIView+FSExtension.h"
@@ -65,29 +65,29 @@
 }
 
 -(void)setUI{
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
     //更新头像
-    [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_head"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:userdata.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_head"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
     
     
 
-    if ([entity.is_expert isEqualToString:@"1"]) {
-        self.nickName.text = entity.nickname;
+    if ([userdata.is_expert isEqualToString:@"1"]) {
+        self.nickName.text = userdata.nickname;
         self.talentView.hidden = NO;
-        self.idTagsLabel.text = [NSString stringWithFormat:@"%@ | %@",entity.expert_label,entity.expert_info];
+        self.idTagsLabel.text = [NSString stringWithFormat:@"%@ | %@",userdata.expert_label,userdata.expert_info];
     }else {
         self.talentView.hidden = YES;
         self.nickName.text = @"";
-        self.idTagsLabel.text = entity.nickname;
+        self.idTagsLabel.text = userdata.nickname;
     }
-    if (entity.summary.length == 0) {
-        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[entity.level intValue],entity.label,@"说说你是什么人，来自哪片山川湖海"];
+    if (userdata.summary.length == 0) {
+        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[userdata.level intValue],userdata.label,@"说说你是什么人，来自哪片山川湖海"];
     }else{
-        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[entity.level intValue],entity.label,entity.summary];
+        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[userdata.level intValue],userdata.label,userdata.summary];
     }
-    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"personalDefaultBg"]];
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:userdata.head_pic_url] placeholderImage:[UIImage imageNamed:@"personalDefaultBg"]];
 }
 
 

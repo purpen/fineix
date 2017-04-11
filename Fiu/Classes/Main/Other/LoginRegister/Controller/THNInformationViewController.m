@@ -9,7 +9,7 @@
 #import "THNInformationViewController.h"
 #import "UIColor+Extension.h"
 #import "UIView+FSExtension.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "UIImage+Helper.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
@@ -49,8 +49,8 @@ static NSString *const modifyUserInformation = @"/my/update_profile";
     self.manBtn.selected = YES;
     self.sexNum = @1;
     
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":userdata.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         
         NSDictionary *dataDict = result[@"data"];
@@ -61,7 +61,7 @@ static NSString *const modifyUserInformation = @"/my/update_profile";
 
     
     
-    self.nameTF.text = entity.nickname;
+    self.nameTF.text = userdata.nickname;
     
     self.headImage.layer.masksToBounds = YES;
     self.headImage.layer.cornerRadius = 45;
@@ -132,8 +132,8 @@ static NSString *const modifyUserInformation = @"/my/update_profile";
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
             
             NSString * fileUrl = [[result objectForKey:@"data"] objectForKey:@"file_url"];
-            UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
-            userEntity.mediumAvatarUrl = fileUrl;
+            THNUserData *userdata = [[THNUserData findAll] lastObject];
+            userdata.mediumAvatarUrl = fileUrl;
             [self.headImage sd_setImageWithURL:[NSURL URLWithString:fileUrl] placeholderImage:[UIImage imageNamed:@"default_head"]];
             
             [SVProgressHUD showSuccessWithStatus:message];
@@ -178,9 +178,10 @@ static NSString *const modifyUserInformation = @"/my/update_profile";
         [SVProgressHUD dismiss];
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
             //更新用户名，性别，个人简介
-            UserInfoEntity *entiey = [UserInfoEntity defaultUserInfoEntity];
-            entiey.nickname = [result objectForKey:@"data"][@"nickname"];
-            entiey.sex = [result objectForKey:@"data"][@"sex"];
+            THNUserData *userdata = [[THNUserData findAll] lastObject];
+            userdata.nickname = [result objectForKey:@"data"][@"nickname"];
+            userdata.sex = [result objectForKey:@"data"][@"sex"];
+            [userdata saveOrUpdate];
             FBRequest *updateRequest = [FBAPI postWithUrlString:@"/my/update_user_identify" requestDictionary:@{
                                                                                                           @"type":@1
                                                                                                           } delegate:self];

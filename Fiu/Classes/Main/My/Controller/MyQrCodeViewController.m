@@ -13,16 +13,15 @@
 #import "QrShareSheetViewController.h"
 #import "SVProgressHUD.h"
 #import "QRCodeScanViewController.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import <UMSocialCore/UMSocialCore.h>
 #import "WXApi.h"
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "UIView+Size.h"
-#import "UserInfo.h"
 #import "MJExtension.h"
 
-static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！>>> http://m.taihuoniao.com/fiu";
+static NSString *const ShareURlText = @"我在D³IN寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！>>> http://m.taihuoniao.com/fiu";
 
 @interface MyQrCodeViewController ()<FBNavigationBarItemsDelegate>
 {
@@ -49,8 +48,8 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     [self addBarItemRightBarButton:nil image:@"icon_ios_more_black" isTransparent:NO];
     
     [self.filter setDefaults];
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    NSString *str = [NSString stringWithFormat:@"http://m.taihuoniao.com/guide/appload?infoType=13&infoId=%@",entity.userId];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    NSString *str = [NSString stringWithFormat:@"http://m.taihuoniao.com/guide/appload?infoType=13&infoId=%@",userdata.userId];
 
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
     [_filter setValue:data forKey:@"inputMessage"];

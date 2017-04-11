@@ -20,6 +20,7 @@
 #import "THNSceneDetalViewController.h"
 #import "THNActiveDetalTwoViewController.h"
 #import <UMSocialCore/UMSocialCore.h>
+#import "THNUserData.h"
 
 @interface THNXinPinDetalViewController ()<THNNavigationBarItemsDelegate,UIWebViewDelegate>
 
@@ -53,7 +54,6 @@
                                                                                              } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
-            NSLog(@"新品详情 %@",result);
             self.model = [THNArticleDetalModel mj_objectWithKeyValues:result[@"data"]];
             NSString *flag = self.model.product.is_favorite;
             NSInteger a = [flag integerValue];
@@ -161,8 +161,8 @@
                     HomePageViewController *homeOpage = [[HomePageViewController alloc] init];
                     homeOpage.type = @2;
                     homeOpage.userId = infoId;
-                    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-                    if ([entity.userId isEqualToString:infoId]) {
+                    THNUserData *userdata = [[THNUserData findAll] lastObject];
+                    if ([userdata.userId isEqualToString:infoId]) {
                         homeOpage.isMySelf = YES;
                     }else{
                         homeOpage.isMySelf = NO;

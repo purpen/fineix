@@ -7,7 +7,7 @@
 //
 
 #import "AccountView.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "Fiu.h"
 

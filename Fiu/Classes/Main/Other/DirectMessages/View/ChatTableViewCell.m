@@ -10,7 +10,7 @@
 #import "AXModel.h"
 #import "Fiu.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "HomePageViewController.h"
 
 @interface ChatTableViewCell()
@@ -32,8 +32,8 @@
 {
     _message = message;
     
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    [self.myIconImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"user"]];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    [self.myIconImageView sd_setImageWithURL:[NSURL URLWithString:userdata.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"user"]];
     
     
     if (message.hideTime) { // 隐藏时间

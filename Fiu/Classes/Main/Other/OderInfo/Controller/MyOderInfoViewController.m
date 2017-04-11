@@ -26,6 +26,7 @@
 #import "THNOrderInfoViewController.h"
 #import "THNRefundInfoViewController.h"
 #import "RefundGoodsModel.h"
+#import "THNUserData.h"
 
 static NSString *const OrderListURL             = @"/shopping/orders";
 static NSString *const URLRefundList            = @"/shopping/refund_list";
@@ -72,8 +73,8 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
     _myTableView.estimatedRowHeight = 212.f;
     _myTableView.rowHeight = UITableViewAutomaticDimension;
     
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":userdata.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         
         NSDictionary *dataDict = result[@"data"];

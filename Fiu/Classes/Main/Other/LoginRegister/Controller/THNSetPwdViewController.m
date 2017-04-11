@@ -11,9 +11,8 @@
 #import "SVProgressHUD.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
-#import "UserInfo.h"
-#import "UserInfoEntity.h"
 #import "THNInformationViewController.h"
+#import "THNUserData.h"
 
 @interface THNSetPwdViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *pwdTF;
@@ -74,11 +73,9 @@ static NSString *const RegisterCodeURL = @"/auth/register";//手机号注册
     FBRequest *request = [FBAPI postWithUrlString:RegisterCodeURL requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         [SVProgressHUD showSuccessWithStatus:@"注册成功"];
-        UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
-        [userInfo saveOrUpdate];
-        [userInfo updateUserInfoEntity];
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        entity.isLogin = YES;
+        THNUserData *userData = [THNUserData mj_objectWithKeyValues:[result objectForKey:@"data"]];
+        userData.isLogin = YES;
+        [userData saveOrUpdate];
         THNInformationViewController *vc = [[THNInformationViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     } failure:^(FBRequest *request, NSError *error) {

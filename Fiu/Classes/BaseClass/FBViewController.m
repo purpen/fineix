@@ -10,6 +10,7 @@
 #import "THNLoginRegisterViewController.h"
 #import "QRCodeScanViewController.h"
 #import "FBConfig.h"
+#import "THNUserData.h"
 
 static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
 static NSString *const URLUserIsLogin = @"/user/user_info";
@@ -93,20 +94,20 @@ static NSInteger const saveTime = 30 * 24 * 60;
 
 #pragma mark - 获取用户登录信息
 - (BOOL)isUserLogin {
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    return entity.isLogin;
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    return userdata.isLogin;
 }
 
 #pragma mark - 获取用户登录id
 - (NSString *)getLoginUserID {
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    return entity.userId;
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    return userdata.userId;
 }
 
 #pragma mark - 是否用户本人
 - (BOOL)isLoginUserSelf:(NSString *)userId {
-    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
-    if ([userId isEqualToString:entity.userId])
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    if ([userId isEqualToString:userdata.userId])
         return YES;
     else
         return NO;

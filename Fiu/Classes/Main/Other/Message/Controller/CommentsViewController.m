@@ -9,8 +9,7 @@
 #import "CommentsViewController.h"
 #import "CommentsTableViewCell.h"
 #import "SVProgressHUD.h"
-#import "UserInfo.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "MJRefresh.h"
 #import "HomePageViewController.h"
 #import "TipNumberView.h"
@@ -76,15 +75,15 @@
 
 - (void)requestDataForOderListOperation
 {
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest *request = [FBAPI postWithUrlString:@"/my/comment_list" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"target_user_id":entity.userId,@"type":@12} delegate:self];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    FBRequest *request = [FBAPI postWithUrlString:@"/my/comment_list" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"target_user_id":userdata.userId,@"type":@12} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
         
         for (NSDictionary *rowsDict in rowsAry) {
             NSDictionary *usersDict = [rowsDict objectForKey:@"user"];
-            UserInfo *model = [[UserInfo alloc] init];
+            THNUserData *model = [[THNUserData alloc] init];
             if (![usersDict[@"_id"] isKindOfClass:[NSNull class]]) {
                 model.userId = usersDict[@"_id"];
             }
@@ -230,12 +229,12 @@
     HomePageViewController *vc = [[HomePageViewController alloc] init];
     vc.type = @2;
     vc.isMySelf = NO;
-    vc.userId = ((UserInfo*)_modelAry[sender.tag]).userId;
+    vc.userId = ((THNUserData*)_modelAry[sender.tag]).userId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UserInfo *model = _modelAry[indexPath.row];
+    THNUserData *model = _modelAry[indexPath.row];
     CommentNViewController * commentVC = [[CommentNViewController alloc] init];
     commentVC.targetId = _sceneIdMarr[indexPath.row];
     commentVC.sceneUserId = model.userId;

@@ -8,6 +8,7 @@
 
 #import "FBPictureViewController.h"
 #import "UIView+TYAlertView.h"
+#import "THNUserData.h"
 
 @interface FBPictureViewController ()
 
@@ -23,8 +24,8 @@
 
 #pragma mark - 获取用户登录id
 - (NSString *)getLoginUserID {
-    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
-    return entity.userId;
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    return userdata.userId;
 }
 
 #pragma mark - 添加控件

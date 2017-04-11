@@ -12,7 +12,7 @@
 #import "FBRequest.h"
 #import "AddreesModel.h"
 #import "AreaModel.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 
 @interface AddreesPickerViewController ()<FBRequestDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 {

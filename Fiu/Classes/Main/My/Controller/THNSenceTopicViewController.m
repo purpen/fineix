@@ -15,8 +15,7 @@
 #import "FBRequest.h"
 #import "FBAPI.h"
 #import "SVProgressHUD.h"
-#import "UserInfoEntity.h"
-#import "UserInfo.h"
+#import "THNUserData.h"
 
 @interface THNSenceTopicViewController ()
 /**  */
@@ -83,11 +82,10 @@ static NSString *getList = @"/category/getlist";
             
         }
         
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        NSLog(@"五 %@",entity.interest_scene_cate);
+        THNUserData *userdata = [[THNUserData findAll] lastObject];
         for (int i = 0; i < self.modelAry.count; i ++) {
             THNTopicsModel *model = self.modelAry[i];
-            if ([entity.interest_scene_cate rangeOfString:model._id].location != NSNotFound) {
+            if ([userdata.interest_scene_cate rangeOfString:model._id].location != NSNotFound) {
                 ((THNSenceTopicView*)self.viewAry[i]).tipBtn.selected = YES;
                 ((THNSenceTopicView*)self.viewAry[i]).layerView.backgroundColor = [UIColor colorWithHexString:@"#A67203" alpha:0.65];
                 ((THNSenceTopicView*)self.viewAry[i]).textImagView.image = [UIImage imageNamed:@"l_topic_s"];
@@ -100,13 +98,12 @@ static NSString *getList = @"/category/getlist";
 }
 
 -(void)update{
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":userdata.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dataDict = result[@"data"];
-        UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+        THNUserData *userInfo = [THNUserData mj_objectWithKeyValues:[result objectForKey:@"data"]];
         NSArray *ary = [result objectForKey:@"data"][@"interest_scene_cate"];
-        NSLog(@"用户  %@",result);
         NSMutableString *str = [NSMutableString string];
         for (int i = 0; i < ary.count; i ++) {
             [str appendString:[NSString stringWithFormat:@"%@",ary[i]]];
@@ -125,9 +122,6 @@ static NSString *getList = @"/category/getlist";
         }
         userInfo.is_expert = [result objectForKey:@"data"][@"identify"][@"is_expert"];
         [userInfo saveOrUpdate];
-        [userInfo updateUserInfoEntity];
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        entity.isLogin = YES;
     } failure:^(FBRequest *request, NSError *error) {
         
     }];

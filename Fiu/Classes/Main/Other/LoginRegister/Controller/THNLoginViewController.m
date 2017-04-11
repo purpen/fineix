@@ -11,8 +11,6 @@
 #import "SVProgressHUD.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
-#import "UserInfo.h"
-#import "UserInfoEntity.h"
 #import "THNInformationViewController.h"
 #import "THNForgetViewController.h"
 #import "UIColor+Extension.h"
@@ -22,6 +20,7 @@
 #import "THNBingViewController.h"
 #import "THNRedEnvelopeView.h"
 #import <UMSocialCore/UMSocialCore.h>
+#import "THNUserData.h"
 
 @interface THNLoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
@@ -129,11 +128,9 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     FBRequest *request = [FBAPI postWithUrlString:LoginURL requestDictionary:params delegate:self];
     
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
-        [userInfo saveOrUpdate];
-        [userInfo updateUserInfoEntity];
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        entity.isLogin = YES;
+        THNUserData *userData = [THNUserData mj_objectWithKeyValues:[result objectForKey:@"data"]];
+        userData.isLogin = YES;
+        [userData saveOrUpdate];
         //跳回个人主页
         [SVProgressHUD showSuccessWithStatus:@"登录成功"];
         NSDictionary *dataDic = result[@"data"];
@@ -143,7 +140,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
             [self.navigationController pushViewController:vc animated:YES];
         }else{
             [self dismissViewControllerAnimated:YES completion:^{
-                if (entity.is_bonus == 1) {
+                if (userData.is_bonus == 1) {
                     THNRedEnvelopeView *alartView = [[THNRedEnvelopeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
                     [alartView thn_showRedEnvelopeViewOnWindowWithText:NSLocalizedString(@"SendOldRed", nil)];
                 }
@@ -204,12 +201,9 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
         NSDictionary *dataDic = [result objectForKey:@"data"];
         if ([[dataDic objectForKey:@"has_user"] isEqualToNumber:@1]){
             //用户存在，更新当前用户的信息
-            UserInfo *userinfo = [UserInfo mj_objectWithKeyValues:[dataDic objectForKey:@"user"]];
-            [userinfo saveOrUpdate];
-            [userinfo updateUserInfoEntity];
-            
-            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-            entity.isLogin = YES;
+            THNUserData *userData = [THNUserData mj_objectWithKeyValues:[result objectForKey:@"data"]];
+            userData.isLogin = YES;
+            [userData saveOrUpdate];
             
             NSString *str = dataDic[@"user"][@"identify"][@"is_scene_subscribe"];
             if ([str integerValue] == 0){
@@ -219,7 +213,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
                 
             }else{
                 [self dismissViewControllerAnimated:YES completion:^{
-                    if (entity.is_bonus == 1) {
+                    if (userData.is_bonus == 1) {
                         THNRedEnvelopeView *alartView = [[THNRedEnvelopeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
                         [alartView thn_showRedEnvelopeViewOnWindowWithText:NSLocalizedString(@"SendOldRed", nil)];
                     }

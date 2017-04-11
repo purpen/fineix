@@ -14,6 +14,7 @@
 #import "THNSceneListViewController.h"
 #import "THNSenceTopicViewController.h"
 #import "THNSceneDetalViewController.h"
+#import "THNUserData.h"
 
 static NSString *const URLSubCount = @"/auth/user";
 static NSString *const URLSceneList = @"/scene_sight/";
@@ -92,9 +93,9 @@ static NSString *const SceneListCellId = @"sceneListCellId";
 
 //  情景列表
 - (void)thn_networkSceneListData {
-    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
-    if (entity.interest_scene_cate.length == 0) {
-        entity.interest_scene_cate = @"nulll";
+    THNUserData *userData = [[THNUserData findAll] lastObject];
+    if (userData.interest_scene_cate.length == 0) {
+        userData.interest_scene_cate = @"nulll";
     }
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1),
                                                                                      @"size":@"10",

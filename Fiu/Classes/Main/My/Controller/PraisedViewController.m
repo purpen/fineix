@@ -10,7 +10,7 @@
 #import "SVProgressHUD.h"
 #import "MJRefresh.h"
 #import "HomeSceneListRow.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "THNHomeSenceCollectionViewCell.h"
 #import "THNSenecCollectionViewCell.h"
 #import "THNSceneDetalViewController.h"
@@ -72,11 +72,10 @@ static NSString *sceneCollectionCellId = @"THNHomeSenceCollectionViewCell";
 - (void)requestDataForOderListOperation
 {
     [SVProgressHUD show];
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    NSDictionary *  requestParams = @{@"size":@"10", @"page":@(_currentPageNumber + 1),@"user_id":entity.userId,@"type":@"12",@"event":@"2"};
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    NSDictionary *  requestParams = @{@"size":@"10", @"page":@(_currentPageNumber + 1),@"user_id":userdata.userId,@"type":@"12",@"event":@"2"};
     self.sceneListRequest = [FBAPI getWithUrlString:@"/favorite/get_new_list" requestDictionary:requestParams delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"赞过的情境  %@",result);
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         
         for (NSDictionary * sceneDic in sceneArr) {
@@ -84,7 +83,6 @@ static NSString *sceneCollectionCellId = @"THNHomeSenceCollectionViewCell";
             THNSenceModel * homeSceneModel = [THNSenceModel mj_objectWithKeyValues:sightDict];
             [self.sceneListMarr addObject:homeSceneModel];
             [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%@", homeSceneModel._id]];
-            NSLog(@"啊啦拉  %@",homeSceneModel.title);
         }
         [self.myCollectionView reloadData];
         _currentPageNumber = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];

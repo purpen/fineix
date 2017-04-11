@@ -8,7 +8,7 @@
 
 #import "MyQrCodeView.h"
 #import "Fiu.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 
@@ -28,10 +28,10 @@
 }
 
 -(void)setUI{
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    self.nameLabel.text = entity.nickname;
-    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_head"]];
-    switch ([entity.sex intValue]) {
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    self.nameLabel.text = userdata.nickname;
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:userdata.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_head"]];
+    switch ([userdata.sex intValue]) {
         case 0:
             break;
         case 1:
@@ -43,8 +43,8 @@
         default:
             break;
     }
-    if (entity.prin) {
-        self.adressLabel.text = [NSString stringWithFormat:@"%@ %@",entity.prin,entity.city];
+    if (userdata.prin) {
+        self.adressLabel.text = [NSString stringWithFormat:@"%@ %@",userdata.prin,userdata.city];
     }
 }
 

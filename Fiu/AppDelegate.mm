@@ -9,8 +9,7 @@
 #import "AppDelegate.h"
 #import "THNTabBarController.h"
 #import "Fiu.h"
-#import "UserInfo.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
 #import "GuidePageViewController.h"
@@ -188,34 +187,15 @@ static NSString *const RedirectURL           = @"http://www.taihuoniao.com";
 #pragma mark - 获取用户启动时的登录状态
 - (void)thn_setAppFirstLaunching {
     //  首先统一设置为未登录
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    entity.isLogin = NO;
-    //  发送网络请求查看登录状态
-    FBRequest *request = [FBAPI postWithUrlString:determineLogin requestDictionary:nil delegate:self];
-    [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSDictionary *dataDic = [result objectForKey:@"data"];
-        if ([[dataDic objectForKey:@"is_login"] boolValue]) {
-            //  已经登录的获取用户信息，更改登录状态
-            [[[UserInfo findAll] lastObject] updateUserInfoEntity];
-            entity.isLogin = YES;
-            
-            //  绑定Umeng Alias
-            if (entity.userId.length) {
-                [UMessage setAlias:entity.userId type:@"user_id" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
-                    if (responseObject) {
-                        NSLog(@"绑定成功 %@", entity.userId);
-                    } else {
-                        NSLog(@"-- %@ --", [error localizedDescription]);
-                    }
-                }];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    //  绑定Umeng Alias
+    if (userdata.userId.length) {
+        [UMessage setAlias:userdata.userId type:@"user_id" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+            if (responseObject) {
+            } else {
             }
-
-        } else {
-            NSLog(@"绑定成功 %zi", entity.isLogin);
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-    }];
+        }];
+    }
 }
 
 #pragma mark - 引导图的设置
@@ -263,9 +243,9 @@ static NSString *const RedirectURL           = @"http://www.taihuoniao.com";
         THNTabBarController * tabBarC = [[THNTabBarController alloc] init];
         self.window.rootViewController = tabBarC;
         
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        if (entity.isLogin) {
-            FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+        THNUserData *userdata = [[THNUserData findAll] lastObject];
+        if (userdata.isLogin) {
+            FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":userdata.userId} delegate:self];
             [request startRequestSuccess:^(FBRequest *request, id result) {
                 NSDictionary *dataDict = result[@"data"];
                 NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
@@ -291,9 +271,9 @@ static NSString *const RedirectURL           = @"http://www.taihuoniao.com";
         } else{
             THNTabBarController * tabBarC = [[THNTabBarController alloc] init];
             self.window.rootViewController = tabBarC;
-            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-            if (entity.isLogin) {
-                FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+            THNUserData *userdata = [[THNUserData findAll] lastObject];
+            if (userdata.isLogin) {
+                FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":userdata.userId} delegate:self];
                 [request startRequestSuccess:^(FBRequest *request, id result) {
                     NSDictionary *dataDict = result[@"data"];
                     NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
@@ -313,7 +293,7 @@ static NSString *const RedirectURL           = @"http://www.taihuoniao.com";
 
 #pragma mark - model属性名与字典key名映射
 - (void)thn_setUserInfoModelMapping {
-    [UserInfo mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
+    [THNUserData mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
         return @{
                  @"userId" : @"_id",
                  @"firstLogin" : @"first_login",
@@ -442,16 +422,6 @@ static NSString *const RedirectURL           = @"http://www.taihuoniao.com";
     if (_notiDelegate && [_notiDelegate respondsToSelector:@selector(resetNotificationState)]) {
         [_notiDelegate resetNotificationState];
     }
-    
-    //登录状态查询及本地用户信息获取
-    UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
-    [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSDictionary * dataDic = [result objectForKey:@"data"];
-        userEntity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
-    } failure:^(FBRequest *request, NSError *error) {
-
-    }];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

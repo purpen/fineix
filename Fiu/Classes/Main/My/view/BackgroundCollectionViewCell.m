@@ -8,7 +8,7 @@
 
 #import "BackgroundCollectionViewCell.h"
 #import "Fiu.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "TalentView.h"
 
@@ -148,22 +148,22 @@
 
 
 -(void)setUI{
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
     //更新头像
-    [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_head"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:userdata.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_head"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
     
     
-    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"personalDefaultBg"]];
-    self.nickName.text = entity.nickname;
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:userdata.head_pic_url] placeholderImage:[UIImage imageNamed:@"personalDefaultBg"]];
+    self.nickName.text = userdata.nickname;
 //    NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
-    if ([entity.is_expert isEqualToString:@"1"]) {
+    if ([userdata.is_expert isEqualToString:@"1"]) {
         self.talentView.hidden = NO;
 //        self.userProfile.hidden = NO;
 //        self.userProfile.text = entity.expert_info;
 //        self.idImageView.hidden = YES;
-        self.idTagsLabel.text = [NSString stringWithFormat:@"%@ | %@",entity.expert_label,entity.expert_info];
+        self.idTagsLabel.text = [NSString stringWithFormat:@"%@ | %@",userdata.expert_label,userdata.expert_info];
 //        int n = (int)[tagsAry indexOfObject:entity.expert_label];
 //        self.idImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
         [self layoutIfNeeded];
@@ -180,10 +180,10 @@
         }];
     }
     
-    if (entity.summary.length == 0) {
-        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[entity.level intValue],entity.label,@"说说你是什么人，来自哪片山川湖海"];
+    if (userdata.summary.length == 0) {
+        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[userdata.level intValue],userdata.label,@"说说你是什么人，来自哪片山川湖海"];
     }else{
-        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[entity.level intValue],entity.label,entity.summary];
+        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[userdata.level intValue],userdata.label,userdata.summary];
     }
     
     //self.userLevelLabel.text = [NSString stringWithFormat:@"%@ | V%d",entity.levelDesc,[entity.level intValue]];

@@ -20,7 +20,6 @@
 #import "CommentNViewController.h"
 #import "HomeSceneListRow.h"
 #import "FBAlertViewController.h"
-#import "UserInfoEntity.h"
 #import "THNLoginRegisterViewController.h"
 #import "FBShareViewController.h"
 #import "THNShangPinCollectionViewCell.h"
@@ -29,6 +28,7 @@
 #import "THNMabeLikeTableViewCell.h"
 #import "THNXiangGuanQingJingTableViewCell.h"
 #import "FBRequest.h"
+#import "THNUserData.h"
 
 @interface THNSceneDetalViewController ()<UITableViewDelegate,UITableViewDataSource, FBNavigationBarItemsDelegate,FBRequestDelegate>
 {
@@ -137,9 +137,8 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 }
 
 -(void)followClick:(UIButton*)sender{
-    
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if (entity.isLogin == NO) {
+    THNUserData *userData = [[THNUserData findAll] lastObject];
+    if (userData.isLogin == NO) {
         THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
         [self presentViewController:vc animated:YES completion:nil];
     }else{
@@ -318,8 +317,8 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             [self.navigationController popViewControllerAnimated:YES];
         }
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        FBRequest *numRequest = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+        THNUserData *userdata = [[THNUserData findAll] lastObject];
+        FBRequest *numRequest = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":userdata.userId} delegate:self];
         [numRequest startRequestSuccess:^(FBRequest *request, id result) {
             NSDictionary *dataDict = result[@"data"];
             if ([self.sceneDelegate respondsToSelector:@selector(updatScenceNum:andDeleteReferenceNo:)]) {
@@ -335,8 +334,8 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 
 //  收藏
 - (void)thn_networkFavoriteData:(NSString *)idx {
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if (entity.isLogin == NO) {
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    if (userdata.isLogin == NO) {
         THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
         [self presentViewController:vc animated:YES completion:nil];
     }else{
@@ -371,8 +370,8 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 //  点赞
 - (void)thn_networkLikeSceneData:(NSString *)idx {
     
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if (entity.isLogin == NO) {
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    if (userdata.isLogin == NO) {
         THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
         [self presentViewController:vc animated:YES completion:nil];
     }else{
@@ -526,8 +525,8 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 
 #pragma mark 收藏情境
 - (void)thn_networkFavoriteData{
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if (entity.isLogin == NO) {
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    if (userdata.isLogin == NO) {
         THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
         [self presentViewController:vc animated:YES completion:nil];
     }else{

@@ -9,8 +9,7 @@
 #import "MessagesssViewController.h"
 #import "CommentsTableViewCell.h"
 #import "SVProgressHUD.h"
-#import "UserInfo.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "MJRefresh.h"
 #import "DirectMessagesViewController.h"
 
@@ -76,15 +75,15 @@
 
 - (void)requestDataForOderListOperation
 {
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest *request = [FBAPI postWithUrlString:@"/message" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"from_user_id":entity.userId,@"type":@0} delegate:self];
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    FBRequest *request = [FBAPI postWithUrlString:@"/message" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"from_user_id":userdata.userId,@"type":@0} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
         for (NSDictionary *rowsDict in rowsAry) {
             NSDictionary *usersDict = [rowsDict objectForKey:@"users"];
             NSDictionary *toUserDict = [usersDict objectForKey:@"from_user"];
-            UserInfo *model = [[UserInfo alloc] init];
+            THNUserData *model = [[THNUserData alloc] init];
             model.userId = toUserDict[@"id"];
             model.summary = rowsDict[@"last_content"][@"content"];
             model.nickname = toUserDict[@"nickname"];
@@ -174,7 +173,7 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UserInfo *model = _modelAry[indexPath.row];
+    THNUserData *model = _modelAry[indexPath.row];
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"My" bundle:nil];
     DirectMessagesViewController *vc = [story instantiateViewControllerWithIdentifier:@"DirectMessagesViewController"];
     vc.nickName = model.nickname;

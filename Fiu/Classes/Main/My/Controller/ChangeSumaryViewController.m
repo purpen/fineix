@@ -9,7 +9,7 @@
 #import "ChangeSumaryViewController.h"
 #import "SVProgressHUD.h"
 #import "FBAPI.h"
-#import "UserInfoEntity.h"
+#import "THNUserData.h"
 #import "IdentityTagModel.h"
 #import "TagsCollectionViewCell.h"
 #import "UIView+FSExtension.h"
@@ -42,8 +42,8 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     //self.navigationController.navigationBarHidden = NO;
     self.navViewTitle.text = NSLocalizedString(@"individualitySignature", nil);
     [self addBarItemRightBarButton:NSLocalizedString(@"save", nil) image:nil isTransparent:NO];
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    self.sumaryTF.text = entity.summary;
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    self.sumaryTF.text = userdata.summary;
     self.sumaryTF.delegate = self;
     
     NSArray *tagsAry1 = [NSArray arrayWithObjects:@"创业先锋",@"IT互联网",@"设计师",@"女神",@"公务员",@"职场新人",@"女强人",@"白领",@"学生",@"买手",@"程序猿",@"BOSS",@"直男",@"驴友",@"吃货",@"单身",@"文艺范", nil];
@@ -78,11 +78,11 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 -(void)viewWillAppear:(BOOL)animated{
     [self.selectedModelAry removeAllObjects];
     IdentityTagModel *model = [[IdentityTagModel alloc] init];
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if (entity.label.length == 0) {
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    if (userdata.label.length == 0) {
         
     }else{
-        model.tags = entity.label;
+        model.tags = userdata.label;
         [self.selectedModelAry addObject:model];
         [self.selectedCollectionView reloadData];
         self.deletAllBtn.hidden = NO;
@@ -244,13 +244,10 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
             FBRequest *request = [FBAPI postWithUrlString:@"/my/update_profile" requestDictionary:@{
                                                                                                     @"label":idStr
                                                                                                     } delegate:self];
-            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-            entity.label = idStr;
-            [entity updateUserInfo];
             [request startRequestSuccess:^(FBRequest *request, id result) {
-                UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-                entity.label = idStr;
-                [entity updateUserInfo];
+                THNUserData *userdata = [[THNUserData findAll] lastObject];
+                userdata.label = idStr;
+                [userdata saveOrUpdate];
                 [self.navigationController popViewControllerAnimated:YES];
             } failure:^(FBRequest *request, NSError *error) {
                 
@@ -262,9 +259,9 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 -(void)requestSucess:(FBRequest *)request result:(id)result{
     NSString *message = [result objectForKey:@"message"];
     if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        entity.summary = self.sumaryTF.text;
-        [entity updateUserInfo];
+        THNUserData *userdata = [[THNUserData findAll] lastObject];
+        userdata.summary = self.sumaryTF.text;
+        [userdata saveOrUpdate];
         [SVProgressHUD showSuccessWithStatus:message];
     }else{
         [SVProgressHUD showInfoWithStatus:message];

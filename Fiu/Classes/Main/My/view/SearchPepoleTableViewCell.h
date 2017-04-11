@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class UserInfo;
+@class THNUserData;
 
 @interface SearchPepoleTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *headBtn;
 @property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *signatureLabel;
 /**  */
-@property (nonatomic, strong) UserInfo *model;
+@property (nonatomic, strong) THNUserData *model;
 @end
