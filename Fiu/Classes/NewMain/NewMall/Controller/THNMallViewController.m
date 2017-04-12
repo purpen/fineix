@@ -86,8 +86,10 @@ static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
 - (void)networkCategoryData {
     self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"1", @"page":@"1", @"size":@"100", @"use_cache":@"1"} delegate:self];
     [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self.categoryMarr removeAllObjects];
+        
+        //  分类标题
         [self.categoryMarr addObject:@"推荐"];
-        [self.categoryMarr addObject:@"情境"];
         [self.categoryMarr addObject:@"合集"];
         NSMutableArray *idxMarr = [NSMutableArray array];
         NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -96,18 +98,22 @@ static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
             [self.categoryMarr addObject:model.title];
             [idxMarr addObject:[NSString stringWithFormat:@"%zi",model.idField]];
         }
+        [self.categoryMarr addObject:@"情境"];
         
-        [self.categoryIdMarr addObject:@"0"];
+        //  分类id
         [self.categoryIdMarr addObject:@"0"];
         NSString *allId = [idxMarr componentsJoinedByString:@","];
         [self.categoryIdMarr addObject:allId];
         [self.categoryIdMarr addObjectsFromArray:idxMarr];
+        [self.categoryIdMarr addObject:@"0"];
         
         if (self.categoryMarr.count) {
             self.menuView.menuTitle = self.categoryMarr;
             [self.menuView updateMenuButtonData];
             [self.menuView updateMenuBtnState:0];
         }
+        
+        NSLog(@"========= %@ ---\n\n %@", self.categoryMarr, self.categoryIdMarr);
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
@@ -118,6 +124,8 @@ static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
 - (void)thn_networkNewGoodsListData {
     self.mallListRequest = [FBAPI getWithUrlString:URLNewGoodsList requestDictionary:@{@"type":@"1", @"use_cache":@"1"} delegate:self];
     [self.mallListRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self.goodsDataMarr removeAllObjects];
+        
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"items"];
         for (NSDictionary * goodsDic in goodsArr) {
             THNMallGoodsModelItem *goodsModel = [[THNMallGoodsModelItem alloc] initWithDictionary:goodsDic];
@@ -161,6 +169,8 @@ static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
                                  @"use_cache":@"1"};
     self.subjectRequest = [FBAPI getWithUrlString:URLMallSubject requestDictionary:requestDic delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self thn_removeSubjectObjects];
+        
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
             THNMallSubjectModelRow *goodsModel = [[THNMallSubjectModelRow alloc] initWithDictionary:goodsDic];
@@ -227,6 +237,8 @@ static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
     
     self.subjectRequest = [FBAPI getWithUrlString:URLMallSubject requestDictionary:requestDic delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self removeCategorySubjectMarrData];
+        
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
             THNMallSubjectModelRow *goodsModel = [[THNMallSubjectModelRow alloc] initWithDictionary:goodsDic];
@@ -420,14 +432,15 @@ static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
 
 - (void)loadNewData {
     self.currentpageNum = 0;
-    [self.goodsDataMarr removeAllObjects];
+
+    [self thn_networkNewGoodsListData];
+    [self thn_networkSubjectListData];
+}
+
+- (void)thn_removeSubjectObjects {
     [self.subjectMarr removeAllObjects];
     [self.subjectIdMarr removeAllObjects];
     [self.subjectTypeMarr removeAllObjects];
-    [self.categoryMarr removeAllObjects];
-    
-    [self thn_networkNewGoodsListData];
-    [self thn_networkSubjectListData];
 }
 
 - (void)addFooterMJRefresh:(UICollectionView *)collectionView {
@@ -456,41 +469,43 @@ static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
     _idx = self.categoryIdMarr[index];
     
     if (index == 1) {
-        self.sceneCurrentpage = 0;
-        [self.sceneListMarr removeAllObjects];
-        [self.sceneIdMarr removeAllObjects];
-        [self.userIdMarr removeAllObjects];
-        [self thn_networkSceneListData];
-        
-    } else if (index == 2) {
         [SVProgressHUD show];
-        [self removeCategorySubjectMarrData];
         [self thn_networkCagetorySubjectListData:@"0" size:@"1000"];
         [self.goodsList.mj_footer endRefreshingWithNoMoreData];
         
-    } else if (index > 2) {
-        [self removeCategorySubjectMarrData];
-        [self thn_networkCagetorySubjectListData:_idx size:@"1"];
-        
-        [self removeGoodsListMarrData];
-        self.goodsCurrentpageNum = 0;
-        [self thn_networkGoodsListData:_idx];
+    } else if (index > 1) {
+        if (index == self.categoryIdMarr.count - 1) {
+            self.sceneCurrentpage = 0;
+            [self.sceneListMarr removeAllObjects];
+            [self.sceneIdMarr removeAllObjects];
+            [self.userIdMarr removeAllObjects];
+            [self thn_networkSceneListData];
+            
+        } else {
+            [self removeGoodsListMarrData];
+            [self thn_networkCagetorySubjectListData:_idx size:@"1"];
+            self.goodsCurrentpageNum = 0;
+            [self thn_networkGoodsListData:_idx];
+        }
     }
 }
 
 - (void)changeCollectionViewFrame:(NSInteger)index {
-    if (index > 2) {
-        index = 2;
+    if (index > 1) {
+        if (index == self.categoryMarr.count -1)
+            index = 2;
+        else
+            index = 1;
     }
-    
-    CGRect goodsRect = self.goodsList.frame;
-    goodsRect = CGRectMake((SCREEN_WIDTH * 2) - (SCREEN_WIDTH * index), 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157);
-    
-    CGRect sceneRect = self.sceneTable.frame;
-    sceneRect = CGRectMake(SCREEN_WIDTH - SCREEN_WIDTH * index, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157);
     
     CGRect mallRect = self.mallList.frame;
     mallRect = CGRectMake(-SCREEN_WIDTH * index, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157);
+    
+    CGRect sceneRect = self.sceneTable.frame;
+    sceneRect = CGRectMake((SCREEN_WIDTH * 2) - (SCREEN_WIDTH * index), 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157);
+
+    CGRect goodsRect = self.goodsList.frame;
+    goodsRect = CGRectMake(SCREEN_WIDTH - SCREEN_WIDTH * index, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157);
     
     [UIView animateWithDuration:0.3 animations:^{
         self.goodsList.frame = goodsRect;
@@ -502,7 +517,7 @@ static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
 #pragma mark - 情境列表
 - (UITableView *)sceneTable {
     if (!_sceneTable) {
-        _sceneTable = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157) style:(UITableViewStyleGrouped)];
+        _sceneTable = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 2, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157) style:(UITableViewStyleGrouped)];
         _sceneTable.delegate = self;
         _sceneTable.dataSource = self;
         _sceneTable.tableFooterView = [UIView new];
@@ -642,14 +657,14 @@ static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
     }
 }
 
-#pragma mark - 好货列表
+#pragma mark - 商品列表
 - (UICollectionView *)goodsList {
     if (!_goodsList) {
         UICollectionViewFlowLayout *flowLayou = [[UICollectionViewFlowLayout alloc] init];
         flowLayou.minimumLineSpacing = 15.0f;
         flowLayou.scrollDirection = UICollectionViewScrollDirectionVertical;
         
-        _goodsList = [[UICollectionView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH *2, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157) collectionViewLayout:flowLayou];
+        _goodsList = [[UICollectionView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157) collectionViewLayout:flowLayou];
         _goodsList.showsVerticalScrollIndicator = NO;
         _goodsList.delegate = self;
         _goodsList.dataSource = self;
@@ -661,6 +676,7 @@ static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
     return _goodsList;
 }
 
+#pragma mark - 好货列表
 - (UICollectionView *)mallList {
     if (!_mallList) {
         UICollectionViewFlowLayout *flowLayou = [[UICollectionViewFlowLayout alloc] init];
