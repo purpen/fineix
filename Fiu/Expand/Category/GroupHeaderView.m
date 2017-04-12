@@ -17,10 +17,8 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
         self.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
         [self setUI];
-        
     }
     return self;
 }

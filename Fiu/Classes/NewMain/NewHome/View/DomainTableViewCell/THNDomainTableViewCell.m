@@ -39,8 +39,8 @@ static NSString *const domainCollectionCellID = @"THNDomainCollectionViewCellId"
     [self.userHelpMarr removeAllObjects];
     [self.userHelpIdMarr removeAllObjects];
     
-    self.userHelpMarr = data;
     for (HelpUserRow *model in data) {
+        [self.userHelpMarr addObject:model];
         [self.userHelpIdMarr addObject:[NSString stringWithFormat:@"%zi", [model.webUrl integerValue]]];
     }
     [self.domainCollectionView reloadData];
@@ -51,8 +51,8 @@ static NSString *const domainCollectionCellID = @"THNDomainCollectionViewCellId"
     [self.domainMarr removeAllObjects];
     [self.domainIdMarr removeAllObjects];
     
-    self.domainMarr = data;
     for (NiceDomainRow *model in data) {
+        [self.domainMarr addObject:model];
         [self.domainIdMarr addObject:[NSString stringWithFormat:@"%zi", [model.webUrl integerValue]]];
     }
     [self.domainCollectionView reloadData];

@@ -88,16 +88,6 @@ static NSString *const URLMallSubject = @"/scene_subject/getlist";
         collectionView.mj_footer.state = MJRefreshStateNoMoreData;
         collectionView.mj_footer.hidden = true;
     }
-    if ([collectionView.mj_header isRefreshing]) {
-        CGPoint tableY = collectionView.contentOffset;
-        tableY.y = 0;
-        if (collectionView.bounds.origin.y > 0) {
-            [UIView animateWithDuration:.3 animations:^{
-                collectionView.contentOffset = tableY;
-            }];
-        }
-        [collectionView.mj_header endRefreshing];
-    }
     if ([collectionView.mj_footer isRefreshing]) {
         if (isLastPage) {
             [collectionView.mj_footer endRefreshingWithNoMoreData];

@@ -27,7 +27,6 @@ static NSString *const goodsCollectionCellID = @"MallListGoodsCollectionViewCell
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
-        [self addSubview:self.goodsCollectionView];
     }
     return self;
 }
@@ -40,7 +39,11 @@ static NSString *const goodsCollectionCellID = @"MallListGoodsCollectionViewCell
 }
 
 - (void)thn_setHomeGoodsModelArr:(NSMutableArray *)data {
-    [self thn_setGoodsListCount:data];
+    _goodsCount = data.count%2 == 0 ? data.count/2 : (data.count + 1)/2;
+    if ([self.subviews containsObject:[self.goodsCollectionView class]]) {
+        return;
+    }
+    [self addSubview:self.goodsCollectionView];
     
     [self.goodsIdMarr removeAllObjects];
     [self.goodsMarr removeAllObjects];
@@ -49,7 +52,7 @@ static NSString *const goodsCollectionCellID = @"MallListGoodsCollectionViewCell
     for (HomeGoodsRow *model in data) {
         [self.goodsIdMarr addObject:[NSString stringWithFormat:@"%zi", model.idField]];
     }
-    
+
     [self.goodsCollectionView reloadData];
 }
 
@@ -61,7 +64,7 @@ static NSString *const goodsCollectionCellID = @"MallListGoodsCollectionViewCell
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         
-        _goodsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+        _goodsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (newGoodsCellHeight * _goodsCount) + (_goodsCount * 15)) collectionViewLayout:flowLayout];
         _goodsCollectionView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _goodsCollectionView.delegate = self;
         _goodsCollectionView.dataSource = self;

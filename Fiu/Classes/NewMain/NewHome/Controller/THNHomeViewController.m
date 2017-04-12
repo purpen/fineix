@@ -90,6 +90,8 @@ static NSInteger const saveTime = 2 * 24 * 60;
     BOOL _rollDown;                  //  是否下拉
     CGFloat _lastContentOffset;      //  滚动的偏移量
     BOOL _isNewUser;                 //  是否是新用户
+    NSArray *_groupTitle;            //  分组标题
+    NSArray *_groupIcon;             //  分组图标
 }
 
 /**  */
@@ -582,6 +584,8 @@ static NSInteger const saveTime = 2 * 24 * 60;
 #pragma mark - 设置视图UI
 - (void)thn_setHomeViewUI {
     [self.view addSubview:self.homeTable];
+    _groupTitle = @[@"新手福利见面礼", @"D3IN在这里", @"新鲜好货早知道", @"好货合集", @"好货人气王", @"大家都在看"];
+    _groupIcon = @[@"shouye_zhuti", @"shouye_jingxuan", @"shouye_jingxuan", @"shouye_jingxuan", @"shouye_jingxuan", @"shouye_jingxuan"];
 }
 
 #pragma mark - 无网络时的提示背景
@@ -751,7 +755,7 @@ static NSInteger const saveTime = 2 * 24 * 60;
                 cell = [[THNSceneImageTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneImgCellId];
             }
             if (self.sceneListMarr.count) {
-                [cell thn_setSceneImageData:self.sceneListMarr[indexPath.section - 4]];
+                [cell thn_setSceneImageData:self.sceneListMarr[indexPath.section - 5]];
                 [cell thn_touchUpOpenControllerType:(ClickOpenTypeSceneList)];
             }
             cell.vc = self;
@@ -764,7 +768,7 @@ static NSInteger const saveTime = 2 * 24 * 60;
                 cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
             }
             if (self.sceneListMarr.count) {
-                [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section - 4] userId:[self getLoginUserID] isLogin:[self isUserLogin]];
+                [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section - 5] userId:[self getLoginUserID] isLogin:[self isUserLogin]];
             }
             cell.vc = self;
             cell.nav = self.navigationController;
@@ -776,7 +780,7 @@ static NSInteger const saveTime = 2 * 24 * 60;
                 cell = [[THNSceneInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneInfoCellId];
             }
             if (self.sceneListMarr.count) {
-                [cell thn_setSceneContentData:self.sceneListMarr[indexPath.section - 4]];
+                [cell thn_setSceneContentData:self.sceneListMarr[indexPath.section - 5]];
                 _contentHigh = cell.cellHigh;
                 _defaultContentHigh = cell.defaultCellHigh;
             }
@@ -789,9 +793,9 @@ static NSInteger const saveTime = 2 * 24 * 60;
                 cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
             }
             if (self.sceneListMarr.count) {
-                [cell thn_setSceneData:self.sceneListMarr[indexPath.section - 4]
+                [cell thn_setSceneData:self.sceneListMarr[indexPath.section - 5]
                                isLogin:[self isUserLogin]
-                            isUserSelf:[self isLoginUserSelf:self.userIdMarr[indexPath.section - 4]]];
+                            isUserSelf:[self isLoginUserSelf:self.userIdMarr[indexPath.section - 5]]];
                 
                 cell.beginLikeTheSceneBlock = ^(NSString *idx) {
                     [weakSelf thn_networkLikeSceneData:idx];
@@ -871,72 +875,42 @@ static NSInteger const saveTime = 2 * 24 * 60;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    self.headerView = [[GroupHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-    self.headerView.nav = self.navigationController;
-    if (section == 0) {
-        if (_isNewUser == YES) {
-            [self.headerView addGroupHeaderViewIcon:@"shouye_zhuti"
-                                          withTitle:@"新手福利见面礼"
-                                       withSubtitle:@""
-                                      withRightMore:@""
-                                       withMoreType:0];
+    GroupHeaderView *headerView = [[GroupHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+    headerView.nav = self.navigationController;
+    if (section < 6) {
+        if (section == 0 && _isNewUser == NO) {
+            return [UIView new];
         }
-    } else if (section == 1) {
-        [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
-                                      withTitle:@"D3IN在这里"
-                                   withSubtitle:@""
-                                  withRightMore:@""
-                                   withMoreType:0];
-    } else if (section == 2) {
-        self.headerView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
-        [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
-                                      withTitle:@"新鲜好货早知道"
-                                   withSubtitle:@""
-                                  withRightMore:@""
-                                   withMoreType:0];
-    } else if (section == 3) {
-        self.headerView.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
-        [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
-                                      withTitle:@"好货合集"
-                                   withSubtitle:@""
-                                  withRightMore:@"查看更多"
-                                   withMoreType:3];
-    } else if (section == 4) {
-        self.headerView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
-        [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
-                                      withTitle:@"好货人气王"
-                                   withSubtitle:@""
-                                  withRightMore:@""
-                                   withMoreType:0];
-    } else if (section == 5) {
-        [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
-                                      withTitle:@"大家都在看"
-                                   withSubtitle:@""
-                                  withRightMore:@""
-                                   withMoreType:0];
+        if (section == 2 || section == 4) {
+            headerView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        }
+        [headerView addGroupHeaderViewIcon:_groupIcon[section]
+                                 withTitle:_groupTitle[section]
+                              withSubtitle:@""
+                             withRightMore:section == 3 ? @"查看更多" : @""
+                              withMoreType:section == 3 ? 3 : 0];
     }
-
-    return self.headerView;
+    return headerView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         if (_isNewUser) {
-            return 44.0f;
+            return 44.0;
         } else {
-            return 0.01f;
+            return 0.01;
         }
     } else if (section == 1 || section == 2 || section == 3 || section == 4 || section == 5) {
-        return 44.0f;
+        return 44.0;
     } else
-        return 0.01f;
+        return 0.01;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section == 0 || section == 1 || section == 2 || section == 4) {
         return 0.01;
     } else
-        return 10.0f;
+        return 10.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -986,28 +960,27 @@ static NSInteger const saveTime = 2 * 24 * 60;
         if (_rollDown == YES) {
             tabBarRect = CGRectMake(0, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 49);
             tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            [UIView animateWithDuration:.3 animations:^{
-                self.tabBarController.tabBar.frame = tabBarRect;
-                self.homeTable.frame = tableRect;
-                self.navView.alpha = 0;
-                self.leftBtn.alpha = 0;
-                self.rightBtn.alpha = 0;
-                [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
-            }];
+            
+            [self thn_setTableRect:tableRect tabBarRect:tabBarRect alpha:0.0 statusBarHidden:YES];
             
         } else if (_rollDown == NO) {
             tabBarRect = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
             tableRect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 108);
-            [UIView animateWithDuration:.3 animations:^{
-                self.tabBarController.tabBar.frame = tabBarRect;
-                self.homeTable.frame = tableRect;
-                self.navView.alpha = 1;
-                self.leftBtn.alpha = 1;
-                self.rightBtn.alpha = 1;
-                [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-            }];
+            
+            [self thn_setTableRect:tableRect tabBarRect:tabBarRect alpha:1.0 statusBarHidden:NO];
         }
     }
+}
+
+- (void)thn_setTableRect:(CGRect)tableRect tabBarRect:(CGRect)tabBarRect alpha:(CGFloat)count statusBarHidden:(BOOL)hidden {
+    [UIView animateWithDuration:.3 animations:^{
+        self.tabBarController.tabBar.frame = tabBarRect;
+        self.homeTable.frame = tableRect;
+        self.navView.alpha = count;
+        self.leftBtn.alpha = count;
+        self.rightBtn.alpha = count;
+        [[UIApplication sharedApplication] setStatusBarHidden:hidden withAnimation:(UIStatusBarAnimationSlide)];
+    }];
 }
 
 #pragma mark - 选择城市
@@ -1044,6 +1017,25 @@ static NSInteger const saveTime = 2 * 24 * 60;
 //    return _downImage;
 //}
 
+#pragma mark - 获取当前城市信息
+-(void)getCity{
+    [LocationManager shareLocation].locationDelegate = self;
+    [[LocationManager shareLocation] findMe];
+}
+
+-(void)setLocalCityStr:(NSString *)str{
+    NSString *cityStr = [str substringToIndex:[str length] - 1];
+    self.addressCityLabel.text = cityStr;
+}
+
+#pragma mark - 首次打开加载指示图
+- (void)thn_setFirstAppStart {
+    if(![USERDEFAULT boolForKey:@"HomeLaunch"]){
+        [USERDEFAULT setBool:YES forKey:@"HomeLaunch"];
+        [self thn_setMoreGuideImgForVC:@[@"shouye_sousuo",@"shouye_dingyue"]];
+    }
+}
+
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
@@ -1065,33 +1057,6 @@ static NSInteger const saveTime = 2 * 24 * 60;
     SearchViewController *searchVC = [[SearchViewController alloc] init];
     searchVC.index = 0;
     [self.navigationController pushViewController:searchVC animated:YES];
-}
-
-#pragma mark - 获取当前城市信息
--(void)getCity
-{
-    [LocationManager shareLocation].locationDelegate = self;
-    [[LocationManager shareLocation] findMe];
-}
-
--(void)setLocalCityStr:(NSString *)str{
-    NSString *cityStr = [str substringToIndex:[str length] - 1];
-    self.addressCityLabel.text = cityStr;
-}
-
-#pragma mark - 首次打开加载指示图
-- (void)thn_setFirstAppStart {
-    if(![USERDEFAULT boolForKey:@"HomeLaunch"]){
-        [USERDEFAULT setBool:YES forKey:@"HomeLaunch"];
-        [self thn_setMoreGuideImgForVC:@[@"shouye_sousuo",@"shouye_dingyue"]];
-    }
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    [SVProgressHUD dismiss];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"thnUserInfoNotification" object:nil];
 }
 
 #pragma mark - 初始化数组
@@ -1193,5 +1158,15 @@ static NSInteger const saveTime = 2 * 24 * 60;
     return _goodsSubjectTypeMarr;
 }
 
+#pragma mark - 移除通知
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [SVProgressHUD dismiss];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"thnUserInfoNotification" object:nil];
+}
 
 @end

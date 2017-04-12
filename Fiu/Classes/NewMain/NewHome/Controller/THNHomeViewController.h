@@ -39,7 +39,6 @@
 @property (nonatomic, strong) FBRequest *deleteRequest;
 
 @property (nonatomic, strong) FBRollImages *homerollView;
-@property (nonatomic, strong) GroupHeaderView *headerView;
 @property (nonatomic, strong) UITableView *homeTable;
 @property (nonatomic, strong) NSMutableArray *sceneListMarr;
 @property (nonatomic, strong) NSMutableArray *sceneIdMarr;

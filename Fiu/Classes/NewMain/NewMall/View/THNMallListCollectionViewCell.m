@@ -30,9 +30,9 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
 }
 
 - (void)setMallSubjectData:(THNMallSubjectModelRow *)model {
-    self.banner.alpha = 0.0f;
-    
     [self.goodsIdMarr removeAllObjects];
+    [self.goodsListMarr removeAllObjects];
+    
     self.title.text = model.title;
     [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@([self.title boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 30)].width + 10));
@@ -43,18 +43,14 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
         make.width.equalTo(@([self.suTitle boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 30)].width + 10));
     }];
     
-    [self.banner sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [UIView animateWithDuration:.5 animations:^{
-            self.banner.alpha = 1.0f;
-        }];
-    }];
+    [self.banner downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
 
     self.goodsListMarr = [NSMutableArray arrayWithArray:model.products];
     if (self.goodsListMarr.count) {
-        [self.goodsList reloadData];
         for (THNMallGoodsModelItem *model in self.goodsListMarr) {
             [self.goodsIdMarr addObject:[NSString stringWithFormat:@"%zi",model.idField]];
         }
+        [self.goodsList reloadData];
     }
 }
 
@@ -188,7 +184,6 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
     MallListGoodsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:MallListGoodsCellId
                                                                                  forIndexPath:indexPath];
     if (self.goodsListMarr.count) {
-        cell.goodsImageView.backgroundColor = [UIColor whiteColor];
         [cell setMallSubjectGoodsListData:self.goodsListMarr[indexPath.row]];
     }
     return cell;
