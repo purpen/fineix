@@ -205,25 +205,23 @@ static NSString *const CategoryGoodsListCellId  = @"CategoryGoodsListCellId";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-
     if (indexPath.section == self.cageSubjectMarr.count) {
         MallListGoodsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:GoodsListCellId forIndexPath:indexPath];
         if (self.goodsListMarr.count) {
             [cell setGoodsListData:self.goodsListMarr[indexPath.row]];
         }
         return cell;
-    }
-
-    THNMallListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CategoryGoodsListCellId forIndexPath:indexPath];
-    if (self.cageSubjectMarr.count > 0) {
-        [cell setMallSubjectData:self.cageSubjectMarr[indexPath.section]];
-        cell.nav = self.navigationController;
+    
     } else {
-        [cell thn_hiddenCellView];
+        THNMallListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CategoryGoodsListCellId forIndexPath:indexPath];
+        if (self.cageSubjectMarr.count > 0) {
+            [cell setMallSubjectData:self.cageSubjectMarr[indexPath.section]];
+            cell.nav = self.navigationController;
+        } else {
+            [cell thn_hiddenCellView];
+        }
+        return cell;
     }
-    return cell;
-
-    return nil;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

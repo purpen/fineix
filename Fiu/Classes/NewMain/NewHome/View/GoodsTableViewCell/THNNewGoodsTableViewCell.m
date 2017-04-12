@@ -27,15 +27,16 @@ static NSString *const goodsCollectionCellID = @"MallListGoodsCollectionViewCell
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        [self addSubview:self.goodsCollectionView];
     }
     return self;
 }
 
 #pragma mark - 商品的数量
-- (NSInteger)thn_setGoodsListCount:(NSMutableArray *)goodsData {
+- (void)thn_setGoodsListCount:(NSMutableArray *)goodsData {
     _goodsCount = 0;
     _goodsCount = goodsData.count%2 == 0 ? goodsData.count/2 : (goodsData.count + 1)/2;
-    return _goodsCount;
+    self.goodsCollectionView.frame = CGRectMake(0, 0, SCREEN_WIDTH, (newGoodsCellHeight * _goodsCount) + (_goodsCount * 15));
 }
 
 - (void)thn_setHomeGoodsModelArr:(NSMutableArray *)data {
@@ -49,10 +50,7 @@ static NSString *const goodsCollectionCellID = @"MallListGoodsCollectionViewCell
         [self.goodsIdMarr addObject:[NSString stringWithFormat:@"%zi", model.idField]];
     }
     
-    if (![self.subviews containsObject:[self.goodsCollectionView class]]) {
-        [self addSubview:self.goodsCollectionView];
-    }
-//    [self.goodsCollectionView reloadData];
+    [self.goodsCollectionView reloadData];
 }
 
 - (UICollectionView *)goodsCollectionView {
@@ -63,9 +61,7 @@ static NSString *const goodsCollectionCellID = @"MallListGoodsCollectionViewCell
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         
-        _goodsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,\
-                                                                                  (newGoodsCellHeight * _goodsCount) + (_goodsCount * 15))
-                                                   collectionViewLayout:flowLayout];
+        _goodsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _goodsCollectionView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _goodsCollectionView.delegate = self;
         _goodsCollectionView.dataSource = self;

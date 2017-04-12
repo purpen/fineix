@@ -58,34 +58,6 @@ static NSString *const domainCollectionCellID = @"THNDomainCollectionViewCellId"
     [self.domainCollectionView reloadData];
 }
 
-- (NSMutableArray *)domainMarr {
-    if (!_domainMarr) {
-        _domainMarr = [NSMutableArray array];
-    }
-    return _domainMarr;
-}
-
-- (NSMutableArray *)domainIdMarr {
-    if (!_domainIdMarr) {
-        _domainIdMarr = [NSMutableArray array];
-    }
-    return _domainIdMarr;
-}
-
-- (NSMutableArray *)userHelpMarr {
-    if (!_userHelpMarr) {
-        _userHelpMarr = [NSMutableArray array];
-    }
-    return _userHelpMarr;
-}
-
-- (NSMutableArray *)userHelpIdMarr {
-    if (!_userHelpIdMarr) {
-        _userHelpIdMarr = [NSMutableArray array];
-    }
-    return _userHelpIdMarr;
-}
-
 - (UICollectionView *)domainCollectionView {
     if (!_domainCollectionView) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -117,13 +89,10 @@ static NSString *const domainCollectionCellID = @"THNDomainCollectionViewCellId"
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     THNDomainCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:domainCollectionCellID
                                                                                   forIndexPath:indexPath];
-    if (_type == 1) {
-        if (self.domainMarr.count) {
+    if (self.domainMarr.count || self.userHelpMarr.count) {
+        if (_type == 1) {
             [cell thn_setDomainDataModel:self.domainMarr[indexPath.row]];
-        }
-        
-    } else {
-        if (self.userHelpMarr.count) {
+        } else {
             [cell thn_setHelpUserDataModel:self.userHelpMarr[indexPath.row]];
         }
     }
@@ -140,5 +109,35 @@ static NSString *const domainCollectionCellID = @"THNDomainCollectionViewCellId"
         self.openUserHelp(self.userHelpIdMarr[indexPath.row]);
     }
 }
+
+#pragma mark - 
+- (NSMutableArray *)domainMarr {
+    if (!_domainMarr) {
+        _domainMarr = [NSMutableArray array];
+    }
+    return _domainMarr;
+}
+
+- (NSMutableArray *)domainIdMarr {
+    if (!_domainIdMarr) {
+        _domainIdMarr = [NSMutableArray array];
+    }
+    return _domainIdMarr;
+}
+
+- (NSMutableArray *)userHelpMarr {
+    if (!_userHelpMarr) {
+        _userHelpMarr = [NSMutableArray array];
+    }
+    return _userHelpMarr;
+}
+
+- (NSMutableArray *)userHelpIdMarr {
+    if (!_userHelpIdMarr) {
+        _userHelpIdMarr = [NSMutableArray array];
+    }
+    return _userHelpIdMarr;
+}
+
 
 @end

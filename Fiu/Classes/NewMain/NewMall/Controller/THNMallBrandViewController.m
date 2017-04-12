@@ -60,7 +60,7 @@ NSString *const BrandCellId = @"FBBrandGoodsCollectionViewCellID";
 - (UICollectionView *)brandList {
     if (!_brandList) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 70)/4, (SCREEN_WIDTH - 70)/4);
+        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 70)/4, (SCREEN_WIDTH - 70)/4 + 10);
         flowLayout.sectionInset = UIEdgeInsetsMake(15, 15, 15, 15);
         flowLayout.minimumLineSpacing = 15.0;
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;

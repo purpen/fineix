@@ -202,7 +202,7 @@
     return _like;
 }
 
-- (void)likeClick:(UIButton *)button {
+- (void)likeClick:(UIButton *)button {                        
     if (_isLogin) {
         if (button.selected == NO) {
             button.selected = YES;

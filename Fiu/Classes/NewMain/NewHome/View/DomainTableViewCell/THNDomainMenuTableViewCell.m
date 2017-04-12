@@ -28,21 +28,10 @@ static NSString *const domainMenuCollectionCellID = @"THNDomainMenuCollectionVie
     return self;
 }
 
-- (NSMutableArray *)menuMarr {
-    if (!_menuMarr) {
-        _menuMarr = [NSMutableArray array];
-    }
-    return _menuMarr;
-}
-
-- (NSMutableArray *)menuIdMarr {
-    if (!_menuIdMarr) {
-        _menuIdMarr = [NSMutableArray array];
-    }
-    return _menuIdMarr;
-}
-
 - (void)setDomainMenuModelArr:(NSMutableArray *)data {
+    [self.menuIdMarr removeAllObjects];
+    [self.menuMarr removeAllObjects];
+    
     self.menuMarr = data;
     for (DomainCategoryRow *model in data) {
         [self.menuIdMarr addObject:[NSString stringWithFormat:@"%zi", model.idField]];
@@ -85,6 +74,21 @@ static NSString *const domainMenuCollectionCellID = @"THNDomainMenuCollectionVie
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"打开地盘分类：%@", self.menuIdMarr[indexPath.row]]];
+//    [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"打开地盘分类：%@", self.menuIdMarr[indexPath.row]]];
 }
+
+- (NSMutableArray *)menuMarr {
+    if (!_menuMarr) {
+        _menuMarr = [NSMutableArray array];
+    }
+    return _menuMarr;
+}
+
+- (NSMutableArray *)menuIdMarr {
+    if (!_menuIdMarr) {
+        _menuIdMarr = [NSMutableArray array];
+    }
+    return _menuIdMarr;
+}
+
 @end

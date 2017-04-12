@@ -19,7 +19,7 @@
     return self;
 }
 
-- (void)thn_setHomeGoodsData:(HomeGoodsRow *)model {
+- (void)thn_setHomeGoodsData:(THNMallGoodsModelItem *)model {
     self.goodsImageView.alpha = 0.0f;
     [self.goodsImageView sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [UIView animateWithDuration:.5 animations:^{
@@ -28,11 +28,6 @@
     }];
     self.title.text = model.title;
     self.price.text = [NSString stringWithFormat:@"¥%.0f", model.salePrice];
-    if (model.stage == 9) {
-        self.price.hidden = NO;
-    } else {
-        self.price.hidden = YES;
-    }
 }
 
 - (void)setMallSubjectGoodsListData:(THNMallSubjectModelProduct *)model {

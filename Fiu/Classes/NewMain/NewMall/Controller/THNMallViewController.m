@@ -115,29 +115,6 @@ static NSString *const URLCategory = @"/category/getlist";
     if (index > 1 && index < self.categoryIdMarr.count - 2) {
          [_goodsVC thn_getCategoryGoodsListData:_idx];
     }
-    
-//    
-//    if (index == 1) {
-//        self.subjectCurrentpageNum = 0;
-//        [self thn_networkCagetorySubjectListData:@"0" size:@"10"];
-//        [self.goodsList.mj_footer endRefreshingWithNoMoreData];
-//        
-//    } else if (index > 1) {
-//        if (index == self.categoryIdMarr.count - 1) {
-//            self.sceneCurrentpage = 0;
-//            [self.sceneListMarr removeAllObjects];
-//            [self.sceneIdMarr removeAllObjects];
-//            [self.userIdMarr removeAllObjects];
-//            [self thn_networkSceneListData];
-//            
-//        } else {
-//            [self removeGoodsListMarrData];
-//            self.subjectCurrentpageNum = 0;
-//            [self thn_networkCagetorySubjectListData:_idx size:@"1"];
-//            self.goodsCurrentpageNum = 0;
-//            [self thn_networkGoodsListData:_idx];
-//        }
-//    }
 }
 
 - (void)thn_changeContentOffSize:(NSInteger)index {

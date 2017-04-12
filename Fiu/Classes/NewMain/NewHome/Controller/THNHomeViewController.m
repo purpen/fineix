@@ -40,6 +40,7 @@
 #import "HelpUserRow.h"
 #import "NiceDomainRow.h"
 #import "HomeGoodsRow.h"
+#import "THNMallGoodsModelItem.h"
 
 #import "NSString+TimeDate.h"
 #import "MJRefresh.h"
@@ -59,17 +60,16 @@ static NSString *const URLHomeSubject       = @"/scene_subject/index_subject_sti
 static NSString *const URLSubjectView       = @"/scene_subject/view";
 static NSString *const URLLikeScene         = @"/favorite/ajax_love";
 static NSString *const URLCancelLike        = @"/favorite/ajax_cancel_love";
-static NSString *const URLFollowUser        = @"/follow/ajax_follow";
-static NSString *const URLCancelFollowUser  = @"/follow/ajax_cancel_follow";
 static NSString *const URLFavorite          = @"/favorite/ajax_favorite";
 static NSString *const URLCancelFavorite    = @"/favorite/ajax_cancel_favorite";
-static NSString *const URLHotUserList       = @"/user/find_user";
 static NSString *const URLDeleteScene       = @"/scene_sight/delete";
-static NSString *const URLGoodsList         = @"/product/getlist";
+static NSString *const URLNewGoodsList      = @"/product/index_new";
+static NSString *const URLHotGoodsList      = @"/product/index_hot";
 
 static NSString *const domainCellId         = @"THNDomainTableViewCellId";
 static NSString *const domainMenuCellId     = @"THNDomainMenuTableViewCellId";
 static NSString *const newGoodsCellId       = @"newGoodsCellId";
+static NSString *const hotGoodsCellId       = @"hotGoodsCellId";
 static NSString *const goodsSubjectCellId   = @"THNGoodsSubjectTableViewCellId";
 static NSString *const subjectCellId        = @"THNHomeSubjectTableViewCellId";
 static NSString *const userInfoCellId       = @"UserInfoCellId";
@@ -146,7 +146,9 @@ static NSInteger const saveTime = 2 * 24 * 60;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(thn_openPushData:) name:@"thnUserInfoNotification" object:nil];
 }
 
-#pragma mark 打开接收推送消息
+/**
+ 打开接收推送消息
+ */
 - (void)thn_openPushData:(NSNotification *)notification {
     NSDictionary *dict = [notification userInfo];
     NSInteger type = [[dict valueForKey:@"type"] integerValue];
@@ -157,7 +159,12 @@ static NSInteger const saveTime = 2 * 24 * 60;
     }
 }
 
-#pragma mark 接收推送消息类型跳转指定页面
+/**
+ 接收推送消息类型跳转指定页面
+
+ @param type 跳转类型
+ @param targetId 专辑ID
+ */
 - (void)thn_openViewControllerWithType:(NSInteger)type targetId:(NSString *)targetId {
     switch (type) {
         case 1:
@@ -204,15 +211,18 @@ static NSInteger const saveTime = 2 * 24 * 60;
 - (void)thn_netWorkGroup {
     [self thn_networkRollImageData];
     [self thn_networkNewUserData];
-    //        [self thn_networkDomainCategoryData];
+    //[self thn_networkDomainCategoryData];
     [self thn_networkNiceDomainData];
     [self thn_networkGoodsSubjectListData];
     [self thn_networkNewGoodsData];
+    [self thn_networkHotGoodsData];
     [self thn_networkSubjectData];
     [self thn_networkSceneListData];
 }
 
-#pragma mark 轮播图
+/**
+ 轮播图
+ */
 - (void)thn_networkRollImageData {
     NSDictionary *requestDic = @{@"name":@"app_fiu_sight_index_slide",
                                  @"size":@"5",
@@ -231,7 +241,9 @@ static NSInteger const saveTime = 2 * 24 * 60;
     }];
 }
 
-#pragma mark 新人专区
+/**
+ 新人专区
+ */
 - (void)thn_networkNewUserData {
     self.userHelpRequest = [FBAPI getWithUrlString:URLBannerSlide requestDictionary:@{@"name":@"app_fiu_index_new_zone"} delegate:self];
     [self.userHelpRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -240,18 +252,17 @@ static NSInteger const saveTime = 2 * 24 * 60;
             HelpUserRow *model = [[HelpUserRow alloc] initWithDictionary:dict];
             [self.userHelpMarr addObject:model];
         }
-        
-        if (self.sceneListMarr.count) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
-        }
+    
+        [self thn_refreshSeciton:0 item:0];
 
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
-#pragma mark 地盘分类
+/**
+ 地盘分类
+ */
 //- (void)thn_networkDomainCategoryData {
 //    self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"12", @"show_sub":@"1"} delegate:self];
 //    [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -260,18 +271,17 @@ static NSInteger const saveTime = 2 * 24 * 60;
 //            DomainCategoryRow *model = [[DomainCategoryRow alloc] initWithDictionary:dict];
 //            [self.domainCategoryMarr addObject:model];
 //        }
-//        
-//        if (self.sceneListMarr.count) {
-//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
-//            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
-//        }
+//
+//        [self thn_refreshSeciton:0 item:1];
 //        
 //    } failure:^(FBRequest *request, NSError *error) {
 //        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
 //    }];
 //}
 
-#pragma mark 推荐地盘
+/**
+ 推荐地盘
+ */
 - (void)thn_networkNiceDomainData {
     self.niceDomainRequest = [FBAPI getWithUrlString:URLBannerSlide requestDictionary:@{@"name":@"app_fiu_index_scene_stick"} delegate:self];
     [self.niceDomainRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -280,38 +290,55 @@ static NSInteger const saveTime = 2 * 24 * 60;
             NiceDomainRow *model = [[NiceDomainRow alloc] initWithDictionary:dict];
             [self.niceDomainMarr addObject:model];
         }
-        
-        if (self.sceneListMarr.count) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
-            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
-        }
+
+        [self thn_refreshSeciton:1 item:1];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
-#pragma mark 最新商品
+/**
+ 最新商品
+ */
 - (void)thn_networkNewGoodsData {
-    self.goodsRequest = [FBAPI getWithUrlString:URLGoodsList requestDictionary:@{@"fine":@"1", @"size":@"8", @"sort":@"5"} delegate:self];
-    [self.goodsRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        for (NSDictionary *dict in dataArr) {
-            HomeGoodsRow *model = [[HomeGoodsRow alloc] initWithDictionary:dict];
-            [self.goodsMarr addObject:model];
+    self.newestGoodsRequest = [FBAPI getWithUrlString:URLNewGoodsList requestDictionary:@{@"type":@"1", @"use_cache":@"1"} delegate:self];
+    [self.newestGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"items"];
+        for (NSDictionary *goodsDic in goodsArr) {
+            THNMallGoodsModelItem *goodsModel = [[THNMallGoodsModelItem alloc] initWithDictionary:goodsDic];
+            [self.newestGoodsMarr addObject:goodsModel];
         }
         
-        if (self.sceneListMarr.count) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
-            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
-        }
+        [self thn_refreshSeciton:2 item:0];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
-#pragma mark 商品专辑
+/**
+ 热门商品
+ */
+- (void)thn_networkHotGoodsData {
+    self.hotGoodsRequest = [FBAPI getWithUrlString:URLHotGoodsList requestDictionary:@{@"type":@"1"} delegate:self];
+    [self.hotGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"items"];
+        for (NSDictionary * goodsDic in goodsArr) {
+            THNMallGoodsModelItem *goodsModel = [[THNMallGoodsModelItem alloc] initWithDictionary:goodsDic];
+            [self.hotGoodsMarr addObject:goodsModel];
+        }
+        
+        [self thn_refreshSeciton:4 item:0];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+/**
+ 商品专辑
+ */
 - (void)thn_networkGoodsSubjectListData {
     NSDictionary *requestDic = @{@"page":@"1",
                                  @"size":@"1",
@@ -329,17 +356,16 @@ static NSInteger const saveTime = 2 * 24 * 60;
             [self.goodsSubjectTypeMarr addObject:[NSString stringWithFormat:@"%zi", goodsModel.type]];
         }
         
-        if (self.sceneListMarr.count) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:3];
-            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationBottom)];
-        }
+        [self thn_refreshSeciton:3 item:0];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
-#pragma mark 专辑推荐
+/**
+ 活动文章专辑
+ */
 - (void)thn_networkSubjectData {
     self.subjectRequest = [FBAPI getWithUrlString:URLHomeSubject requestDictionary:@{} delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -356,7 +382,9 @@ static NSInteger const saveTime = 2 * 24 * 60;
     }];
 }
 
-#pragma mark 点赞
+/**
+ 点赞
+ */
 - (void)thn_networkLikeSceneData:(NSString *)idx {
     self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
     [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -372,7 +400,9 @@ static NSInteger const saveTime = 2 * 24 * 60;
     }];
 }
 
-#pragma mark 取消点赞
+/**
+ 取消点赞
+ */
 - (void)thn_networkCancelLikeData:(NSString *)idx {
     self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
     [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -388,33 +418,9 @@ static NSInteger const saveTime = 2 * 24 * 60;
     }];
 }
 
-#pragma mark 关注
-- (void)thn_networkBeginFollowUserData:(NSString *)idx {
-    self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
-    [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            
-        }
-
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
-}
-
-#pragma mark 取消关注
-- (void)thn_networkCancelFollowUserData:(NSString *)idx {
-    self.cancelFollowRequest = [FBAPI postWithUrlString:URLCancelFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
-    [self.cancelFollowRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
-}
-
-#pragma mark 收藏
+/**
+ 收藏
+ */
 - (void)thn_networkFavoriteData:(NSString *)idx {
     self.favoriteRequest = [FBAPI postWithUrlString:URLFavorite requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
     [self.favoriteRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -429,7 +435,9 @@ static NSInteger const saveTime = 2 * 24 * 60;
     }];
 }
 
-#pragma mark 取消收藏
+/**
+ 取消收藏
+ */
 - (void)thn_networkCancelFavoriteData:(NSString *)idx {
     self.cancelFavoriteRequest = [FBAPI postWithUrlString:URLCancelFavorite requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
     [self.cancelFavoriteRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -444,22 +452,9 @@ static NSInteger const saveTime = 2 * 24 * 60;
     }];
 }
 
-#pragma mark 专题详情
-- (void)thn_networkSubjectInfoData:(NSString *)idx {
-    self.subjectInfoRequest = [FBAPI getWithUrlString:URLSubjectView requestDictionary:@{@"id":idx} delegate:self];
-    [self.subjectInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if (![[[result valueForKey:@"data"] valueForKey:@"type"] isKindOfClass:[NSNull class]]) {
-            _subjectType = [[[result valueForKey:@"data"] valueForKey:@"type"] integerValue];
-
-            [self thn_openSubjectTypeController:self.navigationController type:_subjectType subjectId:idx];
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@",error);
-    }];
-}
-
-#pragma mark 删除情境
+/**
+ 删除情境
+ */
 - (void)thn_networkDeleteScene:(NSString *)idx {
     self.deleteRequest = [FBAPI postWithUrlString:URLDeleteScene requestDictionary:@{@"id":idx} delegate:self];
     [self.deleteRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -476,7 +471,25 @@ static NSInteger const saveTime = 2 * 24 * 60;
     }];
 }
 
-#pragma mark 情境列表
+/**
+ 专题详情
+ */
+- (void)thn_networkSubjectInfoData:(NSString *)idx {
+    self.subjectInfoRequest = [FBAPI getWithUrlString:URLSubjectView requestDictionary:@{@"id":idx} delegate:self];
+    [self.subjectInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if (![[[result valueForKey:@"data"] valueForKey:@"type"] isKindOfClass:[NSNull class]]) {
+            _subjectType = [[[result valueForKey:@"data"] valueForKey:@"type"] integerValue];
+            [self thn_openSubjectTypeController:self.navigationController type:_subjectType subjectId:idx];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+/**
+ 情境列表
+ */
 - (void)thn_networkSceneListData {
     [SVProgressHUD show];
     NSDictionary *requestDic = @{@"page":@"1",
@@ -515,7 +528,20 @@ static NSInteger const saveTime = 2 * 24 * 60;
     }];
 }
 
-#pragma mark - 下拉刷新
+#pragma mark - 刷新数据
+/**
+ 刷新指定单元格
+ */
+- (void)thn_refreshSeciton:(NSInteger)section item:(NSInteger)item {
+    if (self.sceneListMarr.count) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:item inSection:section];
+        [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
+    }
+}
+
+/**
+ 下拉刷新
+ */
 - (void)addMJRefresh:(UITableView *)table {
     FBRefresh * header = [FBRefresh headerWithRefreshingBlock:^{
         [self loadNewData];
@@ -523,7 +549,9 @@ static NSInteger const saveTime = 2 * 24 * 60;
     table.mj_header = header;
 }
 
-#pragma mark 刷新移除旧数据
+/**
+ 移除旧数据
+ */
 - (void)loadNewData {
     [self.rollList removeAllObjects];
     [self.sceneListMarr removeAllObjects];
@@ -534,7 +562,8 @@ static NSInteger const saveTime = 2 * 24 * 60;
 //    [self.domainCategoryMarr removeAllObjects];
     [self.userHelpMarr removeAllObjects];
     [self.niceDomainMarr removeAllObjects];
-    [self.goodsMarr removeAllObjects];
+    [self.newestGoodsMarr removeAllObjects];
+    [self.hotGoodsMarr removeAllObjects];
     [self.goodsSubjectMarr removeAllObjects];
     [self.goodsSubjectIdMarr removeAllObjects];
     [self.goodsSubjectTypeMarr removeAllObjects];
@@ -543,6 +572,7 @@ static NSInteger const saveTime = 2 * 24 * 60;
     [self thn_networkRollImageData];
     [self thn_networkSubjectData];
     [self thn_networkNewUserData];
+    [self thn_networkHotGoodsData];
 //    [self thn_networkDomainCategoryData];
     [self thn_networkNiceDomainData];
     [self thn_networkNewGoodsData];
@@ -570,7 +600,9 @@ static NSInteger const saveTime = 2 * 24 * 60;
     [self loadNewData];
 }
 
-#pragma mark - 列表滚动到底部的背景
+/**
+ 列表滚动到底部的背景
+ */
 - (THNHomeTableViewFooter *)footerImageView {
     if (!_footerImageView) {
         _footerImageView = [[THNHomeTableViewFooter alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
@@ -616,19 +648,15 @@ static NSInteger const saveTime = 2 * 24 * 60;
 
 #pragma mark tableViewDelegate & dataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.sceneListMarr.count + 5;
+    return self.sceneListMarr.count + 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
+    if (section == 0 || section == 2 || section == 3 || section == 4) {
         return 1;
     } else if (section == 1) {
         return 2;
-    } else if (section == 2) {
-        return 1;
-    } else if (section == 3) {
-        return 1;
-    } else if (section == self.sceneListMarr.count + 4) {
+    } else if (section == self.sceneListMarr.count + 5) {
         return self.subjectMarr.count;
     } else {
         return 4;
@@ -641,7 +669,7 @@ static NSInteger const saveTime = 2 * 24 * 60;
     __weak __typeof(self)weakSelf = self;
     
     if (indexPath.section == 0) {
-        if (_isNewUser) {
+        if (_isNewUser) {    //  新手专区
             THNDomainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainCellId];
             cell = [[THNDomainTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainCellId];
             if (self.userHelpMarr.count) {
@@ -652,16 +680,17 @@ static NSInteger const saveTime = 2 * 24 * 60;
             }
             cell.nav = self.navigationController;
             return cell;
+            
+        } else {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainCellId];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainCellId];
+            }
+            return cell;
         }
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainCellId];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainCellId];
-        }
-        return cell;
     
     } else if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
+        if (indexPath.row == 0) {    //  地盘分类
             THNDomainMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainMenuCellId];
             cell = [[THNDomainMenuTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainMenuCellId];
             cell.nav = self.navigationController;
@@ -669,26 +698,27 @@ static NSInteger const saveTime = 2 * 24 * 60;
                 [cell setDomainMenuModelArr:self.domainCategoryMarr];
             }
             return cell;
+            
+        } else {    //  热门地盘
+            THNDomainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainCellId];
+            cell = [[THNDomainTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainCellId];
+            cell.nav = self.navigationController;
+            if (self.niceDomainMarr.count) {
+                [cell thn_setDomainModelArr:self.niceDomainMarr type:1];
+            }
+            return cell;
         }
         
-        THNDomainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainCellId];
-        cell = [[THNDomainTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainCellId];
-        cell.nav = self.navigationController;
-        if (self.niceDomainMarr.count) {
-            [cell thn_setDomainModelArr:self.niceDomainMarr type:1];
-        }
-        return cell;
-        
-    } else if (indexPath.section == 2) {
+    } else if (indexPath.section == 2) {    //  最新商品
         THNNewGoodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:newGoodsCellId];
         cell = [[THNNewGoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:newGoodsCellId];
-        if (self.goodsMarr.count) {
-            [cell thn_setHomeGoodsModelArr:self.goodsMarr];
+        if (self.newestGoodsMarr.count) {
+            [cell thn_setHomeGoodsModelArr:self.newestGoodsMarr];
         }
         cell.nav = self.navigationController;
         return cell;
         
-    } else if (indexPath.section == 3) {
+    } else if (indexPath.section == 3) {    //  商品专辑
         THNGoodsSubjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:goodsSubjectCellId];
         cell = [[THNGoodsSubjectTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsSubjectCellId];
         if (self.goodsSubjectMarr.count) {
@@ -697,16 +727,24 @@ static NSInteger const saveTime = 2 * 24 * 60;
         cell.nav = self.navigationController;
         return cell;
     
-    } else if (indexPath.section == self.sceneListMarr.count + 4) {
+    }  else if (indexPath.section == 4) {    //  热门商品
+        THNNewGoodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:hotGoodsCellId];
+        cell = [[THNNewGoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:hotGoodsCellId];
+        if (self.hotGoodsMarr.count) {
+            [cell thn_setHomeGoodsModelArr:self.hotGoodsMarr];
+        }
+        cell.nav = self.navigationController;
+        return cell;
+        
+    } else if (indexPath.section == self.sceneListMarr.count + 5) {    //  文章活动
         THNHomeSubjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:subjectCellId];
         cell = [[THNHomeSubjectTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:subjectCellId];
         if (self.subjectMarr.count) {
             [cell thn_setSubjectModel:self.subjectMarr[indexPath.row]];
         }
         return cell;
-    }
     
-    else {
+    } else {    //  情境列表
         if (indexPath.row == 0) {
             THNSceneImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneImgCellId];
             if (!cell) {
@@ -798,13 +836,17 @@ static NSInteger const saveTime = 2 * 24 * 60;
         return 195;
 
     } else if (indexPath.section == 2) {
-        NSInteger newGoodsCount = [self thn_setGoodsListCount:self.goodsMarr];
+        NSInteger newGoodsCount = [self thn_setGoodsListCount:self.newestGoodsMarr];
         return (goodsCellHeight * newGoodsCount) + (newGoodsCount * 15);
         
     } else if (indexPath.section == 3) {
         return 366;
         
-    } else if (indexPath.section == self.sceneListMarr.count + 4) {
+    } else if (indexPath.section == 4) {
+        NSInteger hotGoodsCount = [self thn_setGoodsListCount:self.hotGoodsMarr];
+        return (goodsCellHeight * hotGoodsCount) + (hotGoodsCount * 15);
+        
+    } else if (indexPath.section == self.sceneListMarr.count + 5) {
         return (SCREEN_WIDTH * 0.56) + 10;
     
     } else {
@@ -860,6 +902,13 @@ static NSInteger const saveTime = 2 * 24 * 60;
                                   withRightMore:@"查看更多"
                                    withMoreType:3];
     } else if (section == 4) {
+        self.headerView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
+                                      withTitle:@"好货人气王"
+                                   withSubtitle:@""
+                                  withRightMore:@""
+                                   withMoreType:0];
+    } else if (section == 5) {
         [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
                                       withTitle:@"大家都在看"
                                    withSubtitle:@""
@@ -877,21 +926,21 @@ static NSInteger const saveTime = 2 * 24 * 60;
         } else {
             return 0.01f;
         }
-    } else if (section == 1 || section == 2 || section == 3 || section == 4) {
+    } else if (section == 1 || section == 2 || section == 3 || section == 4 || section == 5) {
         return 44.0f;
     } else
         return 0.01f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == 0 || section == 1 || section == 2) {
+    if (section == 0 || section == 1 || section == 2 || section == 4) {
         return 0.01;
     } else
         return 10.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section > 3 && indexPath.section < self.sceneListMarr.count + 4) {
+    if (indexPath.section > 4 && indexPath.section < self.sceneListMarr.count + 5) {
         if (indexPath.row == 2) {
             if (_contentHigh > 90.0f) {
                 if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
@@ -908,7 +957,7 @@ static NSInteger const saveTime = 2 * 24 * 60;
         NSString *idx = self.goodsSubjectIdMarr[indexPath.row];
         [self thn_openSubjectTypeController:self.navigationController type:type subjectId:idx];
     
-    } else if (indexPath.section == self.sceneListMarr.count + 4) {
+    } else if (indexPath.section == self.sceneListMarr.count + 5) {
         [self thn_networkSubjectInfoData:self.subjectIdMarr[indexPath.row]];
     }
 }
@@ -1109,11 +1158,18 @@ static NSInteger const saveTime = 2 * 24 * 60;
     return _niceDomainMarr;
 }
 
-- (NSMutableArray *)goodsMarr {
-    if (!_goodsMarr) {
-        _goodsMarr = [NSMutableArray array];
+- (NSMutableArray *)hotGoodsMarr {
+    if (!_hotGoodsMarr) {
+        _hotGoodsMarr = [NSMutableArray array];
     }
-    return _goodsMarr;
+    return _hotGoodsMarr;
+}
+
+- (NSMutableArray *)newestGoodsMarr {
+    if (!_newestGoodsMarr) {
+        _newestGoodsMarr = [NSMutableArray array];
+    }
+    return _newestGoodsMarr;
 }
 
 - (NSMutableArray *)goodsSubjectMarr {
