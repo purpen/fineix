@@ -245,7 +245,7 @@
     HomePageViewController *v = [[HomePageViewController alloc] init];
     THNUserData *model = _modelAry[indexPath.row];
     THNUserData *userdata = [[THNUserData findAll] lastObject];
-    v.userId = userdata.userId;
+    v.userId = model.userId;
     if ([userdata.userId integerValue] == [model.userId integerValue]) {
         v.isMySelf = YES;
     }else{
