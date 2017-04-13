@@ -11,7 +11,7 @@
 #import "GoodsRow.h"
 #import "THNMallSubjectModelProduct.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "HomeGoodsRow.h"
+#import "THNMallGoodsModelItem.h"
 
 @interface MallListGoodsCollectionViewCell : UICollectionViewCell
 
@@ -20,7 +20,7 @@
 @property (nonatomic, strong) UILabel *title;
 @property (nonatomic, strong) UILabel *price;
 
-- (void)thn_setHomeGoodsData:(HomeGoodsRow *)model;
+- (void)thn_setHomeGoodsData:(THNMallGoodsModelItem *)model;
 
 - (void)setGoodsListData:(GoodsRow *)model;
 

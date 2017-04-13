@@ -26,12 +26,11 @@
 @property (nonatomic, strong) FBRequest *userHelpRequest;
 @property (nonatomic, strong) FBRequest *categoryRequest;
 @property (nonatomic, strong) FBRequest *niceDomainRequest;
-@property (nonatomic, strong) FBRequest *goodsRequest;
+@property (nonatomic, strong) FBRequest *newestGoodsRequest;
+@property (nonatomic, strong) FBRequest *hotGoodsRequest;
 @property (nonatomic, strong) FBRequest *goodsSubjectRequest;
 @property (nonatomic, strong) FBRequest *subjectRequest;
 @property (nonatomic, strong) FBRequest *subjectInfoRequest;
-@property (nonatomic, strong) FBRequest *followRequest;
-@property (nonatomic, strong) FBRequest *cancelFollowRequest;
 @property (nonatomic, strong) FBRequest *sceneListRequest;
 @property (nonatomic, strong) FBRequest *likeSceneRequest;
 @property (nonatomic, strong) FBRequest *cancelLikeRequest;
@@ -40,7 +39,6 @@
 @property (nonatomic, strong) FBRequest *deleteRequest;
 
 @property (nonatomic, strong) FBRollImages *homerollView;
-@property (nonatomic, strong) GroupHeaderView *headerView;
 @property (nonatomic, strong) UITableView *homeTable;
 @property (nonatomic, strong) NSMutableArray *sceneListMarr;
 @property (nonatomic, strong) NSMutableArray *sceneIdMarr;
@@ -53,7 +51,8 @@
 @property (nonatomic, strong) NSMutableArray *domainCategoryMarr;
 @property (nonatomic, strong) NSMutableArray *userHelpMarr;
 @property (nonatomic, strong) NSMutableArray *niceDomainMarr;
-@property (nonatomic, strong) NSMutableArray *goodsMarr;
+@property (nonatomic, strong) NSMutableArray *newestGoodsMarr;
+@property (nonatomic, strong) NSMutableArray *hotGoodsMarr;
 @property (nonatomic, strong) NSMutableArray *goodsSubjectMarr;
 @property (nonatomic, strong) NSMutableArray *goodsSubjectIdMarr;
 @property (nonatomic, strong) NSMutableArray *goodsSubjectTypeMarr;

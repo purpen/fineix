@@ -32,7 +32,7 @@ NSString *const kTHNMallGoodsModelItemTitle = @"title";
 	}
     
     if(![dictionary[kTHNMallGoodsModelItemSalePrice] isKindOfClass:[NSNull class]]){
-        self.salePrice = [dictionary[kTHNMallGoodsModelItemSalePrice] integerValue];
+        self.salePrice = [dictionary[kTHNMallGoodsModelItemSalePrice] floatValue];
     }
 
 	if(![dictionary[kTHNMallGoodsModelItemBrandCoverUrl] isKindOfClass:[NSNull class]]){

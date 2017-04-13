@@ -66,7 +66,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     FBBrandGoodsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FBBrandGoodsCollectionViewCellID" forIndexPath:indexPath];
-    [cell setSelfBrandData:_brandData[indexPath.row]];
+    [cell thn_setBrandData:_brandData[indexPath.row]];
     return cell;
 }
 

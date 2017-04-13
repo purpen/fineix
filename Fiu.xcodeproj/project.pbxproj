@@ -770,6 +770,10 @@
 		D8884E101E595FC000CEE159 /* THNDomainInfoHeaderImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D8884E0A1E595FC000CEE159 /* THNDomainInfoHeaderImage.m */; };
 		D8884E111E595FC000CEE159 /* THNMoreDesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8884E0C1E595FC000CEE159 /* THNMoreDesTableViewCell.m */; };
 		D8884E171E59650700CEE159 /* THNDomainInfoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = D8884E161E59650700CEE159 /* THNDomainInfoFooter.m */; };
+		D888CFFD1E9CB0E30086A76E /* THNRecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D888CFFC1E9CB0E30086A76E /* THNRecommendViewController.m */; };
+		D888D0001E9CC5220086A76E /* THNMallSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D888CFFF1E9CC5220086A76E /* THNMallSceneViewController.m */; };
+		D888D0031E9CC9D90086A76E /* THNMallBrandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D888D0021E9CC9D90086A76E /* THNMallBrandViewController.m */; };
+		D888D0061E9CCB3B0086A76E /* FBBrandGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D888D0051E9CCB3B0086A76E /* FBBrandGoodsCollectionViewCell.m */; };
 		D88F47EE1D5C5BD300C83A0C /* FBCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = D88F47ED1D5C5BD300C83A0C /* FBCategoryView.m */; };
 		D8932E461D17FE8100428FC7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8932E451D17FE8100428FC7 /* Launch Screen.storyboard */; };
 		D89478D91D867D9A00200ACD /* THNSceneImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D89478D81D867D9A00200ACD /* THNSceneImageScrollView.m */; };
@@ -806,7 +810,6 @@
 		D8B855C21D3F6BA10008BD57 /* AddLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B855C11D3F6BA10008BD57 /* AddLocationView.m */; };
 		D8B855CE1D3F7F1F0008BD57 /* AddContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B855CD1D3F7F1F0008BD57 /* AddContentView.m */; };
 		D8BE89D81D33401C00DE5029 /* FBBrandGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BE89D71D33401C00DE5029 /* FBBrandGoodsView.m */; };
-		D8BE89DB1D33419000DE5029 /* FBBrandGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BE89DA1D33419000DE5029 /* FBBrandGoodsCollectionViewCell.m */; };
 		D8BE89DE1D334ADD00DE5029 /* BrandsListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BE89DD1D334ADD00DE5029 /* BrandsListTableViewCell.m */; };
 		D8BE89E11D33509400DE5029 /* BrandListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BE89E01D33509400DE5029 /* BrandListModel.m */; };
 		D8BE89E41D3377B000DE5029 /* SeleBrandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BE89E31D3377B000DE5029 /* SeleBrandViewController.m */; };
@@ -822,6 +825,7 @@
 		D8C095201D7533FD00908491 /* ShareInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C0951C1D7533FD00908491 /* ShareInfoData.m */; };
 		D8C095211D7533FD00908491 /* ShareInfoRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C0951E1D7533FD00908491 /* ShareInfoRow.m */; };
 		D8C095241D75344000908491 /* ShareSearchTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C095231D75344000908491 /* ShareSearchTextTableViewCell.m */; };
+		D8D277871E9CD68500DEEA2D /* THNMallGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D277861E9CD68500DEEA2D /* THNMallGoodsViewController.m */; };
 		D8DD22581DB756C0007D80CE /* THNChooseCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD22571DB756C0007D80CE /* THNChooseCityViewController.m */; };
 		D8DD225B1DBA1809007D80CE /* THNProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD225A1DBA1809007D80CE /* THNProvinceModel.m */; };
 		D8DDEE101D338D760020FF66 /* FBPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DDEE0F1D338D760020FF66 /* FBPopupView.m */; };
@@ -2211,6 +2215,14 @@
 		D8884E0C1E595FC000CEE159 /* THNMoreDesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNMoreDesTableViewCell.m; sourceTree = "<group>"; };
 		D8884E151E59650700CEE159 /* THNDomainInfoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDomainInfoFooter.h; sourceTree = "<group>"; };
 		D8884E161E59650700CEE159 /* THNDomainInfoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomainInfoFooter.m; sourceTree = "<group>"; };
+		D888CFFB1E9CB0E30086A76E /* THNRecommendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRecommendViewController.h; sourceTree = "<group>"; };
+		D888CFFC1E9CB0E30086A76E /* THNRecommendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRecommendViewController.m; sourceTree = "<group>"; };
+		D888CFFE1E9CC5220086A76E /* THNMallSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNMallSceneViewController.h; sourceTree = "<group>"; };
+		D888CFFF1E9CC5220086A76E /* THNMallSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNMallSceneViewController.m; sourceTree = "<group>"; };
+		D888D0011E9CC9D90086A76E /* THNMallBrandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNMallBrandViewController.h; sourceTree = "<group>"; };
+		D888D0021E9CC9D90086A76E /* THNMallBrandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNMallBrandViewController.m; sourceTree = "<group>"; };
+		D888D0041E9CCB3B0086A76E /* FBBrandGoodsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBBrandGoodsCollectionViewCell.h; sourceTree = "<group>"; };
+		D888D0051E9CCB3B0086A76E /* FBBrandGoodsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBBrandGoodsCollectionViewCell.m; sourceTree = "<group>"; };
 		D88F47EC1D5C5BD300C83A0C /* FBCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBCategoryView.h; sourceTree = "<group>"; };
 		D88F47ED1D5C5BD300C83A0C /* FBCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBCategoryView.m; sourceTree = "<group>"; };
 		D8932E451D17FE8100428FC7 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -2270,8 +2282,6 @@
 		D8B855CD1D3F7F1F0008BD57 /* AddContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddContentView.m; sourceTree = "<group>"; };
 		D8BE89D61D33401C00DE5029 /* FBBrandGoodsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBBrandGoodsView.h; sourceTree = "<group>"; };
 		D8BE89D71D33401C00DE5029 /* FBBrandGoodsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBBrandGoodsView.m; sourceTree = "<group>"; };
-		D8BE89D91D33419000DE5029 /* FBBrandGoodsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBBrandGoodsCollectionViewCell.h; sourceTree = "<group>"; };
-		D8BE89DA1D33419000DE5029 /* FBBrandGoodsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBBrandGoodsCollectionViewCell.m; sourceTree = "<group>"; };
 		D8BE89DC1D334ADD00DE5029 /* BrandsListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandsListTableViewCell.h; sourceTree = "<group>"; };
 		D8BE89DD1D334ADD00DE5029 /* BrandsListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandsListTableViewCell.m; sourceTree = "<group>"; };
 		D8BE89DF1D33509400DE5029 /* BrandListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandListModel.h; sourceTree = "<group>"; };
@@ -2302,6 +2312,8 @@
 		D8C0951E1D7533FD00908491 /* ShareInfoRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareInfoRow.m; sourceTree = "<group>"; };
 		D8C095221D75344000908491 /* ShareSearchTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareSearchTextTableViewCell.h; sourceTree = "<group>"; };
 		D8C095231D75344000908491 /* ShareSearchTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareSearchTextTableViewCell.m; sourceTree = "<group>"; };
+		D8D277851E9CD68500DEEA2D /* THNMallGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNMallGoodsViewController.h; sourceTree = "<group>"; };
+		D8D277861E9CD68500DEEA2D /* THNMallGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNMallGoodsViewController.m; sourceTree = "<group>"; };
 		D8DD22561DB756C0007D80CE /* THNChooseCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNChooseCityViewController.h; sourceTree = "<group>"; };
 		D8DD22571DB756C0007D80CE /* THNChooseCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNChooseCityViewController.m; sourceTree = "<group>"; };
 		D8DD22591DBA1809007D80CE /* THNProvinceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNProvinceModel.h; sourceTree = "<group>"; };
@@ -2877,8 +2889,6 @@
 				1F2A8D501CF40276005116C7 /* GoodsBrandTableViewCell.m */,
 				D8BE89D61D33401C00DE5029 /* FBBrandGoodsView.h */,
 				D8BE89D71D33401C00DE5029 /* FBBrandGoodsView.m */,
-				D8BE89D91D33419000DE5029 /* FBBrandGoodsCollectionViewCell.h */,
-				D8BE89DA1D33419000DE5029 /* FBBrandGoodsCollectionViewCell.m */,
 				D8BE89DC1D334ADD00DE5029 /* BrandsListTableViewCell.h */,
 				D8BE89DD1D334ADD00DE5029 /* BrandsListTableViewCell.m */,
 			);
@@ -4928,8 +4938,6 @@
 		D85174481D5878C8005F5722 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D85F19251E6033D20038E0BB /* THNNiceGoodsViewController.h */,
-				D85F19261E6033D20038E0BB /* THNNiceGoodsViewController.m */,
 				D85174521D587908005F5722 /* THNMallViewController.h */,
 				D85174531D587908005F5722 /* THNMallViewController.m */,
 				D80878E31D6B015100C1FFA0 /* THNCategoryViewController.h */,
@@ -4940,6 +4948,16 @@
 				D806697A1D6F0206007FD81E /* MallSearchViewController.m */,
 				D8E8FFC91D77393400DDC3E0 /* THNUserAddGoodsViewController.h */,
 				D8E8FFCA1D77393400DDC3E0 /* THNUserAddGoodsViewController.m */,
+				D85F19251E6033D20038E0BB /* THNNiceGoodsViewController.h */,
+				D85F19261E6033D20038E0BB /* THNNiceGoodsViewController.m */,
+				D888CFFB1E9CB0E30086A76E /* THNRecommendViewController.h */,
+				D888CFFC1E9CB0E30086A76E /* THNRecommendViewController.m */,
+				D888CFFE1E9CC5220086A76E /* THNMallSceneViewController.h */,
+				D888CFFF1E9CC5220086A76E /* THNMallSceneViewController.m */,
+				D888D0011E9CC9D90086A76E /* THNMallBrandViewController.h */,
+				D888D0021E9CC9D90086A76E /* THNMallBrandViewController.m */,
+				D8D277851E9CD68500DEEA2D /* THNMallGoodsViewController.h */,
+				D8D277861E9CD68500DEEA2D /* THNMallGoodsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4968,6 +4986,8 @@
 		D851744A1D5878C8005F5722 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D888D0041E9CCB3B0086A76E /* FBBrandGoodsCollectionViewCell.h */,
+				D888D0051E9CCB3B0086A76E /* FBBrandGoodsCollectionViewCell.m */,
 				D861BC6F1D7E995600A26022 /* THNBrandInfoCollectionReusableView.h */,
 				D861BC701D7E995600A26022 /* THNBrandInfoCollectionReusableView.m */,
 				D8E8FFC61D76D01B00DDC3E0 /* TagFlowLayout.h */,
@@ -6058,6 +6078,7 @@
 				1FD10CAD1D62DE0E005898EE /* THNCollectionViewController.m in Sources */,
 				1F2A8F411CF40277005116C7 /* MarkGoodsData.m in Sources */,
 				1F2AFD701D88186C00DA6035 /* BindIngViewController.m in Sources */,
+				D888CFFD1E9CB0E30086A76E /* THNRecommendViewController.m in Sources */,
 				1F2AFD7C1D88186C00DA6035 /* THNInputCodeViewController.m in Sources */,
 				D857C46F1E2CC52A00569B3D /* THNTradingInfoViewController.m in Sources */,
 				1F2AFC761D88170B00DA6035 /* THNSceneDetalViewController.m in Sources */,
@@ -6199,6 +6220,7 @@
 				D86809151D643AA0002714B2 /* THNMarkGoodsViewController.m in Sources */,
 				D8117B0C1E5AAE5D0094E7EB /* FBSubjectModel.m in Sources */,
 				1F2AFC9B1D88170B00DA6035 /* MyQrCodeView.m in Sources */,
+				D888D0061E9CCB3B0086A76E /* FBBrandGoodsCollectionViewCell.m in Sources */,
 				1F2AFC941D88170B00DA6035 /* FocusNonView.m in Sources */,
 				1F2AFCFA1D8817CC00DA6035 /* THNActiveRuleCollectionViewCell.m in Sources */,
 				D8482D291E136232000B511C /* JKDBModel.m in Sources */,
@@ -6246,6 +6268,7 @@
 				D857C4BF1E2F632500569B3D /* THNWithdrawData.m in Sources */,
 				D857C4B71E2F58A500569B3D /* THNAllinaceData.m in Sources */,
 				1F18040E1E52F26200722AF5 /* THNCityCollectionViewCell.m in Sources */,
+				D888D0031E9CC9D90086A76E /* THNMallBrandViewController.m in Sources */,
 				1F2AFD001D8817CC00DA6035 /* THNArticleDetalViewController.m in Sources */,
 				D86E548F1DD444230075ED88 /* FS1977Filter.m in Sources */,
 				D86E54BE1DD444230075ED88 /* FSLomofiFilter.m in Sources */,
@@ -6522,6 +6545,7 @@
 				1F2A8F3F1CF40277005116C7 /* FindGoodsModelRow.m in Sources */,
 				D8117AE51E5A89D50094E7EB /* SceneInfoProduct.m in Sources */,
 				1F99E15F1E515B2D000D3D73 /* CollectionViewCell.m in Sources */,
+				D888D0001E9CC5220086A76E /* THNMallSceneViewController.m in Sources */,
 				D869BD701D6036A000432423 /* CommentRow.m in Sources */,
 				D8884DF31E57007800CEE159 /* DominInfoUser.m in Sources */,
 				1FA204E51D378AAB00B89699 /* UIView+Size.m in Sources */,
@@ -6548,7 +6572,6 @@
 				D859A9EF1E820A56003E1F42 /* THNEditLightViewController.m in Sources */,
 				D80878D91D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.m in Sources */,
 				D8117ADF1E5A89D50094E7EB /* HomeSceneListRow.m in Sources */,
-				D8BE89DB1D33419000DE5029 /* FBBrandGoodsCollectionViewCell.m in Sources */,
 				D8117AD21E5A89D50094E7EB /* HotUserListUser.m in Sources */,
 				1F2AFC711D88170B00DA6035 /* MyQrCodeViewController.m in Sources */,
 				1F2AFC851D88170B00DA6035 /* FiuSceneInfoUserInfo.m in Sources */,
@@ -6632,6 +6655,7 @@
 				1F2A90A51CF40277005116C7 /* FBSearchView.m in Sources */,
 				D8ACF44C1D6BFE0300DB79D8 /* THNMallGoodsModelItem.m in Sources */,
 				D81179FD1E598A230094E7EB /* THNDomainMenuCollectionViewCell.m in Sources */,
+				D8D277871E9CD68500DEEA2D /* THNMallGoodsViewController.m in Sources */,
 				D86E54C21DD444230075ED88 /* FSSierraFilter.m in Sources */,
 				D8117ACC1E5A89D50094E7EB /* DomainCategoryData.m in Sources */,
 				D869BD721D6036A000432423 /* CommentDataTableViewCell.m in Sources */,

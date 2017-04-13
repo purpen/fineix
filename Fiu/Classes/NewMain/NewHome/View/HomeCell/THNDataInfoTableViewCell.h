@@ -20,45 +20,45 @@ typedef void(^RefreshData)();
 
 @interface THNDataInfoTableViewCell : UITableViewCell
 
-@pro_strong UIViewController *vc;
-@pro_strong UINavigationController *nav;
-@pro_strong UIButton *look;
-@pro_strong UIButton *like;
-@pro_strong UIButton *comments;
-@pro_strong UIButton *share;
-@pro_strong UIButton *more;
+@property (nonatomic, strong) UIViewController *vc;
+@property (nonatomic, strong) UINavigationController *nav;
+@property (nonatomic, strong) UIButton *look;
+@property (nonatomic, strong) UIButton *like;
+@property (nonatomic, strong) UIButton *comments;
+@property (nonatomic, strong) UIButton *share;
+@property (nonatomic, strong) UIButton *more;
 
 - (void)thn_setSceneData:(HomeSceneListRow *)dataModel isLogin:(BOOL)login isUserSelf:(BOOL)userSelf;
 
 /**
- *  点赞
+ 点赞
  */
-@pro_copy BeginLikeTheSceneBlock beginLikeTheSceneBlock;
+@property (nonatomic, copy) BeginLikeTheSceneBlock beginLikeTheSceneBlock;
 
 /**
- *  取消点赞
+ 取消点赞
  */
-@pro_copy CancelLikeTheSceneBlock cancelLikeTheSceneBlock;
+@property (nonatomic, copy) CancelLikeTheSceneBlock cancelLikeTheSceneBlock;
 
 /**
- *  收藏
+ 收藏
  */
-@pro_copy BeginFavoriteTheSceneBlock beginFavoriteTheSceneBlock;
+@property (nonatomic, copy) BeginFavoriteTheSceneBlock beginFavoriteTheSceneBlock;
 
 /**
- *  取消收藏
+ 取消收藏
  */
-@pro_copy CancelFavoriteTheSceneBlock cancelFavoriteTheSceneBlock;
+@property (nonatomic, copy) CancelFavoriteTheSceneBlock cancelFavoriteTheSceneBlock;
 
 /**
- *  删除情境
+ 删除情境
  */
-@pro_copy CancelFavoriteTheSceneBlock deleteTheSceneBlock;
+@property (nonatomic, copy) CancelFavoriteTheSceneBlock deleteTheSceneBlock;
 
 /**
- *  刷新数据 
+ 刷新数据
  */
-@pro_copy RefreshData refreshData;
+@property (nonatomic, copy) RefreshData refreshData;
 
 
 @end

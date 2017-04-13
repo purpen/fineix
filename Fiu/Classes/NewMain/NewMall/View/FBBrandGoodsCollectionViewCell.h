@@ -12,8 +12,9 @@
 
 @interface FBBrandGoodsCollectionViewCell : UICollectionViewCell
 
-@pro_strong UIImageView     *   brandImg;
+@property (nonatomic, strong) UIImageView *brandImg;
+@property (nonatomic, strong) UILabel *titleLabel;
 
-- (void)setSelfBrandData:(BrandListModel *)model;
+- (void)thn_setBrandData:(BrandListModel *)model;
 
 @end
