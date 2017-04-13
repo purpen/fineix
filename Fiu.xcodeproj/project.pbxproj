@@ -856,6 +856,7 @@
 		D8F80B8E1DD30F2700C086FA /* THNAdjustView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F80B8D1DD30F2700C086FA /* THNAdjustView.m */; };
 		D8F80B911DD3103500C086FA /* THNAdjustCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F80B901DD3103500C086FA /* THNAdjustCollectionViewCell.m */; };
 		F52C5E9E1E9C6B1900DF12A8 /* THNUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = F52C5E9D1E9C6B1900DF12A8 /* THNUserData.m */; };
+		F52C5EA11E9F1E4000DF12A8 /* THNWelfareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F52C5EA01E9F1E4000DF12A8 /* THNWelfareViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -2375,6 +2376,8 @@
 		D8F80B901DD3103500C086FA /* THNAdjustCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAdjustCollectionViewCell.m; sourceTree = "<group>"; };
 		F52C5E9C1E9C6B1900DF12A8 /* THNUserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNUserData.h; sourceTree = "<group>"; };
 		F52C5E9D1E9C6B1900DF12A8 /* THNUserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNUserData.m; sourceTree = "<group>"; };
+		F52C5E9F1E9F1E4000DF12A8 /* THNWelfareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNWelfareViewController.h; sourceTree = "<group>"; };
+		F52C5EA01E9F1E4000DF12A8 /* THNWelfareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNWelfareViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3532,6 +3535,8 @@
 				1F2362581E64404600A6178C /* THNQiYeQingDingZhiViewController.m */,
 				1F23625A1E64417B00A6178C /* THNZhaoMuViewController.h */,
 				1F23625B1E64417B00A6178C /* THNZhaoMuViewController.m */,
+				F52C5E9F1E9F1E4000DF12A8 /* THNWelfareViewController.h */,
+				F52C5EA01E9F1E4000DF12A8 /* THNWelfareViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -6552,6 +6557,7 @@
 				1F2AFD0E1D8817CC00DA6035 /* THNXinPinDetalViewController.m in Sources */,
 				1F2AFC721D88170B00DA6035 /* PraisedViewController.m in Sources */,
 				1F99E1591E51581E000D3D73 /* LeftTableViewCell.m in Sources */,
+				F52C5EA11E9F1E4000DF12A8 /* THNWelfareViewController.m in Sources */,
 				1F2AFD861D88186C00DA6035 /* THNSignUpViewController.m in Sources */,
 				1F2A8FAE1CF40277005116C7 /* FBSureOrderViewController.m in Sources */,
 				1F2AFCA21D88170B00DA6035 /* SearchView.m in Sources */,

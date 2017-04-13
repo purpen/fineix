@@ -47,6 +47,7 @@
 #import "THNZhaoMuViewController.h"
 #import "THNDiPanGuanLiCollectionViewCell.h"
 #import "THNDomainSetViewController.h"
+#import "THNWelfareViewController.h"
 
 @interface MyPageViewController ()<THNNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -402,7 +403,8 @@
 
 #pragma mark 新人福利
 -(void)welfareClick{
-    
+    THNWelfareViewController *vc = [[THNWelfareViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
   
 #pragma mark 全部订单
