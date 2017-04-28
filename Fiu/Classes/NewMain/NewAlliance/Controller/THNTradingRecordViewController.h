@@ -14,6 +14,10 @@
     UITableViewDataSource
 >
 
+/**
+ 查询子账户id
+ */
+@property (nonatomic, strong) NSString *userId;
 @property (nonatomic, strong) FBRequest *tradingRequest;
 @property (nonatomic, assign) NSInteger currentpageNum;
 @property (nonatomic, assign) NSInteger totalPageNum;

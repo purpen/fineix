@@ -19,7 +19,6 @@
 #import "THNCuXiaoDetalViewController.h"
 #import "THNProjectViewController.h"
 #import "THNQingJingZhuanTiViewController.h"
-#import "THNUserData.h"
 
 static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
 static NSInteger const saveTime = 30 * 24 * 60;
@@ -223,6 +222,12 @@ static NSInteger const saveTime = 30 * 24 * 60;
 - (NSString *)getLoginUserID {
     THNUserData *userdata = [[THNUserData findAll] lastObject];
     return userdata.userId;
+}
+
+#pragma mark - 获取用户信息
+- (THNUserData *)getLoginUserInfo {
+    THNUserData *userdata = [[THNUserData findAll] lastObject];
+    return userdata;
 }
 
 #pragma mark - 获取注册时间

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
+#import "THNUserData.h"
 
 @protocol THNNavigationBarItemsDelegate <NSObject>
 
@@ -56,6 +57,11 @@
  *  获取当前登录用户id
  */
 - (NSString *)getLoginUserID;
+
+/**
+ *  获取当前登录用户信息
+ */
+- (THNUserData *)getLoginUserInfo;
 
 /**
  *  获取登录用户注册时间

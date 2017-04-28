@@ -16,4 +16,6 @@
 
 - (void)thn_setShowRecordCellData:(NSInteger)index;
 
+- (void)thn_setChildUserCellData;
+
 @end

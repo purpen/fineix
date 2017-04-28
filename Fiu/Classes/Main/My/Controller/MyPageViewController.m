@@ -203,6 +203,7 @@
         _userInfo.is_expert = [result objectForKey:@"data"][@"identify"][@"is_expert"];
         _userInfo.allianceId = [result objectForKey:@"data"][@"identify"][@"alliance_id"];
         _userInfo.storageId = [NSString stringWithFormat:@"%zi", [[result objectForKey:@"data"][@"identify"][@"storage_id"] integerValue]];
+        _userInfo.is_storage_manage = [[result objectForKey:@"data"][@"identify"][@"is_scene_subscribe"] integerValue];
         _userInfo.isLogin = YES;
         [_userInfo saveOrUpdate];
 

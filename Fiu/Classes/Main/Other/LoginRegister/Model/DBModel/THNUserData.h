@@ -66,4 +66,9 @@
  */
 @property (nonatomic, strong) NSString *created_on;
 
+/**
+ 父类管理员
+ */
+@property (nonatomic, assign) NSInteger is_storage_manage;
+
 @end

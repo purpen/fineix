@@ -13,13 +13,14 @@
 #import "THNWithdrawRecordViewController.h"
 #import "THNSettlementRecordViewController.h"
 #import "THNAlianceHeaderTableViewCell.h"
+#import "THNChildAllianceViewController.h"
 
 static NSString *const URLAliance = @"/alliance/view";
 static NSString *const alianceCellId = @"THNAlianceTableViewCellId";
 static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
 
 @interface THNAllianceViewController () {
-    
+    BOOL _isAdmain;
 }
 
 @end
@@ -36,6 +37,13 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self thn_isUserAdmin];
+}
+
+#pragma mark - 是否为父类账号可管理子账号
+- (void)thn_isUserAdmin {
+    NSLog(@"=========== %zi", [self getLoginUserInfo].is_storage_manage);
+    _isAdmain = [self getLoginUserInfo].is_storage_manage;
     [self setViewUI];
 }
 
@@ -81,12 +89,12 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return _isAdmain ? 3 : 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 1) {
-        return 2;
+        return 3;
     }
     return 1;
 }
@@ -97,13 +105,17 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
         cell = [[THNAlianceHeaderTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:headerCellId];
         [cell thn_showAllianceData:self.dataModel];
         return cell;
+    
+    } else {
+        THNAlianceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:alianceCellId];
+        cell = [[THNAlianceTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:alianceCellId];
+        if (indexPath.section == 1) {
+            [cell thn_setShowRecordCellData:indexPath.row];
+        } else {
+            [cell thn_setChildUserCellData];
+        }
+        return cell;
     }
-    THNAlianceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:alianceCellId];
-    cell = [[THNAlianceTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:alianceCellId];
-    if (indexPath.section == 1) {
-        [cell thn_setShowRecordCellData:indexPath.row];
-    }
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -120,30 +132,31 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         THNWithdrawViewController *withdrawVC = [[THNWithdrawViewController alloc] init];
-        
         [self.navigationController pushViewController:withdrawVC animated:YES];
         
     } else if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
-            THNTradingRecordViewController *tRecordVC = [[THNTradingRecordViewController alloc] init];
-            [self.navigationController pushViewController:tRecordVC animated:YES];
-            
-        } else {
-            THNSettlementRecordViewController *sRecordVC = [[THNSettlementRecordViewController alloc] init];
-            [self.navigationController pushViewController:sRecordVC animated:YES];
-        }
+        [self.navigationController pushViewController:[self thn_getControllerArr][indexPath.row] animated:YES];
         
     } else if (indexPath.section == 2) {
-        THNWithdrawRecordViewController *wRecordVC = [[THNWithdrawRecordViewController alloc] init];
-        [self.navigationController pushViewController:wRecordVC animated:YES];
+        THNChildAllianceViewController *childAllianceVC = [[THNChildAllianceViewController alloc] init];
+        [self.navigationController pushViewController:childAllianceVC animated:YES];
     }
+}
+
+- (NSArray *)thn_getControllerArr {
+    THNTradingRecordViewController *tRecordVC = [[THNTradingRecordViewController alloc] init];
+    tRecordVC.userId = @"";
+    THNSettlementRecordViewController *sRecordVC = [[THNSettlementRecordViewController alloc] init];
+    THNWithdrawRecordViewController *wRecordVC = [[THNWithdrawRecordViewController alloc] init];
+    NSArray *controllerArr = @[tRecordVC, sRecordVC, wRecordVC];
+    return controllerArr;
 }
 
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    self.navViewTitle.text = NSLocalizedString(@"AlianceVCTitle", nil);
+    self.navViewTitle.text = @"我的钱包";
 }
 
 @end

@@ -21,11 +21,15 @@
 }
 
 - (void)thn_setShowRecordCellData:(NSInteger)index {
-    NSArray *leftArr = @[@"交易记录", @"结算记录"];
+    NSArray *leftArr = @[@"交易记录", @"结算记录", @"提现记录"];
     self.leftLable.text = leftArr[index];
-    if (index == 1) {
+    if (index > 0) {
         [self showBottomLine];
     }
+}
+
+- (void)thn_setChildUserCellData {
+    self.leftLable.text = @"子账号管理";
 }
 
 - (void)showBottomLine {
@@ -54,7 +58,6 @@
     if (!_leftLable) {
         _leftLable = [[UILabel alloc] init];
         _leftLable.textColor = [UIColor colorWithHexString:@"#666666"];
-        _leftLable.text = @"提现记录";
         _leftLable.font = [UIFont systemFontOfSize:14];
     }
     return _leftLable;
