@@ -18,8 +18,8 @@
     return self;
 }
 
-- (void)thn_setChildUserEarningsMoney:(NSString *)money {
-    self.moneyLabel.text = [NSString stringWithFormat:@"￥%@", money];
+- (void)thn_setChildUserEarningsMoney:(CGFloat)money {
+    self.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f", money];
 }
 
 #pragma mark - 

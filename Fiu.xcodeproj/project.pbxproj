@@ -661,6 +661,9 @@
 		D85F192C1E6034EA0038E0BB /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D85F192B1E6034EA0038E0BB /* GPUImage.framework */; };
 		D861BC6E1D7E977700A26022 /* THNBrandInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */; };
 		D861BC711D7E995600A26022 /* THNBrandInfoCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC701D7E995600A26022 /* THNBrandInfoCollectionReusableView.m */; };
+		D8679C431EBC1ADE0019B15C /* THNGoodsQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8679C421EBC1ADE0019B15C /* THNGoodsQRCodeViewController.m */; };
+		D8679C461EBC66B70019B15C /* THNQRCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8679C451EBC66B70019B15C /* THNQRCodeView.m */; };
+		D8679C491EBC87C00019B15C /* THNEditChildUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8679C481EBC87C00019B15C /* THNEditChildUserInfoViewController.m */; };
 		D86809031D622049002714B2 /* FBImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809021D622049002714B2 /* FBImageScrollView.m */; };
 		D868090F1D6349B0002714B2 /* THNMarkGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D868090E1D6349B0002714B2 /* THNMarkGoodsView.m */; };
 		D86809121D6433B0002714B2 /* MarkBrandsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809111D6433B0002714B2 /* MarkBrandsViewController.m */; };
@@ -2047,6 +2050,12 @@
 		D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBrandInfoViewController.m; sourceTree = "<group>"; };
 		D861BC6F1D7E995600A26022 /* THNBrandInfoCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoCollectionReusableView.h; sourceTree = "<group>"; };
 		D861BC701D7E995600A26022 /* THNBrandInfoCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBrandInfoCollectionReusableView.m; sourceTree = "<group>"; };
+		D8679C411EBC1ADE0019B15C /* THNGoodsQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNGoodsQRCodeViewController.h; sourceTree = "<group>"; };
+		D8679C421EBC1ADE0019B15C /* THNGoodsQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNGoodsQRCodeViewController.m; sourceTree = "<group>"; };
+		D8679C441EBC66B70019B15C /* THNQRCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNQRCodeView.h; sourceTree = "<group>"; };
+		D8679C451EBC66B70019B15C /* THNQRCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNQRCodeView.m; sourceTree = "<group>"; };
+		D8679C471EBC87C00019B15C /* THNEditChildUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNEditChildUserInfoViewController.h; sourceTree = "<group>"; };
+		D8679C481EBC87C00019B15C /* THNEditChildUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNEditChildUserInfoViewController.m; sourceTree = "<group>"; };
 		D86809011D622049002714B2 /* FBImageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBImageScrollView.h; sourceTree = "<group>"; };
 		D86809021D622049002714B2 /* FBImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBImageScrollView.m; sourceTree = "<group>"; };
 		D868090D1D6349B0002714B2 /* THNMarkGoodsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNMarkGoodsView.h; sourceTree = "<group>"; };
@@ -2768,6 +2777,8 @@
 				1F2A8CFF1CF40276005116C7 /* FBGoodsCommentViewController.m */,
 				1F2A8D0A1CF40276005116C7 /* ThnGoodsCommentViewController.h */,
 				1F2A8D0B1CF40276005116C7 /* ThnGoodsCommentViewController.m */,
+				D8679C411EBC1ADE0019B15C /* THNGoodsQRCodeViewController.h */,
+				D8679C421EBC1ADE0019B15C /* THNGoodsQRCodeViewController.m */,
 			);
 			path = Goods;
 			sourceTree = "<group>";
@@ -2899,6 +2910,8 @@
 				1F2A8D5B1CF40276005116C7 /* GoodsCar */,
 				1F2A8D621CF40276005116C7 /* Order */,
 				1F2A8D691CF40276005116C7 /* TableViewCell */,
+				D8679C441EBC66B70019B15C /* THNQRCodeView.h */,
+				D8679C451EBC66B70019B15C /* THNQRCodeView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4680,6 +4693,8 @@
 				D8C80F851EB1CE6A00C7FAD3 /* THNChildAllianceViewController.m */,
 				D8C80F931EB1F24200C7FAD3 /* THNAddChildUserViewController.h */,
 				D8C80F941EB1F24200C7FAD3 /* THNAddChildUserViewController.m */,
+				D8679C471EBC87C00019B15C /* THNEditChildUserInfoViewController.h */,
+				D8679C481EBC87C00019B15C /* THNEditChildUserInfoViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -6106,6 +6121,7 @@
 				D86E54C41DD444230075ED88 /* FSWaldenFilter.m in Sources */,
 				D8E1EB8D1E7132E20041F010 /* THNDomainManageInfoUser.m in Sources */,
 				D8117AEB1E5A89D60094E7EB /* UserModelData.m in Sources */,
+				D8679C431EBC1ADE0019B15C /* THNGoodsQRCodeViewController.m in Sources */,
 				1F2AFDD91D8818A400DA6035 /* ExpressInfoModel.m in Sources */,
 				D8AC3E131D2DF9D900148522 /* UITabBar+badge.m in Sources */,
 				1FEB23A81E60190000FFF692 /* THNQingjingCollectionViewCell.m in Sources */,
@@ -6205,6 +6221,7 @@
 				D80669881D6F3F82007FD81E /* FBGoodsInfoModelData.m in Sources */,
 				1F2A8F401CF40277005116C7 /* MarkGoods.m in Sources */,
 				1F1804081E52B2AD00722AF5 /* THNSelecteCityViewController.m in Sources */,
+				D8679C461EBC66B70019B15C /* THNQRCodeView.m in Sources */,
 				D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */,
 				1F2AFC8D1D88170B00DA6035 /* AccountView.m in Sources */,
 				1F2AFDDB1D8818A400DA6035 /* OrderInfoModel.m in Sources */,
@@ -6504,6 +6521,7 @@
 				D84763381D427F7500C88379 /* AppDelegate+UMAnalytics.m in Sources */,
 				D869DB4F1DF7A98000793038 /* THNLogisticsInfoViewController.m in Sources */,
 				1F2A8FB81CF40277005116C7 /* FiuBrandRow.m in Sources */,
+				D8679C491EBC87C00019B15C /* THNEditChildUserInfoViewController.m in Sources */,
 				D85F192A1E60345E0038E0BB /* THNDomianLightViewController.m in Sources */,
 				D8117A001E598A310094E7EB /* THNDomainMenuTableViewCell.m in Sources */,
 				D8117ADC1E5A89D50094E7EB /* HomeSceneListData.m in Sources */,

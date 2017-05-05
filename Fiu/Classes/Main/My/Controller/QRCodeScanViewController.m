@@ -309,6 +309,9 @@ static NSString *const referral_code = @"referral_code=";
             [self.navigationController pushViewController:fbGoodsInfoVC animated:YES];
             
         } else if ([infoType isEqualToString:@"10"]) {
+            if ([resultStr containsString:referral_code]) {
+                [self thn_getGoodsReferralCodeWithResult:resultStr];
+            }
             //地盘
             THNDomainInfoViewController *domainInfoVC = [[THNDomainInfoViewController alloc] init];
             domainInfoVC.infoId = infoId;

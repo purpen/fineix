@@ -10,6 +10,7 @@
 #import "THNMacro.h"
 #import "THND3inExplainViewController.h"
 #import "UIView+TYAlertView.h"
+#import "THNGoodsQRCodeViewController.h"
 
 static const NSInteger shareButtonTag = 810;
 
@@ -32,8 +33,8 @@ static const NSInteger shareButtonTag = 810;
 }
 
 + (void)showShare:(UIViewController *)controller shareMessageObject:(UMSocialMessageObject *)object linkUrl:(NSString *)linkUrl {
-    NSArray *titleArr = @[@"微信", @"朋友圈", @"微博", @"QQ", @"复制链接"];
-    NSArray *iconImageArr = @[@"icon_share_wechatSession", @"icon_share_wechatTimeLine", @"icon_share_sina", @"icon_share_qq", @"icon_share_link"];
+    NSArray *titleArr = @[@"微信", @"朋友圈", @"微博", @"QQ", @"二维码"];
+    NSArray *iconImageArr = @[@"icon_share_wechatSession", @"icon_share_wechatTimeLine", @"icon_share_sina", @"icon_share_qq", @"icon_share_qr"];
     
     if (linkUrl.length > 0) {
         [self shareView].linkUrl = linkUrl;
@@ -180,7 +181,7 @@ static const NSInteger shareButtonTag = 810;
             [self shareToPlatform:UMSocialPlatformType_QQ];
             break;
         case 4:
-            [self copyLink];
+            [self open_shareQRCodeInfo];
             break;
     }
 }
@@ -199,15 +200,16 @@ static const NSInteger shareButtonTag = 810;
                                            }];
 }
 
-- (void)copyLink {
-    if (self.linkUrl.length > 0) {
-        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-        pasteboard.string = self.linkUrl;
+- (void)open_shareQRCodeInfo {
+    if (_linkUrl.length > 0) {
         [self thn_removeFromSuperview];
-        [SVProgressHUD showSuccessWithStatus:@"复制成功"];
+        THNGoodsQRCodeViewController *qrCodeVC = [[THNGoodsQRCodeViewController alloc] init];
+        qrCodeVC.linkUrl = _linkUrl;
+        qrCodeVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        [self.vc presentViewController:qrCodeVC animated:YES completion:nil];
         
     } else {
-        [SVProgressHUD showErrorWithStatus:@"没有链接内容"];
+        [SVProgressHUD showInfoWithStatus:@"暂无分享链接"];
     }
 }
 

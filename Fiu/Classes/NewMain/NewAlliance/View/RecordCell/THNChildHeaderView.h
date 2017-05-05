@@ -14,6 +14,6 @@
 @property (nonatomic, strong) UILabel *leftLabel;
 @property (nonatomic, strong) UILabel *moneyLabel;
 
-- (void)thn_setChildUserEarningsMoney:(NSString *)money;
+- (void)thn_setChildUserEarningsMoney:(CGFloat)money;
 
 @end

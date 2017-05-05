@@ -14,6 +14,7 @@ static NSString *const URLCheckAccount = @"/auth/check_account";
 static NSString *const URLCheckAuth = @"/auth/check_verify_code";
 static NSString *const URLVerifyCode = @"/auth/verify_code";
 static NSString *const URLSaveUser = @"/storage_manage/save";
+static NSInteger const MAX_SCALE = 100;
 
 @interface THNAddChildUserViewController () {
     NSString *_phoneNumDone;
@@ -21,6 +22,7 @@ static NSString *const URLSaveUser = @"/storage_manage/save";
     NSString *_auth;
     NSString *_setPassword;
     NSString *_password;
+    NSString *_scale;
     BOOL _isNewUser;
 }
 
@@ -33,7 +35,6 @@ static NSString *const URLSaveUser = @"/storage_manage/save";
     
     [self thn_setNavigationViewUI];
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -77,12 +78,12 @@ static NSString *const URLSaveUser = @"/storage_manage/save";
  @param phoneNum 手机号
  @param auth 验证码
  */
-- (void)thn_networkCheckAuth:(NSString *)phoneNum authCode:(NSString *)auth {
+- (void)thn_networkCheckAuth:(NSString *)phoneNum authCode:(NSString *)auth addition:(NSString *)addition {
     self.checkAuthRequest = [FBAPI postWithUrlString:URLCheckAuth requestDictionary:@{@"phone":phoneNum, @"code":auth} delegate:nil];
     [self.checkAuthRequest startRequestSuccess:^(FBRequest *request, id result) {
 //        NSLog(@"--------- 验证码是否正确 %@", result);
         if (!_isNewUser) {
-            [self thn_networkSaveUserInfo:_phoneNumDone userName:_name authCode:_auth];
+            [self thn_networkSaveUserInfo:_phoneNumDone userName:_name authCode:_auth addition:addition];
         } else {
             [self thn_checkPassword];
         }
@@ -100,11 +101,12 @@ static NSString *const URLSaveUser = @"/storage_manage/save";
  @param auth 验证码
  @param password 密码
  */
-- (void)thn_networkNewSaveUserInfo:(NSString *)phoneNum userName:(NSString *)name authCode:(NSString *)auth password:(NSString *)password {
+- (void)thn_networkNewSaveUserInfo:(NSString *)phoneNum name:(NSString *)name authCode:(NSString *)auth password:(NSString *)password  addition:(NSString *)addition {
     self.saveRequest = [FBAPI postWithUrlString:URLSaveUser requestDictionary:@{@"account"    :phoneNum,
                                                                                 @"username"   :name,
                                                                                 @"verify_code":auth,
-                                                                                @"password"   :password} delegate:nil];
+                                                                                @"password"   :password,
+                                                                                @"addition"   :addition} delegate:nil];
     [self.saveRequest startRequestSuccess:^(FBRequest *request, id result) {
 //        NSLog(@"====== 添加子账号%@", result);
         if ([[result valueForKey:@"success"] integerValue] ==1) {
@@ -126,10 +128,11 @@ static NSString *const URLSaveUser = @"/storage_manage/save";
  @param name 姓名
  @param auth 验证码
  */
-- (void)thn_networkSaveUserInfo:(NSString *)phoneNum userName:(NSString *)name authCode:(NSString *)auth {
+- (void)thn_networkSaveUserInfo:(NSString *)phoneNum userName:(NSString *)name authCode:(NSString *)auth addition:(NSString *)addition {
     self.saveRequest = [FBAPI postWithUrlString:URLSaveUser requestDictionary:@{@"account"    :phoneNum,
                                                                                 @"username"   :name,
-                                                                                @"verify_code":auth} delegate:nil];
+                                                                                @"verify_code":auth,
+                                                                                @"addition"   :addition} delegate:nil];
     [self.saveRequest startRequestSuccess:^(FBRequest *request, id result) {
 //        NSLog(@"====== 添加子账号%@", result);
         if ([[result valueForKey:@"success"] integerValue] ==1) {
@@ -146,8 +149,9 @@ static NSString *const URLSaveUser = @"/storage_manage/save";
 
 #pragma mark - UI
 - (void)thn_setViewUI {
-    NSArray *titleArr = @[@"    姓名", @"    手机号", @"    验证码"];
+    NSArray *titleArr = @[@"    手机号", @"    验证码", @"    姓名"];
     [self thn_creatTextFieldView:titleArr];
+    [self.view addSubview:self.scaleField];
     [self.view addSubview:self.passView];
 }
 
@@ -155,7 +159,7 @@ static NSString *const URLSaveUser = @"/storage_manage/save";
     for (NSInteger idx = 0; idx < titleArr.count; ++ idx) {
         UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 64 + (44 * idx), SCREEN_WIDTH, 44)];
         textField.backgroundColor = [UIColor whiteColor];
-        UILabel *leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 65, 44)];
+        UILabel *leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 70, 44)];
         leftLabel.text = titleArr[idx];
         leftLabel.textColor = [UIColor colorWithHexString:@"#666666"];
         leftLabel.font = [UIFont systemFontOfSize:14];
@@ -170,9 +174,9 @@ static NSString *const URLSaveUser = @"/storage_manage/save";
         if (textField.tag == textFieldTag + 1) {
             textField.rightView = self.sendButtonView;
             textField.rightViewMode = UITextFieldViewModeAlways;
-            textField.keyboardType = UIKeyboardTypePhonePad;
-        } else if (textField.tag == textFieldTag + 2) {
             textField.keyboardType = UIKeyboardTypeNumberPad;
+        } else if (textField.tag == textFieldTag) {
+            textField.keyboardType = UIKeyboardTypePhonePad;
         }
         
         UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
@@ -194,22 +198,31 @@ static NSString *const URLSaveUser = @"/storage_manage/save";
         }
         switch (textField.tag) {
             case textFieldTag +0:
-                _name = textField.text;
-                break;
-                
-            case textFieldTag +1:
                 _phoneNumDone = textField.text;
                 break;
                 
-            case textFieldTag +2:
+            case textFieldTag +1:
                 _auth = textField.text;
                 break;
                 
+            case textFieldTag +2:
+                _name = textField.text;
+                break;
+                
             case textFieldTag +3:
-                _setPassword = textField.text;
+                if ([textField.text integerValue] > MAX_SCALE) {
+                    [SVProgressHUD showInfoWithStatus:@"比例不能大于100%"];
+                    textField.text = @"100";
+                    return;
+                }
+                _scale = textField.text;
                 break;
                 
             case textFieldTag +4:
+                _setPassword = textField.text;
+                break;
+                
+            case textFieldTag +5:
                 _password = textField.text;
                 break;
         }
@@ -290,6 +303,34 @@ static NSString *const URLSaveUser = @"/storage_manage/save";
     dispatch_resume(_timer);
 }
 
+#pragma mark - 分成比例
+- (UITextField *)scaleField {
+    if (!_scaleField) {
+        _scaleField = [[UITextField alloc] initWithFrame:CGRectMake(0, 196, SCREEN_WIDTH, 44)];
+        _scaleField.backgroundColor = [UIColor whiteColor];
+        UILabel *leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 125, 44)];
+        leftLabel.text = @"    分成比例（％）";
+        leftLabel.textColor = [UIColor colorWithHexString:@"#666666"];
+        leftLabel.font = [UIFont systemFontOfSize:14];
+        _scaleField.leftView = leftLabel;
+        _scaleField.leftViewMode = UITextFieldViewModeAlways;
+        _scaleField.returnKeyType = UIReturnKeyDone;
+        _scaleField.delegate = self;
+        _scaleField.tag = textFieldTag + 3;
+        _scaleField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(textFiledEditChanged:)
+                                                     name:@"UITextFieldTextDidChangeNotification"
+                                                   object:_scaleField];
+        
+        UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
+        line.backgroundColor = [UIColor colorWithHexString:@"#E5E5E5"];
+        [_scaleField addSubview:line];
+    }
+    return _scaleField;
+}
+
 #pragma mark - 设置密码视图
 - (void)thn_creatPasswordTextFieldView {
     NSArray *titleArr = @[@"    设置密码", @"    确认密码"];
@@ -304,7 +345,7 @@ static NSString *const URLSaveUser = @"/storage_manage/save";
         textField.leftViewMode = UITextFieldViewModeAlways;
         textField.returnKeyType = UIReturnKeyDone;
         textField.delegate = self;
-        textField.tag = textFieldTag +idx +3;
+        textField.tag = textFieldTag +idx +4;
         textField.secureTextEntry = YES;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFiledEditChanged:) name:@"UITextFieldTextDidChangeNotification" object:textField];
@@ -318,7 +359,7 @@ static NSString *const URLSaveUser = @"/storage_manage/save";
 
 - (UIView *)passView {
     if (!_passView) {
-        _passView = [[UIView alloc] initWithFrame:CGRectMake(0, 210, SCREEN_WIDTH, 88)];
+        _passView = [[UIView alloc] initWithFrame:CGRectMake(0, 255, SCREEN_WIDTH, 88)];
         _passView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         [self thn_creatPasswordTextFieldView];
         _passView.hidden = YES;
@@ -374,7 +415,14 @@ static NSString *const URLSaveUser = @"/storage_manage/save";
         }
     }
    
-    [self thn_networkCheckAuth:_phoneNumDone authCode:_auth];
+    NSString *addition;
+    if (self.scaleField.text.length == 0) {
+        addition = @"1";
+    } else {
+        addition = [NSString stringWithFormat:@"%f", [self.scaleField.text floatValue] /100];
+    }
+    
+    [self thn_networkCheckAuth:_phoneNumDone authCode:_auth addition:addition];
 }
 
 /**
@@ -386,7 +434,14 @@ static NSString *const URLSaveUser = @"/storage_manage/save";
         return;
     }
     
-    [self thn_networkNewSaveUserInfo:_phoneNumDone userName:_name authCode:_auth password:_password];
+    NSString *addition;
+    if (self.scaleField.text.length == 0) {
+        addition = @"1";
+    } else {
+        addition = [NSString stringWithFormat:@"%f", [self.scaleField.text floatValue] /100];
+    }
+    
+    [self thn_networkNewSaveUserInfo:_phoneNumDone name:_name authCode:_auth password:_password addition:addition];
 }
 
 #pragma mark -

@@ -13,6 +13,7 @@ NSString *const kTHNChildUserModelCid = @"cid";
 NSString *const kTHNChildUserModelName = @"username";
 NSString *const kTHNChildUserModelPhone = @"account";
 NSString *const kTHNChildUserModelMoney = @"amount";
+NSString *const kTHNChildUserModelAddition = @"addition";
 
 @implementation THNChildUserModel
 
@@ -33,6 +34,9 @@ NSString *const kTHNChildUserModelMoney = @"amount";
     }
     if(![dictionary[kTHNChildUserModelMoney] isKindOfClass:[NSNull class]]){
         self.money = [dictionary[kTHNChildUserModelMoney] floatValue];
+    }
+    if(![dictionary[kTHNChildUserModelAddition] isKindOfClass:[NSNull class]]){
+        self.addition = [dictionary[kTHNChildUserModelAddition] floatValue];
     }
     return self;
 }

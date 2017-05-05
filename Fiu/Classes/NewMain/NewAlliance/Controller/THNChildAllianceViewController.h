@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSMutableArray        *childDataArr;
 @property (nonatomic, strong) NSMutableArray        *childIdArr;
 @property (nonatomic, strong) NSMutableArray        *deleteIdArr;
+@property (nonatomic, strong) NSMutableArray        *scaleArr;
 @property (nonatomic, strong) UITableView           *childTable;
 @property (nonatomic, strong) THNChildHeaderView    *childHeaderView;
 

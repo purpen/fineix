@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString * cid;
 @property (nonatomic, strong) NSString * name;
 @property (nonatomic, strong) NSString * phone;
+@property (nonatomic, assign) CGFloat addition;
 @property (nonatomic, assign) CGFloat money;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;

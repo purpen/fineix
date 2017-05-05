@@ -16,6 +16,8 @@
 @property (nonatomic, strong) UILabel       *nameLabel;
 @property (nonatomic, strong) UILabel       *moneyLabel;
 @property (nonatomic, strong) UIImageView   *iconImage;
+@property (nonatomic, strong) UILabel       *hintLabel;
+@property (nonatomic, strong) UILabel       *scaleLabel;
 
 - (void)thn_setChildUserData:(THNChildUserModel *)model;
 

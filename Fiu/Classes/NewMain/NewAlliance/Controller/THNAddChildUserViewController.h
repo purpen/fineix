@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UITextField *nameField;
 @property (nonatomic, strong) UITextField *phoneField;
 @property (nonatomic, strong) UITextField *authField;
+@property (nonatomic, strong) UITextField *scaleField;
 @property (nonatomic, strong) UIButton    *sendAuthButton;
 @property (nonatomic, strong) UIView      *sendButtonView;
 @property (nonatomic, strong) FBRequest   *isRegisterRequest;

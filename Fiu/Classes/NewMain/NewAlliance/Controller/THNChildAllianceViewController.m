@@ -9,6 +9,7 @@
 #import "THNChildAllianceViewController.h"
 #import "THNAddChildUserViewController.h"
 #import "THNTradingRecordViewController.h"
+#import "THNEditChildUserInfoViewController.h"
 
 #import "THNChildUserTableViewCell.h"
 #import "THNAddChildUserTableViewCell.h"
@@ -18,7 +19,9 @@ static NSString *const AddChildCellId = @"THNAddChildUserTableViewCellId";
 static NSString *const URLChildList = @"/storage_manage/getlist";
 static NSString *const URLDeleteUser = @"/storage_manage/deleted";
 
-@interface THNChildAllianceViewController ()
+@interface THNChildAllianceViewController () {
+    CGFloat _totalMoney;
+}
 
 @end
 
@@ -39,15 +42,16 @@ static NSString *const URLDeleteUser = @"/storage_manage/deleted";
 
 #pragma mark - 获取子账号列表
 - (void)thn_networkGetChildUserListData {
+    _totalMoney = 0;
     [SVProgressHUD showWithMaskType:(SVProgressHUDMaskTypeBlack)];
     self.childUserRquest = [FBAPI postWithUrlString:URLChildList requestDictionary:@{@"page":@"1", @"size":@"10000", @"sort":@"0"} delegate:nil];
     [self.childUserRquest startRequestSuccess:^(FBRequest *request, id result) {
         [self.childDataArr removeAllObjects];
         [self.childIdArr removeAllObjects];
         [self.deleteIdArr removeAllObjects];
+        [self.scaleArr removeAllObjects];
         
-//        NSLog(@"------------- 子账号列表%@", result);
-        [self.childHeaderView thn_setChildUserEarningsMoney:@"421"];
+        NSLog(@"------------- 子账号列表%@", result);
         NSDictionary *dataDict = [result valueForKey:@"data"];
         NSArray *dataArr = dataDict[@"rows"];
         for (NSDictionary *modelDict in dataArr) {
@@ -55,7 +59,11 @@ static NSString *const URLDeleteUser = @"/storage_manage/deleted";
             [self.childDataArr addObject:model];
             [self.childIdArr addObject:model.cid];
             [self.deleteIdArr addObject:model.idField];
+            [self.scaleArr addObject:[NSString stringWithFormat:@"%.2f",model.addition]];
+            _totalMoney += model.money;
         }
+        [self.childHeaderView thn_setChildUserEarningsMoney:_totalMoney];
+        
         [self.childTable reloadData];
         [SVProgressHUD dismiss];
         
@@ -79,6 +87,7 @@ static NSString *const URLDeleteUser = @"/storage_manage/deleted";
         [self.childIdArr removeObjectAtIndex:index];
         [self.childDataArr removeObjectAtIndex:index];
         [self.deleteIdArr removeObjectAtIndex:index];
+        [self.scaleArr removeObjectAtIndex:index];
         [self.childTable reloadData];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -140,7 +149,10 @@ static NSString *const URLDeleteUser = @"/storage_manage/deleted";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 48.0;
+    if (indexPath.section == 1) {
+        return 48;
+    }
+    return 60;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -165,20 +177,24 @@ static NSString *const URLDeleteUser = @"/storage_manage/deleted";
     }
 }
 
-#pragma mark - 删除子账号单元格
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return UITableViewCellEditingStyleDelete;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // 删除数据
+#pragma mark - 删除/编辑子账号单元格
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        //  删除数据
         [self thn_networkDeleteUser:self.deleteIdArr[indexPath.row]];
-    }
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return @"删除";
+    }];
+    deleteAction.backgroundColor = [UIColor redColor];
+    
+    UITableViewRowAction *editAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"编辑" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        //  编辑数据
+        THNEditChildUserInfoViewController *editVC = [[THNEditChildUserInfoViewController alloc] init];
+        editVC.childId = self.deleteIdArr[indexPath.row];
+        [editVC thn_setEditUserInfo:self.childDataArr[indexPath.row]];
+        [self.navigationController pushViewController:editVC animated:YES];
+    }];
+    editAction.backgroundColor = [UIColor colorWithHexString:@"#222222"];
+    
+    return @[deleteAction, editAction];
 }
 
 #pragma mark - 设置Nav
