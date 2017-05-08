@@ -26,6 +26,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
     NSString *_tags;
     NSString *_oid;
     NSString *_linkUrl;
+    NSString *_oLinkUrl;
 }
 
 @property (nonatomic, strong) ShareViewController  *shareVC;
@@ -76,6 +77,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             NSDictionary *dict =  [result valueForKey:@"data"];
             _linkUrl = [dict valueForKey:@"url"];
+            _oLinkUrl = [dict valueForKey:@"o_url"];
             [self.shareTopView setQRCodeImagewithLink:_linkUrl];
             [self.styleOneView setQRCodeImagewithLink:_linkUrl];
             [self.styleTwoView setQRCodeImagewithLink:_linkUrl];
@@ -285,7 +287,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 
 - (void)shareItemSelected {
     if (_linkUrl.length) {
-        [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:_linkUrl];
+        [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:_linkUrl oLinkUrl:_oLinkUrl];
     }
     
     if (_oid.length > 0) {

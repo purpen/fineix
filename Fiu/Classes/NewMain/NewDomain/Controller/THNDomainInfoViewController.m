@@ -37,6 +37,7 @@ static NSString *const URLShareLink = @"/gateway/share_link";
     BOOL _onFooterView;
     NSString *_domainId;
     NSString *_linkUrl;
+    NSString *_oLinkUrl;
 }
 
 @end
@@ -87,10 +88,14 @@ static NSString *const URLShareLink = @"/gateway/share_link";
 - (void)thn_networkShareInfoData {
     self.shareRequest = [FBAPI postWithUrlString:URLShareLink requestDictionary:@{@"id":self.infoId, @"type":@"3"} delegate:self];
     [self.shareRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"======== %@", result);
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             NSDictionary *dict =  [result valueForKey:@"data"];
             _linkUrl = [dict valueForKey:@"url"];
-            [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:_linkUrl];
+            _oLinkUrl = [dict valueForKey:@"o_url"];
+            if (_linkUrl.length > 0) {
+                [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:_linkUrl oLinkUrl:_oLinkUrl];
+            }
         }
         
     } failure:^(FBRequest *request, NSError *error) {

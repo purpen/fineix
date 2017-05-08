@@ -49,10 +49,11 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
     FBGoodsCommentViewController *_goodsCommentVC;
     ShareViewController *_shareVC;
     NSString *_linkUrl;
+    NSString *_oLinkUrl;
 }
 
-@pro_strong FBGoodsInfoModelData        *   goodsInfo;
-@pro_strong NSMutableArray              *   goodsComment;
+@property (nonatomic, strong) FBGoodsInfoModelData *   goodsInfo;
+@property (nonatomic, strong) NSMutableArray *   goodsComment;
 
 @end
 
@@ -190,8 +191,9 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             NSDictionary *dict =  [result valueForKey:@"data"];
             _linkUrl = [dict valueForKey:@"url"];
+            _oLinkUrl = [dict valueForKey:@"o_url"];
             if (_linkUrl.length > 0) {
-                [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:_linkUrl];
+                [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:_linkUrl oLinkUrl:_oLinkUrl];
             }
         }
         

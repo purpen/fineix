@@ -41,7 +41,11 @@
 - (THNQRCodeView *)mainView {
     if (!_mainView) {
         _mainView = [[THNQRCodeView alloc] init];
-        [_mainView thn_setShareQRCodeInfoImage:[UIImage creatQRCodeImageForLinkUrl:self.linkUrl width:170] link:self.linkUrl];
+        if (self.oLinkUrl.length) {
+            [_mainView thn_setShareQRCodeInfoImage:[UIImage creatQRCodeImageForLinkUrl:self.oLinkUrl width:170] link:self.linkUrl];
+        } else {
+            [_mainView thn_setShareQRCodeInfoImage:[UIImage creatQRCodeImageForLinkUrl:self.linkUrl width:170] link:self.linkUrl];
+        }
     }
     return _mainView;
 }

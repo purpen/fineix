@@ -57,7 +57,7 @@ static NSString *const URLPlan = @"https://m.taihuoniao.com/storage/plan?from=ap
 }
 
 - (void)thn_rightBarItemSelected {
-    [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:URLPlan];
+    [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:URLPlan oLinkUrl:URLPlan];
 }
 
 #pragma mark - 创建分享消息对象

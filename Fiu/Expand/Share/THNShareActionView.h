@@ -20,6 +20,7 @@
 @property (nonatomic, strong) UMSocialMessageObject *shareMessageObject;
 @property (nonatomic, strong) UIViewController *vc;
 @property (nonatomic, strong) NSString *linkUrl;
+@property (nonatomic, strong) NSString *oLinkUrl;
 
 /**
  调用分享功能
@@ -27,8 +28,9 @@
  @param controller 当前所在控制器
  @param object 分享的数据内容
  @param linkUrl 分享的链接（可为nil）
+ @param oLinkUrl 长链接（生成二维码）
  */
-+ (void)showShare:(UIViewController *)controller shareMessageObject:(UMSocialMessageObject *)object linkUrl:(NSString *)linkUrl;
++ (void)showShare:(UIViewController *)controller shareMessageObject:(UMSocialMessageObject *)object linkUrl:(NSString *)linkUrl oLinkUrl:(NSString *)oLinkUrl;
 
 - (void)thn_creatShareButton:(NSArray *)title iconImage:(NSArray *)iconImage;
 

@@ -32,14 +32,16 @@ static const NSInteger shareButtonTag = 810;
     return self;
 }
 
-+ (void)showShare:(UIViewController *)controller shareMessageObject:(UMSocialMessageObject *)object linkUrl:(NSString *)linkUrl {
++ (void)showShare:(UIViewController *)controller shareMessageObject:(UMSocialMessageObject *)object linkUrl:(NSString *)linkUrl oLinkUrl:(NSString *)oLinkUrl {
     NSArray *titleArr = @[@"微信", @"朋友圈", @"微博", @"QQ", @"二维码"];
     NSArray *iconImageArr = @[@"icon_share_wechatSession", @"icon_share_wechatTimeLine", @"icon_share_sina", @"icon_share_qq", @"icon_share_qr"];
     
-    if (linkUrl.length > 0) {
+    if (linkUrl.length > 0 && oLinkUrl.length > 0) {
         [self shareView].linkUrl = linkUrl;
+        [self shareView].oLinkUrl = oLinkUrl;
     } else {
         [self shareView].linkUrl = @"";
+        [self shareView].oLinkUrl = oLinkUrl;
     }
     [self shareView].shareMessageObject = object;
     [self shareView].vc = controller;
@@ -205,6 +207,7 @@ static const NSInteger shareButtonTag = 810;
         [self thn_removeFromSuperview];
         THNGoodsQRCodeViewController *qrCodeVC = [[THNGoodsQRCodeViewController alloc] init];
         qrCodeVC.linkUrl = _linkUrl;
+        qrCodeVC.oLinkUrl = _oLinkUrl;
         qrCodeVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         [self.vc presentViewController:qrCodeVC animated:YES completion:nil];
         

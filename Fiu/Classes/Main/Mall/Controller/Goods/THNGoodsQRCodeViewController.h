@@ -11,6 +11,7 @@
 
 @interface THNGoodsQRCodeViewController : THNViewController
 
+@property (nonatomic, strong) NSString *oLinkUrl;
 @property (nonatomic, strong) NSString *linkUrl;
 @property (nonatomic, strong) THNQRCodeView *mainView;
 @property (nonatomic, strong) UIButton *closeButton;

@@ -42,7 +42,6 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
 
 #pragma mark - 是否为父类账号可管理子账号
 - (void)thn_isUserAdmin {
-    NSLog(@"=========== %zi", [self getLoginUserInfo].is_storage_manage);
     _isAdmain = [self getLoginUserInfo].is_storage_manage;
     [self setViewUI];
 }
