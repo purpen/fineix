@@ -35,20 +35,22 @@ static NSString *const URLDelegate = @"/scene_scene/del_product";
     [super viewDidLoad];
     
     [self.view addSubview:self.goodsTable];
-    [self thn_networkGoodsListData];
+    [self thn_networkGoodsListData:NO];
 }
     
 #pragma mark - 地盘商品列表
-- (void)thn_networkGoodsListData {
+- (void)thn_networkGoodsListData:(BOOL)remove {
     [SVProgressHUD show];
     self.goodsRequests = [FBAPI getWithUrlString:URLProductList requestDictionary:@{@"page":@(self.goodsCurrentpageNum + 1),
                                                                                     @"size":@"10",
                                                                                     @"sort":@"0",
                                                                                     @"scene_id":self.domainId} delegate:nil];
     [self.goodsRequests startRequestSuccess:^(FBRequest *request, id result) {
-        [self.goodsListMarr removeAllObjects];
-        [self.goodsIdMarr removeAllObjects];
-        [self.idMarr removeAllObjects];
+        if (remove) {
+            [self.goodsListMarr removeAllObjects];
+            [self.goodsIdMarr removeAllObjects];
+            [self.idMarr removeAllObjects];
+        }
         
 //        NSLog(@"===== 地盘商品 %@", result);
         NSArray *goodsArr = [[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"product"];
@@ -143,11 +145,19 @@ static NSString *const URLDelegate = @"/scene_scene/del_product";
  下拉刷新
  */
 - (void)addMJRefresh:(UITableView *)table {
-    FBRefresh * header = [FBRefresh headerWithRefreshingBlock:^{
+    FBRefresh *header = [FBRefresh headerWithRefreshingBlock:^{
         self.goodsCurrentpageNum = 0;
-        [self thn_networkGoodsListData];
+        [self thn_networkGoodsListData:YES];
     }];
     table.mj_header = header;
+    
+    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (self.goodsCurrentpageNum < self.goodsTotalPageNum) {
+            [self thn_networkGoodsListData:NO];
+        } else {
+            [table.mj_footer endRefreshing];
+        }
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

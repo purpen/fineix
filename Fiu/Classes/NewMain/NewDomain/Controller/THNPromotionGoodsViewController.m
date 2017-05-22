@@ -34,10 +34,11 @@ static NSString *const GoodsCellId = @"THNDomainGoodsTableViewCellId";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _categoryIdx = @"0";
     [self.view addSubview:self.menuView];
     [self thn_networkCategoryData];
     [self.view addSubview:self.goodsTable];
-    [self thn_networkGoodsListData:@""];
+    [self thn_networkGoodsListData:_categoryIdx remove:NO];
 }
     
 #pragma mark -
@@ -45,7 +46,6 @@ static NSString *const GoodsCellId = @"THNDomainGoodsTableViewCellId";
 - (void)thn_networkCategoryData {
     self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"show_all":@"1", @"domain":@"1", @"page":@"1", @"size":@"100", @"use_cache":@"1"} delegate:self];
     [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
-        [self.categoryMarr removeAllObjects];
         NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary *dataDict in dataArr) {
             CategoryRow *model = [[CategoryRow alloc] initWithDictionary:dataDict];
@@ -70,7 +70,7 @@ static NSString *const GoodsCellId = @"THNDomainGoodsTableViewCellId";
  
  @param categoryId 分类id
 */
-- (void)thn_networkGoodsListData:(NSString *)categoryId {
+- (void)thn_networkGoodsListData:(NSString *)categoryId remove:(BOOL)remove {
     [SVProgressHUD show];
     self.goodsListRequest = [FBAPI getWithUrlString:URLProductList requestDictionary:@{@"page":@(self.goodsCurrentpageNum + 1),
                                                                                        @"size":@"10",
@@ -78,10 +78,11 @@ static NSString *const GoodsCellId = @"THNDomainGoodsTableViewCellId";
                                                                                 @"category_id":categoryId,
                                                                                @"is_commision":@"1"} delegate:self];
     [self.goodsListRequest startRequestSuccess:^(FBRequest *request, id result) {
-        [self.goodsListMarr removeAllObjects];
-        [self.goodsIdMarr removeAllObjects];
-        
 //        NSLog(@"===== 推广商品 %@", result);
+        if (remove) {
+            [self.goodsListMarr removeAllObjects];
+            [self.goodsIdMarr removeAllObjects];
+        }
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
             GoodsRow *goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
@@ -139,16 +140,16 @@ static NSString *const GoodsCellId = @"THNDomainGoodsTableViewCellId";
     return _menuView;
 }
     
-    /**
-     切换分类
-     
-     @param index 点击的分类下标
-     */
+/**
+ 切换分类
+ 
+ @param index 点击的分类下标
+ */
 - (void)menuItemSelectedWithIndex:(NSInteger)index {
     _categoryIdx = self.categoryIdMarr[index];
     
     self.goodsCurrentpageNum = 0;
-    [self thn_networkGoodsListData:_categoryIdx];
+    [self thn_networkGoodsListData:_categoryIdx remove:YES];
 }
     
 #pragma mark 加载商品的列表
@@ -161,8 +162,22 @@ static NSString *const GoodsCellId = @"THNDomainGoodsTableViewCellId";
         _goodsTable.showsVerticalScrollIndicator = NO;
 //        _goodsTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         _goodsTable.tableFooterView = [UIView new];
+        [self addMJRefresh:_goodsTable];
     }
     return _goodsTable;
+}
+
+/**
+ 上拉加载
+ */
+- (void)addMJRefresh:(UITableView *)table {
+    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (self.goodsCurrentpageNum < self.goodsTotalPageNum) {
+            [self thn_networkGoodsListData:_categoryIdx remove:NO];
+        } else {
+            [table.mj_footer endRefreshing];
+        }
+    }];
 }
     
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
