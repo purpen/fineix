@@ -81,7 +81,7 @@ static NSString *const GoodsCellId = @"THNDomainGoodsTableViewCellId";
         [self.goodsListMarr removeAllObjects];
         [self.goodsIdMarr removeAllObjects];
         
-        NSLog(@"===== 推广商品 %@", result);
+//        NSLog(@"===== 推广商品 %@", result);
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
             GoodsRow *goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];

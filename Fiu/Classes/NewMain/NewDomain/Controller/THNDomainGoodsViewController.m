@@ -12,6 +12,7 @@
 #import "THNDomainGoodsTableViewCell.h"
 #import "THNPromotionGoodsViewController.h"
 #import "UIView+TYAlertView.h"
+#import "FBRefresh.h"
 
 static NSString *const GoodsCellId = @"THNDomainGoodsTableViewCellId";
 static NSString *const URLProductList = @"/scene_scene/product_list";
@@ -27,13 +28,13 @@ static NSString *const URLDelegate = @"/scene_scene/del_product";
     [super viewWillAppear:animated];
     
     [self thn_setNavigationViewUI];
-    [self thn_networkGoodsListData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.view addSubview:self.goodsTable];
+    [self thn_networkGoodsListData];
 }
     
 #pragma mark - 地盘商品列表
@@ -44,6 +45,9 @@ static NSString *const URLDelegate = @"/scene_scene/del_product";
                                                                                     @"sort":@"0",
                                                                                     @"scene_id":self.domainId} delegate:nil];
     [self.goodsRequests startRequestSuccess:^(FBRequest *request, id result) {
+        [self.goodsListMarr removeAllObjects];
+        [self.goodsIdMarr removeAllObjects];
+        
 //        NSLog(@"===== 地盘商品 %@", result);
         NSArray *goodsArr = [[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"product"];
         for (NSDictionary * goodsDic in goodsArr) {
@@ -67,6 +71,10 @@ static NSString *const URLDelegate = @"/scene_scene/del_product";
     
 #pragma mark  是否分页加载
 - (void)requestIsLastData:(UIScrollView *)scrollView currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
+    if ([scrollView.mj_header isRefreshing]) {
+        [scrollView.mj_header endRefreshing];
+    }
+    
     if (total == 0) {
         scrollView.mj_footer.state = MJRefreshStateNoMoreData;
         scrollView.mj_footer.hidden = true;
@@ -122,8 +130,20 @@ static NSString *const URLDelegate = @"/scene_scene/del_product";
         _goodsTable.showsVerticalScrollIndicator = NO;
 //        _goodsTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         _goodsTable.tableFooterView = [UIView new];
+        [self addMJRefresh:_goodsTable];
     }
     return _goodsTable;
+}
+
+/**
+ 下拉刷新
+ */
+- (void)addMJRefresh:(UITableView *)table {
+    FBRefresh * header = [FBRefresh headerWithRefreshingBlock:^{
+        self.goodsCurrentpageNum = 0;
+        [self thn_networkGoodsListData];
+    }];
+    table.mj_header = header;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

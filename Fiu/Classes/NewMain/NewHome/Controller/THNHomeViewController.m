@@ -231,6 +231,8 @@ static NSInteger const saveTime = 2 * 24 * 60;
                                  @"use_cache":@"1"};
     self.rollImgRequest = [FBAPI getWithUrlString:URLBannerSlide requestDictionary:requestDic delegate:self];
     [self.rollImgRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self.rollList removeAllObjects];
+        
         NSArray *rollArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * rollDic in rollArr) {
             RollImageRow *rollModel = [[RollImageRow alloc] initWithDictionary:rollDic];
@@ -249,12 +251,13 @@ static NSInteger const saveTime = 2 * 24 * 60;
 - (void)thn_networkNewUserData {
     self.userHelpRequest = [FBAPI getWithUrlString:URLBannerSlide requestDictionary:@{@"name":@"app_fiu_index_new_zone"} delegate:self];
     [self.userHelpRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self.userHelpMarr removeAllObjects];
+        
         NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary *dict in dataArr) {
             HelpUserRow *model = [[HelpUserRow alloc] initWithDictionary:dict];
             [self.userHelpMarr addObject:model];
         }
-    
         [self thn_refreshSeciton:0 item:0];
 
     } failure:^(FBRequest *request, NSError *error) {
@@ -287,12 +290,13 @@ static NSInteger const saveTime = 2 * 24 * 60;
 - (void)thn_networkNiceDomainData {
     self.niceDomainRequest = [FBAPI getWithUrlString:URLBannerSlide requestDictionary:@{@"name":@"app_fiu_index_scene_stick"} delegate:self];
     [self.niceDomainRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self.niceDomainMarr removeAllObjects];
+        
         NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary *dict in dataArr) {
             NiceDomainRow *model = [[NiceDomainRow alloc] initWithDictionary:dict];
             [self.niceDomainMarr addObject:model];
         }
-
         [self thn_refreshSeciton:1 item:1];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -306,12 +310,13 @@ static NSInteger const saveTime = 2 * 24 * 60;
 - (void)thn_networkNewGoodsData {
     self.newestGoodsRequest = [FBAPI getWithUrlString:URLNewGoodsList requestDictionary:@{@"type":@"1", @"use_cache":@"1"} delegate:self];
     [self.newestGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self.newestGoodsMarr removeAllObjects];
+        
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"items"];
         for (NSDictionary *goodsDic in goodsArr) {
             THNMallGoodsModelItem *goodsModel = [[THNMallGoodsModelItem alloc] initWithDictionary:goodsDic];
             [self.newestGoodsMarr addObject:goodsModel];
         }
-        
         [self thn_refreshSeciton:2 item:0];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -325,12 +330,13 @@ static NSInteger const saveTime = 2 * 24 * 60;
 - (void)thn_networkHotGoodsData {
     self.hotGoodsRequest = [FBAPI getWithUrlString:URLHotGoodsList requestDictionary:@{@"type":@"1"} delegate:self];
     [self.hotGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self.hotGoodsMarr removeAllObjects];
+        
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"items"];
         for (NSDictionary * goodsDic in goodsArr) {
             THNMallGoodsModelItem *goodsModel = [[THNMallGoodsModelItem alloc] initWithDictionary:goodsDic];
             [self.hotGoodsMarr addObject:goodsModel];
         }
-        
         [self thn_refreshSeciton:4 item:0];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -350,6 +356,10 @@ static NSInteger const saveTime = 2 * 24 * 60;
                                  @"use_cache":@"1"};
     self.goodsSubjectRequest = [FBAPI getWithUrlString:URLSubject requestDictionary:requestDic delegate:self];
     [self.goodsSubjectRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self.goodsSubjectMarr removeAllObjects];
+        [self.goodsSubjectIdMarr removeAllObjects];
+        [self.goodsSubjectTypeMarr removeAllObjects];
+        
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
             THNMallSubjectModelRow *goodsModel = [[THNMallSubjectModelRow alloc] initWithDictionary:goodsDic];
@@ -371,6 +381,9 @@ static NSInteger const saveTime = 2 * 24 * 60;
 - (void)thn_networkSubjectData {
     self.subjectRequest = [FBAPI getWithUrlString:URLHomeSubject requestDictionary:@{} delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self.subjectMarr removeAllObjects];
+        [self.subjectIdMarr removeAllObjects];
+        
         NSArray *subArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSInteger idx = 0; idx < 2; ++ idx) {
             HomeSubjectRow *subModel = [[HomeSubjectRow alloc] initWithDictionary:subArr[idx]];
@@ -502,6 +515,10 @@ static NSInteger const saveTime = 2 * 24 * 60;
                                  @"is_product":@"1"};
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestDic delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self.sceneListMarr removeAllObjects];
+        [self.sceneIdMarr removeAllObjects];
+        [self.userIdMarr removeAllObjects];
+        
         [self.defaultHomeView removeFromSuperview];
         if (![self.view.subviews containsObject:self.homeTable]) {
             [self thn_setHomeViewUI];
@@ -555,27 +572,13 @@ static NSInteger const saveTime = 2 * 24 * 60;
  移除旧数据
  */
 - (void)loadNewData {
-    [self.rollList removeAllObjects];
-    [self.sceneListMarr removeAllObjects];
-    [self.sceneIdMarr removeAllObjects];
-    [self.userIdMarr removeAllObjects];
-    [self.subjectMarr removeAllObjects];
-    [self.subjectIdMarr removeAllObjects];
 //    [self.domainCategoryMarr removeAllObjects];
-    [self.userHelpMarr removeAllObjects];
-    [self.niceDomainMarr removeAllObjects];
-    [self.newestGoodsMarr removeAllObjects];
-    [self.hotGoodsMarr removeAllObjects];
-    [self.goodsSubjectMarr removeAllObjects];
-    [self.goodsSubjectIdMarr removeAllObjects];
-    [self.goodsSubjectTypeMarr removeAllObjects];
-
+//    [self thn_networkDomainCategoryData];
     [self thn_networkSceneListData];
     [self thn_networkRollImageData];
     [self thn_networkSubjectData];
     [self thn_networkNewUserData];
     [self thn_networkHotGoodsData];
-//    [self thn_networkDomainCategoryData];
     [self thn_networkNiceDomainData];
     [self thn_networkNewGoodsData];
     [self thn_networkGoodsSubjectListData];
