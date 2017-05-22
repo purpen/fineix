@@ -435,10 +435,14 @@ static NSInteger const saveTime = 30 * 24 * 60;
 
 - (void)thn_addBarItemRightBarButton:(NSString *)title image:(NSString *)image {
     [self.rightBtn setTitle:title forState:UIControlStateNormal];
+    CGFloat buttonWidth = [title boundingRectWithSize:CGSizeMake(320, 44) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width *1.5;
     if (image.length > 0) {
         [self.rightBtn setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
         self.rightBtn.frame = CGRectMake(SCREEN_WIDTH - 44, 20, 44, 44);
+        [self.navView addSubview:self.rightBtn];
+        return;
     }
+    self.rightBtn.frame = CGRectMake(SCREEN_WIDTH - buttonWidth - 15, 20, buttonWidth, 44);
     [self.navView addSubview:self.rightBtn];
 }
 

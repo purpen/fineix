@@ -46,6 +46,7 @@
 @property (nonatomic, strong) NSString * title;
 @property (nonatomic, assign) NSInteger updatedOn;
 @property (nonatomic, assign) NSInteger viewCount;
+@property (nonatomic, assign) CGFloat commision;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end

@@ -149,7 +149,10 @@
 	if(![dictionary[@"view_count"] isKindOfClass:[NSNull class]]){
 		self.viewCount = [dictionary[@"view_count"] integerValue];
 	}
-
+    
+    if (![dictionary[@"commision_percent"] isKindOfClass:[NSNull class]]) {
+        self.commision = [dictionary[@"commision_percent"] floatValue];
+    }
 	return self;
 }
 @end

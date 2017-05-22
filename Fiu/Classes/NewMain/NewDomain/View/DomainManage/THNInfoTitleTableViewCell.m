@@ -96,7 +96,7 @@
 - (UIButton *)leftButton {
     if (!_leftButton) {
         _leftButton = [[UIButton alloc] init];
-        [_leftButton setImage:[UIImage imageNamed:@"Add_Scene"] forState:(UIControlStateNormal)];
+//        [_leftButton setImage:[UIImage imageNamed:@"Add_Scene"] forState:(UIControlStateNormal)];
     }
     return _leftButton;
 }

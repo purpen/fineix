@@ -14,6 +14,7 @@
 #import "THNDomianLightViewController.h"
 #import "THNEditLightViewController.h"
 #import "THNDomainInfoViewController.h"
+#import "THNDomainGoodsViewController.h"
 
 static NSString *const URLDomainInfo = @"/scene_scene/view";
 static NSString *const infoCellId = @"THNInfoTitleTableViewCellId";
@@ -77,7 +78,7 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -109,11 +110,11 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
         } else if (indexPath.section == 1) {
             NSArray *leftText = @[@"地盘简介", @"地盘特色"];
             [cell thn_setInfoTitleLeftText:leftText[indexPath.row] andRightText:@""];
-        }
-//        else if (indexPath.section == 3) {
-//            [cell thn_setInfoTitleLeftText:@"添加商品到地盘" andRightText:@""];
+            
+        } else if (indexPath.section == 3) {
+            [cell thn_setInfoTitleLeftText:@"商品管理" andRightText:@""];
 //            [cell thn_showLeftButton];
-//        }
+        }
         
         return cell;
     }
@@ -158,6 +159,13 @@ static NSString *const imageCellId = @"THNDomainImagesTableViewCellId";
             editLightVC.infoData = self.infoData;
             [editLightVC thn_setBrightSpotData:[self thn_checkHasLightDraft]];
             [self.navigationController pushViewController:editLightVC animated:YES];
+        }
+        
+    } else if (indexPath.section == 3) {
+        if (_domainId.length) {
+            THNDomainGoodsViewController *goodsVC = [[THNDomainGoodsViewController alloc] init];
+            goodsVC.domainId = _domainId;
+            [self.navigationController pushViewController:goodsVC animated:YES];
         }
     }
 }

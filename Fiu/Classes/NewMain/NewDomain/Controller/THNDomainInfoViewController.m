@@ -88,7 +88,6 @@ static NSString *const URLShareLink = @"/gateway/share_link";
 - (void)thn_networkShareInfoData {
     self.shareRequest = [FBAPI postWithUrlString:URLShareLink requestDictionary:@{@"id":self.infoId, @"type":@"3"} delegate:self];
     [self.shareRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"======== %@", result);
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             NSDictionary *dict =  [result valueForKey:@"data"];
             _linkUrl = [dict valueForKey:@"url"];
