@@ -82,6 +82,8 @@
         [goImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(self.noneView.mas_centerY).mas_offset(0);
             make.right.mas_equalTo(self.noneView.mas_right).mas_offset(-15);
+            make.width.mas_offset(8);
+            make.height.mas_offset(31/2.0);
         }];
         
         UILabel *zhangHuLabel = [[UILabel alloc] init];

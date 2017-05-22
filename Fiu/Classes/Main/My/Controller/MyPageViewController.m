@@ -98,12 +98,6 @@
     [self.view addSubview:self.myCollectionView];
     
     self.tabBarController.tabBar.hidden = NO;
-    FBRequest *request = [FBAPI postWithUrlString:@"/alliance/view" requestDictionary:@{} delegate:self];
-    [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSDictionary *dict = [result valueForKey:@"data"];
-        self.moneyStr = dict[@"wait_cash_amount"];
-    } failure:^(FBRequest *request, NSError *error) {
-    }];
 }
 
 -(void)signleTap1:(UITapGestureRecognizer*)sender{
@@ -151,6 +145,14 @@
     [self.navView.layer insertSublayer:self.shadowLayer below:self.logoImg.layer];
     //网络请求
     [self netGetData];
+    
+    FBRequest *request = [FBAPI postWithUrlString:@"/alliance/view" requestDictionary:@{} delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary *dict = [result valueForKey:@"data"];
+        self.moneyStr = dict[@"wait_cash_amount"];
+        [self.myCollectionView reloadData];
+    } failure:^(FBRequest *request, NSError *error) {
+    }];
 }
 
 -(CAGradientLayer *)shadowLayer{
