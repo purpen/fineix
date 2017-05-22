@@ -11,10 +11,10 @@
 #import "CategoryRow.h"
 #import <MJRefresh/MJRefresh.h>
 #import "THNDomainGoodsTableViewCell.h"
+#import "FBGoodsInfoViewController.h"
 
 static NSString *const URLProductList = @"/product/getlist";
 static NSString *const URLCategory = @"/category/getlist";
-
 static NSString *const GoodsCellId = @"THNDomainGoodsTableViewCellId";
 
 @interface THNPromotionGoodsViewController (){
@@ -179,7 +179,14 @@ static NSString *const GoodsCellId = @"THNDomainGoodsTableViewCellId";
     }
     return cell;
 }
-    
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    FBGoodsInfoViewController *goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
+    goodsInfoVC.storageId = _domainId;
+    goodsInfoVC.goodsID = self.goodsIdMarr[indexPath.row];
+    [self.navigationController pushViewController:goodsInfoVC animated:YES];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 120;
 }

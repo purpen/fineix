@@ -22,5 +22,6 @@
 @property (nonatomic, assign) NSInteger goodsTotalPageNum;
 @property (nonatomic, strong) NSMutableArray *goodsListMarr;
 @property (nonatomic, strong) NSMutableArray *goodsIdMarr;
+@property (nonatomic, strong) NSMutableArray *idMarr;
     
 @end

@@ -13,6 +13,7 @@
 #import "THNPromotionGoodsViewController.h"
 #import "UIView+TYAlertView.h"
 #import "FBRefresh.h"
+#import "FBGoodsInfoViewController.h"
 
 static NSString *const GoodsCellId = @"THNDomainGoodsTableViewCellId";
 static NSString *const URLProductList = @"/scene_scene/product_list";
@@ -47,12 +48,14 @@ static NSString *const URLDelegate = @"/scene_scene/del_product";
     [self.goodsRequests startRequestSuccess:^(FBRequest *request, id result) {
         [self.goodsListMarr removeAllObjects];
         [self.goodsIdMarr removeAllObjects];
+        [self.idMarr removeAllObjects];
         
 //        NSLog(@"===== 地盘商品 %@", result);
         NSArray *goodsArr = [[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"product"];
         for (NSDictionary * goodsDic in goodsArr) {
             GoodsRow *goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
             [self.goodsListMarr addObject:goodsModel];
+            [self.idMarr addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
         }
         
         NSArray *goodsIdArr = [[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"_id"];
@@ -110,6 +113,7 @@ static NSString *const URLDelegate = @"/scene_scene/del_product";
 //            NSLog(@"----------- 删除了商品%@", result);
             NSInteger index = [self.goodsIdMarr indexOfObject:goodsId];
             [self.goodsListMarr removeObjectAtIndex:index];
+            [self.idMarr removeObjectAtIndex:index];
             [self.goodsIdMarr removeObject:goodsId];
             [self.goodsTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
             
@@ -163,6 +167,13 @@ static NSString *const URLDelegate = @"/scene_scene/del_product";
     
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 120;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    FBGoodsInfoViewController *goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
+    goodsInfoVC.storageId = _domainId;
+    goodsInfoVC.goodsID = self.idMarr[indexPath.row];
+    [self.navigationController pushViewController:goodsInfoVC animated:YES];
 }
 
 #pragma mark - 删除商品
@@ -219,6 +230,13 @@ static NSString *const URLDelegate = @"/scene_scene/del_product";
         _goodsIdMarr = [NSMutableArray array];
     }
     return _goodsIdMarr;
+}
+
+- (NSMutableArray *)idMarr {
+    if (!_idMarr) {
+        _idMarr = [NSMutableArray array];
+    }
+    return _idMarr;
 }
 
 @end
