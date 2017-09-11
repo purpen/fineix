@@ -5839,6 +5839,7 @@
 					800507331C7A9CDD005AF0BE = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 7ET6PJMCHV;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -6884,8 +6885,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CODE_SIGN_ENTITLEMENTS = Fiu/Fiu.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
-				DEVELOPMENT_TEAM = 7ET6PJMCHV;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7003,8 +7004,8 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "b96c5fde-fb5b-43a7-b188-5b1c140541a1";
-				PROVISIONING_PROFILE_SPECIFIER = FineixDev;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
@@ -7019,8 +7020,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CODE_SIGN_ENTITLEMENTS = Fiu/Fiu.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: TaiHuoniao(SHENZHEN) Science and Technology Company Limited (7ET6PJMCHV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: TaiHuoniao(SHENZHEN) Science and Technology Company Limited (7ET6PJMCHV)";
-				DEVELOPMENT_TEAM = 7ET6PJMCHV;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7138,8 +7139,8 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "e1aa23a3-874d-4343-9037-7fe48231b2a1";
-				PROVISIONING_PROFILE_SPECIFIER = FiuDis;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
