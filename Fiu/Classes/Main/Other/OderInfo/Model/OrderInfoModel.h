@@ -59,6 +59,7 @@ typedef NS_ENUM(NSInteger, OrderInfoState) {
 @property (nonatomic, strong) NSNumber *totalMoney;             //总金额
 @property (nonatomic, assign) NSInteger userId;                 //购买用户ID
 @property (nonatomic, strong) NSString *summary;                //备注信息
+@property (nonatomic, assign) NSInteger delivery_type;    // 1快递 2自提
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

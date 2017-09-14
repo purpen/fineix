@@ -80,10 +80,10 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
 #pragma mark - FBRequest Delegate
 - (void)requestSucess:(FBRequest *)request result:(id)result
 {
+    NSLog(@"订单详情 %@", result);
     NSString * message = result[@"message"];
     if ([request.flag isEqualToString:OrderDetailURL]) {
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
-            NSLog(@"订单详情：------------ %@", result);
             NSDictionary * dataDic = [result objectForKey:@"data"];
             self.orderInfo = [[OrderInfoModel alloc] initWithDictionary:dataDic];
             self.productInfoAry = self.orderInfo.productInfos;

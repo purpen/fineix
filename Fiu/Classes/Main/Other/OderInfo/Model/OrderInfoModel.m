@@ -136,6 +136,10 @@
         self.status = OrderInfoState([dictionary[@"status"] integerValue]);
     }
     
+    if(![dictionary[@"delivery_type"] isKindOfClass:[NSNull class]]){
+        self.delivery_type = [dictionary[@"delivery_type"] integerValue];
+    }
+    
     if(![dictionary[@"status_label"] isKindOfClass:[NSNull class]]){
         self.statusLabel = dictionary[@"status_label"];
     }

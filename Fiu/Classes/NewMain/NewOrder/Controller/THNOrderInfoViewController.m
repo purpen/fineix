@@ -113,8 +113,10 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
 
 #pragma mark - 获取订单信息
 - (void)thn_getOrderInfoData:(NSDictionary *)data {
-    self.addressModel = [[DeliveryAddressModel alloc] initWithDictionary:[data valueForKey:@"express_info"]];
     self.orderModel = [[OrderInfoModel alloc] initWithDictionary:data];
+    if (self.orderModel.delivery_type == 1) {
+        self.addressModel = [[DeliveryAddressModel alloc] initWithDictionary:[data valueForKey:@"express_info"]];
+    }
     _orderId = self.orderModel.rid;
     
     NSArray *subOrderArr = [NSArray array];
@@ -272,8 +274,12 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {   // 收货信息
-        return 100;
+    if (indexPath.section == 0) {
+        // 收货信息
+        if (self.orderModel.delivery_type == 1) {
+             return 100;
+        }
+        return 0;
         
     } else if (indexPath.section == 1) {    // 子订单提示
         if (_isHasSubOrder) {
@@ -329,9 +335,13 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {   // 收货信息
-        FBUserAddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:addressCellId];
-        cell = [[FBUserAddressTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:addressCellId];
-        [cell thn_setOrderAddressModel:self.addressModel];
+        if (self.orderModel.delivery_type == 1) {
+            FBUserAddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:addressCellId];
+            cell = [[FBUserAddressTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:addressCellId];
+            [cell thn_setOrderAddressModel:self.addressModel];
+            return cell;
+        }
+        UITableViewCell *cell = [[UITableViewCell alloc] init];
         return cell;
         
     } else if (indexPath.section == 1) {    // 有子订单时的拆单提示
