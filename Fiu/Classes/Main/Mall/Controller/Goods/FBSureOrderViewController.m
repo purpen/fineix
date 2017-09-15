@@ -563,7 +563,7 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
                                      @"payment_method":_paymentMethod,
                                      @"transfer_time":_transferTime,
                                      @"bonus_code":[NSString stringWithFormat:@"%@",_bonusCode],
-                                     @"delivery_type" : @(2)
+                                     @"delivery_type" : @(1)
                                      };
         
         [self networkSureOrder:orderDict];
