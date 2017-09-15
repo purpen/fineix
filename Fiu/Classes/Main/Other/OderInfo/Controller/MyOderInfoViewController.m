@@ -284,7 +284,9 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
     
     FBRequest * request = [FBAPI postWithUrlString:URL requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        [self.orderListAry removeAllObjects];
+        if ([result[@"data"][@"current_page"] integerValue] == 1) {
+            [self.orderListAry removeAllObjects];
+        }
         NSDictionary * dataDic = [result objectForKey:@"data"];
         NSArray * rowsAry = [dataDic objectForKey:@"rows"];
         
