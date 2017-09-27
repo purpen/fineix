@@ -234,7 +234,7 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
         WEAKSELF
         [request startRequestSuccess:^(FBRequest *request, id result) {
             NSDictionary * dataDic = [result objectForKey:@"data"];
-            if ([[dataDic objectForKey:@"status"] isEqualToNumber:@10]) {
+            if ([[dataDic objectForKey:@"status"] isEqualToNumber:@10] | [[dataDic objectForKey:@"status"] isEqualToNumber:@16]) {
                 PaySuccessViewController * paySuccessVC = [[PaySuccessViewController alloc] initWithNibName:@"PaySuccessViewController" bundle:nil];
                 paySuccessVC.orderInfo = weakSelf.orderInfo;
                 paySuccessVC.paymentWay = paymentWay;
