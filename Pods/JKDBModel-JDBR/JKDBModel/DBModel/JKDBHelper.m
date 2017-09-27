@@ -79,8 +79,8 @@ static JKDBHelper *_instance = nil;
         numClasses = objc_getClassList(classes, numClasses);
         for (int i = 0; i < numClasses; i++) {
             if (class_getSuperclass(classes[i]) == [JKDBModel class]){
-                id class1 = classes[i];
-                [class1 performSelector:@selector(createTable) withObject:nil];
+                id class = classes[i];
+                [class performSelector:@selector(createTable) withObject:nil];
             }
         }
         free(classes);

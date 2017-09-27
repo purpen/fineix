@@ -28,7 +28,7 @@
     self.userName.text = [NSString stringWithFormat:@"收货人：%@", addressModel.name];
     self.cityName.text = [NSString stringWithFormat:@"%@ %@ %@ %@", addressModel.provinceName ,addressModel.cityName ,addressModel.countyName ,addressModel.townName];
     self.addressLab.text = addressModel.address;
-    self.phoneNum.text = addressModel.phone;    
+    self.phoneNum.text = addressModel.phone;
 }
 
 - (void)thn_setOrderAddressModel:(DeliveryAddressModel *)model {
@@ -52,24 +52,84 @@
 - (void)set_cellViewUI {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    [self addSubview:self.shouHuoFangShiLabel];
+    [_shouHuoFangShiLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mas_left).with.offset(15);
+        make.top.mas_equalTo(self.mas_top).mas_offset(20);
+    }];
+    
+    [self addSubview:self.kuaiDiBtn];
+    [_kuaiDiBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.shouHuoFangShiLabel.mas_right).with.offset(10);
+        make.centerY.mas_equalTo(self.shouHuoFangShiLabel.mas_centerY).mas_offset(0);
+    }];
+    
+    [self addSubview:self.kuaiDiLabel];
+    [_kuaiDiLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.kuaiDiBtn.mas_right).with.offset(10);
+        make.centerY.mas_equalTo(self.shouHuoFangShiLabel.mas_centerY).mas_offset(0);
+    }];
+    
+    [self addSubview:self.kuaiDiCoverBtn];
+    [_kuaiDiCoverBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.kuaiDiBtn.mas_left).with.offset(0);
+        make.top.mas_equalTo(self.kuaiDiBtn.mas_top).mas_offset(0);
+        make.right.mas_equalTo(self.kuaiDiLabel.mas_right).mas_offset(0);
+        make.bottom.mas_equalTo(self.kuaiDiBtn.mas_bottom).mas_offset(0);
+    }];
+    
+    [self addSubview:self.ziTiBtn];
+    [_ziTiBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.kuaiDiLabel.mas_right).with.offset(10);
+        make.centerY.mas_equalTo(self.shouHuoFangShiLabel.mas_centerY).mas_offset(0);
+    }];
+    
+    [self addSubview:self.ziTiLabel];
+    [_ziTiLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.ziTiBtn.mas_right).with.offset(10);
+        make.centerY.mas_equalTo(self.shouHuoFangShiLabel.mas_centerY).mas_offset(0);
+    }];
+    
+    [self addSubview:self.ziTiCoverBtn];
+    [_ziTiCoverBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.ziTiBtn.mas_left).with.offset(0);
+        make.top.mas_equalTo(self.ziTiBtn.mas_top).mas_offset(0);
+        make.right.mas_equalTo(self.ziTiLabel.mas_right).mas_offset(0);
+        make.bottom.mas_equalTo(self.ziTiBtn.mas_bottom).mas_offset(0);
+    }];
+    
+    [self addSubview:self.lineView];
+    [_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mas_left).with.offset(15);
+        make.top.mas_equalTo(self.ziTiBtn.mas_bottom).mas_offset(5);
+        make.right.mas_equalTo(self.mas_right).mas_offset(-15);
+        make.height.mas_equalTo(0.5);
+    }];
+    
+    [self addSubview:self.tipLabel];
+    [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mas_left).with.offset(15);
+        make.top.mas_equalTo(self.lineView.mas_bottom).mas_offset(10);
+    }];
+    
     [self addSubview:self.addressIcon];
     [_addressIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(10.5, 17));
-        make.centerY.equalTo(self);
+        make.centerY.mas_equalTo(self.mas_centerY).mas_offset(30);
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
     
     [self addSubview:self.openIcon];
     [_openIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(10.5, 17));
-        make.centerY.equalTo(self);
+        make.centerY.mas_equalTo(self.addressIcon.mas_centerY).mas_offset(0);
         make.right.equalTo(self.mas_right).with.offset(-20);
     }];
     
     [self addSubview:self.userName];
     [_userName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH-50, 14));
-        make.top.equalTo(self.mas_top).with.offset(10);
+        make.top.equalTo(self.lineView.mas_bottom).with.offset(20);
         make.left.equalTo(_addressIcon.mas_right).with.offset(10);
         
     }];
@@ -99,16 +159,98 @@
     [self addSubview:self.addLab];
     [_addLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(130, 20));
-        make.centerY.equalTo(self);
+        make.centerY.mas_equalTo(self.addressIcon.mas_centerY).mas_offset(0);
         make.centerX.equalTo(self);
     }];
     
     [self addSubview:self.addIcon];
     [_addIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(20, 20));
-        make.centerY.equalTo(self);
+        make.centerY.mas_equalTo(self.addressIcon.mas_centerY).mas_offset(0);
         make.right.equalTo(_addLab.mas_left).with.offset(-10);
     }];
+}
+
+-(UIView *)lineView{
+    if (!_lineView) {
+        _lineView = [[UIView alloc] init];
+        _lineView.backgroundColor = [UIColor colorWithHexString:@"#d2d2d2"];
+    }
+    return _lineView;
+}
+
+-(UIButton *)ziTiCoverBtn{
+    if (!_ziTiCoverBtn) {
+        _ziTiCoverBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+    }
+    return _ziTiCoverBtn;
+}
+
+-(UILabel *)tipLabel{
+    if (!_tipLabel) {
+        _tipLabel = [[UILabel alloc] init];
+        _tipLabel.font = [UIFont systemFontOfSize:13];
+        _tipLabel.textColor = [UIColor colorWithHexString:@"#F05958"];
+        _tipLabel.text = @"* 联系所在店铺工作人员领取该商品";
+        _tipLabel.hidden = YES;
+    }
+    return _tipLabel;
+}
+
+-(UILabel *)ziTiLabel{
+    if (!_ziTiLabel) {
+        _ziTiLabel = [[UILabel alloc] init];
+        _ziTiLabel.font = [UIFont systemFontOfSize:13];
+        _ziTiLabel.textColor = [UIColor colorWithRed:93/255.0 green:98/255.0 blue:102/255.0 alpha:1];
+        _ziTiLabel.text = @"自提";
+    }
+    return _ziTiLabel;
+}
+
+-(UIButton *)ziTiBtn{
+    if (!_ziTiBtn) {
+        _ziTiBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+        [_ziTiBtn setImage:[UIImage imageNamed:@"NotSelected"] forState:UIControlStateNormal];
+        [_ziTiBtn setImage:[UIImage imageNamed:@"Selected"] forState:UIControlStateDisabled];
+    }
+    return _ziTiBtn;
+}
+
+-(UIButton *)kuaiDiCoverBtn{
+    if (!_kuaiDiCoverBtn) {
+        _kuaiDiCoverBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    }
+    return _kuaiDiCoverBtn;
+}
+
+-(UILabel *)kuaiDiLabel{
+    if (!_kuaiDiLabel) {
+        _kuaiDiLabel = [[UILabel alloc] init];
+        _kuaiDiLabel.font = [UIFont systemFontOfSize:13];
+        _kuaiDiLabel.textColor = [UIColor colorWithRed:93/255.0 green:98/255.0 blue:102/255.0 alpha:1];
+        _kuaiDiLabel.text = @"快递";
+    }
+    return _kuaiDiLabel;
+}
+
+-(UIButton *)kuaiDiBtn{
+    if (!_kuaiDiBtn) {
+        _kuaiDiBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+        [_kuaiDiBtn setImage:[UIImage imageNamed:@"NotSelected"] forState:UIControlStateNormal];
+        [_kuaiDiBtn setImage:[UIImage imageNamed:@"Selected"] forState:UIControlStateDisabled];
+    }
+    return _kuaiDiBtn;
+}
+
+-(UILabel *)shouHuoFangShiLabel{
+    if (!_shouHuoFangShiLabel) {
+        _shouHuoFangShiLabel = [[UILabel alloc] init];
+        _shouHuoFangShiLabel.font = [UIFont systemFontOfSize:13];
+        _shouHuoFangShiLabel.textColor = [UIColor colorWithRed:93/255.0 green:98/255.0 blue:102/255.0 alpha:1];
+        _shouHuoFangShiLabel.text = @"收货方式:";
+    }
+    return _shouHuoFangShiLabel;
 }
 
 - (UIImageView *)addIcon {

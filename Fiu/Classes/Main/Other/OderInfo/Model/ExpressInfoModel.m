@@ -13,9 +13,10 @@
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
     self = [super init];
-    if(![dictionary[@"address"] isKindOfClass:[NSNull class]]){
-        self.address = dictionary[@"address"];
+    if (![[dictionary class] isEqual:[NSDictionary class]]) {
+        return nil;
     }
+    self.address = dictionary[@"address"];
     if(![dictionary[@"name"] isKindOfClass:[NSNull class]]){
         self.name = dictionary[@"name"];
     }

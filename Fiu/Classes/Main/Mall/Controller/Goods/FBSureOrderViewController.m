@@ -46,6 +46,7 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
 @pro_strong NSMutableArray          *   goodsItems;
 @pro_strong DeliveryAddressModel    *   userAddress;
 @pro_strong OrderInfoModel          *   orderInfo;
+@property(nonatomic, assign) BOOL flag;
 
 @end
 
@@ -71,6 +72,8 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
     }
     
     [self setOrderVcUI];
+    
+    self.flag = YES;
 }
 
 #pragma mark - 网络请求
@@ -325,33 +328,75 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
     return 1;
 }
 
+-(void)kuaiDi:(UIButton*)sender{
+    self.flag = YES;
+    [self.orderTable reloadData];
+}
+
+-(void)ziTi:(UIButton*)sender{
+    self.flag = NO;
+    [self.orderTable reloadData];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
+        static NSString * goodsItemsTableViewCellID = @"GoodsItemsTableViewCellID";
+        FBGoodsItemsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:goodsItemsTableViewCellID];
+        if (!cell) {
+            cell = [[FBGoodsItemsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsItemsTableViewCellID];
+        }
+        if (self.goodsItems.count > 0) {
+            [cell setOrderModelData:self.goodsItems[indexPath.row]];
+        }
+        return cell;
+    
+    } else if (indexPath.section == 1) {
+        
         static NSString * userAddressTableViewCellId = @"UserAddressTableViewCellId";
         FBUserAddressTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:userAddressTableViewCellId];
         if (!cell) {
             cell = [[FBUserAddressTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userAddressTableViewCellId];
         }
         
-        if (![self.userAddress valueForKey:@"address"]) {
-            cell.addIcon.hidden = NO;
-            cell.addIcon.hidden = NO;
-            cell.openIcon.hidden = YES;
-        } else {
+        if (self.flag == NO) {
             cell.addIcon.hidden = YES;
+            cell.openIcon.hidden = YES;
+            cell.tipLabel.hidden = NO;
+            cell.addressIcon.hidden = YES;
+            cell.userName.hidden = YES;
+            cell.cityName.hidden = YES;
+            cell.phoneNum.hidden = YES;
+            cell.addressLab.hidden = YES;
             cell.addLab.hidden = YES;
-            cell.openIcon.hidden = NO;
-            [cell setAddressModel:self.userAddress];
+            
+            cell.ziTiBtn.enabled = NO;
+            cell.kuaiDiBtn.enabled = YES;
+        } else if (self.flag == YES) {
+            cell.tipLabel.hidden = YES;
+            cell.userName.hidden = NO;
+            cell.cityName.hidden = NO;
+            cell.phoneNum.hidden = NO;
+            cell.addressLab.hidden = NO;
+            
+            cell.ziTiBtn.enabled = YES;
+            cell.kuaiDiBtn.enabled = NO;
+            if (![self.userAddress valueForKey:@"address"]) {
+                cell.addIcon.hidden = NO;
+                cell.openIcon.hidden = YES;
+                cell.addressIcon.hidden = YES;
+                cell.addLab.hidden = NO;
+            } else {
+                cell.addIcon.hidden = YES;
+                cell.openIcon.hidden = NO;
+                cell.addressIcon.hidden = NO;
+                cell.addLab.hidden = YES;
+                [cell setAddressModel:self.userAddress];
+            }
         }
-        return cell;
     
-    } else if (indexPath.section == 1) {
-        static NSString * goodsItemsTableViewCellID = @"GoodsItemsTableViewCellID";
-        FBGoodsItemsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:goodsItemsTableViewCellID];
-        if (!cell) {
-            cell = [[FBGoodsItemsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsItemsTableViewCellID];
-        }
-        [cell setOrderModelData:self.goodsItems[indexPath.row]];
+        [cell.ziTiCoverBtn addTarget:self action:@selector(ziTi:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.kuaiDiCoverBtn addTarget:self action:@selector(kuaiDi:) forControlEvents:UIControlEventTouchUpInside];
+    
         return cell;
     
     } else if (indexPath.section == 2) {
@@ -392,8 +437,14 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0 || indexPath.section == 1) {
+    if (indexPath.section == 0) {
         return 95;
+    } else if (indexPath.section == 1) {
+        if (self.flag == NO) {
+            return 60+30;
+        } else if (self.flag == YES) {
+            return 95+60;
+        }
     }
     return 44;
 }
@@ -406,19 +457,21 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        DeliveryAddressViewController * deliveryAddressVC = [[DeliveryAddressViewController alloc] init];
-        deliveryAddressVC.isSelectType = true;
-        deliveryAddressVC.selectedAddress = self.userAddress;
-        deliveryAddressVC.selectedAddressBlock = ^(DeliveryAddressModel *deliveryAddress) {
-            self.userAddress = deliveryAddress;
-            _addbookId = [deliveryAddress valueForKey:@"idField"];
-            if (_addbookId.length && _rid.length) {
-                [self post_networkGetFreight:_addbookId];
-            }
-            [self.orderTable reloadData];
-        };
-        [self.navigationController pushViewController:deliveryAddressVC animated:YES];
+    if (indexPath.section == 1) {
+        if (self.flag == YES) {
+            DeliveryAddressViewController * deliveryAddressVC = [[DeliveryAddressViewController alloc] init];
+            deliveryAddressVC.isSelectType = true;
+            deliveryAddressVC.selectedAddress = self.userAddress;
+            deliveryAddressVC.selectedAddressBlock = ^(DeliveryAddressModel *deliveryAddress) {
+                self.userAddress = deliveryAddress;
+                _addbookId = [deliveryAddress valueForKey:@"idField"];
+                if (_addbookId.length && _rid.length) {
+                    [self post_networkGetFreight:_addbookId];
+                }
+                [self.orderTable reloadData];
+            };
+            [self.navigationController pushViewController:deliveryAddressVC animated:YES];
+        }
     
     } else if (indexPath.section == 3) {
         FBOrderTimeViewController * timeWayVC = [[FBOrderTimeViewController alloc] init];
@@ -549,7 +602,30 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
 }
 
 - (void)sureOrederData {
-    if (_addbookId.length) {
+    if (self.flag == YES) {
+        if (_addbookId.length) {
+            _fromSite = @"7";
+            _paymentMethod = @"a";
+            _summary = self.summaryText.text;
+            
+            NSDictionary * orderDict = @{
+                                         @"from_site":_fromSite,
+                                         @"rrid":_rrid,
+                                         @"addbook_id":_addbookId,
+                                         @"is_nowbuy":_isNowbuy,
+                                         @"summary":_summary,
+                                         @"payment_method":_paymentMethod,
+                                         @"transfer_time":_transferTime,
+                                         @"bonus_code":[NSString stringWithFormat:@"%@",_bonusCode],
+                                         @"delivery_type" : @(1)
+                                         };
+            
+            [self networkSureOrder:orderDict];
+            
+        } else {
+            [SVProgressHUD showInfoWithStatus:@"请填写一个收货地址"];
+        }
+    } else {
         _fromSite = @"7";
         _paymentMethod = @"a";
         _summary = self.summaryText.text;
@@ -557,21 +633,17 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
         NSDictionary * orderDict = @{
                                      @"from_site":_fromSite,
                                      @"rrid":_rrid,
-                                     @"addbook_id":_addbookId,
+//                                     @"addbook_id":@"",
                                      @"is_nowbuy":_isNowbuy,
                                      @"summary":_summary,
                                      @"payment_method":_paymentMethod,
                                      @"transfer_time":_transferTime,
                                      @"bonus_code":[NSString stringWithFormat:@"%@",_bonusCode],
-                                     @"delivery_type" : @(1)
+                                     @"delivery_type" : @(2)
                                      };
         
         [self networkSureOrder:orderDict];
-   
-    } else {
-        [SVProgressHUD showInfoWithStatus:@"请填写一个收货地址"];
     }
-   
 }
 
 #pragma mark - 设置Nav

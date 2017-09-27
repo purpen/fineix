@@ -581,8 +581,6 @@
 		D8482D241E136231000B511C /* BaiduMapAPI_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8482D0E1E136231000B511C /* BaiduMapAPI_Map.framework */; };
 		D8482D261E136231000B511C /* BaiduMapAPI_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8482D101E136231000B511C /* BaiduMapAPI_Search.framework */; };
 		D8482D271E136231000B511C /* BaiduMapAPI_Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8482D111E136231000B511C /* BaiduMapAPI_Utils.framework */; };
-		D8482D281E136231000B511C /* JKDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8482D141E136231000B511C /* JKDBHelper.m */; };
-		D8482D291E136232000B511C /* JKDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8482D161E136231000B511C /* JKDBModel.m */; };
 		D8482D2A1E136232000B511C /* SGTopTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8482D191E136231000B511C /* SGTopTitleView.m */; };
 		D8482D2B1E136232000B511C /* UIView+SGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D8482D1B1E136231000B511C /* UIView+SGExtension.m */; };
 		D8482D2C1E136232000B511C /* libUMessage_Sdk_1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8482D1D1E136231000B511C /* libUMessage_Sdk_1.4.0.a */; };
@@ -1894,10 +1892,6 @@
 		D8482D0E1E136231000B511C /* BaiduMapAPI_Map.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Map.framework; sourceTree = "<group>"; };
 		D8482D101E136231000B511C /* BaiduMapAPI_Search.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Search.framework; sourceTree = "<group>"; };
 		D8482D111E136231000B511C /* BaiduMapAPI_Utils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Utils.framework; sourceTree = "<group>"; };
-		D8482D131E136231000B511C /* JKDBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKDBHelper.h; sourceTree = "<group>"; };
-		D8482D141E136231000B511C /* JKDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBHelper.m; sourceTree = "<group>"; };
-		D8482D151E136231000B511C /* JKDBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKDBModel.h; sourceTree = "<group>"; };
-		D8482D161E136231000B511C /* JKDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBModel.m; sourceTree = "<group>"; };
 		D8482D181E136231000B511C /* SGTopTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGTopTitleView.h; sourceTree = "<group>"; };
 		D8482D191E136231000B511C /* SGTopTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGTopTitleView.m; sourceTree = "<group>"; };
 		D8482D1A1E136231000B511C /* UIView+SGExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SGExtension.h"; sourceTree = "<group>"; };
@@ -4766,7 +4760,6 @@
 				1F1804181E5432C100722AF5 /* YLButton */,
 				D8482D071E136231000B511C /* AliPay */,
 				D8482D0A1E136231000B511C /* BaiduMapSDK */,
-				D8482D121E136231000B511C /* DBModel */,
 				D8482D171E136231000B511C /* SGTopTitleView */,
 				D8482D1C1E136231000B511C /* UMessage_Sdk_1.4.0 */,
 			);
@@ -4792,17 +4785,6 @@
 				D8482D111E136231000B511C /* BaiduMapAPI_Utils.framework */,
 			);
 			path = BaiduMapSDK;
-			sourceTree = "<group>";
-		};
-		D8482D121E136231000B511C /* DBModel */ = {
-			isa = PBXGroup;
-			children = (
-				D8482D131E136231000B511C /* JKDBHelper.h */,
-				D8482D141E136231000B511C /* JKDBHelper.m */,
-				D8482D151E136231000B511C /* JKDBModel.h */,
-				D8482D161E136231000B511C /* JKDBModel.m */,
-			);
-			path = DBModel;
 			sourceTree = "<group>";
 		};
 		D8482D171E136231000B511C /* SGTopTitleView */ = {
@@ -6059,7 +6041,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DB8A5B5921F38AD4E4CB410C /* [CP] Copy Pods Resources */ = {
@@ -6293,7 +6275,6 @@
 				D888D0061E9CCB3B0086A76E /* FBBrandGoodsCollectionViewCell.m in Sources */,
 				1F2AFC941D88170B00DA6035 /* FocusNonView.m in Sources */,
 				1F2AFCFA1D8817CC00DA6035 /* THNActiveRuleCollectionViewCell.m in Sources */,
-				D8482D291E136232000B511C /* JKDBModel.m in Sources */,
 				1F2AFCA61D88170B00DA6035 /* THNSenceTopicView.m in Sources */,
 				D857C4791E2DB51A00569B3D /* THNRecordInfoTableViewCell.m in Sources */,
 				D86809211D662382002714B2 /* THNAddGoodsBtn.m in Sources */,
@@ -6550,7 +6531,6 @@
 				1F2A8F431CF40277005116C7 /* FBFilters.m in Sources */,
 				1F2A8FD71CF40277005116C7 /* FBUserAddressTableViewCell.m in Sources */,
 				1F2AFC611D88170B00DA6035 /* AddreesPickerViewController.m in Sources */,
-				D8482D281E136231000B511C /* JKDBHelper.m in Sources */,
 				1F2AFDCF1D8818A400DA6035 /* OrderInfoDetailViewController.m in Sources */,
 				D857AC3B1DE836F000F924E8 /* THNOrderNumberTableViewCell.m in Sources */,
 				D8884DF11E57007800CEE159 /* DominInfoExtra.m in Sources */,

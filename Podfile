@@ -5,7 +5,7 @@ use_frameworks!
 target "Fiu" do
  pod "AFNetworking", "~> 3.0"
  pod 'SDWebImage', '~> 3.7.1'
- pod 'FMDB', '~> 2.4'
+ pod 'JKDBModel-JDBR', '~> 0.0.1'
  pod 'MJRefresh', '~> 3.0.2'
  pod 'Masonry', '~> 0.6.3'
  pod 'SDCycleScrollView','~> 1.3'

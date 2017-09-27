@@ -20,6 +20,15 @@
 @pro_strong UIImageView           *openIcon;
 @pro_strong UIImageView           *addIcon;
 @pro_strong UILabel               *addLab;
+@pro_strong UILabel               *shouHuoFangShiLabel;
+@pro_strong UIButton               *kuaiDiBtn;
+@pro_strong UILabel               *kuaiDiLabel;
+@pro_strong UIButton               *kuaiDiCoverBtn;
+@pro_strong UIButton               *ziTiBtn;
+@pro_strong UILabel               *ziTiLabel;
+@pro_strong UIButton               *ziTiCoverBtn;
+@pro_strong UIView               *lineView;
+@pro_strong UILabel               *tipLabel;
 
 - (void)setAddressModel:(DeliveryAddressModel *)addressModel;
 - (void)thn_setOrderAddressModel:(DeliveryAddressModel *)model;
