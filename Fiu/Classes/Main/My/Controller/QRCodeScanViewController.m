@@ -250,6 +250,7 @@ static NSString *const referral_code = @"referral_code=";
 
 #pragma mark - 处理扫描结果
 -(void)scanResultWithStr:(NSString*)resultStr{
+    NSLog(@"ffdsfdsfsd  %@", resultStr);
     NSData *jsonData = [resultStr dataUsingEncoding:NSUTF8StringEncoding];
     NSError *err;
     id resultObj = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
