@@ -498,7 +498,6 @@ static BOOL                           _canSendMessage      = YES;
                           constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
                 
                     weakSelf.constructingBodyBlock(formData);
-                              
             }
 //                                           progress:^(NSProgress * _Nonnull uploadProgress) {
 //                
