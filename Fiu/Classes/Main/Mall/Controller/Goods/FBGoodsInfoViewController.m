@@ -74,6 +74,15 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
     [self networkGoodsInfoData];
 }
 
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.menuView.frame = CGRectMake(0, 88, SCREEN_WIDTH, 44);
+        self.goodsInfoRoll.frame = CGRectMake(0, 132, SCREEN_WIDTH, SCREEN_HEIGHT - 210);
+    }
+}
+
 #pragma mark - 网络请求
 #pragma mark 商品详情
 - (void)networkGoodsInfoData {
@@ -277,6 +286,11 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
     [self.goodsInfoRoll addSubview:_goodsCommentVC.view];
     
     [self.view addSubview:self.goodsBuyView];
+    [_goodsBuyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 44));
+        make.left.equalTo(self.view.mas_left).with.offset(0);
+        make.top.equalTo(_goodsInfoRoll.mas_bottom).with.offset(0);
+    }];
 }
 
 - (void)changeRollFrame {
@@ -530,7 +544,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 #pragma mark - 底部功能栏
 - (THNGoodsBuyView *)goodsBuyView {
     if (!_goodsBuyView) {
-        _goodsBuyView = [[THNGoodsBuyView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 44)];
+        _goodsBuyView = [[THNGoodsBuyView alloc] init];
         _goodsBuyView.delegate = self;
     }
     return _goodsBuyView;

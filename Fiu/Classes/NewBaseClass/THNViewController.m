@@ -35,6 +35,18 @@ static NSInteger const saveTime = 30 * 24 * 60;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.navView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 88);
+    }
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -262,7 +274,14 @@ static NSInteger const saveTime = 30 * 24 * 60;
 - (void)thn_setNavViewUI {
     [self.view addSubview:self.navView];
     [self.navView bringSubviewToFront:self.view];
+    
     [self.navView addSubview:self.navViewTitle];
+    [_navViewTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 120, 44));
+        make.centerX.equalTo(_navView);
+        make.bottom.equalTo(_navView.mas_bottom).with.offset(0);
+    }];
+    
     [self thn_addNavBackBtn];
 }
 
@@ -278,7 +297,7 @@ static NSInteger const saveTime = 30 * 24 * 60;
 
 - (UILabel *)navViewTitle {
     if (!_navViewTitle) {
-        _navViewTitle = [[UILabel alloc] initWithFrame:CGRectMake(60, 20, SCREEN_WIDTH - 120, 44)];
+        _navViewTitle = [[UILabel alloc] init];
         _navViewTitle.textColor = [UIColor whiteColor];
         _navViewTitle.font = [UIFont systemFontOfSize:17];
         _navViewTitle.textAlignment = NSTextAlignmentCenter;
@@ -289,7 +308,7 @@ static NSInteger const saveTime = 30 * 24 * 60;
 #pragma mark pop返回按钮
 - (UIButton *)navBackBtn {
     if (!_navBackBtn) {
-        _navBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 44, 44)];
+        _navBackBtn = [[UIButton alloc] init];
         [_navBackBtn setImage:[UIImage imageNamed:@"icon_back_white"] forState:(UIControlStateNormal)];
         [_navBackBtn addTarget:self action:@selector(popViewController) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -338,7 +357,7 @@ static NSInteger const saveTime = 30 * 24 * 60;
 #pragma mark Nav中间的Logo
 - (UIButton *)logoImg {
     if (!_logoImg) {
-        _logoImg = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 28, 27, 56, 25)];
+        _logoImg = [[UIButton alloc] init];
         [_logoImg setImage:[UIImage imageNamed:@"shouye_Logo"] forState:(UIControlStateNormal)];
         [_logoImg setImage:[UIImage imageNamed:@"shouye_Logo"] forState:(UIControlStateHighlighted)];
         [_logoImg addTarget:self action:@selector(backTop) forControlEvents:(UIControlEventTouchUpInside)];
@@ -353,7 +372,7 @@ static NSInteger const saveTime = 30 * 24 * 60;
 #pragma mark 二维码扫描
 - (UIButton *)qrBtn {
     if (!_qrBtn) {
-        _qrBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 78, 20, 44, 44)];
+        _qrBtn = [[UIButton alloc] init];
         [_qrBtn setImage:[UIImage imageNamed:@"qr_saoyisao"] forState:(UIControlStateNormal)];
         [_qrBtn addTarget:self action:@selector(openQR) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -368,7 +387,7 @@ static NSInteger const saveTime = 30 * 24 * 60;
 #pragma mark 搜索
 - (UIButton *)searchBtn {
     if (!_searchBtn) {
-        _searchBtn = [[UIButton alloc] initWithFrame:CGRectMake(50, 29, SCREEN_WIDTH - 100, 26)];
+        _searchBtn = [[UIButton alloc] init];
         [_searchBtn setImage:[UIImage imageNamed:@"button_search"] forState:(UIControlStateNormal)];
         [_searchBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
         [_searchBtn setTitleColor:[UIColor colorWithHexString:@"#888888"] forState:(UIControlStateNormal)];
@@ -411,10 +430,20 @@ static NSInteger const saveTime = 30 * 24 * 60;
 #pragma mark - 加载控件
 - (void)thn_addNavLogoImage {
     [self.navView addSubview:self.logoImg];
+    [_logoImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(56, 25));
+        make.centerX.equalTo(_navView);
+        make.bottom.equalTo(_navView.mas_bottom).with.offset(-10);
+    }];
 }
 
 - (void)thn_addQRBtn {
     [self.navView addSubview:self.qrBtn];
+    [_qrBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(44, 44));
+        make.left.equalTo(_navView.mas_left).with.offset(10);
+        make.bottom.equalTo(_navView.mas_bottom).with.offset(0);
+    }];
 }
 
 - (void)thn_addSubscribeBtn {
@@ -425,12 +454,21 @@ static NSInteger const saveTime = 30 * 24 * 60;
     _searchType = type;
     [self.searchBtn setTitle:title forState:(UIControlStateNormal)];
     [self.navView addSubview:self.searchBtn];
-    
+    [_searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 100, 26));
+        make.left.equalTo(_navView.mas_left).with.offset(60);
+        make.bottom.equalTo(_navView.mas_bottom).with.offset(-10);
+    }];
 }
 
 - (void)thn_addBarItemLeftBarButton:(NSString *)title image:(NSString *)image {
     [self.leftBtn setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
     [self.navView addSubview:self.leftBtn];
+    [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(44, 44));
+        make.left.equalTo(_navView.mas_left).with.offset(10);
+        make.bottom.equalTo(_navView.mas_bottom).with.offset(0);
+    }];
 }
 
 - (void)thn_addBarItemRightBarButton:(NSString *)title image:(NSString *)image {
@@ -438,12 +476,21 @@ static NSInteger const saveTime = 30 * 24 * 60;
     CGFloat buttonWidth = [title boundingRectWithSize:CGSizeMake(320, 44) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width *1.5;
     if (image.length > 0) {
         [self.rightBtn setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
-        self.rightBtn.frame = CGRectMake(SCREEN_WIDTH - 44, 20, 44, 44);
         [self.navView addSubview:self.rightBtn];
+        [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(44, 44));
+            make.right.equalTo(_navView.mas_right).with.offset(-10);
+            make.bottom.equalTo(_navView.mas_bottom).with.offset(0);
+        }];
         return;
     }
-    self.rightBtn.frame = CGRectMake(SCREEN_WIDTH - buttonWidth - 15, 20, buttonWidth, 44);
+    
     [self.navView addSubview:self.rightBtn];
+    [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(buttonWidth, 44));
+        make.right.equalTo(_navView.mas_right).with.offset(-buttonWidth - 10);
+        make.bottom.equalTo(_navView.mas_bottom).with.offset(0);
+    }];
 }
 
 #pragma mark - 添加操作指示图
@@ -480,6 +527,10 @@ static NSInteger const saveTime = 30 * 24 * 60;
 - (void)thn_addNavBackBtn {
     if ([self.navigationController viewControllers].count > 1) {
         [self.navView addSubview:self.navBackBtn];
+        [_navBackBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(44, 44));
+            make.left.bottom.equalTo(self.navView).with.offset(0);
+        }];
     }
 }
 

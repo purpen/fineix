@@ -11,6 +11,7 @@
 #import "QRCodeScanViewController.h"
 #import "FBConfig.h"
 #import "THNUserData.h"
+#import "THNMacro.h"
 
 static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
 static NSString *const URLUserIsLogin = @"/user/user_info";
@@ -27,11 +28,29 @@ static NSInteger const saveTime = 30 * 24 * 60;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 //    [self setSlideBackVC];
-    [self.view addSubview:self.navView];
+
+    [self setNavViewUI];
     [self addNavBackBtn];
     [self getGoodsCarNumData];
+}
+
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.navView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 88);
+    }
+}
+
+- (void)setNavViewUI {
+    [self.view addSubview:self.navView];
+    [_navView addSubview:self.navViewTitle];
+    [_navViewTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 120, 44));
+        make.centerX.equalTo(_navView);
+        make.bottom.equalTo(_navView.mas_bottom).with.offset(0);
+    }];
 }
 
 #pragma mark 是否有商品推广
@@ -75,7 +94,7 @@ static NSInteger const saveTime = 30 * 24 * 60;
 
 - (UILabel *)countLab {
     if (!_countLab) {
-        _countLab = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 20, 25, 15, 15)];
+        _countLab = [[UILabel alloc] init];
         _countLab.layer.cornerRadius = 15 / 2;
         _countLab.layer.masksToBounds = YES;
         _countLab.backgroundColor = [UIColor colorWithHexString:fineixColor];
@@ -90,6 +109,11 @@ static NSInteger const saveTime = 30 * 24 * 60;
 - (void)setNavGoodsCarNumLab {
     self.countLab.hidden = YES;
     [self.navView addSubview:self.countLab];
+    [_countLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(15, 15));
+        make.right.equalTo(_navView.mas_right).with.offset(-12);
+        make.bottom.equalTo(_navView.mas_bottom).with.offset(-23);
+    }];
 }
 
 #pragma mark - 获取用户登录信息
@@ -156,8 +180,6 @@ static NSInteger const saveTime = 30 * 24 * 60;
     if (!_navView) {
         _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
         _navView.backgroundColor = [UIColor blackColor];
-        [_navView addSubview:self.navViewTitle];
-        [_navView addSubview:self.navLine];
     }
     return _navView;
 }
@@ -176,7 +198,7 @@ static NSInteger const saveTime = 30 * 24 * 60;
 #pragma mark - pop返回按钮
 - (UIButton *)navBackBtn {
     if (!_navBackBtn) {
-        _navBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 44, 44)];
+        _navBackBtn = [[UIButton alloc] init];
         [_navBackBtn setImage:[UIImage imageNamed:@"icon_back_white"] forState:(UIControlStateNormal)];
         [_navBackBtn addTarget:self action:@selector(popViewController) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -186,7 +208,7 @@ static NSInteger const saveTime = 30 * 24 * 60;
 #pragma mark - Nav左边按钮
 - (UIButton *)leftBtn {
     if (!_leftBtn) {
-        _leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 44, 44)];
+        _leftBtn = [[UIButton alloc] init];
         [_leftBtn addTarget:self action:@selector(leftAction) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _leftBtn;
@@ -195,7 +217,7 @@ static NSInteger const saveTime = 30 * 24 * 60;
 #pragma mark - Nav右边按钮
 - (UIButton *)rightBtn {
     if (!_rightBtn) {
-        _rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 20, 44, 44)];
+        _rightBtn = [[UIButton alloc] init];
         [_rightBtn addTarget:self action:@selector(rightAction) forControlEvents:(UIControlEventTouchUpInside)];
         [_rightBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         _rightBtn.titleLabel.font = [UIFont systemFontOfSize:16];
@@ -268,6 +290,11 @@ static NSInteger const saveTime = 30 * 24 * 60;
 - (void)addNavBackBtn {
     if ([self.navigationController viewControllers].count > 1) {
         [self.navView addSubview:self.navBackBtn];
+        [_navBackBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(44, 44));
+            make.left.equalTo(_navView.mas_left).with.offset(20);
+            make.bottom.equalTo(_navView.mas_bottom).with.offset(0);
+        }];
     }
 }
 
@@ -286,9 +313,20 @@ static NSInteger const saveTime = 30 * 24 * 60;
     if (transparent == NO) {
         self.navView.hidden = NO;
         [self.navView addSubview:self.leftBtn];
+        [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(44, 44));
+            make.left.equalTo(_navView.mas_left).with.offset(10);
+            make.bottom.equalTo(_navView.mas_bottom).with.offset(0);
+        }];
+        
     } else if (transparent == YES) {
         self.navView.hidden = YES;
         [self.view addSubview:self.leftBtn];
+        [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(44, 44));
+            make.left.equalTo(self.view.mas_left).with.offset(10);
+            make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+        }];
     }
 }
 
@@ -319,9 +357,19 @@ static NSInteger const saveTime = 30 * 24 * 60;
     if (transparent == NO) {
         self.navView.hidden = NO;
         [self.navView addSubview:self.rightBtn];
+        [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(44, 44));
+            make.right.equalTo(_navView.mas_right).with.offset(-10);
+            make.bottom.equalTo(_navView.mas_bottom).with.offset(0);
+        }];
     } else if (transparent == YES) {
         self.navView.hidden = YES;
         [self.view addSubview:self.rightBtn];
+        [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(44, 44));
+            make.right.equalTo(self.view.mas_right).with.offset(-10);
+            make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+        }];
     }
 }
 

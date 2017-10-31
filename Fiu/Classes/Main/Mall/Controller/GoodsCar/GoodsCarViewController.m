@@ -62,6 +62,37 @@ static CGFloat const itemHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
     [self thn_networkGoodsListData];
 }
 
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        if (self.openType == 1) {
+            _carItemTabel.frame = CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 88 - 34);
+        } else {
+            _carItemTabel.frame = CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 170);
+        }
+    }
+}
+
+#pragma mark - 设置视图
+- (void)setGoodsCarVcUI {
+    [self.navView addSubview:self.editBtn];
+    [_editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(44, 44));
+        make.right.equalTo(self.navView.mas_right).with.offset(-10);
+        make.bottom.equalTo(self.navView.mas_bottom).with.offset(0);
+    }];
+    
+    [self.view addSubview:self.carItemTable];
+    
+    [self.view addSubview:self.bottomView];
+    [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 44));
+        make.left.equalTo(self.view.mas_left).with.offset(0);
+        make.bottom.equalTo(_carItemTabel.mas_bottom).with.offset(0);
+    }];
+}
+
 #pragma mark - 网络请求
 #pragma mark 购物车列表
 - (void)networkGoodsCarList {
@@ -213,24 +244,6 @@ static CGFloat const itemHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
             [self.goodsIdList addObjectsFromArray:JDGoodsIdMarr];
         }
     }
-}
-
-#pragma mark - 设置视图
-- (void)setGoodsCarVcUI {
-    [self.navView addSubview:self.editBtn];
-    [self.view addSubview:self.carItemTable];
-    [self.view addSubview:self.bottomView];
-    [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 44));
-        make.left.equalTo(self.view.mas_left).with.offset(0);
-        make.bottom.equalTo(_carItemTabel.mas_bottom).with.offset(0);
-    }];
-}
-
-- (void)changTableHeight {
-    CGRect rect = self.carItemTabel.frame;
-    rect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
-    self.carItemTabel.frame = rect;
 }
 
 #pragma mark - 服务描述性文字视图
@@ -545,7 +558,7 @@ static CGFloat const itemHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
 #pragma mark - 编辑购物车
 - (UIButton *)editBtn {
     if (!_editBtn) {
-        _editBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 20, 44, 44)];
+        _editBtn = [[UIButton alloc] init];
         [_editBtn setTitle:NSLocalizedString(@"Edit", nil) forState:(UIControlStateNormal)];
         [_editBtn setTitle:NSLocalizedString(@"Done", nil) forState:(UIControlStateSelected)];
         [_editBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
