@@ -58,6 +58,14 @@ static NSString *const URLShareLink = @"/gateway/share_link";
     [self thn_setViewUI];
 }
 
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.domainInfoTable.frame = CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 122);
+    }
+}
+
 #pragma mark - 网络请求
 #pragma mark 地盘详情数据
 - (void)thn_networkDomainInfoData {
@@ -290,11 +298,16 @@ static NSString *const URLShareLink = @"/gateway/share_link";
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
+    
     self.baseTable = self.domainInfoTable;
     self.delegate = self;
     [self thn_addBarItemRightBarButton:@"" image:@"shouye_share_white"];
     [self.view addSubview:self.favoriteButton];
+    [_favoriteButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(44, 44));
+        make.right.equalTo(self.navView.mas_right).with.offset(-44);
+        make.bottom.equalTo(self.navView.mas_bottom).with.offset(-1);
+    }];
     self.favoriteButton.selected = NO;
 }
 
@@ -316,7 +329,7 @@ static NSString *const URLShareLink = @"/gateway/share_link";
 #pragma mark - 收藏按钮
 - (UIButton *)favoriteButton {
     if (!_favoriteButton) {
-        _favoriteButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 80, 18, 44, 44)];
+        _favoriteButton = [[UIButton alloc] init];
         [_favoriteButton setImage:[UIImage imageNamed:@"icon_favorite"] forState:(UIControlStateNormal)];
         [_favoriteButton setImage:[UIImage imageNamed:@"icon_favorite_seleted"] forState:(UIControlStateSelected)];
         [_favoriteButton addTarget:self action:@selector(favoriteButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];

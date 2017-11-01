@@ -122,6 +122,14 @@ static NSInteger const saveTime = 2 * 24 * 60;
     //    [self getCity];
 }
 
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.homeTable.frame = CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 133);
+    }
+}
+
 #pragma mark - 获取登录信息
 - (void)thn_getUserLoginInfo {
     if ([self isUserLogin]) {
@@ -940,51 +948,51 @@ static NSInteger const saveTime = 2 * 24 * 60;
 }
 
 #pragma mark - 判断上／下滑状态，显示/隐藏Nav/tabBar
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    if (scrollView == self.homeTable) {
-        _lastContentOffset = scrollView.contentOffset.y;
-    }
-}
-
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    if (scrollView == self.homeTable) {
-        if (_lastContentOffset < scrollView.contentOffset.y) {
-            _rollDown = YES;
-        }else{
-            _rollDown = NO;
-        }
-    }
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView == self.homeTable) {
-        CGRect tabBarRect = self.tabBarController.tabBar.frame;
-        CGRect tableRect = self.homeTable.frame;
-        if (_rollDown == YES) {
-            tabBarRect = CGRectMake(0, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 49);
-            tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            
-            [self thn_setTableRect:tableRect tabBarRect:tabBarRect alpha:0.0 statusBarHidden:YES];
-            
-        } else if (_rollDown == NO) {
-            tabBarRect = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
-            tableRect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 108);
-            
-            [self thn_setTableRect:tableRect tabBarRect:tabBarRect alpha:1.0 statusBarHidden:NO];
-        }
-    }
-}
-
-- (void)thn_setTableRect:(CGRect)tableRect tabBarRect:(CGRect)tabBarRect alpha:(CGFloat)count statusBarHidden:(BOOL)hidden {
-    [UIView animateWithDuration:.3 animations:^{
-        self.tabBarController.tabBar.frame = tabBarRect;
-        self.homeTable.frame = tableRect;
-        self.navView.alpha = count;
-        self.leftBtn.alpha = count;
-        self.rightBtn.alpha = count;
-        [[UIApplication sharedApplication] setStatusBarHidden:hidden withAnimation:(UIStatusBarAnimationSlide)];
-    }];
-}
+//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+//    if (scrollView == self.homeTable) {
+//        _lastContentOffset = scrollView.contentOffset.y;
+//    }
+//}
+//
+//- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+//    if (scrollView == self.homeTable) {
+//        if (_lastContentOffset < scrollView.contentOffset.y) {
+//            _rollDown = YES;
+//        }else{
+//            _rollDown = NO;
+//        }
+//    }
+//}
+//
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    if (scrollView == self.homeTable) {
+//        CGRect tabBarRect = self.tabBarController.tabBar.frame;
+//        CGRect tableRect = self.homeTable.frame;
+//        if (_rollDown == YES) {
+//            tabBarRect = CGRectMake(0, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 49);
+//            tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+//
+//            [self thn_setTableRect:tableRect tabBarRect:tabBarRect alpha:0.0 statusBarHidden:YES];
+//
+//        } else if (_rollDown == NO) {
+//            tabBarRect = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
+//            tableRect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 108);
+//
+//            [self thn_setTableRect:tableRect tabBarRect:tabBarRect alpha:1.0 statusBarHidden:NO];
+//        }
+//    }
+//}
+//
+//- (void)thn_setTableRect:(CGRect)tableRect tabBarRect:(CGRect)tabBarRect alpha:(CGFloat)count statusBarHidden:(BOOL)hidden {
+//    [UIView animateWithDuration:.3 animations:^{
+//        self.tabBarController.tabBar.frame = tabBarRect;
+//        self.homeTable.frame = tableRect;
+//        self.navView.alpha = count;
+//        self.leftBtn.alpha = count;
+//        self.rightBtn.alpha = count;
+//        [[UIApplication sharedApplication] setStatusBarHidden:hidden withAnimation:(UIStatusBarAnimationSlide)];
+//    }];
+//}
 
 #pragma mark - 选择城市
 //-(UILabel *)addressCityLabel{
@@ -1042,7 +1050,6 @@ static NSInteger const saveTime = 2 * 24 * 60;
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
     self.delegate = self;
     self.baseTable = self.homeTable;
     self.navViewTitle.hidden = YES;

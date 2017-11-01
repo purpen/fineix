@@ -43,6 +43,15 @@ static NSString *const URLCategory = @"/category/getlist";
     [self networkCategoryData];
 }
 
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.menuView.frame = CGRectMake(0, 88, SCREEN_WIDTH, 44);
+        self.mallRollView.frame = CGRectMake(0, 132, SCREEN_WIDTH, SCREEN_HEIGHT - 215);
+    }
+}
+
 #pragma mark - 设置视图UI
 - (void)thn_setMallViewUI {
     [self.view addSubview:self.menuView];
@@ -178,7 +187,6 @@ static NSString *const URLCategory = @"/category/getlist";
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.delegate = self;
     self.navViewTitle.hidden = YES;
     [self thn_addSearchBtnText:NSLocalizedString(@"mallSearch", nil) type:2];

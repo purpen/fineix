@@ -49,6 +49,16 @@ static NSString *const URLSearchList = @"/search/getlist";
     }
 }
 
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.searchView.frame = CGRectMake(0, 44, SCREEN_WIDTH, 44);
+        self.menuView.frame = CGRectMake(0, 88, SCREEN_WIDTH, 44);
+        self.resultsView.frame = CGRectMake(0, 132, SCREEN_WIDTH, SCREEN_HEIGHT - 132);
+    }
+}
+
 #pragma mark - 设置视图UI 
 - (void)setSearchVcUI {
     self.titleArr = @[NSLocalizedString(@"searchProduct", nil),
@@ -223,8 +233,6 @@ static NSString *const URLSearchList = @"/search/getlist";
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-    [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent)];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
     [self.navView addSubview:self.searchView];
 }

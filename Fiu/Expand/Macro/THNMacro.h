@@ -27,6 +27,8 @@
 #define BOUNDS_HEIGHT       self.bounds.size.height
 #define BANNER_HEIGHT       211
 
+#define Is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+
 #undef 设备信息
 #define USERDEFAULT          [NSUserDefaults standardUserDefaults]
 #define IS_iOS9              [[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0
