@@ -15,10 +15,10 @@
 
 @interface THNBrandInfoCollectionReusableView : UICollectionReusableView
 
-@pro_strong UIImageView         *   brandBgImg;         //   品牌的背景
-@pro_strong UIImageView         *   brandImg;           //   品牌的头像
-@pro_strong UILabel             *   brandIntroduce;     //   品牌介绍
-@pro_strong FBSegmentView       *   menuView;
+@property (nonatomic, strong) UIImageView *brandBgImg;         //   品牌的背景
+@property (nonatomic, strong) UIImageView *brandImg;           //   品牌的头像
+@property (nonatomic, strong) UILabel *brandIntroduce;     //   品牌介绍
+@property (nonatomic, strong) FBSegmentView *menuView;
 
 - (void)setBrandInfoData:(BrandInfoData *)model;
 

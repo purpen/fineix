@@ -17,8 +17,8 @@
 @property (nonatomic, strong) NSString *domainId;
 
 /** 活动ID */
-@pro_strong NSString *actionId;
+@property (nonatomic, strong) NSString *actionId;
 /** 活动标题 */
-@pro_strong NSString *activeTitle;
+@property (nonatomic, strong) NSString *activeTitle;
 
 @end

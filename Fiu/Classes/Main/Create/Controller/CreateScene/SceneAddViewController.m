@@ -48,6 +48,14 @@ static NSString *const DefaultFilter = @"original";
     _idx = 391;
 }
 
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        
+    }
+}
+
 - (NSArray *)footTitleArr {
     if (!_footTitleArr) {
         _footTitleArr = @[NSLocalizedString(@"marker", nil),
@@ -304,7 +312,6 @@ static NSString *const DefaultFilter = @"original";
         }
         [self.userAddGoodsMarr addObject:tagDataDict];
     };
-    
 }
 
 #pragma mark - 创建一个标签

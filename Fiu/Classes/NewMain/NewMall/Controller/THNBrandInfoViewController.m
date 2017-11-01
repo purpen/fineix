@@ -59,6 +59,16 @@ static NSString *const brandInfoHeader = @"BrandInfoHeader";
     self.currentpageNum = 0;
     [self networkBrandInfoData];
     [self networkBrandGoodsList];
+    
+    
+}
+
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.brandCollection.frame = CGRectMake(0, -20, SCREEN_WIDTH, SCREEN_HEIGHT + 20 - 34);
+    }
 }
 
 #pragma mark - 网络请求
@@ -218,6 +228,11 @@ static NSString *const brandInfoHeader = @"BrandInfoHeader";
         [_brandCollection registerClass:[MallListGoodsCollectionViewCell class] forCellWithReuseIdentifier:MallListCellId];
         [_brandCollection registerClass:[THNDiscoverSceneCollectionViewCell class] forCellWithReuseIdentifier:brandCollectionCellId];
         [_brandCollection registerClass:[THNBrandInfoCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:brandInfoHeader];
+        
+        if (@available(iOS 11.0, *)) {
+            _brandCollection.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
+        
         [self addMJRefresh:_brandCollection];
     }
     return _brandCollection;
