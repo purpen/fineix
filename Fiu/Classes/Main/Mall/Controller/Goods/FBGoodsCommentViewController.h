@@ -12,13 +12,13 @@
 
 @interface FBGoodsCommentViewController : FBViewController <UITableViewDelegate, UITableViewDataSource>
 
-@pro_strong FBRequest               *   commentRequest;
-@pro_assign NSInteger                   currentpageNum;
-@pro_assign NSInteger                   totalPageNum;
-@pro_strong NSString                *   targetId;
+@property (nonatomic, strong) FBRequest *commentRequest;
+@property (nonatomic, assign) NSInteger currentpageNum;
+@property (nonatomic, assign) NSInteger totalPageNum;
+@property (nonatomic, strong) NSString *targetId;
 
-@pro_strong UITableView             *   commentTabel;   //  评论视图
-@pro_strong UILabel                 *   promptLab;
+@property (nonatomic, strong) UITableView *commentTabel;   //  评论视图
+@property (nonatomic, strong) UILabel *promptLab;
 
 - (void)networkSceneCommenstData:(NSString *)targetId;
 

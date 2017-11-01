@@ -19,19 +19,19 @@
 
 @interface FBPictureViewController : UIViewController
 
-@pro_strong UIView *navView;            //  顶部状态栏
-@pro_strong UILabel *navTitle;          //  顶部标题
-@pro_strong UIButton *openPhotoAlbums;  //  打开相薄
-@pro_strong UIButton *cancelBtn;        //  取消按钮
-@pro_strong UIButton *backBtn;          //  返回按钮
-@pro_strong UIButton *doneBtn;          //  完成发布按钮
-@pro_strong UIButton *cancelDoneBtn;    //  取消创建
-@pro_strong UIButton *closeBtn;         //  关闭
-@pro_strong UIButton *sureButton;       //  确定
-@pro_strong UIButton *nextBtn;          //  继续按钮
-@pro_strong UIButton *cropBack;         //  "裁剪"返回
-@pro_strong UILabel *line;              //  视图分割线
-@pro_weak id <FBPictureViewControllerDelegate> delegate;
+@property (nonatomic, strong) UIView *navView;            //  顶部状态栏
+@property (nonatomic, strong) UILabel *navTitle;          //  顶部标题
+@property (nonatomic, strong) UIButton *openPhotoAlbums;  //  打开相薄
+@property (nonatomic, strong) UIButton *cancelBtn;        //  取消按钮
+@property (nonatomic, strong) UIButton *backBtn;          //  返回按钮
+@property (nonatomic, strong) UIButton *doneBtn;          //  完成发布按钮
+@property (nonatomic, strong) UIButton *cancelDoneBtn;    //  取消创建
+@property (nonatomic, strong) UIButton *closeBtn;         //  关闭
+@property (nonatomic, strong) UIButton *sureButton;       //  确定
+@property (nonatomic, strong) UIButton *nextBtn;          //  继续按钮
+@property (nonatomic, strong) UIButton *cropBack;         //  "裁剪"返回
+@property (nonatomic, strong) UILabel *line;              //  视图分割线
+@property (nonatomic, weak) id <FBPictureViewControllerDelegate> delegate;
 
 /**
  *  获取当前登录用户id

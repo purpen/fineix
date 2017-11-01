@@ -14,9 +14,9 @@
 
 @interface GoodsBrandTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) UIImageView         *   brandBgImg;         //   品牌的背景
-@property (nonatomic, strong) UIImageView         *   brandImg;           //   品牌的头像
-@property (nonatomic, strong) UILabel             *   brandIntroduce;     //   品牌介绍
+@property (nonatomic, strong) UIImageView         *brandBgImg;         //   品牌的背景
+@property (nonatomic, strong) UIImageView         *brandImg;           //   品牌的头像
+@property (nonatomic, strong) UILabel             *brandIntroduce;     //   品牌介绍
 @property (nonatomic, assign) CGFloat                 cellHeight;
 
 - (void)setBrandInfoData:(BrandInfoData *)model;

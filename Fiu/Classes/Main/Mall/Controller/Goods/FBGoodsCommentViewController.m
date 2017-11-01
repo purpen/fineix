@@ -17,7 +17,7 @@ static NSString *const URLComment = @"/comment/getlist";
     NSString *_idx;
 }
 
-@pro_strong NSMutableArray      *   commentListMarr;    //  评论列表
+@pro_strong NSMutableArray *commentListMarr;    //  评论列表
 
 @end
 

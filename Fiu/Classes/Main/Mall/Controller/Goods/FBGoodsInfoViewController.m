@@ -233,7 +233,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
             count = (self.sceneListMarr.count +1)/2;
         }
         
-        _sceneListHeight = 20 + (sceneCellHeight + 15) * count;
+        _sceneListHeight = 55 + (sceneCellHeight + 15) * count;
         self.goodsTable.tableFooterView = self.sceneList;
        [self.sceneList reloadData];
         
@@ -356,7 +356,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 #pragma mark - 商品详情
 - (UIWebView *)goodsInfoWeb {
     if (!_goodsInfoWeb) {
-        _goodsInfoWeb = [[UIWebView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 152)];
+        _goodsInfoWeb = [[UIWebView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 152 - 34)];
         _goodsInfoWeb.delegate = self;
         _goodsInfoWeb.scrollView.delegate = self;
         _goodsInfoWeb.scrollView.bounces = YES;

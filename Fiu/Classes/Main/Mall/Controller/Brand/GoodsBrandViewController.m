@@ -20,9 +20,9 @@ static NSString *const SceneListCellId = @"SceneListCellId";
 
 @interface GoodsBrandViewController ()
 
-@pro_strong BrandInfoData               *   brandInfo;
-@pro_strong NSMutableArray              *   goodsList;
-@pro_strong NSMutableArray              *   goodsIdList;
+@property (nonatomic, strong) BrandInfoData *brandInfo;
+@property (nonatomic, strong) NSMutableArray *goodsList;
+@property (nonatomic, strong) NSMutableArray *goodsIdList;
 
 @end
 
@@ -36,10 +36,19 @@ static NSString *const SceneListCellId = @"SceneListCellId";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self networkBrandInfoData];
     [self networkBrandGoodsList];
     [self thn_networkSceneListData];
     [self.view addSubview:self.goodsBrandTable];
+}
+
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+//        self.goodsBrandTable.frame = CGRectMake(0, -68, SCREEN_WIDTH, SCREEN_HEIGHT - 133);
+    }
 }
 
 #pragma mark - 网络请求

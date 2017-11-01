@@ -166,7 +166,11 @@ static NSString *const URLShareLink = @"/gateway/share_link";
 #pragma mark 地盘底部功能信息
 - (THNDomainInfoFooter *)footerView {
     if (!_footerView) {
-        _footerView = [[THNDomainInfoFooter alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        if (Is_iPhoneX) {
+            _footerView = [[THNDomainInfoFooter alloc] initWithFrame:CGRectMake(0, 120, SCREEN_WIDTH, SCREEN_HEIGHT - 120)];
+        } else {
+            _footerView = [[THNDomainInfoFooter alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        }
         _footerView.nav = self.navigationController;
         _footerView.vc = self;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableBackTop:) name:@"tableOnHeader" object:nil];
@@ -302,6 +306,7 @@ static NSString *const URLShareLink = @"/gateway/share_link";
     self.baseTable = self.domainInfoTable;
     self.delegate = self;
     [self thn_addBarItemRightBarButton:@"" image:@"shouye_share_white"];
+    
     [self.view addSubview:self.favoriteButton];
     [_favoriteButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(44, 44));

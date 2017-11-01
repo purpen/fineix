@@ -14,10 +14,10 @@
     CGFloat beginOriginY;
 }
 
-@pro_assign CGFloat scale;
-@pro_assign CGFloat rotaion;
-@pro_assign CGPoint centerPoint;
-@pro_assign CGPoint touchPoint;
+@property (nonatomic, assign) CGFloat scale;
+@property (nonatomic, assign) CGFloat rotaion;
+@property (nonatomic, assign) CGPoint centerPoint;
+@property (nonatomic, assign) CGPoint touchPoint;
 
 @end
 
@@ -44,6 +44,14 @@
     
     [self loadAllPhotos];
     [self setViewUI];
+}
+
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.pictureView.frame = CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 88 - 45 - 34);
+    }
 }
 
 #pragma mark - 应用第一次打开，加载操作指示图
@@ -95,8 +103,8 @@
     [self.view addSubview:self.footView];
     [_footView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 45));
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
-        make.centerX.equalTo(self.view);
+        make.top.equalTo(_pictureView.mas_bottom).with.offset(0);
+        make.centerX.equalTo(_pictureView);
     }];
 }
 
@@ -171,20 +179,24 @@
 
 #pragma mark - 打开相册列表
 - (void)openPhotoAlbumsClick {
+    CGFloat navTopHeight = Is_iPhoneX ? 88 : 45;
     if (self.openPhotoAlbums.selected == YES) {
         self.openPhotoAlbums.selected = NO;
-        CGRect openPhotoAlbumsRect = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT-45);
-        [UIView animateWithDuration:.3 animations:^{
+        CGRect openPhotoAlbumsRect = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - navTopHeight);
+        [UIView animateWithDuration:0.3 animations:^{
             self.photoAlbumsView.frame = openPhotoAlbumsRect;
             self.nextBtn.hidden = NO;
+        } completion:^(BOOL finished) {
+            self.footView.hidden = NO;
         }];
         
     } else if (self.openPhotoAlbums.selected == NO){
         self.openPhotoAlbums.selected = YES;
-        CGRect openPhotoAlbumsRect = CGRectMake(0, 45, SCREEN_WIDTH, SCREEN_HEIGHT-45);
-        [UIView animateWithDuration:.3 animations:^{
+        CGRect openPhotoAlbumsRect = CGRectMake(0, navTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - navTopHeight);
+        [UIView animateWithDuration:0.3 animations:^{
             self.photoAlbumsView.frame = openPhotoAlbumsRect;
             self.nextBtn.hidden = YES;
+            self.footView.hidden = YES;
         }];
     }
 }

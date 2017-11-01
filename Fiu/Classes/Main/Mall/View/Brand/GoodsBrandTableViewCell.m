@@ -24,9 +24,6 @@
 
 - (void)setBrandInfoData:(BrandInfoData *)model {
     [self.brandBgImg downloadImage:model.bannerUrl place:[UIImage imageNamed:@""]];
-    UIView * bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 210)];
-    bgView.backgroundColor = [UIColor colorWithHexString:@"#555555" alpha:.2];
-    [_brandBgImg addSubview:bgView];
     [self.brandImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     [self changeContentLabStyle:self.brandIntroduce withText:[NSString stringWithFormat:@"%@", model.des]];
 }
