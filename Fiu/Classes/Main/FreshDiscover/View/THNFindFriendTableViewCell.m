@@ -34,21 +34,38 @@ static NSString *const ShareURlText = @"我在D³IN寻找同路人；希望和�
         [self.contentView addSubview:self.imageV];
         self.imageV.image = [UIImage imageNamed:@"findFriendTop"];
         [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.contentView.mas_left).mas_offset(22*SCREEN_HEIGHT/667.0);
-            make.top.mas_equalTo(self.contentView.mas_top).mas_offset(10*SCREEN_HEIGHT/667.0);
-            make.width.mas_equalTo(526/2);
-            make.height.mas_equalTo(0);
+            if (SCREEN_HEIGHT == 812) {
+                make.left.mas_equalTo(self.contentView.mas_left).mas_offset(22);
+                make.top.mas_equalTo(self.contentView.mas_top).mas_offset(10);
+                make.width.mas_equalTo(526/2);
+                make.height.mas_equalTo(0);
+            }else {
+                make.left.mas_equalTo(self.contentView.mas_left).mas_offset(22*SCREEN_HEIGHT/667.0);
+                make.top.mas_equalTo(self.contentView.mas_top).mas_offset(10*SCREEN_HEIGHT/667.0);
+                make.width.mas_equalTo(526/2);
+                make.height.mas_equalTo(0);
+            }
         }];
         
         self.weibo = [[UIImageView alloc] init];
         self.weibo.image = [UIImage imageNamed:@"weibo_icon"];
         [self.contentView addSubview:self.weibo];
         self.weibo.layer.masksToBounds = YES;
-        self.weibo.layer.cornerRadius = 20*SCREEN_HEIGHT/667.0;
+        if (SCREEN_HEIGHT == 812) {
+            self.weibo.layer.cornerRadius = 20;
+        } else {
+            self.weibo.layer.cornerRadius = 20*SCREEN_HEIGHT/667.0;
+        }
         [_weibo mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.imageV.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);
-            make.centerX.mas_equalTo(self.contentView.mas_centerX).mas_offset(0);
-            make.width.height.mas_equalTo(40*SCREEN_HEIGHT/667.0);
+            if (SCREEN_HEIGHT == 812) {
+                make.top.mas_equalTo(self.imageV.mas_bottom).mas_offset(5);
+                make.centerX.mas_equalTo(self.contentView.mas_centerX).mas_offset(0);
+                make.width.height.mas_equalTo(40);
+            } else {
+                make.top.mas_equalTo(self.imageV.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);
+                make.centerX.mas_equalTo(self.contentView.mas_centerX).mas_offset(0);
+                make.width.height.mas_equalTo(40*SCREEN_HEIGHT/667.0);
+            }
         }];
         self.weibo.userInteractionEnabled = YES;
         [self.weibo addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(weiBo)]];
@@ -60,19 +77,34 @@ static NSString *const ShareURlText = @"我在D³IN寻找同路人；希望和�
         self.weiboLabel.textColor = [UIColor colorWithHexString:@"#727272"];
         [self.contentView addSubview:self.weiboLabel];
         [_weiboLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.weibo.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);
-            make.centerX.mas_equalTo(self.weibo.mas_centerX).mas_offset(0);
+            if (SCREEN_HEIGHT == 812) {
+                make.top.mas_equalTo(self.weibo.mas_bottom).mas_offset(5);
+                make.centerX.mas_equalTo(self.weibo.mas_centerX).mas_offset(0);
+            } else {
+                make.top.mas_equalTo(self.weibo.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);
+                make.centerX.mas_equalTo(self.weibo.mas_centerX).mas_offset(0);
+            }
         }];
         
         self.touXiang = [[UIImageView alloc] init];
         self.touXiang.image = [UIImage imageNamed:@"weixin_icon"];
         [self.contentView addSubview:self.touXiang];
         self.touXiang.layer.masksToBounds = YES;
-        self.touXiang.layer.cornerRadius = 20*SCREEN_HEIGHT/667.0;
+        if (SCREEN_HEIGHT == 812) {
+            self.touXiang.layer.cornerRadius = 20;
+        } else {
+            self.touXiang.layer.cornerRadius = 20*SCREEN_HEIGHT/667.0;
+        }
         [_touXiang mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(self.weibo.mas_left).mas_offset(-102/2*SCREEN_HEIGHT/667.0);
-            make.top.mas_equalTo(self.imageV.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);
-            make.width.height.mas_equalTo(40*SCREEN_HEIGHT/667.0);
+            if (SCREEN_HEIGHT != 812) {
+                make.right.mas_equalTo(self.weibo.mas_left).mas_offset(-102/2*SCREEN_HEIGHT/667.0);
+                make.top.mas_equalTo(self.imageV.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);
+                make.width.height.mas_equalTo(40*SCREEN_HEIGHT/667.0);
+            } else {
+                make.right.mas_equalTo(self.weibo.mas_left).mas_offset(-102/2);
+                make.top.mas_equalTo(self.imageV.mas_bottom).mas_offset(5);
+                make.width.height.mas_equalTo(40);
+            }
         }];
         self.touXiang.userInteractionEnabled = YES;
         [self.touXiang addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touXiangTap)]];
@@ -84,19 +116,34 @@ static NSString *const ShareURlText = @"我在D³IN寻找同路人；希望和�
         self.weixinLabel.textColor = [UIColor colorWithHexString:@"#727272"];
         [self.contentView addSubview:self.weixinLabel];
         [_weixinLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.touXiang.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);
-            make.centerX.mas_equalTo(self.touXiang.mas_centerX).mas_offset(0);
+            if (SCREEN_HEIGHT == 812) {
+                make.top.mas_equalTo(self.touXiang.mas_bottom).mas_offset(5);
+                make.centerX.mas_equalTo(self.touXiang.mas_centerX).mas_offset(0);
+            } else {
+                make.top.mas_equalTo(self.touXiang.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);
+                make.centerX.mas_equalTo(self.touXiang.mas_centerX).mas_offset(0);
+            }
         }];
         
         self.tongxunlu = [[UIImageView alloc] init];
         self.tongxunlu.image = [UIImage imageNamed:@"tongxunlu"];
         [self.contentView addSubview:self.tongxunlu];
         self.tongxunlu.layer.masksToBounds = YES;
-        self.tongxunlu.layer.cornerRadius = 20*SCREEN_HEIGHT/667.0;
+        if (SCREEN_HEIGHT == 812) {
+            self.tongxunlu.layer.cornerRadius = 20;
+        }else {
+            self.tongxunlu.layer.cornerRadius = 20*SCREEN_HEIGHT/667.0;
+        }
         [_tongxunlu mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self.touXiang.mas_centerY).mas_offset(0);
-            make.left.mas_equalTo(self.weibo.mas_right).mas_offset(102/2*SCREEN_HEIGHT/667.0);
-            make.width.height.mas_equalTo(40*SCREEN_HEIGHT/667.0);
+            if (SCREEN_HEIGHT == 812) {
+                make.centerY.mas_equalTo(self.touXiang.mas_centerY).mas_offset(0);
+                make.left.mas_equalTo(self.weibo.mas_right).mas_offset(102/2);
+                make.width.height.mas_equalTo(40);
+            } else {
+                make.centerY.mas_equalTo(self.touXiang.mas_centerY).mas_offset(0);
+                make.left.mas_equalTo(self.weibo.mas_right).mas_offset(102/2*SCREEN_HEIGHT/667.0);
+                make.width.height.mas_equalTo(40*SCREEN_HEIGHT/667.0);
+            }
         }];
         self.tongxunlu.userInteractionEnabled = YES;
         
@@ -107,8 +154,13 @@ static NSString *const ShareURlText = @"我在D³IN寻找同路人；希望和�
         self.tongxunluLabel.textColor = [UIColor colorWithHexString:@"#727272"];
         [self.contentView addSubview:self.tongxunluLabel];
         [_tongxunluLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.tongxunlu.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);
-            make.centerX.mas_equalTo(self.tongxunlu.mas_centerX).mas_offset(0);
+            if (SCREEN_HEIGHT == 812) {
+                make.top.mas_equalTo(self.tongxunlu.mas_bottom).mas_offset(5);
+                make.centerX.mas_equalTo(self.tongxunlu.mas_centerX).mas_offset(0);
+            } else {
+                make.top.mas_equalTo(self.tongxunlu.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);
+                make.centerX.mas_equalTo(self.tongxunlu.mas_centerX).mas_offset(0);
+            }
         }];
     }
     return self;

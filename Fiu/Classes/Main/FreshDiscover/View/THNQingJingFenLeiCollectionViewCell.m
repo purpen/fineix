@@ -31,15 +31,27 @@
 //        self.imageV.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:self.imageV];
         self.imageV.layer.masksToBounds = YES;
-        self.imageV.layer.cornerRadius = 30*SCREEN_HEIGHT/667.0;
+        if (SCREEN_HEIGHT == 812) {
+            self.imageV.layer.cornerRadius = 30;
+        } else {
+            self.imageV.layer.cornerRadius = 30*SCREEN_HEIGHT/667.0;
+        }
         [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.mas_equalTo(self.contentView).mas_offset(0);
-            make.width.height.mas_equalTo(60*SCREEN_HEIGHT/667.0);
+            if (SCREEN_HEIGHT == 812) {
+                make.center.mas_equalTo(self.contentView).mas_offset(0);
+                make.width.height.mas_equalTo(60);
+            } else {
+                make.center.mas_equalTo(self.contentView).mas_offset(0);
+                make.width.height.mas_equalTo(60*SCREEN_HEIGHT/667.0);
+            }
         }];
         
         self.textLabel = [[UILabel alloc] init];
         self.textLabel.font = [UIFont systemFontOfSize:13];
         if (SCREEN_HEIGHT>667.0) {
+            if (SCREEN_HEIGHT == 812) {
+                self.textLabel.font = [UIFont systemFontOfSize:13];
+            }
             self.textLabel.font = [UIFont systemFontOfSize:14];
         }
         self.textLabel.textAlignment = NSTextAlignmentCenter;
@@ -54,9 +66,15 @@
         self.lineView.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:self.lineView];
         [_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.textLabel.mas_bottom).mas_offset(2*SCREEN_HEIGHT/667.0);
-            make.left.right.mas_equalTo(self.textLabel).mas_offset(0);
-            make.height.mas_equalTo(1*SCREEN_HEIGHT/667.0);
+            if (SCREEN_HEIGHT == 812) {
+                make.top.mas_equalTo(self.textLabel.mas_bottom).mas_offset(2);
+                make.left.right.mas_equalTo(self.textLabel).mas_offset(0);
+                make.height.mas_equalTo(1);
+            } else {
+                make.top.mas_equalTo(self.textLabel.mas_bottom).mas_offset(2*SCREEN_HEIGHT/667.0);
+                make.left.right.mas_equalTo(self.textLabel).mas_offset(0);
+                make.height.mas_equalTo(1*SCREEN_HEIGHT/667.0);
+            }
         }];
         
     }

@@ -47,7 +47,11 @@
         self.textLabel = [[UILabel alloc] init];
         self.textLabel.font = [UIFont systemFontOfSize:13];
         if (SCREEN_HEIGHT>667.0) {
-            self.textLabel.font = [UIFont systemFontOfSize:14];
+            if (SCREEN_HEIGHT == 812) {
+                 self.textLabel.font = [UIFont systemFontOfSize:13];
+            } else {
+                self.textLabel.font = [UIFont systemFontOfSize:14];
+            }
         } else if (SCREEN_HEIGHT<667.0) {
             self.textLabel.font = [UIFont systemFontOfSize:12];
         }
