@@ -183,9 +183,15 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
     
     [self.view addSubview:self.writeComment];
     [_writeComment mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 49));
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
-        make.left.equalTo(self.view.mas_left).with.offset(0);
+        if (SCREEN_HEIGHT == 812) {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 49+20));
+            make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+            make.left.equalTo(self.view.mas_left).with.offset(0);
+        } else {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 49));
+            make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+            make.left.equalTo(self.view.mas_left).with.offset(0);
+        }
     }];
 }
 
@@ -226,7 +232,11 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
 #pragma mark 评论列表
 - (UITableView *)commentTabel {
     if (!_commentTabel) {
-        _commentTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113) style:(UITableViewStylePlain)];
+        if (SCREEN_HEIGHT == 812) {
+            _commentTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 113-24) style:(UITableViewStylePlain)];
+        } else {
+            _commentTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113) style:(UITableViewStylePlain)];
+        }
         _commentTabel.delegate = self;
         _commentTabel.dataSource = self;
         _commentTabel.showsVerticalScrollIndicator = NO;

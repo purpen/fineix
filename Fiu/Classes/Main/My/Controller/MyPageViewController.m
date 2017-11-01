@@ -480,36 +480,69 @@
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            return CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH - 20);
+    if (SCREEN_HEIGHT == 812) {
+        if (indexPath.section == 0) {
+            if (indexPath.row == 0) {
+                return CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH - 20);
+            }
         }
-    }
-    if (indexPath.section == 1) {
-        if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
-            return CGSizeMake(SCREEN_WIDTH, 80/667.0*SCREEN_HEIGHT);
+        if (indexPath.section == 1) {
+            if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
+                return CGSizeMake(SCREEN_WIDTH, 80);
+            }
+            return CGSizeMake(SCREEN_WIDTH, 60);
         }
-        return CGSizeMake(SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
-    }
-    if (indexPath.section == 2) {
-        return CGSizeMake(SCREEN_WIDTH, 44/667.0*SCREEN_HEIGHT);
-    }
-    if (indexPath.section == 3) {
-        if ((long)[_userInfo.storageId integerValue] == 0) {
-            return CGSizeMake(SCREEN_WIDTH, 0.00001);
+        if (indexPath.section == 2) {
+            return CGSizeMake(SCREEN_WIDTH, 44);
         }
-        return CGSizeMake(SCREEN_WIDTH, 44/667.0*SCREEN_HEIGHT);
+        if (indexPath.section == 3) {
+            if ((long)[_userInfo.storageId integerValue] == 0) {
+                return CGSizeMake(SCREEN_WIDTH, 0.00001);
+            }
+            return CGSizeMake(SCREEN_WIDTH, 44);
+        }
+        if (indexPath.section == 4) {
+            return CGSizeMake(SCREEN_WIDTH, 120.5);
+        }
+        if (indexPath.section == 5) {
+            return CGSizeMake(SCREEN_WIDTH, (190 + 140));
+        }
+        if (indexPath.section == 6) {
+            return CGSizeMake(SCREEN_HEIGHT, 200);
+        }
+        return CGSizeMake(0, 0);
+    } else {
+        if (indexPath.section == 0) {
+            if (indexPath.row == 0) {
+                return CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH - 20);
+            }
+        }
+        if (indexPath.section == 1) {
+            if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
+                return CGSizeMake(SCREEN_WIDTH, 80/667.0*SCREEN_HEIGHT);
+            }
+            return CGSizeMake(SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
+        }
+        if (indexPath.section == 2) {
+            return CGSizeMake(SCREEN_WIDTH, 44/667.0*SCREEN_HEIGHT);
+        }
+        if (indexPath.section == 3) {
+            if ((long)[_userInfo.storageId integerValue] == 0) {
+                return CGSizeMake(SCREEN_WIDTH, 0.00001);
+            }
+            return CGSizeMake(SCREEN_WIDTH, 44/667.0*SCREEN_HEIGHT);
+        }
+        if (indexPath.section == 4) {
+            return CGSizeMake(SCREEN_WIDTH, 120.5/667.0*SCREEN_HEIGHT);
+        }
+        if (indexPath.section == 5) {
+            return CGSizeMake(SCREEN_WIDTH, (190 + 140)/667.0*SCREEN_HEIGHT);
+        }
+        if (indexPath.section == 6) {
+            return CGSizeMake(SCREEN_HEIGHT, 200);
+        }
+        return CGSizeMake(0, 0);
     }
-    if (indexPath.section == 4) {
-        return CGSizeMake(SCREEN_WIDTH, 120.5/667.0*SCREEN_HEIGHT);
-    }
-    if (indexPath.section == 5) {
-        return CGSizeMake(SCREEN_WIDTH, (190 + 140)/667.0*SCREEN_HEIGHT);
-    }
-    if (indexPath.section == 6) {
-        return CGSizeMake(SCREEN_HEIGHT, 200);
-    }
-    return CGSizeMake(0, 0);
 }
 
 

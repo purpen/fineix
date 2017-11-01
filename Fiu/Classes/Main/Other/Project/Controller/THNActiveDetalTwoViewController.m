@@ -128,7 +128,11 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     if (!_contentView) {
         _flowLayout = [[UICollectionViewFlowLayout alloc] init];
         _flowLayout.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, 30);
-        _contentView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:_flowLayout];
+        if (SCREEN_HEIGHT == 812) {
+             _contentView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 88) collectionViewLayout:_flowLayout];
+        } else {
+            _contentView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:_flowLayout];
+        }
         _contentView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
         
         _contentView.showsVerticalScrollIndicator = NO;

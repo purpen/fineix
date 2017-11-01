@@ -38,6 +38,8 @@
 /**  */
 @property (nonatomic, strong) NSArray *modelAry;
 @property(nonatomic,strong) ShareViewController *shareVC;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewBottomSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopSpace;
 
 @end
 
@@ -79,7 +81,6 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
                                                                                              } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
-            NSLog(@"asdsadas  %@", result);
             self.model = [THNCuXiaoDetalModel mj_objectWithKeyValues:result[@"data"]];
             
             self.topView.model = self.model;
@@ -97,6 +98,10 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if (SCREEN_HEIGHT == 812) {
+        self.viewBottomSpace.constant = 20;
+        self.tableViewTopSpace.constant += 24;
+    }
 }
 
 -(ShareViewController *)shareVC{

@@ -289,7 +289,11 @@ static NSInteger const saveTime = 30 * 24 * 60;
 #pragma mark Nav视图
 - (UIView *)navView {
     if (!_navView) {
-        _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
+        if (SCREEN_HEIGHT == 812) {
+            _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 88)];
+        } else {
+           _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
+        }
         _navView.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
     }
     return _navView;

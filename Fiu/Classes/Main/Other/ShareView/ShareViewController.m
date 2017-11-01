@@ -18,12 +18,18 @@
 {
     BOOL _flag;
 }
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelBtnBottomSpace;
 @end
 
 @implementation ShareViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (SCREEN_HEIGHT == 812) {
+        self.cancelBtnBottomSpace.constant += 20;
+    }
+    
     _flag = NO;
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.3];

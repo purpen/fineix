@@ -35,6 +35,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
 @property (weak, nonatomic) IBOutlet UILabel *memoryLabel;
 @property (weak, nonatomic) IBOutlet UIView *quitBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *resetPsdViewTopSpace;
 
 @end
 static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
@@ -43,6 +44,11 @@ static NSString *const logOut = @"/auth/logout";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (SCREEN_HEIGHT == 812) {
+        self.resetPsdViewTopSpace.constant += 24;
+    }
+    
     self.quitBtn.layer.masksToBounds = YES;
     self.quitBtn.layer.cornerRadius = 3;
     self.view.backgroundColor = [UIColor colorWithHexString:grayLineColor];
