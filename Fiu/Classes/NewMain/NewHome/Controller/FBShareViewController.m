@@ -152,7 +152,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 #pragma mark - 分享场景信息视图
 - (UIView *)shareView {
     if (!_shareView) {
-        _shareView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _shareView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.topView.frame), SCREEN_WIDTH, SCREEN_WIDTH * 1.77)];
         [_shareView addSubview:self.shareTopView];
     }
     return _shareView;
@@ -160,28 +160,28 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 
 - (ShareStyleTopView *)shareTopView {
     if (!_shareTopView) {
-        _shareTopView = [[ShareStyleTopView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _shareTopView = [[ShareStyleTopView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 1.77)];
     }
     return _shareTopView;
 }
 
 - (ShareStyleViewOne *)styleOneView {
     if (!_styleOneView) {
-        _styleOneView = [[ShareStyleViewOne alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _styleOneView = [[ShareStyleViewOne alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 1.77)];
     }
     return _styleOneView;
 }
 
 - (ShareStyleViewTwo *)styleTwoView {
     if (!_styleTwoView) {
-        _styleTwoView = [[ShareStyleViewTwo alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _styleTwoView = [[ShareStyleViewTwo alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 1.77)];
     }
     return _styleTwoView;
 }
 
 - (ShareStyleViewThree *)styleThreeView {
     if (!_styleThreeView) {
-        _styleThreeView = [[ShareStyleViewThree alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _styleThreeView = [[ShareStyleViewThree alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 1.77)];
     }
     return _styleThreeView;
 }
@@ -194,7 +194,8 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
         flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 70)/4, SCREEN_HEIGHT *0.165);
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 20, 0, 20);
         
-        _styleView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT *0.835, SCREEN_WIDTH, SCREEN_HEIGHT *0.165) collectionViewLayout:flowLayout];
+        CGFloat bottomHeight = Is_iPhoneX ? 34 : 0;
+        _styleView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT * 0.835 - bottomHeight, SCREEN_WIDTH, SCREEN_HEIGHT *0.165) collectionViewLayout:flowLayout];
         _styleView.showsHorizontalScrollIndicator = NO;
         _styleView.delegate = self;
         _styleView.dataSource = self;
@@ -251,7 +252,8 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 #pragma mark - 顶部视图
 - (UIView *)topView {
     if (!_topView) {
-        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        CGFloat topViewHeight = Is_iPhoneX ? 88 : 44;
+        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topViewHeight)];
         _topView.backgroundColor = [UIColor colorWithHexString:@"#222222" alpha:1];
         
         [_topView addSubview:self.closeBtn];
@@ -263,7 +265,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 #pragma mark - 关闭
 - (UIButton *)closeBtn {
     if (!_closeBtn) {
-        _closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+        _closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - 44, 44, 44)];
         [_closeBtn setImage:[UIImage imageNamed:@"icon_cancel"] forState:(UIControlStateNormal)];
         [_closeBtn addTarget:self action:@selector(closeItemSelected) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -277,7 +279,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 #pragma mark - 分享
 - (UIButton *)shareBtn {
     if (!_shareBtn) {
-        _shareBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 0, 44, 44)];
+        _shareBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, CGRectGetMaxY(self.topView.frame) - 44, 44, 44)];
         [_shareBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         [_shareBtn setImage:[UIImage imageNamed:@"Share_white"] forState:(UIControlStateNormal)];
         [_shareBtn addTarget:self action:@selector(shareItemSelected) forControlEvents:(UIControlEventTouchUpInside)];

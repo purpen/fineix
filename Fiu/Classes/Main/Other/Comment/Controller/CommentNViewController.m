@@ -9,6 +9,7 @@
 #import "CommentNViewController.h"
 #import "CommentDataTableViewCell.h"
 #import "CommentRow.h"
+#import "THNMacro.h"
 
 static NSString *const URLSceneComment = @"/comment/getlist";
 static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
@@ -18,9 +19,9 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
     NSString    *   _userLoginID;
 }
 
-@pro_strong NSMutableArray      *   commentListMarr;    //  评论列表
-@pro_strong NSMutableArray      *   userId;             //  被回复人id
-@pro_strong NSMutableArray      *   replyId;            //  被回复评论id
+@property (nonatomic, strong) NSMutableArray      *   commentListMarr;    //  评论列表
+@property (nonatomic, strong) NSMutableArray      *   userId;             //  被回复人id
+@property (nonatomic, strong) NSMutableArray      *   replyId;            //  被回复评论id
 
 @end
 
@@ -44,6 +45,15 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
     [self setCommentViewUI];
     
 }
+
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.commentTabel.frame = CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 170);
+    }
+}
+
 
 #pragma mark - 网络请求 
 #pragma mark 请求评论
@@ -182,7 +192,7 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
     [self.view addSubview:self.writeComment];
     [_writeComment mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 49));
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+        make.top.equalTo(_commentTabel.mas_bottom).with.offset(0);
         make.left.equalTo(self.view.mas_left).with.offset(0);
     }];
 }

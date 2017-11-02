@@ -13,18 +13,18 @@
 
 @interface CommentNViewController : FBViewController <UITableViewDelegate, UITableViewDataSource>
 
-@pro_strong FBRequest               *   sceneCommentRequest;
-@pro_strong FBRequest               *   sendCommentRequest;
-@pro_strong FBRequest               *   replyCommentRequest;
-@pro_assign NSInteger                   currentpageNum;
-@pro_assign NSInteger                   totalPageNum;
-@pro_strong NSString                *   targetId;
+@property (nonatomic, strong) FBRequest               *   sceneCommentRequest;
+@property (nonatomic, strong) FBRequest               *   sendCommentRequest;
+@property (nonatomic, strong) FBRequest               *   replyCommentRequest;
+@property (nonatomic, assign) NSInteger                   currentpageNum;
+@property (nonatomic, assign) NSInteger                   totalPageNum;
+@property (nonatomic, strong) NSString                *   targetId;
 
-@pro_strong UITableView             *   commentTabel;   //  评论视图
-@pro_strong WriteCommentView        *   writeComment;   //  填写评论
-@pro_strong NSString                *   sceneUserId;    //  场景创建人id
-@pro_strong NSString                *   tagetUserId;    //  被回复的人id
-@pro_strong NSString                *   replyCommentId; //  被回复的评论id
-@pro_strong UILabel                 *   promptLab;
+@property (nonatomic, strong) UITableView             *   commentTabel;   //  评论视图
+@property (nonatomic, strong) WriteCommentView        *   writeComment;   //  填写评论
+@property (nonatomic, strong) NSString                *   sceneUserId;    //  场景创建人id
+@property (nonatomic, strong) NSString                *   tagetUserId;    //  被回复的人id
+@property (nonatomic, strong) NSString                *   replyCommentId; //  被回复的评论id
+@property (nonatomic, strong) UILabel                 *   promptLab;
 
 @end

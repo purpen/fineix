@@ -42,6 +42,14 @@ static NSString *const URLMallSubject = @"/scene_subject/getlist";
     [self thn_networkSubjectListData];
 }
 
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.mallList.frame = CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - (self.isIndex == 0 ? 88 : 190));
+    }
+}
+
 #pragma mark 商品专题列表
 - (void)thn_networkSubjectListData {
     [SVProgressHUD show];
