@@ -44,6 +44,8 @@
  */
 @property(nonatomic,copy) NSString *formalUrl;
 
+@property (nonatomic, assign) CGFloat screenHeight;
+
 
 /**
  *  是否登录

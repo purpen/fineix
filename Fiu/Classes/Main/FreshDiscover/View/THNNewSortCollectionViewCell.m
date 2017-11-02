@@ -29,10 +29,18 @@
         //        self.imageV.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:self.imageV];
         self.imageV.layer.masksToBounds = YES;
-        self.imageV.layer.cornerRadius = 30*SCREEN_HEIGHT/667.0;
+        if (SCREEN_HEIGHT == 812) {
+            self.imageV.layer.cornerRadius = 30;
+        } else {
+            self.imageV.layer.cornerRadius = 30*SCREEN_HEIGHT/667.0;
+        }
         [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.right.mas_equalTo(self.contentView).mas_offset(0);
-            make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(-20*SCREEN_HEIGHT/667.0);
+            if (SCREEN_HEIGHT == 812) {
+                make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(-20);
+            }else{
+                make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(-20*SCREEN_HEIGHT/667.0);
+            }
         }];
         
         self.textLabel = [[UILabel alloc] init];
@@ -40,13 +48,21 @@
         if (SCREEN_HEIGHT<667.0) {
             self.textLabel.font = [UIFont systemFontOfSize:10];
         } else if (SCREEN_HEIGHT > 667.0) {
-            self.textLabel.font = [UIFont systemFontOfSize:12];
+            if (SCREEN_HEIGHT == 812) {
+                self.textLabel.font = [UIFont systemFontOfSize:11];
+            } else {
+                self.textLabel.font = [UIFont systemFontOfSize:12];
+            }
         }
         self.textLabel.textAlignment = NSTextAlignmentCenter;
         self.textLabel.textColor = [UIColor whiteColor];
         [self.imageV addSubview:self.textLabel];
         [_textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.imageV.mas_top).mas_offset(37*SCREEN_HEIGHT/667.0);
+            if (SCREEN_HEIGHT == 812) {
+                make.top.mas_equalTo(self.imageV.mas_top).mas_offset(37);
+            } else {
+                make.top.mas_equalTo(self.imageV.mas_top).mas_offset(37*SCREEN_HEIGHT/667.0);
+            }
             make.centerX.mas_equalTo(self.imageV.mas_centerX).mas_offset(0);
         }];
         

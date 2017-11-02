@@ -29,12 +29,20 @@
 //        self.imageV.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:self.imageV];
         self.imageV.layer.masksToBounds = YES;
-        self.imageV.layer.cornerRadius = 30*SCREEN_HEIGHT/667.0;
+        if (SCREEN_HEIGHT == 812) {
+            self.imageV.layer.cornerRadius = 30;
+        } else {
+            self.imageV.layer.cornerRadius = 30*SCREEN_HEIGHT/667.0;
+        }
         self.imageV.layer.borderColor = [UIColor colorWithWhite:0 alpha:0.1].CGColor;
         self.imageV.layer.borderWidth = 0.5;
         [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.right.mas_equalTo(self.contentView).mas_offset(0);
-            make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(-40*SCREEN_HEIGHT/667.0);
+            if (SCREEN_HEIGHT == 812) {
+                 make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(-40);
+            } else {
+                make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(-40*SCREEN_HEIGHT/667.0);
+            }
         }];
         
         self.textLabel = [[UILabel alloc] init];
@@ -43,7 +51,11 @@
         self.textLabel.textColor = [UIColor colorWithHexString:@"#727272"];
         [self.contentView addSubview:self.textLabel];
         [_textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.imageV.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);
+            if (SCREEN_HEIGHT == 812) {
+                make.top.mas_equalTo(self.imageV.mas_bottom).mas_offset(5);
+            } else {
+                make.top.mas_equalTo(self.imageV.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);
+            }
             make.centerX.mas_equalTo(self.contentView.mas_centerX).mas_offset(0);
         }];
         

@@ -101,7 +101,6 @@
 }
 
 -(void)signleTap1:(UITapGestureRecognizer*)sender{
-    //跳转到我的主页的情景的界面
     THNUserData *userdata = [[THNUserData findAll] lastObject];
     HomePageViewController *myHomeVC = [[HomePageViewController alloc] init];
     myHomeVC.userId = userdata.userId;
@@ -111,7 +110,6 @@
 }
 
 -(void)signleTap2:(UITapGestureRecognizer*)sender{
-    //跳转到我的主页的情景的界面
     THNUserData *userdata = [[THNUserData findAll] lastObject];
     MyPageFocusOnViewController *view = [[MyPageFocusOnViewController alloc] init];
     view.userId = userdata.userId;
@@ -119,7 +117,6 @@
 }
 
 -(void)signleTap3:(UITapGestureRecognizer*)sender{
-    //跳转到我的主页的情景的界面
     MyFansViewController *view = [[MyFansViewController alloc] init];
     THNUserData *userdata = [[THNUserData findAll] lastObject];
     view.userId = userdata.userId;
@@ -232,7 +229,12 @@
     if (!_myCollectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         
-        _myCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, -54, SCREEN_WIDTH, SCREEN_HEIGHT+54) collectionViewLayout:layout];
+        if (Is_iPhoneX) {
+            _myCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, -54-17, SCREEN_WIDTH, SCREEN_HEIGHT+54) collectionViewLayout:layout];
+        } else {
+            _myCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, -54, SCREEN_WIDTH, SCREEN_HEIGHT+54) collectionViewLayout:layout];
+        }
+        
         _myCollectionView.backgroundColor = [UIColor colorWithHexString:@"#f7f7f7"];
         _myCollectionView.showsVerticalScrollIndicator = NO;
         _myCollectionView.delegate = self;
@@ -385,7 +387,11 @@
         
     } else if (indexPath.section == 6) {
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell1" forIndexPath:indexPath];
-        self.botView.frame = CGRectMake(146/667.0*SCREEN_HEIGHT, 0, SCREEN_WIDTH, 44*3);
+        if (Is_iPhoneX) {
+            self.botView.frame = CGRectMake(223, 0, SCREEN_WIDTH, 44*3);
+        } else {
+            self.botView.frame = CGRectMake(146/667.0*self.screenHeight, 0, SCREEN_WIDTH, 44*3);
+        }
         [self.botView.welfareBtn addTarget:self action:@selector(welfareClick) forControlEvents:UIControlEventTouchUpInside];
         [self.botView.optionBtn addTarget:self action:@selector(optionBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self.botView.qiyeQingdingzhiBtn addTarget:self action:@selector(qiye) forControlEvents:UIControlEventTouchUpInside];
@@ -480,36 +486,69 @@
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            return CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH - 20);
+    if (SCREEN_HEIGHT == 812) {
+        if (indexPath.section == 0) {
+            if (indexPath.row == 0) {
+                return CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH - 20);
+            }
         }
-    }
-    if (indexPath.section == 1) {
-        if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
-            return CGSizeMake(SCREEN_WIDTH, 80/667.0*SCREEN_HEIGHT);
+        if (indexPath.section == 1) {
+            if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
+                return CGSizeMake(SCREEN_WIDTH, 80);
+            }
+            return CGSizeMake(SCREEN_WIDTH, 60);
         }
-        return CGSizeMake(SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
-    }
-    if (indexPath.section == 2) {
-        return CGSizeMake(SCREEN_WIDTH, 44/667.0*SCREEN_HEIGHT);
-    }
-    if (indexPath.section == 3) {
-        if ((long)[_userInfo.storageId integerValue] == 0) {
-            return CGSizeMake(SCREEN_WIDTH, 0.00001);
+        if (indexPath.section == 2) {
+            return CGSizeMake(SCREEN_WIDTH, 44);
         }
-        return CGSizeMake(SCREEN_WIDTH, 44/667.0*SCREEN_HEIGHT);
+        if (indexPath.section == 3) {
+            if ((long)[_userInfo.storageId integerValue] == 0) {
+                return CGSizeMake(SCREEN_WIDTH, 0.00001);
+            }
+            return CGSizeMake(SCREEN_WIDTH, 44);
+        }
+        if (indexPath.section == 4) {
+            return CGSizeMake(SCREEN_WIDTH, 120.5);
+        }
+        if (indexPath.section == 5) {
+            return CGSizeMake(SCREEN_WIDTH, (190 + 140));
+        }
+        if (indexPath.section == 6) {
+            return CGSizeMake(SCREEN_HEIGHT, 200);
+        }
+        return CGSizeMake(0, 0);
+    } else {
+        if (indexPath.section == 0) {
+            if (indexPath.row == 0) {
+                return CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH - 20);
+            }
+        }
+        if (indexPath.section == 1) {
+            if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
+                return CGSizeMake(SCREEN_WIDTH, 80/667.0*SCREEN_HEIGHT);
+            }
+            return CGSizeMake(SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
+        }
+        if (indexPath.section == 2) {
+            return CGSizeMake(SCREEN_WIDTH, 44/667.0*SCREEN_HEIGHT);
+        }
+        if (indexPath.section == 3) {
+            if ((long)[_userInfo.storageId integerValue] == 0) {
+                return CGSizeMake(SCREEN_WIDTH, 0.00001);
+            }
+            return CGSizeMake(SCREEN_WIDTH, 44/667.0*SCREEN_HEIGHT);
+        }
+        if (indexPath.section == 4) {
+            return CGSizeMake(SCREEN_WIDTH, 120.5/667.0*SCREEN_HEIGHT);
+        }
+        if (indexPath.section == 5) {
+            return CGSizeMake(SCREEN_WIDTH, (190 + 140)/667.0*SCREEN_HEIGHT);
+        }
+        if (indexPath.section == 6) {
+            return CGSizeMake(SCREEN_HEIGHT, 200);
+        }
+        return CGSizeMake(0, 0);
     }
-    if (indexPath.section == 4) {
-        return CGSizeMake(SCREEN_WIDTH, 120.5/667.0*SCREEN_HEIGHT);
-    }
-    if (indexPath.section == 5) {
-        return CGSizeMake(SCREEN_WIDTH, (190 + 140)/667.0*SCREEN_HEIGHT);
-    }
-    if (indexPath.section == 6) {
-        return CGSizeMake(SCREEN_HEIGHT, 200);
-    }
-    return CGSizeMake(0, 0);
 }
 
 

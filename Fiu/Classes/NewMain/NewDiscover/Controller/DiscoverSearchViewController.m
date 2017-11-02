@@ -89,7 +89,11 @@
 - (FBSegmentView *)menuView {
     if (!_menuView) {
         NSArray *titleArr = @[NSLocalizedString(@"searchScene", nil), NSLocalizedString(@"searchUser", nil)];
-        _menuView = [[FBSegmentView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        if (Is_iPhoneX) {
+            _menuView = [[FBSegmentView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, 44)];
+        } else {
+            _menuView = [[FBSegmentView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        }
         _menuView.delegate = self;
         [_menuView set_menuItemTitle:titleArr];
         [_menuView set_showBottomLine:YES];

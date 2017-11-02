@@ -128,7 +128,11 @@ static NSString *searchCellId = @"search";
 
 -(UITableView *)myTbaleView{
     if (!_myTbaleView) {
-        _myTbaleView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
+        if (Is_iPhoneX) {
+            _myTbaleView = [[UITableView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT-88) style:UITableViewStyleGrouped];
+        }else {
+            _myTbaleView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
+        }
         
         SearchView *searchView = [[SearchView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
         searchView.searchTF.delegate = self;
@@ -161,7 +165,11 @@ static NSString *searchCellId = @"search";
         self.searchView.searchTF.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width * 0.5 - 40, 35);
         self.searchView.searchTF.searchIcon.frame = CGRectMake([UIScreen mainScreen].bounds.size.width * 0.5 - 40 -16, 9.5, 16, 16);
         self.window = nil;
-        _myTbaleView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);
+        if (Is_iPhoneX) {
+            _myTbaleView.frame = CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT-88);
+        }else {
+            _myTbaleView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);
+        }
         CGRect frame = self.searchView.searchTF.frame;
         frame.size.width = SCREEN_WIDTH - 15 * 2;
         frame.size.height = 35;
@@ -178,7 +186,11 @@ static NSString *searchCellId = @"search";
 
 -(UITableView *)searchTableView{
     if (!_searchTableView) {
-        _searchTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+        if (Is_iPhoneX) {
+            _searchTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 24, SCREEN_WIDTH, SCREEN_HEIGHT-88) style:UITableViewStylePlain];
+        }else{
+            _searchTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+        }
         _searchTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _searchTableView.delegate = self;
         _searchTableView.dataSource = self;
@@ -198,10 +210,19 @@ static NSString *searchCellId = @"search";
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
 //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     self.searchView.backgroundColor = [UIColor blackColor];
-    UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
+    UIWindow *window;
+    if (Is_iPhoneX) {
+        window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT-88)];
+    } else {
+        window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
+    }
     [UIView animateWithDuration:0.25 animations:^{
         
-        self.navView.y = -64;
+        if (Is_iPhoneX) {
+            self.navView.y = -88;
+        } else {
+            self.navView.y = -64;
+        }
         _myTbaleView.frame = CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT);
         
         
@@ -458,7 +479,11 @@ static NSString *searchCellId = @"search";
             self.searchView.searchTF.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width * 0.5 - 40, 35);
             self.searchView.searchTF.searchIcon.frame = CGRectMake([UIScreen mainScreen].bounds.size.width * 0.5 - 40 -16, 9.5, 16, 16);
             self.window.hidden = YES;
-            _myTbaleView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);
+            if (Is_iPhoneX) {
+                _myTbaleView.frame = CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT-88);
+            }else {
+                _myTbaleView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);
+            }
             CGRect frame = self.searchView.searchTF.frame;
             frame.size.width = SCREEN_WIDTH - 15 * 2;
             self.searchView.searchTF.frame = frame;

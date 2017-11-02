@@ -25,7 +25,11 @@
 
 -(UIWebView *)contentWebView{
     if (!_contentWebView) {
-        _contentWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
+        if (Is_iPhoneX) {
+            _contentWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT-88)];
+        } else {
+            _contentWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
+        }
     }
     return _contentWebView;
 }

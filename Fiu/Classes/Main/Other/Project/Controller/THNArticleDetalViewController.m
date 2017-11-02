@@ -37,6 +37,8 @@
 @property (nonatomic, strong) THNArticleDetalModel *model;
 @property (weak, nonatomic) IBOutlet UIButton *lookBtn;
 @property(nonatomic,strong) ShareViewController *shareVC;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewBottomSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentWebViewTopSpace;
 
 @end
 
@@ -47,6 +49,11 @@
     
     [self requestUrl];
     [self requestGetDataFromeNet];
+    
+    if (SCREEN_HEIGHT == 812) {
+        self.viewBottomSpace.constant += 20;
+        self.contentWebViewTopSpace.constant += 24;
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{

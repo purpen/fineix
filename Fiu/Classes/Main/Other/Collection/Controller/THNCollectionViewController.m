@@ -46,7 +46,11 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     UIScrollView *contentView = [[UIScrollView alloc] init];
-    contentView.frame = CGRectMake(0, 64 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44);
+    if (SCREEN_HEIGHT == 812) {
+        contentView.frame = CGRectMake(0, 88 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 88 - 44);
+    } else {
+        contentView.frame = CGRectMake(0, 64 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44);
+    }
     contentView.delegate = self;
     contentView.pagingEnabled = YES;
     [self.view insertSubview:contentView atIndex:0];
@@ -67,7 +71,11 @@
     titlesView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
     titlesView.width = SCREEN_WIDTH;
     titlesView.height = 44;
-    titlesView.y = 64;
+    if (SCREEN_HEIGHT == 812) {
+        titlesView.y = 88;
+    } else {
+        titlesView.y = 64;
+    }
     [self.view addSubview:titlesView];
     self.titlesView = titlesView;
     

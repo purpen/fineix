@@ -131,6 +131,16 @@ static NSInteger const saveTime = 30 * 24 * 60;
     }
 }
 
+-(CGFloat)screenHeight{
+    CGFloat n = 0;
+    if (SCREEN_HEIGHT == 812) {
+        n = 667;
+    } else {
+        n = SCREEN_HEIGHT;
+    }
+    return n;
+}
+
 #pragma mark - 轮播图类型跳转
 - (void)thn_openSubjectTypeController:(UINavigationController *)nav type:(NSInteger)type subjectId:(NSString *)idx {
     if (type == 1) {
@@ -289,7 +299,11 @@ static NSInteger const saveTime = 30 * 24 * 60;
 #pragma mark Nav视图
 - (UIView *)navView {
     if (!_navView) {
-        _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
+        if (SCREEN_HEIGHT == 812) {
+            _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 88)];
+        } else {
+           _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
+        }
         _navView.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
     }
     return _navView;

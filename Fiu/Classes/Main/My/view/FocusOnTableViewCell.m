@@ -13,6 +13,12 @@
 #import "TalentView.h"
 #import "TipNumberView.h"
 
+@interface FocusOnTableViewCell()
+
+@property (nonatomic, assign) CGFloat screenHeight;
+
+@end
+
 @implementation FocusOnTableViewCell
 
 - (void)awakeFromNib {
@@ -24,7 +30,7 @@
     if (!_alertTipviewNum) {
         _alertTipviewNum = [TipNumberView getTipNumView];
         _alertTipviewNum.layer.masksToBounds = YES;
-        _alertTipviewNum.layer.cornerRadius = 5*0.5/667.0*SCREEN_HEIGHT;
+        _alertTipviewNum.layer.cornerRadius = 5*0.5/667.0*SCREEN_HEIGHT ;
     }
     return _alertTipviewNum;
 }
@@ -37,42 +43,50 @@
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        
+        
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
         
         
         [self.contentView addSubview:self.headImageView];
         [_headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(32/667.0*SCREEN_HEIGHT,32/667.0*SCREEN_HEIGHT));
+            make.size.mas_equalTo(CGSizeMake(32/667.0*SCREEN_HEIGHT ,32/667.0*SCREEN_HEIGHT ));
             make.centerY.mas_equalTo(self.mas_centerY);
-            make.left.mas_equalTo(self.mas_left).with.offset(15/667.0*SCREEN_HEIGHT);
+            make.left.mas_equalTo(self.mas_left).with.offset(15/667.0*SCREEN_HEIGHT );
         }];
         
         [self.contentView addSubview:self.talentView];
         [_talentView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(10/667.0*SCREEN_HEIGHT, 10/667.0*SCREEN_HEIGHT));
+            make.size.mas_equalTo(CGSizeMake(10/667.0*SCREEN_HEIGHT , 10/667.0*SCREEN_HEIGHT ));
             make.right.mas_equalTo(_headImageView.mas_right).offset(0);
             make.bottom.mas_equalTo(_headImageView.mas_bottom).offset(0);
         }];
         
         [self.contentView addSubview:self.focusOnBtn];
         [_focusOnBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(72/667.0*SCREEN_HEIGHT, 26/667.0*SCREEN_HEIGHT));
-            make.centerY.mas_equalTo(self.mas_centerY);
-            make.right.mas_equalTo(self.mas_right).with.offset(-15/667.0*SCREEN_HEIGHT);
+            if (SCREEN_HEIGHT == 812) {
+                make.size.mas_equalTo(CGSizeMake(72 , 26));
+                make.centerY.mas_equalTo(self.mas_centerY);
+                make.right.mas_equalTo(self.mas_right).with.offset(-15);
+            } else {
+                make.size.mas_equalTo(CGSizeMake(72/667.0*SCREEN_HEIGHT , 26/667.0*SCREEN_HEIGHT ));
+                make.centerY.mas_equalTo(self.mas_centerY);
+                make.right.mas_equalTo(self.mas_right).with.offset(-15/667.0*SCREEN_HEIGHT );
+            }
         }];
         
         [self.contentView addSubview:self.nickNameLabel];
         [_nickNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(_headImageView.mas_right).with.offset(9/667.0*SCREEN_HEIGHT);
-            make.top.mas_equalTo(self.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
+            make.left.mas_equalTo(_headImageView.mas_right).with.offset(9/667.0*SCREEN_HEIGHT );
+            make.top.mas_equalTo(self.mas_top).with.offset(13/667.0*SCREEN_HEIGHT );
             make.right.mas_lessThanOrEqualTo(200);
         }];
         
         [self.contentView addSubview:self.summaryLabel];
         [_summaryLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(_headImageView.mas_right).with.offset(9/667.0*SCREEN_HEIGHT);
-            make.top.mas_equalTo(_nickNameLabel.mas_bottom).with.offset(5/667.0*SCREEN_HEIGHT);
+            make.left.mas_equalTo(_headImageView.mas_right).with.offset(9/667.0*SCREEN_HEIGHT );
+            make.top.mas_equalTo(_nickNameLabel.mas_bottom).with.offset(5/667.0*SCREEN_HEIGHT );
             make.right.mas_equalTo(_focusOnBtn.mas_left).with.offset(-5);
             make.height.mas_equalTo(10);
         }];
@@ -88,7 +102,7 @@
         [self.contentView addSubview:self.alertTipviewNum];
         self.alertTipviewNum.tipNumLabel.text = @"";
         [self.alertTipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(5/667.0*SCREEN_HEIGHT, 5/667.0*SCREEN_HEIGHT));
+            make.size.mas_equalTo(CGSizeMake(5/667.0*SCREEN_HEIGHT , 5/667.0*SCREEN_HEIGHT ));
             make.left.mas_equalTo(self.nickNameLabel.mas_right).with.offset(5);
             make.centerY.mas_equalTo(self.nickNameLabel.mas_centerY);
         }];
@@ -174,7 +188,7 @@
     if (!_headImageView) {
         _headImageView = [[UIImageView alloc] init];
         _headImageView.layer.masksToBounds = YES;
-        _headImageView.layer.cornerRadius = 16/667.0*SCREEN_HEIGHT;
+        _headImageView.layer.cornerRadius = 16/667.0*SCREEN_HEIGHT ;
         _headImageView.layer.borderWidth = 1.0;
         _headImageView.layer.borderColor = [UIColor colorWithHexString:lineGrayColor].CGColor;
     }

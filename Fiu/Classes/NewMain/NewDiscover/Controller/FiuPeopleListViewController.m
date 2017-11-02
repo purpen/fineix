@@ -59,7 +59,11 @@ static NSString *const FiuPeople = @"/user/activity_user";
 #pragma makr - 用户排行列表
 - (UITableView *)userListTable {
     if (!_userListTable) {
-        _userListTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStylePlain)];
+        if (SCREEN_HEIGHT == 812) {
+            _userListTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 88) style:(UITableViewStylePlain)];
+        } else {
+            _userListTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStylePlain)];
+        }
         _userListTable.delegate = self;
         _userListTable.dataSource = self;
         _userListTable.tableFooterView = [UIView new];

@@ -55,7 +55,11 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     UIScrollView *contentView = [[UIScrollView alloc] init];
-    contentView.frame = CGRectMake(0, 64 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44);
+    if (SCREEN_HEIGHT == 812) {
+        contentView.frame = CGRectMake(0, 88 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 88 - 44);
+    } else {
+        contentView.frame = CGRectMake(0, 64 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44);
+    }
     contentView.delegate = self;
     contentView.pagingEnabled = YES;
     [self.view insertSubview:contentView atIndex:0];
@@ -68,7 +72,11 @@
 
 -(UIView *)lineView{
     if (!_lineView) {
-        _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 44.5 + 64, SCREEN_WIDTH, 0.5)];
+        if (SCREEN_HEIGHT == 812) {
+            _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 44.5 + 88, SCREEN_WIDTH, 0.5)];
+        } else {
+            _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 44.5 + 64, SCREEN_WIDTH, 0.5)];
+        }
         _lineView.backgroundColor = [UIColor colorWithHexString:@"#E2E2E2" alpha:0.5];
     }
     return _lineView;

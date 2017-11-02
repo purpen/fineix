@@ -206,8 +206,13 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
         flowLayou.sectionInset = UIEdgeInsetsMake(15, 15, 15, 15);
         flowLayou.scrollDirection = UICollectionViewScrollDirectionVertical;
         
-        _sceneList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 108)
-                                        collectionViewLayout:flowLayou];
+        if (SCREEN_HEIGHT == 812) {
+            _sceneList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 108+24, SCREEN_WIDTH, SCREEN_HEIGHT - 108-24)
+                                            collectionViewLayout:flowLayou];
+        }else {
+            _sceneList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 108)
+                                            collectionViewLayout:flowLayou];
+        }
         _sceneList.showsVerticalScrollIndicator = NO;
         _sceneList.delegate = self;
         _sceneList.dataSource = self;
@@ -252,7 +257,11 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 - (FBSegmentView *)menuView {
     if (!_menuView) {
         NSArray *titleArr = @[NSLocalizedString(@"fineScene", nil), NSLocalizedString(@"newScene", nil)];
-        _menuView = [[FBSegmentView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        if (SCREEN_HEIGHT == 812) {
+            _menuView = [[FBSegmentView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, 44)];
+        } else {
+            _menuView = [[FBSegmentView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        }
         _menuView.delegate = self;
         [_menuView set_menuItemTitle:titleArr];
         [_menuView set_showBottomLine:YES];

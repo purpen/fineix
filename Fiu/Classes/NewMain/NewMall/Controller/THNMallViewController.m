@@ -105,7 +105,11 @@ static NSString *const URLCategory = @"/category/getlist";
 #pragma mark 分类导航栏
 - (FBMenuView *)menuView {
     if (!_menuView) {
-        _menuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        if (Is_iPhoneX) {
+            _menuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, 44)];
+        }else {
+            _menuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        }
         _menuView.delegate = self;
         _menuView.defaultColor = @"#666666";
     }

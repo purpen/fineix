@@ -86,7 +86,11 @@ static NSString *const URLApplyRefund   = @"/shopping/apply_product_refund";
 
 - (THNApplyRefundView *)applyView {
     if (!_applyView) {
-        _applyView = [[THNApplyRefundView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
+        if (Is_iPhoneX) {
+            _applyView = [[THNApplyRefundView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 108-24)];
+        }else {
+            _applyView = [[THNApplyRefundView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
+        }
         [_applyView thn_setShowType:self.type];
         _applyView.delegate = self;
     }

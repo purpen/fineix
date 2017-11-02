@@ -136,7 +136,11 @@
 #pragma mark 视图
 - (UIView *)payTheWayView {
     if (!_payTheWayView) {
-        _payTheWayView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
+        if (Is_iPhoneX) {
+            _payTheWayView = [[UIView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT-88)];
+        } else {
+            _payTheWayView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
+        }
         _payTheWayView.backgroundColor = [UIColor colorWithHexString:@"#F1F1F1" alpha:1];
         [_payTheWayView addSubview:self.okPayBtn];
         [_okPayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
