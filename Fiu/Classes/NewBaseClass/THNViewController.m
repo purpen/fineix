@@ -405,7 +405,6 @@ static NSInteger const saveTime = 30 * 24 * 60;
         DiscoverSearchViewController *discoverVC = [[DiscoverSearchViewController alloc] init];
         [self.navigationController pushViewController:discoverVC animated:YES];
     } else if (_searchType == 2) {
-        
         MallSearchViewController *mallVC = [[MallSearchViewController alloc] init];
         [self.navigationController pushViewController:mallVC animated:YES];
     }

@@ -292,7 +292,7 @@ static NSInteger const saveTime = 30 * 24 * 60;
         [self.navView addSubview:self.navBackBtn];
         [_navBackBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(44, 44));
-            make.left.equalTo(_navView.mas_left).with.offset(20);
+            make.left.equalTo(_navView.mas_left).with.offset(0);
             make.bottom.equalTo(_navView.mas_bottom).with.offset(0);
         }];
     }
@@ -315,7 +315,7 @@ static NSInteger const saveTime = 30 * 24 * 60;
         [self.navView addSubview:self.leftBtn];
         [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(44, 44));
-            make.left.equalTo(_navView.mas_left).with.offset(10);
+            make.left.equalTo(_navView.mas_left).with.offset(0);
             make.bottom.equalTo(_navView.mas_bottom).with.offset(0);
         }];
         
@@ -324,7 +324,7 @@ static NSInteger const saveTime = 30 * 24 * 60;
         [self.view addSubview:self.leftBtn];
         [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(44, 44));
-            make.left.equalTo(self.view.mas_left).with.offset(10);
+            make.left.equalTo(self.view.mas_left).with.offset(0);
             make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
         }];
     }

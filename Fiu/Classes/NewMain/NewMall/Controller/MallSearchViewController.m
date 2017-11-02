@@ -32,6 +32,16 @@
     [self setSearchVcUI];
 }
 
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.searchView.frame = CGRectMake(0, 44, SCREEN_WIDTH, 44);
+        self.menuView.frame = CGRectMake(0, 88, SCREEN_WIDTH, 44);
+        self.resultsView.frame = CGRectMake(0, 132, SCREEN_WIDTH, SCREEN_HEIGHT - 132);
+    }
+}
+
 #pragma mark - 设置视图UI
 - (void)setSearchVcUI {
     [self.view addSubview:self.menuView];
@@ -142,6 +152,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent)];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+    self.navBackBtn.hidden = YES;
     [self.navView addSubview:self.searchView];
     self.navLine.hidden = YES;
 }
