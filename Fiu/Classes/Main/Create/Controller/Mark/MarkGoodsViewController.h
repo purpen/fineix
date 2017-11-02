@@ -16,20 +16,20 @@ typedef void(^GetImgBlock)(NSString * imgUrl, NSString * title, NSString * price
 
 @interface MarkGoodsViewController : FBPictureViewController <FBSearchDelegate, FBMenuViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
-@pro_strong FBRequest               *   markGoodsRequest;
-@pro_strong FBRequest               *   goodsDataRequest;
-@pro_strong FBRequest               *   searchRequest;
-@pro_strong FBRequest               *   getImgRequest;
-@pro_assign NSInteger                   currentpageNum;
-@pro_assign NSInteger                   totalPageNum;
-@pro_assign NSInteger                   searchCurrentpageNum;
-@pro_assign NSInteger                   searchTotalPageNum;
+@property (nonatomic, strong) FBRequest               *   markGoodsRequest;
+@property (nonatomic, strong) FBRequest               *   goodsDataRequest;
+@property (nonatomic, strong) FBRequest               *   searchRequest;
+@property (nonatomic, strong) FBRequest               *   getImgRequest;
+@property (nonatomic, assign) NSInteger                   currentpageNum;
+@property (nonatomic, assign) NSInteger                   totalPageNum;
+@property (nonatomic, assign) NSInteger                   searchCurrentpageNum;
+@property (nonatomic, assign) NSInteger                   searchTotalPageNum;
 
-@pro_strong UICollectionView        *   searchListView;
-@pro_strong UICollectionView        *   goodsListView;          //  商品列表
-@pro_strong FBMenuView              *   categoryMenuView;       //  滑动导航栏
-@pro_strong FBSearchView            *   searchGoods;            //  搜索框
+@property (nonatomic, strong) UICollectionView        *   searchListView;
+@property (nonatomic, strong) UICollectionView        *   goodsListView;          //  商品列表
+@property (nonatomic, strong) FBMenuView              *   categoryMenuView;       //  滑动导航栏
+@property (nonatomic, strong) FBSearchView            *   searchGoods;            //  搜索框
 
-@pro_strong GetImgBlock getImgBlock;
+@property (nonatomic, strong) GetImgBlock getImgBlock;
 
 @end

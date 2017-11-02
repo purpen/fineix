@@ -34,6 +34,15 @@ static NSString *const recordCellId = @"THNWithdrawRecordTableViewCellId";
     [self setViewUI];
 }
 
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.recordHintView.frame = CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 40);
+        self.recordTable.frame = CGRectMake(0, 128, SCREEN_WIDTH, SCREEN_HEIGHT - 128);
+    }
+}
+
 #pragma mark - 请求交易列表数据
 - (void)thn_networkTradingRecordListData {
     [SVProgressHUD show];

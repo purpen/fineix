@@ -19,18 +19,16 @@
         [self addSubview:self.bgView];
         [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(self.bounds.size.width - 70, 30));
-            make.centerY.equalTo(self);
+            make.bottom.equalTo(self.mas_bottom).with.offset(-7);
             make.left.equalTo(self.mas_left).with.offset(15);
         }];
         
         [self addSubview:self.cancelBtn];
         [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(44, 44));
-            make.top.equalTo(self.mas_top).with.offset(0);
             make.right.equalTo(self.mas_right).with.offset(-5);
+            make.centerY.equalTo(_bgView);
         }];
-    
-//        [self addSubview:self.line];
     }
     
     return self;
@@ -97,19 +95,6 @@
     return YES;
 }
 
-//- (void)textFieldDidBeginEditing:(UITextField *)textField {
-//    [self changeSearchBoxFrame:YES];
-//}
-
-#pragma mark - 视图分割线
-- (UILabel *)line {
-    if (!_line) {
-        _line = [[UILabel alloc] initWithFrame:CGRectMake(0, 43, SCREEN_WIDTH, 1)];
-        _line.backgroundColor = [UIColor colorWithHexString:@"#F0F0F1" alpha:1];
-    }
-    return _line;
-}
-
 #pragma mark - 背景
 - (UIView *)bgView {
     if (!_bgView) {
@@ -136,37 +121,5 @@
     }
     return _bgView;
 }
-
-//#pragma mark - 改变输入框状态
-//- (void)changeSearchBoxFrame:(BOOL)type {
-//    if (type == YES) {
-//        [UIView animateWithDuration:.2 animations:^{
-//            [_bgView mas_updateConstraints:^(MASConstraintMaker *make) {
-//                make.width.mas_equalTo(self.bounds.size.width - 70);
-//            }];
-//            
-//            [_bgView layoutIfNeeded];
-//            
-//        } completion:^(BOOL finished) {
-//            [self addSubview:self.cancelBtn];
-//            [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.size.mas_equalTo(CGSizeMake(44, 44));
-//                make.top.equalTo(self.mas_top).with.offset(0);
-//                make.right.equalTo(self.mas_right).with.offset(-5);
-//            }];
-//        }];
-//    
-//    } else if (type == NO) {
-//        [_cancelBtn removeFromSuperview];
-//        [UIView animateWithDuration:.2 animations:^{
-//            [_bgView mas_updateConstraints:^(MASConstraintMaker *make) {
-//                make.width.mas_equalTo(self.bounds.size.width - 30);
-//            }];
-//            
-//            [_bgView layoutIfNeeded];
-//        }];
-//
-//    }
-//}
 
 @end

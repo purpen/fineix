@@ -30,15 +30,26 @@ static const CGFloat DEFAULT_VALUE = 50.0f;
 }
 
 - (void)setViewUI {
-    [self addSubview:self.valueTitle];
+    [self addSubview:self.navBackgroundView];
+    [self.navBackgroundView addSubview:self.valueTitle];
     [self addSubview:self.cancelBtn];
     [self addSubview:self.sureBtn];
     [self addSubview:self.sliderBack];
 }
 
+- (UIView *)navBackgroundView {
+    if (!_navBackgroundView) {
+        CGFloat valueTitleHeight = Is_iPhoneX ? 88 : 45;
+        _navBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, valueTitleHeight)];
+        _navBackgroundView.backgroundColor = [UIColor colorWithHexString:@"#222222"];
+    }
+    return _navBackgroundView;
+}
+
 - (UILabel *)valueTitle {
     if (!_valueTitle) {
-        _valueTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 45)];
+        CGFloat navTopHeight = Is_iPhoneX ? 44 : 0;
+        _valueTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, navTopHeight, SCREEN_WIDTH, 44)];
         _valueTitle.backgroundColor = [UIColor colorWithHexString:@"#222222"];
         _valueTitle.textAlignment = NSTextAlignmentCenter;
         _valueTitle.font = [UIFont systemFontOfSize:17];
@@ -49,7 +60,7 @@ static const CGFloat DEFAULT_VALUE = 50.0f;
 
 - (UIButton *)cancelBtn {
     if (!_cancelBtn) {
-        _cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 45, SCREEN_WIDTH/2, 45)];
+        _cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.sliderBack.frame), SCREEN_WIDTH/2, 45)];
         _cancelBtn.backgroundColor = [UIColor colorWithHexString:@"#25272A"];
         [_cancelBtn setImage:[UIImage imageNamed:@"icon_cancel"] forState:(UIControlStateNormal)];
         [_cancelBtn addTarget:self action:@selector(cancelBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -66,7 +77,7 @@ static const CGFloat DEFAULT_VALUE = 50.0f;
 
 - (UIButton *)sureBtn {
     if (!_sureBtn) {
-        _sureBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2, SCREEN_HEIGHT - 45, SCREEN_WIDTH/2, 45)];
+        _sureBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2, CGRectGetMaxY(self.sliderBack.frame), SCREEN_WIDTH/2, 45)];
         _sureBtn.backgroundColor = [UIColor colorWithHexString:@"#25272A"];
         [_sureBtn setImage:[UIImage imageNamed:@"icon_sure"] forState:(UIControlStateNormal)];
         [_sureBtn addTarget:self action:@selector(sureBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -83,7 +94,7 @@ static const CGFloat DEFAULT_VALUE = 50.0f;
 
 - (UIView *)sliderBack {
     if (!_sliderBack) {
-        _sliderBack = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 165 , SCREEN_WIDTH, 120)];
+        _sliderBack = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.bounds) - CGRectGetHeight(self.navBackgroundView.frame) - 120 , SCREEN_WIDTH, 120)];
         _sliderBack.backgroundColor = [UIColor colorWithHexString:@"#222222" alpha:1];
         
         [_sliderBack addSubview:self.valueSlider];

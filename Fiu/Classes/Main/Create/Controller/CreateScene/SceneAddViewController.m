@@ -48,14 +48,6 @@ static NSString *const DefaultFilter = @"original";
     _idx = 391;
 }
 
-- (void)viewSafeAreaInsetsDidChange {
-    [super viewSafeAreaInsetsDidChange];
-    
-    if (Is_iPhoneX) {
-        
-    }
-}
-
 - (NSArray *)footTitleArr {
     if (!_footTitleArr) {
         _footTitleArr = @[NSLocalizedString(@"marker", nil),
@@ -64,6 +56,18 @@ static NSString *const DefaultFilter = @"original";
                           ];
     }
     return _footTitleArr;
+}
+
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        CGFloat functionViewHeight = SCREEN_HEIGHT - (SCREEN_WIDTH + 88);
+        self.functionView.frame = CGRectMake(0, SCREEN_WIDTH, SCREEN_WIDTH, functionViewHeight);
+        self.bottomBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, functionViewHeight - 79);
+        self.filtersView.frame = CGRectMake(SCREEN_WIDTH, functionViewHeight - 199, SCREEN_WIDTH, 120);
+        self.adjustView.frame = CGRectMake(SCREEN_WIDTH *2, functionViewHeight - 199, SCREEN_WIDTH, 120);
+    }
 }
 
 #pragma mark - 应用第一次打开，加载操作指示图
@@ -119,17 +123,20 @@ static NSString *const DefaultFilter = @"original";
 - (void)setFiltersControllerUI {
     self.filtersImageView.image = self.editFilterImage.image = self.filtersImg;
     
+    CGFloat topNavHeight = Is_iPhoneX ? 88 : 45;
+    CGFloat bottomHeight = Is_iPhoneX ? -34 : 0;
+    
     [self.view addSubview:self.filtersImageView];
     [_filtersImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH));
-        make.top.equalTo(self.view.mas_top).with.offset(45);
+        make.top.equalTo(self.view.mas_top).with.offset(topNavHeight);
         make.centerX.equalTo(self.view);
     }];
     
     [self.view addSubview:self.footView];
     [_footView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 45));
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(bottomHeight);
         make.centerX.equalTo(self.view);
     }];
     
@@ -228,6 +235,7 @@ static NSString *const DefaultFilter = @"original";
 
 - (THNFilterValueView *)filterValueView {
     if (!_filterValueView) {
+        CGFloat filterValueViewHeight = Is_iPhoneX ? SCREEN_HEIGHT - 34 : SCREEN_HEIGHT;
         _filterValueView = [[THNFilterValueView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         _filterValueView.hidden = YES;
         _filterValueView.delegate = self;
@@ -281,7 +289,8 @@ static NSString *const DefaultFilter = @"original";
 #pragma mark - 标记产品信息视图
 - (THNMarkGoodsView *)markGoodsView {
     if (!_markGoodsView) {
-        _markGoodsView = [[THNMarkGoodsView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        CGFloat markViewHeight = Is_iPhoneX ? SCREEN_HEIGHT - 34 : SCREEN_HEIGHT;
+        _markGoodsView = [[THNMarkGoodsView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, markViewHeight)];
         _markGoodsView.delegate = self;
         _markGoodsView.vc = self;
     }

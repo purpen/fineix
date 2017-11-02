@@ -26,36 +26,36 @@ typedef void(^GetActionId)(NSString *actionId);
     FBPictureViewControllerDelegate
 >
 
-@pro_strong FBRequest           *   categoryRequest;
-@pro_strong FBRequest           *   listRequest;
-@pro_strong FBRequest           *   searchListRequest;
-@pro_strong FBRequest           *   actionTagRequest;
-@pro_assign NSInteger               listCurrentpageNum;
-@pro_assign NSInteger               listTotalPageNum;
-@pro_assign NSInteger               currentpageNum;
-@pro_assign NSInteger               totalPageNum;
+@property (nonatomic, strong) FBRequest           *   categoryRequest;
+@property (nonatomic, strong) FBRequest           *   listRequest;
+@property (nonatomic, strong) FBRequest           *   searchListRequest;
+@property (nonatomic, strong) FBRequest           *   actionTagRequest;
+@property (nonatomic, assign) NSInteger               listCurrentpageNum;
+@property (nonatomic, assign) NSInteger               listTotalPageNum;
+@property (nonatomic, assign) NSInteger               currentpageNum;
+@property (nonatomic, assign) NSInteger               totalPageNum;
 
-@pro_strong UIView *bgView;
-@pro_strong UITextField         *   titleText;
-@pro_strong UITextView          *   desText;
-@pro_strong UIImageView         *   bgImgView;
-@pro_strong UIImage             *   bgImg;
-@pro_strong NSString            *   actionTag;
+@property (nonatomic, strong) UIView *bgView;
+@property (nonatomic, strong) UITextField         *   titleText;
+@property (nonatomic, strong) UITextView          *   desText;
+@property (nonatomic, strong) UIImageView         *   bgImgView;
+@property (nonatomic, strong) UIImage             *   bgImg;
+@property (nonatomic, strong) NSString            *   actionTag;
 
 /*  默认进入的分类语境列表视图 */
-@pro_strong UIView              *   listView;
-@pro_strong UIButton            *   searchBtn;
-@pro_strong UITableView         *   listTable;
-@pro_strong FBMenuView          *   categoryMenuView;
-@pro_strong FBKeyboradToolbar   *   keyboardToolbar;
+@property (nonatomic, strong) UIView              *   listView;
+@property (nonatomic, strong) UIButton            *   searchBtn;
+@property (nonatomic, strong) UITableView         *   listTable;
+@property (nonatomic, strong) FBMenuView          *   categoryMenuView;
+@property (nonatomic, strong) FBKeyboradToolbar   *   keyboardToolbar;
 
 /*  搜索进入的列表视图 */
-@pro_strong UIView              *   searchView;
-@pro_strong UITextField         *   searchField;
-@pro_strong UITableView         *   shareTextTable;
-@pro_strong UIButton            *   cancelSearchBtn;
-@pro_copy GetEditShareText          getEdtiShareText;
-@pro_copy GetActionId               getActionId;
-@pro_strong NSString            *   actionTitle;
+@property (nonatomic, strong) UIView              *   searchView;
+@property (nonatomic, strong) UITextField         *   searchField;
+@property (nonatomic, strong) UITableView         *   shareTextTable;
+@property (nonatomic, strong) UIButton            *   cancelSearchBtn;
+@property (nonatomic, copy) GetEditShareText          getEdtiShareText;
+@property (nonatomic, copy) GetActionId               getActionId;
+@property (nonatomic, strong) NSString            *   actionTitle;
 
 @end

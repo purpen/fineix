@@ -167,11 +167,13 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 
 #pragma mark - 设置视图UI
 - (void)setReleaseViewUI {
+    CGFloat navTopHeight = Is_iPhoneX ? 88 : 45;
+    
     [self.view addSubview:self.addContent];
     [_addContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH+88));
         make.left.equalTo(self.view.mas_left).with.offset(0);
-        make.top.equalTo(self.view.mas_top).with.offset(45);
+        make.top.equalTo(self.view.mas_top).with.offset(navTopHeight);
     }];
     
     [self.view addSubview:self.addLocaiton];

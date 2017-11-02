@@ -40,6 +40,14 @@ static NSString *const URLDeleteUser = @"/storage_manage/deleted";
     [self.view addSubview:self.childTable];
 }
 
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.childTable.frame = CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 88);
+    }
+}
+
 #pragma mark - 获取子账号列表
 - (void)thn_networkGetChildUserListData {
     _totalMoney = 0;
@@ -110,6 +118,8 @@ static NSString *const URLDeleteUser = @"/storage_manage/deleted";
         _childTable.allowsMultipleSelection = NO;
         _childTable.allowsSelectionDuringEditing = NO;
         _childTable.allowsMultipleSelectionDuringEditing = NO;
+        _childTable.estimatedSectionHeaderHeight = 0;
+        _childTable.estimatedSectionFooterHeight = 0;
     }
     return _childTable;
 }

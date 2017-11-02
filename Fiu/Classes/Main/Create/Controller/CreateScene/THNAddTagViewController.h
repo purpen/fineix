@@ -17,12 +17,12 @@ typedef void(^GetAddTagsDataBlock)(NSString *text, NSString *actionTag);
     UITableViewDataSource
 >
 
-@pro_strong FBRequest *hotTagsRequest;
-@pro_strong FBRequest *usedTagsRequest;
-@pro_strong FBRequest *searchRequest;
-@pro_strong UITextField *tagsTextField;
-@pro_strong UITableView *tagsList;
-@pro_strong UITableView *searchList;
-@pro_copy GetAddTagsDataBlock getAddTagsDataBlock;
+@property (nonatomic, strong) FBRequest *hotTagsRequest;
+@property (nonatomic, strong) FBRequest *usedTagsRequest;
+@property (nonatomic, strong) FBRequest *searchRequest;
+@property (nonatomic, strong) UITextField *tagsTextField;
+@property (nonatomic, strong) UITableView *tagsList;
+@property (nonatomic, strong) UITableView *searchList;
+@property (nonatomic, copy) GetAddTagsDataBlock getAddTagsDataBlock;
 
 @end

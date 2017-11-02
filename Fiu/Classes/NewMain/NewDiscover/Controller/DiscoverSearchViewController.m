@@ -60,7 +60,6 @@
         _searchView = [[FBSearchView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, 44)];
         _searchView.searchInputBox.placeholder = NSLocalizedString(@"discoverSearch", nil);
         _searchView.delegate = self;
-        _searchView.line.hidden = YES;
         [_searchView.searchInputBox becomeFirstResponder];
     }
     return _searchView;

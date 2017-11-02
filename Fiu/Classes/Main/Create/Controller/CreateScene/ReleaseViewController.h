@@ -16,25 +16,25 @@
 
 @interface ReleaseViewController : FBPictureViewController
 
-@pro_strong FBRequest           *   releaseSceneRequest;
-@pro_strong FBRequest           *   releaseFiuSceneRequest;
-@pro_strong FBRequest           *   getUserDesTagsRequest;
-@pro_strong FBRequest           *   editSceneRequest;
+@property (nonatomic, strong) FBRequest           *   releaseSceneRequest;
+@property (nonatomic, strong) FBRequest           *   releaseFiuSceneRequest;
+@property (nonatomic, strong) FBRequest           *   getUserDesTagsRequest;
+@property (nonatomic, strong) FBRequest           *   editSceneRequest;
 
-@pro_strong NSMutableArray      *   goodsTitle;             //  商品标题
-@pro_strong NSMutableArray      *   goodsId;                //  商品id
-@pro_strong NSMutableArray      *   goodsX;                 //  商品坐标
-@pro_strong NSMutableArray      *   goodsY;                 //  商品坐标
-@pro_strong NSMutableArray      *   goodsLoc;               //  商品指向
-@pro_strong NSMutableArray      *   goodsType;              //  商品类型
-@pro_strong UIImage             *   bgImg;
-@pro_strong AddLocationView     *   addLocaiton;
-@pro_strong AddContentView      *   addContent;
-@pro_strong FBPopupView         *   sharePopView;
+@property (nonatomic, strong) NSMutableArray      *   goodsTitle;             //  商品标题
+@property (nonatomic, strong) NSMutableArray      *   goodsId;                //  商品id
+@property (nonatomic, strong) NSMutableArray      *   goodsX;                 //  商品坐标
+@property (nonatomic, strong) NSMutableArray      *   goodsY;                 //  商品坐标
+@property (nonatomic, strong) NSMutableArray      *   goodsLoc;               //  商品指向
+@property (nonatomic, strong) NSMutableArray      *   goodsType;              //  商品类型
+@property (nonatomic, strong) UIImage             *   bgImg;
+@property (nonatomic, strong) AddLocationView     *   addLocaiton;
+@property (nonatomic, strong) AddContentView      *   addContent;
+@property (nonatomic, strong) FBPopupView         *   sharePopView;
 /** 活动ID */
-@pro_strong NSString *actionId;
+@property (nonatomic, strong) NSString *actionId;
 /** 活动标题 */
-@pro_strong NSString *activeTitle;
+@property (nonatomic, strong) NSString *activeTitle;
 /**
  所属地盘id
  */

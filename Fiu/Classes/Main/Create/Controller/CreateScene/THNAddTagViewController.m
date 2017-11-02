@@ -7,6 +7,7 @@
 //
 
 #import "THNAddTagViewController.h"
+#import "THNMacro.h"
 
 static NSString *const URLHotTags = @"/scene_sight/stick_active_tags";
 static NSString *const URLUsedTags = @"/my/my_recent_tags";
@@ -18,11 +19,11 @@ static NSString *const searchListCellID = @"SearchListCellID";
 
 @interface THNAddTagViewController ()
 
-@pro_strong NSMutableArray *hotTagsMarr;
-@pro_strong NSMutableArray *hotTagsIdMarr;
-@pro_strong NSMutableArray *usedTagsMarr;
-@pro_strong NSMutableArray *usedHotTagsMarr;
-@pro_strong NSMutableArray *searchTagsMarr;
+@property (nonatomic, strong) NSMutableArray *hotTagsMarr;
+@property (nonatomic, strong) NSMutableArray *hotTagsIdMarr;
+@property (nonatomic, strong) NSMutableArray *usedTagsMarr;
+@property (nonatomic, strong) NSMutableArray *usedHotTagsMarr;
+@property (nonatomic, strong) NSMutableArray *searchTagsMarr;
 
 @end
 
@@ -45,6 +46,16 @@ static NSString *const searchListCellID = @"SearchListCellID";
     
     [self networkHotTagsData];
     [self networkUsedTagsData];
+}
+
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.tagsTextField.frame = CGRectMake(0, 88, SCREEN_WIDTH, 44);
+        self.tagsList.frame = CGRectMake(0, 132, SCREEN_WIDTH, SCREEN_HEIGHT - 166);
+        self.searchList.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - 122);
+    }
 }
 
 #pragma mark - 网络请求

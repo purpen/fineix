@@ -23,11 +23,11 @@ static NSString *const goodsCellId = @"GoodsCellId";
     NSString *_chooseBrandId;
 }
 
-@pro_strong NSMutableArray *brandMarr;
-@pro_strong NSMutableArray *brandTitleMarr;
-@pro_strong NSMutableArray *brandIdMarr;
-@pro_strong NSMutableArray *goodsMarr;
-@pro_strong NSMutableArray *goodsIdMarr;
+@property (nonatomic, strong) NSMutableArray *brandMarr;
+@property (nonatomic, strong) NSMutableArray *brandTitleMarr;
+@property (nonatomic, strong) NSMutableArray *brandIdMarr;
+@property (nonatomic, strong) NSMutableArray *goodsMarr;
+@property (nonatomic, strong) NSMutableArray *goodsIdMarr;
 
 @end
 
@@ -102,7 +102,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
 
 - (UITableView *)goodsList {
     if (!_goodsList) {
-        _goodsList = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        _goodsList = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, CGRectGetHeight(self.searchGoods.frame), SCREEN_WIDTH, SCREEN_HEIGHT - CGRectGetHeight(self.searchGoods.frame))];
         _goodsList.delegate = self;
         _goodsList.dataSource = self;
         _goodsList.showsVerticalScrollIndicator = NO;
@@ -114,7 +114,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
 
 - (UITableView *)brandList {
     if (!_brandList) {
-        _brandList = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        _brandList = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.searchGoods.frame), SCREEN_WIDTH, SCREEN_HEIGHT - CGRectGetHeight(self.searchGoods.frame))];
         _brandList.delegate = self;
         _brandList.dataSource = self;
         _brandList.showsVerticalScrollIndicator = NO;
@@ -201,8 +201,9 @@ static NSString *const goodsCellId = @"GoodsCellId";
     self.searchGoods.searchInputBox.placeholder = NSLocalizedString(@"pleaseWriteGoods", nil);
     [self.searchGoods.searchInputBox becomeFirstResponder];
     
-    CGRect goodsListFrame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
-    CGRect brandListFrame = CGRectMake(-SCREEN_WIDTH, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+    
+    CGRect goodsListFrame = CGRectMake(0, CGRectGetHeight(self.searchGoods.frame), SCREEN_WIDTH, SCREEN_HEIGHT - CGRectGetHeight(self.searchGoods.frame));
+    CGRect brandListFrame = CGRectMake(-SCREEN_WIDTH, CGRectGetHeight(self.searchGoods.frame), SCREEN_WIDTH, SCREEN_HEIGHT - CGRectGetHeight(self.searchGoods.frame));
     self.goodsList.frame = goodsListFrame;
     self.brandList.frame = brandListFrame;
     
@@ -225,7 +226,8 @@ static NSString *const goodsCellId = @"GoodsCellId";
 #pragma mark - 添加搜索框视图
 - (FBSearchView *)searchGoods {
     if (!_searchGoods) {
-        _searchGoods = [[FBSearchView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, 44)];
+        CGFloat searchGoodsHeight = Is_iPhoneX ? 88 : 64;
+        _searchGoods = [[FBSearchView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, searchGoodsHeight)];
         _searchGoods.searchInputBox.placeholder = NSLocalizedString(@"pleaseWriteBrand", nil);
         _searchGoods.delegate = self;
         [_searchGoods.searchInputBox becomeFirstResponder];
@@ -256,7 +258,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
 #pragma mark - 没有搜索结果时自定义添加
 - (THNAddGoodsBtn *)addGoodBtn {
     if (!_addGoodBtn) {
-        _addGoodBtn = [[THNAddGoodsBtn alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        _addGoodBtn = [[THNAddGoodsBtn alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.searchGoods.frame), SCREEN_WIDTH, 44)];
         _addGoodBtn.hidden = YES;
         [_addGoodBtn addTarget:self action:@selector(addUserGoodsInfo:) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -267,8 +269,8 @@ static NSString *const goodsCellId = @"GoodsCellId";
     if (self.brandNameBtn.titleLabel.text.length == 0) {
         [self setBrandName:button.name.text type:2];
         [button setAddGoodsOrBrandInfo:2 withText:@""];
-        CGRect goodsListFrame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
-        CGRect brandListFrame = CGRectMake(-SCREEN_WIDTH, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+        CGRect goodsListFrame = CGRectMake(0, CGRectGetHeight(self.searchGoods.frame), SCREEN_WIDTH, SCREEN_HEIGHT - CGRectGetHeight(self.searchGoods.frame));
+        CGRect brandListFrame = CGRectMake(-SCREEN_WIDTH, CGRectGetHeight(self.searchGoods.frame), SCREEN_WIDTH, SCREEN_HEIGHT - CGRectGetHeight(self.searchGoods.frame));
         self.goodsList.frame = goodsListFrame;
         self.brandList.frame = brandListFrame;
         

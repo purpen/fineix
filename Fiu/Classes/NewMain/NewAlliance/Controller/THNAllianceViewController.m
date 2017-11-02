@@ -87,6 +87,8 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
         _alianceTable.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _alianceTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         _alianceTable.tableFooterView = self.footerView;
+        _alianceTable.estimatedSectionHeaderHeight = 0;
+        _alianceTable.estimatedSectionFooterHeight = 0;
     }
     return _alianceTable;
 }

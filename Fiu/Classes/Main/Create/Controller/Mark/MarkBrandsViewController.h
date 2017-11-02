@@ -18,14 +18,14 @@ typedef void(^GetBrandAndGoodsInfoBlock)(NSString *brandTitle, NSString *brandId
     UITableViewDataSource
 >
 
-@pro_strong FBSearchView *searchGoods;  //  搜索框
-@pro_strong UIButton *brandNameBtn;
-@pro_strong UITableView *brandList;
-@pro_strong UITableView *goodsList;
-@pro_strong FBRequest *brandRequest;
-@pro_strong FBRequest *goodsRequest;
-@pro_strong THNAddGoodsBtn *addGoodBtn;
+@property (nonatomic, strong) FBSearchView *searchGoods;  //  搜索框
+@property (nonatomic, strong) UIButton *brandNameBtn;
+@property (nonatomic, strong) UITableView *brandList;
+@property (nonatomic, strong) UITableView *goodsList;
+@property (nonatomic, strong) FBRequest *brandRequest;
+@property (nonatomic, strong) FBRequest *goodsRequest;
+@property (nonatomic, strong) THNAddGoodsBtn *addGoodBtn;
 
-@pro_copy GetBrandAndGoodsInfoBlock getBrandAndGoodsInfoBlock;
+@property (nonatomic, weak) GetBrandAndGoodsInfoBlock getBrandAndGoodsInfoBlock;
 
 @end

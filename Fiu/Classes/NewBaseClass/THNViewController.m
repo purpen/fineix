@@ -479,7 +479,7 @@ static NSInteger const saveTime = 30 * 24 * 60;
     [self.navView addSubview:self.leftBtn];
     [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(44, 44));
-        make.left.equalTo(_navView.mas_left).with.offset(10);
+        make.left.equalTo(_navView.mas_left).with.offset(0);
         make.bottom.equalTo(_navView.mas_bottom).with.offset(0);
     }];
 }
@@ -492,7 +492,7 @@ static NSInteger const saveTime = 30 * 24 * 60;
         [self.navView addSubview:self.rightBtn];
         [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(44, 44));
-            make.right.equalTo(_navView.mas_right).with.offset(-10);
+            make.right.equalTo(_navView.mas_right).with.offset(0);
             make.bottom.equalTo(_navView.mas_bottom).with.offset(0);
         }];
         return;
@@ -501,7 +501,7 @@ static NSInteger const saveTime = 30 * 24 * 60;
     [self.navView addSubview:self.rightBtn];
     [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(buttonWidth, 44));
-        make.right.equalTo(_navView.mas_right).with.offset(-buttonWidth - 10);
+        make.right.equalTo(_navView.mas_right).with.offset(-buttonWidth);
         make.bottom.equalTo(_navView.mas_bottom).with.offset(0);
     }];
 }
