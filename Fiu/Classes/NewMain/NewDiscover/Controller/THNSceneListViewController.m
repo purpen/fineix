@@ -243,7 +243,11 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 #pragma mark tableView
 - (UITableView *)sceneTable {
     if (!_sceneTable) {
-        _sceneTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStyleGrouped)];
+        if (Is_iPhoneX) {
+            _sceneTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 88) style:(UITableViewStyleGrouped)];
+        } else {
+            _sceneTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStyleGrouped)];
+        }
         _sceneTable.delegate = self;
         _sceneTable.dataSource = self;
         _sceneTable.showsVerticalScrollIndicator = NO;

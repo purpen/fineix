@@ -165,7 +165,11 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
         self.logisticsView.hidden = YES;
     }
     else{
-        self.logisticsHeight.constant = 64;
+        if (Is_iPhoneX) {
+            self.logisticsHeight.constant = 88;
+        } else {
+            self.logisticsHeight.constant = 64;
+        }
         self.logisticsBotomHeight.constant = 5;
         self.logisticsView.hidden = NO;
     }

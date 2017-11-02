@@ -43,7 +43,11 @@ static NSString *const URLPlan = @"https://m.taihuoniao.com/storage/plan?from=ap
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
+    if (SCREEN_HEIGHT == 812) {
+        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT-88)];
+    } else {
+        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
+    }
     [self.view addSubview:_webView];
     
     self.delegate = self;

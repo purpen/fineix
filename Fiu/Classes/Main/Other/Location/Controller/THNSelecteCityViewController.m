@@ -33,7 +33,11 @@ UICollectionViewDataSource>
         [flowlayout setScrollDirection:UICollectionViewScrollDirectionVertical];
         //左右间距
         flowlayout.minimumInteritemSpacing = 16;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 2 + 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:flowlayout];
+        if (Is_iPhoneX) {
+            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 2 + 88, SCREEN_WIDTH, SCREEN_HEIGHT - 88) collectionViewLayout:flowlayout];
+        } else {
+            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 2 + 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:flowlayout];
+        }
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;

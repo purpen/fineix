@@ -44,7 +44,11 @@
 #pragma mark - 商品信息列表
 - (UITableView *)goodsTable {
     if (!_goodsTable) {
-        _goodsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStylePlain)];
+        if (Is_iPhoneX) {
+            _goodsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStylePlain)];
+        }else {
+            _goodsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStylePlain)];
+        }
         _goodsTable.delegate = self;
         _goodsTable.dataSource = self;
         _goodsTable.showsVerticalScrollIndicator = NO;

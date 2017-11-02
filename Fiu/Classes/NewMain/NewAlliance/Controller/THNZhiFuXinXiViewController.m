@@ -38,7 +38,6 @@ static NSString *const URLAliance = @"/alliance/view";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     [self thn_setNavigationViewUI];
 }
 
@@ -100,43 +99,47 @@ static NSString *const URLAliance = @"/alliance/view";
     [self.view addSubview:self.topView];
     [_topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view).mas_offset(0);
-        make.top.mas_equalTo(self.view.mas_top).mas_offset(64);
-        make.height.mas_equalTo(120/2*SCREEN_HEIGHT/667.0);
+        if (Is_iPhoneX) {
+            make.top.mas_equalTo(self.view.mas_top).mas_offset(88);
+        }else {
+            make.top.mas_equalTo(self.view.mas_top).mas_offset(64);
+        }
+        make.height.mas_equalTo(120/2*self.screenHeight/667.0);
     }];
     
     [self.view addSubview:self.nameView];
     [_nameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view).mas_offset(0);
         make.top.mas_equalTo(self.topView.mas_bottom).mas_offset(15);
-        make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
+        make.height.mas_equalTo(44*self.screenHeight/667.0);
     }];
     
     [self.view addSubview:self.zhangHuView];
     [_zhangHuView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view).mas_offset(0);
         make.top.mas_equalTo(self.nameView.mas_bottom).mas_offset(1);
-        make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
+        make.height.mas_equalTo(44*self.screenHeight/667.0);
     }];
     
     [self.view addSubview:self.phoneView];
     [_phoneView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view).mas_offset(0);
         make.top.mas_equalTo(self.zhangHuView.mas_bottom).mas_offset(1);
-        make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
+        make.height.mas_equalTo(44*self.screenHeight/667.0);
     }];
 
     [self.view addSubview:self.yanZhengView];
     [_yanZhengView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view).mas_offset(0);
         make.top.mas_equalTo(self.phoneView.mas_bottom).mas_offset(1);
-        make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
+        make.height.mas_equalTo(44*self.screenHeight/667.0);
     }];
     
     [self.view addSubview:self.moRenView];
     [_moRenView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view).mas_offset(0);
         make.top.mas_equalTo(self.yanZhengView.mas_bottom).mas_offset(10);
-        make.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
+        make.height.mas_equalTo(44*self.screenHeight/667.0);
     }];
     
     [self setModel:self.model];
@@ -190,7 +193,7 @@ static NSString *const URLAliance = @"/alliance/view";
         [_yanZhengView addSubview:_yanZhengMaTF];
         _yanZhengMaTF.font = [UIFont systemFontOfSize:14];
         [_yanZhengMaTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(label.mas_right).mas_offset(15*SCREEN_HEIGHT/667.0);
+            make.left.mas_equalTo(label.mas_right).mas_offset(15*self.screenHeight/667.0);
             make.top.bottom.mas_equalTo(_yanZhengView).mas_offset(0);
             make.right.mas_equalTo(_yanZhengView.mas_right).mas_offset(-(68+30+20)/2);
         }];
@@ -294,7 +297,7 @@ static NSString *const URLAliance = @"/alliance/view";
         [_phoneView addSubview:self.phoneTF];
         self.phoneTF.font = [UIFont systemFontOfSize:14];
         [_phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(label.mas_right).mas_offset(15*SCREEN_HEIGHT/667.0);
+            make.left.mas_equalTo(label.mas_right).mas_offset(15*self.screenHeight/667.0);
             make.right.top.bottom.mas_equalTo(_phoneView).mas_offset(0);
         }];
     }
@@ -323,7 +326,7 @@ static NSString *const URLAliance = @"/alliance/view";
         [_zhangHuView addSubview:_zhangHuTF];
         _zhangHuTF.font = [UIFont systemFontOfSize:14];
         [_zhangHuTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(label.mas_right).mas_offset(15*SCREEN_HEIGHT/667.0);
+            make.left.mas_equalTo(label.mas_right).mas_offset(15*self.screenHeight/667.0);
             make.right.top.bottom.mas_equalTo(_zhangHuView).mas_offset(0);
         }];
     }
@@ -352,7 +355,7 @@ static NSString *const URLAliance = @"/alliance/view";
         [_nameView addSubview:_nameTF];
         _nameTF.font = [UIFont systemFontOfSize:14];
         [_nameTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(label.mas_right).mas_offset(15*SCREEN_HEIGHT/667.0);
+            make.left.mas_equalTo(label.mas_right).mas_offset(15*self.screenHeight/667.0);
             make.right.top.bottom.mas_equalTo(_nameView).mas_offset(0);
         }];
     }
@@ -368,7 +371,7 @@ static NSString *const URLAliance = @"/alliance/view";
         [_topView addSubview:tuBiao];
         [tuBiao mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(_topView.mas_centerY).mas_offset(0);
-            make.width.height.mas_equalTo(44*SCREEN_HEIGHT/667.0);
+            make.width.height.mas_equalTo(44*self.screenHeight/667.0);
             make.left.mas_equalTo(_topView.mas_left).mas_offset(15);
         }];
         
@@ -379,7 +382,7 @@ static NSString *const URLAliance = @"/alliance/view";
         [_topView addSubview:label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(_topView.mas_centerY).mas_offset(0);
-            make.left.mas_equalTo(tuBiao.mas_right).mas_offset(20*SCREEN_HEIGHT/667.0);
+            make.left.mas_equalTo(tuBiao.mas_right).mas_offset(20*self.screenHeight/667.0);
         }];
     }
     return _topView;

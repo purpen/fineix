@@ -17,6 +17,7 @@
 #import "MyFansActionSheetViewController.h"
 #import "FocusNonView.h"
 #import "TipNumberView.h"
+#import "THNMacro.h"
 
 @interface MyPageFocusOnViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
 
@@ -142,9 +143,13 @@
                 self.scenarioNonView.tipLabel.text = @"你一定是想关注我，才点进来的对吧";
             }
             [_scenarioNonView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT));
+                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, self.screenHeight));
                 make.left.mas_equalTo(self.view.mas_left).with.offset(0);
-                make.top.mas_equalTo(self.view.mas_top).with.offset(64);
+                if (Is_iPhoneX) {
+                    make.top.mas_equalTo(self.view.mas_top).with.offset(88);
+                }else {
+                    make.top.mas_equalTo(self.view.mas_top).with.offset(64);
+                }
             }];
         }else{
             [self.scenarioNonView removeFromSuperview];
@@ -206,7 +211,11 @@
 
 -(UITableView *)mytableView{
     if (!_mytableView) {
-        _mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+        if (Is_iPhoneX) {
+            _mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT-88) style:UITableViewStylePlain];
+        } else {
+            _mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+        }
         _mytableView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
         self.mytableView.delegate = self;
         self.mytableView.dataSource = self;
@@ -307,7 +316,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 55/667.0*SCREEN_HEIGHT;
+    return 55/667.0*self.screenHeight;
 }
 
 - (void)didReceiveMemoryWarning {

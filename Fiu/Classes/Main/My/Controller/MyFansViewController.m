@@ -16,6 +16,7 @@
 #import "HomePageViewController.h"
 #import "FocusNonView.h"
 #import "TipNumberView.h"
+#import "THNMacro.h"
 
 @interface MyFansViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
 
@@ -102,7 +103,11 @@
             [_scenarioNonView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT));
                 make.left.mas_equalTo(self.view.mas_left).with.offset(0);
-                make.top.mas_equalTo(self.view.mas_top).with.offset(64);
+                if (Is_iPhoneX) {
+                    make.top.mas_equalTo(self.view.mas_top).with.offset(88);
+                } else {
+                    make.top.mas_equalTo(self.view.mas_top).with.offset(64);
+                }
             }];
         }else{
             [self.scenarioNonView removeFromSuperview];
@@ -205,7 +210,11 @@
 
 -(UITableView *)mytableView{
     if (!_mytableView) {
-        _mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+        if (SCREEN_HEIGHT == 812) {
+            _mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT-88) style:UITableViewStylePlain];
+        } else {
+           _mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+        }
         _mytableView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
         _mytableView.delegate = self;
         _mytableView.dataSource = self;

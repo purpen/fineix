@@ -26,6 +26,16 @@ static NSInteger const saveTime = 30 * 24 * 60;
 
 @implementation FBViewController
 
+-(CGFloat)screenHeight{
+    CGFloat n = 0;
+    if (SCREEN_HEIGHT == 812) {
+        n = 667;
+    } else {
+        n = SCREEN_HEIGHT;
+    }
+    return n;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [self setSlideBackVC];
@@ -178,7 +188,11 @@ static NSInteger const saveTime = 30 * 24 * 60;
 #pragma mark - 自定义Nav视图
 - (UIView *)navView {
     if (!_navView) {
-        _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
+        if (Is_iPhoneX) {
+            _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 88)];
+        } else {
+            _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
+        }
         _navView.backgroundColor = [UIColor blackColor];
     }
     return _navView;
@@ -323,9 +337,15 @@ static NSInteger const saveTime = 30 * 24 * 60;
         self.navView.hidden = YES;
         [self.view addSubview:self.leftBtn];
         [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(44, 44));
-            make.left.equalTo(self.view.mas_left).with.offset(10);
-            make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+            if (Is_iPhoneX) {
+                make.size.mas_equalTo(CGSizeMake(44, 44));
+                make.left.equalTo(self.view.mas_left).with.offset(10);
+                make.bottom.equalTo(_navView.mas_bottom).with.offset(0);
+            } else {
+                make.size.mas_equalTo(CGSizeMake(44, 44));
+                make.left.equalTo(self.view.mas_left).with.offset(10);
+                make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+            }
         }];
     }
 }
@@ -366,9 +386,15 @@ static NSInteger const saveTime = 30 * 24 * 60;
         self.navView.hidden = YES;
         [self.view addSubview:self.rightBtn];
         [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(44, 44));
-            make.right.equalTo(self.view.mas_right).with.offset(-10);
-            make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+            if (Is_iPhoneX) {
+                make.size.mas_equalTo(CGSizeMake(44, 44));
+                make.right.equalTo(self.view.mas_right).with.offset(-10);
+                make.bottom.equalTo(_navView.mas_bottom).with.offset(0);
+            } else {
+                make.size.mas_equalTo(CGSizeMake(44, 44));
+                make.right.equalTo(self.view.mas_right).with.offset(-10);
+                make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+            }
         }];
     }
 }

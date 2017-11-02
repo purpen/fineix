@@ -251,7 +251,11 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
 #pragma mark - 详情列表视图
 - (UITableView *)orderInfoTable {
     if (!_orderInfoTable) {
-        _orderInfoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT -108) style:(UITableViewStyleGrouped)];
+        if (Is_iPhoneX) {
+            _orderInfoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT -108-24) style:(UITableViewStyleGrouped)];
+        }else {
+            _orderInfoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT -108) style:(UITableViewStyleGrouped)];
+        }
         _orderInfoTable.delegate = self;
         _orderInfoTable.dataSource = self;
         _orderInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone;

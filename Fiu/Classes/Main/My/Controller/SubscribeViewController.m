@@ -59,7 +59,11 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 
 -(THNSubHeadView *)headView{
     if (!_headView) {
-        _headView = [[THNSubHeadView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        if (SCREEN_HEIGHT == 812) {
+            _headView = [[THNSubHeadView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, 44)];
+        } else {
+           _headView = [[THNSubHeadView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        }
         _headView.navi = self.navigationController;
     }
     return _headView;
@@ -164,7 +168,11 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
         flowLayout.minimumInteritemSpacing = 5.0;
         flowLayout.minimumLineSpacing = 5.0;
         
-        _allSceneView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) collectionViewLayout:flowLayout];
+        if (SCREEN_HEIGHT == 812) {
+            _allSceneView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 88 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 88 - 44) collectionViewLayout:flowLayout];
+        } else {
+            _allSceneView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) collectionViewLayout:flowLayout];
+        }
         
         
         _allSceneView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];

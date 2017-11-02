@@ -29,6 +29,7 @@
 #import "THNHomeSenceCollectionViewCell.h"
 #import "UIView+FSExtension.h"
 #import "THNSceneDetalViewController.h"
+#import "THNMacro.h"
 
 #define UserHeadTag 1
 #define BgTag 2
@@ -141,7 +142,11 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
         _shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
                           (__bridge id)[UIColor blackColor].CGColor];
         _shadow.locations = @[@(0.5f), @(2.5f)];
-        _shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
+        if (Is_iPhoneX) {
+            _shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, 88);
+        } else {
+            _shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
+        }
     }
     return _shadow;
 }
@@ -180,7 +185,11 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 20, SCREEN_WIDTH - 88, 44)];
+        if (Is_iPhoneX) {
+            _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 44, SCREEN_WIDTH - 88, 44)];
+        } else {
+            _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 20, SCREEN_WIDTH - 88, 44)];
+        }
         _titleLabel.textColor = [UIColor whiteColor];
         if (IS_iOS9) {
             _titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:17];
@@ -546,7 +555,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
                 cell.userInteractionEnabled = YES;
                 [cell addSubview:self.defaultView];
                 [self.defaultView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 320/667.0*SCREEN_HEIGHT));
+                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 320/667.0*self.screenHeight));
                     make.left.mas_equalTo(cell.mas_left).with.offset(0);
                     make.top.mas_equalTo(cell.mas_top).with.offset(0);
                 }];
@@ -556,7 +565,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
                 THNHomeSenceCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:sceneCellId forIndexPath:indexPath];
                 cell.model = _sceneListMarr[indexPath.row];
                 cell.width = (SCREEN_WIDTH - 15 * 3) * 0.5;
-                cell.height = 0.25 * SCREEN_HEIGHT;
+                cell.height = 0.25 * self.screenHeight;
                 return cell;
             }
         }else if([self.type isEqualToNumber:@1]){
@@ -572,7 +581,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
                 }
                 [cell.contentView addSubview:view];
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 320/667.0*SCREEN_HEIGHT));
+                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 320/667.0*self.screenHeight));
                     make.left.mas_equalTo(cell.mas_left).with.offset(0);
                     make.top.mas_equalTo(cell.mas_top).with.offset(0);
                 }];
@@ -838,19 +847,19 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
     }
     if (indexPath.section == 1) {
         if ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"]) {
-            return CGSizeMake(SCREEN_WIDTH, 80/667.0*SCREEN_HEIGHT);
+            return CGSizeMake(SCREEN_WIDTH, 80/667.0*self.screenHeight);
         }
-        return CGSizeMake(SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
+        return CGSizeMake(SCREEN_WIDTH, 60/667.0*self.screenHeight);
     }
     if (indexPath.section == 2) {
         if ([self.type isEqualToNumber:@2]) {
             if (_sceneListMarr.count == 0) {
-                return CGSizeMake(SCREEN_WIDTH, 320/667.0*SCREEN_HEIGHT);
+                return CGSizeMake(SCREEN_WIDTH, 320/667.0*self.screenHeight);
             }else{
-                return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.25 * SCREEN_HEIGHT);
+                return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.25 * self.screenHeight);
             }
         }else if ([self.type isEqualToNumber:@1]){
-            return CGSizeMake((SCREEN_WIDTH-15)/2, 320/667.0*SCREEN_HEIGHT);
+            return CGSizeMake((SCREEN_WIDTH-15)/2, 320/667.0*self.screenHeight);
         }
     }
     

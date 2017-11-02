@@ -55,7 +55,11 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
 -(SGTopTitleView *)segmentedControl{
 
     if (!_segmentedControl) {
-        _segmentedControl = [[SGTopTitleView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        if (Is_iPhoneX) {
+            _segmentedControl = [[SGTopTitleView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, 44)];
+        } else {
+            _segmentedControl = [[SGTopTitleView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        }
         _segmentedControl.staticTitleArr = @[@"全部", @"未付款", @"待发货", @"待收货", @"待评价"];
         _segmentedControl.backgroundColor = [UIColor whiteColor];
         _segmentedControl.delegate_SG = self;

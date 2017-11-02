@@ -58,9 +58,15 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     
     [self.view addSubview:self.accountView];
     [_accountView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-64));
-        make.left.mas_equalTo(self.view.mas_left).with.offset(0);
-        make.bottom.mas_equalTo(self.view.mas_bottom).with.offset(0);
+        if (SCREEN_HEIGHT == 812) {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-88));
+            make.left.mas_equalTo(self.view.mas_left).with.offset(0);
+            make.bottom.mas_equalTo(self.view.mas_bottom).with.offset(0);
+        }else {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-64));
+            make.left.mas_equalTo(self.view.mas_left).with.offset(0);
+            make.bottom.mas_equalTo(self.view.mas_bottom).with.offset(0);
+        }
     }];
 }
 

@@ -64,7 +64,11 @@
 
 -(void)setModel:(DominInfoData *)model{
     _model = model;
-    _mapView = [[BMKMapView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+    if (Is_iPhoneX) {
+        _mapView = [[BMKMapView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 88)];
+    } else {
+        _mapView = [[BMKMapView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+    }
     _mapView.zoomLevel = 20;
     [_mapView setCenterCoordinate:CLLocationCoordinate2DMake([model.location.coordinates[1] floatValue], [model.location.coordinates[0] floatValue]) animated:YES];
     [self.view addSubview:_mapView];

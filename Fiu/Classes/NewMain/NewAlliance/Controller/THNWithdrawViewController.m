@@ -127,7 +127,11 @@ static NSString *const URLApply = @"/withdraw_cash/apply_cash";
 
 -(THNZhangHuView *)zhangHuView{
     if (!_zhangHuView) {
-        _zhangHuView = [[THNZhangHuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        if (Is_iPhoneX) {
+            _zhangHuView = [[THNZhangHuView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, 88)];
+        } else {
+            _zhangHuView = [[THNZhangHuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        }
         _zhangHuView.nav = self.navigationController;
         _zhangHuView.model = self.zhangHuModel;
         _zhangHuView.zhangHu = self.zhangHu;

@@ -58,7 +58,11 @@
 
 -(UITableView *)tabelView{
     if (!_tabelView) {
-        _tabelView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64-44)];
+        if (Is_iPhoneX) {
+            _tabelView = [[UITableView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT-88-44-17)];
+        } else {
+            _tabelView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64-44)];
+        }
         _tabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tabelView.delegate = self;
         _tabelView.dataSource = self;
@@ -95,7 +99,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.navViewTitle.text = @"绑定提现账户";
     [self thn_addBarItemRightBarButton:@"管理" image:nil];
-    [self thn_addBarItemLeftBarButton:@"" image:@"icon_back_white"];
+//    [self thn_addBarItemLeftBarButton:@"" image:@"icon_back_white"];
     self.delegate = self;
 }
 
@@ -210,8 +214,14 @@
     [super viewDidLoad];
     [self.view addSubview:self.addView];
     [_addView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_equalTo(self.view).mas_offset(0);
-        make.height.mas_equalTo(44);
+        if (Is_iPhoneX) {
+            make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(-17);
+            make.left.right.mas_equalTo(self.view).mas_offset(0);
+            make.height.mas_equalTo(44);
+        } else {
+            make.left.right.bottom.mas_equalTo(self.view).mas_offset(0);
+            make.height.mas_equalTo(44);
+        }
     }];
 }
 

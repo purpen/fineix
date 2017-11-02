@@ -131,6 +131,16 @@ static NSInteger const saveTime = 30 * 24 * 60;
     }
 }
 
+-(CGFloat)screenHeight{
+    CGFloat n = 0;
+    if (SCREEN_HEIGHT == 812) {
+        n = 667;
+    } else {
+        n = SCREEN_HEIGHT;
+    }
+    return n;
+}
+
 #pragma mark - 轮播图类型跳转
 - (void)thn_openSubjectTypeController:(UINavigationController *)nav type:(NSInteger)type subjectId:(NSString *)idx {
     if (type == 1) {

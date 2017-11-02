@@ -30,7 +30,7 @@
 @property (nonatomic, strong) UIButton *searchBtn;    //  搜索
 @property (nonatomic, strong) UITableView *baseTable; //  当前列表
 @property (nonatomic, strong) UIButton *subscribeBtn; //  订阅按钮
-
+@property (nonatomic, assign) CGFloat screenHeight;
 
 /**
  *  请求购物车数量

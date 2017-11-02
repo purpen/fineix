@@ -59,7 +59,11 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         make.left.mas_equalTo(self.view.mas_left).with.offset(0);
         make.bottom.mas_equalTo(self.view.mas_bottom).with.offset(0);
         make.right.mas_equalTo(self.view.mas_right).with.offset(0);
-        make.top.mas_equalTo(self.view.mas_top).with.offset(64);
+        if (SCREEN_HEIGHT == 812) {
+            make.top.mas_equalTo(self.view.mas_top).with.offset(88);
+        } else {
+            make.top.mas_equalTo(self.view.mas_top).with.offset(64);
+        }
     }];
         
     [self getImageFromView:self.view];

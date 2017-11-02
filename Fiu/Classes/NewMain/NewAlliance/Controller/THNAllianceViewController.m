@@ -76,7 +76,11 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
 
 - (UITableView *)alianceTable {
     if (!_alianceTable) {
-        _alianceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT -64) style:(UITableViewStyleGrouped)];
+        if (Is_iPhoneX) {
+            _alianceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT -88) style:(UITableViewStyleGrouped)];
+        } else {
+            _alianceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT -64) style:(UITableViewStyleGrouped)];
+        }
         _alianceTable.delegate = self;
         _alianceTable.dataSource = self;
         _alianceTable.sectionFooterHeight = 10.0f;

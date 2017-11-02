@@ -197,7 +197,11 @@ UITableViewDataSource
         flowlayout.minimumInteritemSpacing = 2;
         //上下间距
         flowlayout.minimumLineSpacing = 2;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(2 + 90, 64, SCREEN_WIDTH - 90 - 4, SCREEN_HEIGHT - 64 - 49) collectionViewLayout:flowlayout];
+        if (Is_iPhoneX) {
+            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(2 + 90, 88, SCREEN_WIDTH - 90 - 4, SCREEN_HEIGHT - 88 - 49) collectionViewLayout:flowlayout];
+        }else {
+            _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(2 + 90, 64, SCREEN_WIDTH - 90 - 4, SCREEN_HEIGHT - 64 - 49) collectionViewLayout:flowlayout];
+        }
         if (SCREEN_HEIGHT == 812) {
             _collectionView.y += 24;
             _collectionView.height -= 24;
@@ -229,7 +233,11 @@ UITableViewDataSource
 {
     if (!_tableView)
     {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 90, SCREEN_HEIGHT - 64 - 49)];
+        if (Is_iPhoneX) {
+            _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 88, 90, SCREEN_HEIGHT - 88 - 49)];
+        }else {
+            _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 90, SCREEN_HEIGHT - 64 - 49)];
+        }
         if (SCREEN_HEIGHT == 812) {
             _tableView.y += 24;
             _tableView.height -= 24;
