@@ -32,9 +32,9 @@
 /**
  *  请求购物车数量
  */
-@pro_strong FBRequest   *   goodsCarRequest;
-@pro_strong NSString    *   goodsCount;
-@pro_strong UILabel     *   countLab;
+@property (nonatomic, strong) FBRequest   *   goodsCarRequest;
+@property (nonatomic, strong) NSString    *   goodsCount;
+@property (nonatomic, strong) UILabel     *   countLab;
 - (void)getGoodsCarNumData;
 - (void)setNavGoodsCarNumLab;
 
@@ -50,7 +50,7 @@
 /**
  *  是否登录
  */
-@pro_strong FBRequest   *   userLoginRequest;
+@property (nonatomic, strong) FBRequest   *   userLoginRequest;
 - (BOOL)isUserLogin;
 
 /**
@@ -71,50 +71,50 @@
 /*
  *  自定义Nav视图
  */
-@pro_strong UIView      *   navView;
+@property (nonatomic, strong) UIView      *   navView;
 
 /*
  *  控制器的标题
  */
-@pro_strong UILabel     *   navViewTitle;
+@property (nonatomic, strong) UILabel     *   navViewTitle;
 
 /*
  *  返回pop按钮
  */
-@pro_strong UIButton    *   navBackBtn;
+@property (nonatomic, strong) UIButton    *   navBackBtn;
 
 /*
  *  返回pop按钮
  */
-@pro_strong UIButton    *   leftBtn;
+@property (nonatomic, strong) UIButton    *   leftBtn;
 
 /*
  *  返回pop按钮
  */
-@pro_strong UIButton    *   rightBtn;
+@property (nonatomic, strong) UIButton    *   rightBtn;
 
 /*
  *  Nav中间的Logo
  */
-@pro_strong UIButton    *   logoImg;
+@property (nonatomic, strong) UIButton    *   logoImg;
 
 /*
  *  表格
  */
-@pro_strong UITableView *   baseTable;
+@property (nonatomic, strong) UITableView *   baseTable;
 
 /*
  *  视图分割线
  */
-@pro_strong UILabel     *   navLine;
+@property (nonatomic, strong) UILabel     *   navLine;
 
 /*
  *  二维码扫描
  */
-@pro_strong UIButton    *   qrBtn;
+@property (nonatomic, strong) UIButton    *   qrBtn;
 
 
-@pro_weak id <FBNavigationBarItemsDelegate> delegate;
+@property (nonatomic, weak) id <FBNavigationBarItemsDelegate> delegate;
 
 /*
  *  在Nav上添加中间的Logo

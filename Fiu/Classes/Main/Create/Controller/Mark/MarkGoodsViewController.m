@@ -12,6 +12,7 @@
 #import "MarkGoodsRow.h"
 #import "MarkGoodsCollectionViewCell.h"
 #import "GoodsInfoData.h"
+#import "THNMacro.h"
 
 static NSString *const URLMarkGoods = @"/category/getlist";
 static NSString *const URLGoodsList = @"/product/getlist";
@@ -20,12 +21,12 @@ static NSString *const URLGetGoodsImg = @"/product/view";
 
 @interface MarkGoodsViewController ()
 
-@pro_strong NSMutableArray      *   categoryTitle;
-@pro_strong NSMutableArray      *   categoryId;
-@pro_strong NSMutableArray      *   goodsList;
-@pro_strong NSMutableArray      *   searchGoodsList;
-@pro_strong NSString            *   ids;
-@pro_strong GoodsInfoData       *   goodsModel;
+@property (nonatomic, strong) NSMutableArray      *   categoryTitle;
+@property (nonatomic, strong) NSMutableArray      *   categoryId;
+@property (nonatomic, strong) NSMutableArray      *   goodsList;
+@property (nonatomic, strong) NSMutableArray      *   searchGoodsList;
+@property (nonatomic, strong) NSString            *   ids;
+@property (nonatomic, strong) GoodsInfoData       *   goodsModel;
 
 @end
 
@@ -210,7 +211,7 @@ static NSString *const URLGetGoodsImg = @"/product/view";
         flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 30)/2, ((SCREEN_WIDTH - 30)/2) * 1.33);
         flowLayout.sectionInset = UIEdgeInsetsMake(5, 10, 10, 10);
         
-        _goodsListView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 108) collectionViewLayout:flowLayout];
+        _goodsListView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.categoryMenuView.frame), SCREEN_WIDTH, SCREEN_HEIGHT - 108) collectionViewLayout:flowLayout];
         _goodsListView.delegate = self;
         _goodsListView.dataSource = self;
         _goodsListView.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
@@ -270,7 +271,8 @@ static NSString *const URLGetGoodsImg = @"/product/view";
 #pragma mark - 添加搜索框视图
 - (FBSearchView *)searchGoods {
     if (!_searchGoods) {
-        _searchGoods = [[FBSearchView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, 44)];
+        CGFloat searchGoodsHeight = Is_iPhoneX ? 88 : 64;
+        _searchGoods = [[FBSearchView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, searchGoodsHeight)];
         _searchGoods.searchInputBox.placeholder = NSLocalizedString(@"searchGoods", nil);
         _searchGoods.delegate = self;
     }
@@ -295,7 +297,7 @@ static NSString *const URLGetGoodsImg = @"/product/view";
 #pragma mark - 导航菜单视图
 - (FBMenuView *)categoryMenuView {
     if (!_categoryMenuView) {
-        _categoryMenuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        _categoryMenuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.searchGoods.frame), SCREEN_WIDTH, 44)];
         _categoryMenuView.delegate = self;
         _categoryMenuView.defaultColor = titleColor;
         _categoryMenuView.menuTitle = self.categoryTitle;

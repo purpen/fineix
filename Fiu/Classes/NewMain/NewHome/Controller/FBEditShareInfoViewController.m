@@ -24,11 +24,11 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
     NSString *_actionTagId;
 }
 
-@pro_strong NSMutableArray *categoryTitleMarr;
-@pro_strong NSMutableArray *categoryIdMarr;
-@pro_strong NSMutableArray *listMarr;
-@pro_strong NSMutableArray *shareTextList;
-@pro_strong NSMutableArray *userAddTagMarr;
+@property (nonatomic, strong) NSMutableArray *categoryTitleMarr;
+@property (nonatomic, strong) NSMutableArray *categoryIdMarr;
+@property (nonatomic, strong) NSMutableArray *listMarr;
+@property (nonatomic, strong) NSMutableArray *shareTextList;
+@property (nonatomic, strong) NSMutableArray *userAddTagMarr;
 
 @end
 
@@ -62,6 +62,16 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
     self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.0f];
     [self.view addSubview:self.bgView];
     [self setEditInfoVcUI];
+}
+
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.listView.frame = CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 122);
+        self.searchView.frame = CGRectMake(SCREEN_WIDTH, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 122);
+        self.bgView.frame = CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 122);
+    }
 }
 
 #pragma mark -  设置导航栏
@@ -383,12 +393,14 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
 
 #pragma mark - 跳转搜索语境视图
 - (void)searchBtnClick {
-    CGRect changeListRect = CGRectMake(-SCREEN_WIDTH, 44, SCREEN_WIDTH, SCREEN_HEIGHT - 44);
+    CGFloat navTopHeight = Is_iPhoneX ? 88 : 44;
+    CGFloat bottomHeight = Is_iPhoneX ? 34 : 0;
+    CGRect changeListRect = CGRectMake(-SCREEN_WIDTH, navTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - navTopHeight - bottomHeight);
     [UIView animateWithDuration:.3 animations:^{
         self.listView.frame = changeListRect;
     }];
     
-    CGRect changeSearchRect = CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT - 44);
+    CGRect changeSearchRect = CGRectMake(0, navTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - navTopHeight - bottomHeight);
     [UIView animateWithDuration:.3 animations:^{
         self.searchView.frame = changeSearchRect;
     }];
@@ -421,7 +433,8 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
 #pragma mark - 分类语境列表
 - (UITableView *)listTable {
     if (!_listTable) {
-        _listTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 218, SCREEN_WIDTH, SCREEN_HEIGHT - 222)];
+        CGFloat marginHeight = Is_iPhoneX ? 300 : 220;
+        _listTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 218, SCREEN_WIDTH, CGRectGetHeight(self.listView.frame) - marginHeight)];
         _listTable.delegate = self;
         _listTable.dataSource = self;
         _listTable.tableFooterView = [UIView new];
@@ -533,12 +546,16 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
 
 - (void)cancelSearchBtnClick {
     [self.searchField resignFirstResponder];
-    CGRect changeListRect = CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT - 44);
+    
+    CGFloat navTopHeight = Is_iPhoneX ? 88 : 44;
+    CGFloat bottomHeight = Is_iPhoneX ? 34 : 0;
+    
+    CGRect changeListRect = CGRectMake(0, navTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - navTopHeight - bottomHeight);
     [UIView animateWithDuration:.3 animations:^{
         self.listView.frame = changeListRect;
     }];
     
-    CGRect changeSearchRect = CGRectMake(SCREEN_WIDTH, 44, SCREEN_WIDTH, SCREEN_HEIGHT - 44);
+    CGRect changeSearchRect = CGRectMake(SCREEN_WIDTH, navTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - navTopHeight - bottomHeight);
     [UIView animateWithDuration:.3 animations:^{
         self.searchView.frame = changeSearchRect;
     }];
@@ -547,7 +564,8 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
 #pragma mark 搜索文字结果列表
 - (UITableView *)shareTextTable {
     if (!_shareTextTable) {
-        _shareTextTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 46, SCREEN_WIDTH, SCREEN_HEIGHT - 90) style:(UITableViewStylePlain)];
+        CGFloat marginHeight = Is_iPhoneX ? 122 : 46;
+        _shareTextTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 46, SCREEN_WIDTH, CGRectGetHeight(self.searchView.frame) - marginHeight) style:(UITableViewStylePlain)];
         _shareTextTable.delegate = self;
         _shareTextTable.dataSource = self;
         _shareTextTable.tableFooterView = [UIView new];

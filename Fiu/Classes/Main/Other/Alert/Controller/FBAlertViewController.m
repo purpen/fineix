@@ -26,13 +26,12 @@ static NSInteger const actionBtnTag = 686;
     [super viewWillAppear:animated];
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(thn_editSceneSuccess) name:@"editSceneDone" object:nil];
+
 }
 
 #pragma mark - 编辑成功
 - (void)thn_editSceneSuccess {
-//    self.editDoneAndRefresh();
-//    [SVProgressHUD showSuccessWithStatus:@"编辑成功"];
+
 }
 
 - (void)viewDidLoad {
@@ -40,6 +39,15 @@ static NSInteger const actionBtnTag = 686;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:.3];
     [self.view addSubview:self.closeBtn];
     [self.view addSubview:self.alertView];
+}
+
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.alertView.frame = CGRectMake(0, SCREEN_HEIGHT - 166, SCREEN_WIDTH, 132);
+        self.closeBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 166);
+    }
 }
 
 #pragma mark -
@@ -158,7 +166,7 @@ static NSInteger const actionBtnTag = 686;
 }
 
 - (void)dealloc {
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"editSceneDone" object:nil];
+
 }
 
 @end

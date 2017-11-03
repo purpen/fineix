@@ -103,14 +103,6 @@
 
 - (void)goChooseText {
     FBEditShareInfoViewController *chooseTextVC = [[FBEditShareInfoViewController alloc] init];
-//    NSString *title = self.title.text;
-//    NSString *suTitle = [self.suTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];;
-//    if (title.length == 0) {
-//        title = @"";
-//    }
-//    if (suTitle.length == 0) {
-//        suTitle = @"";
-//    }
     chooseTextVC.titleText.text = self.title.text;
     chooseTextVC.desText.text = self.content.text;
     chooseTextVC.actionTitle = _actionTitle;

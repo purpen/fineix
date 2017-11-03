@@ -32,7 +32,8 @@ static NSString *const URLPlan = @"https://m.taihuoniao.com/storage/plan?from=ap
 
 - (UIWebView *)webView {
     if (!_webView) {
-        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        CGFloat navTopHeight = Is_iPhoneX ? 88 : 64;
+        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, navTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - navTopHeight)];
         _webView.delegate = self;
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:URLPlan]]];
     }

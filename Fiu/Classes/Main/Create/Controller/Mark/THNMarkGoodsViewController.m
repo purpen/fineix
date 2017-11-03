@@ -61,7 +61,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
 
 - (UITableView *)goodsList {
     if (!_goodsList) {
-        _goodsList = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        _goodsList = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.searchGoods.frame), SCREEN_WIDTH, SCREEN_HEIGHT - CGRectGetHeight(self.searchGoods.frame))];
         _goodsList.delegate = self;
         _goodsList.dataSource = self;
         _goodsList.showsVerticalScrollIndicator = NO;
@@ -103,7 +103,8 @@ static NSString *const goodsCellId = @"GoodsCellId";
 #pragma mark - 添加搜索框视图
 - (FBSearchView *)searchGoods {
     if (!_searchGoods) {
-        _searchGoods = [[FBSearchView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, 44)];
+        CGFloat searchGoodsHeight = Is_iPhoneX ? 88 : 64;
+        _searchGoods = [[FBSearchView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, searchGoodsHeight)];
         _searchGoods.searchInputBox.placeholder = NSLocalizedString(@"pleaseWriteGoods", nil);
         _searchGoods.delegate = self;
         [_searchGoods.searchInputBox becomeFirstResponder];
@@ -122,7 +123,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
 #pragma mark - 没有搜索结果时自定义添加
 - (THNAddGoodsBtn *)addGoodBtn {
     if (!_addGoodBtn) {
-        _addGoodBtn = [[THNAddGoodsBtn alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        _addGoodBtn = [[THNAddGoodsBtn alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.searchGoods.frame), SCREEN_WIDTH, CGRectGetHeight(self.searchGoods.frame))];
         _addGoodBtn.hidden = YES;
         [_addGoodBtn addTarget:self action:@selector(addUserGoodsInfo:) forControlEvents:(UIControlEventTouchUpInside)];
     }

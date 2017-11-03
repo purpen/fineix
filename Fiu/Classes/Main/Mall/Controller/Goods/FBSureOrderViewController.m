@@ -19,6 +19,7 @@
 #import "OrderInfoModel.h"
 #import "FBPayTheWayViewController.h"
 #import "PaySuccessViewController.h"
+#import "THNMacro.h"
 
 static NSString *const URLBuying = @"/shopping/now_buy";
 static NSString *const URLUserAddress = @"/delivery_address/defaulted";
@@ -43,9 +44,9 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
     NSString   *_freight;   //  运费
 }
 
-@pro_strong NSMutableArray          *   goodsItems;
-@pro_strong DeliveryAddressModel    *   userAddress;
-@pro_strong OrderInfoModel          *   orderInfo;
+@property (nonatomic, strong) NSMutableArray *goodsItems;
+@property (nonatomic, strong) DeliveryAddressModel *userAddress;
+@property (nonatomic, strong) OrderInfoModel *orderInfo;
 @property(nonatomic, assign) BOOL flag;
 
 @end
@@ -74,6 +75,15 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
     [self setOrderVcUI];
     
     self.flag = YES;
+}
+
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.orderTable.frame = CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 162);
+        self.sureView.frame = CGRectMake(0, SCREEN_HEIGHT - 44 - 34, SCREEN_WIDTH, 44);
+    }
 }
 
 #pragma mark - 网络请求
@@ -268,6 +278,10 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
         _orderTable.showsVerticalScrollIndicator = NO;
         _orderTable.tableFooterView = self.footerView;
         _orderTable.sectionFooterHeight = 0.01f;
+        _orderTable.estimatedRowHeight = 0;
+        _orderTable.estimatedSectionHeaderHeight = 0;
+        _orderTable.estimatedSectionFooterHeight = 0;
+        _orderTable.tableHeaderView = [UIView new];
         _orderTable.backgroundColor = [UIColor colorWithHexString:grayLineColor];
     }
     return _orderTable;
@@ -452,8 +466,8 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         return 2.0f;
-    }
-    return 5.0f;
+    } else
+        return 5.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

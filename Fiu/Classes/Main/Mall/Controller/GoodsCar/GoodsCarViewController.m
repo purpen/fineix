@@ -264,6 +264,9 @@ static CGFloat const itemHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
         }
         _carItemTabel.delegate = self;
         _carItemTabel.dataSource = self;
+        _carItemTabel.estimatedRowHeight = 0;
+        _carItemTabel.estimatedSectionHeaderHeight = 0;
+        _carItemTabel.estimatedSectionFooterHeight = 0;
         _carItemTabel.backgroundColor = [UIColor colorWithHexString:grayLineColor];
         _carItemTabel.showsVerticalScrollIndicator = NO;
         _carItemTabel.separatorStyle = UITableViewCellSeparatorStyleNone;

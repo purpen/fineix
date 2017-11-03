@@ -44,6 +44,14 @@
     [self loadingPayWayView];
 }
 
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.payTheWayView.frame = CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 118);
+    }
+}
+
 - (void)loadingPayWayView {
     [self.view addSubview:self.payTheWayView];
     

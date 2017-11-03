@@ -27,15 +27,15 @@ typedef void(^AddGoodsInfoDoneBlock)(NSString *goods, NSString *goodsId);
     UITextFieldDelegate
 >
 
-@pro_strong UIViewController *vc;
-@pro_strong UIView *bgView;
-@pro_strong FBFootView *footView;   //  底部功能选择视图
-@pro_strong UIButton *chooseGoods;
-@pro_strong UILabel *writeLab;
-@pro_strong UITextField *brand;
-@pro_strong UITextField *goods;
-@pro_weak id <THNMarkGoodsViewDelegate> delegate;
-@pro_copy AddBrandInfoDoneBlock addBrandInfoDoneBlock;
-@pro_copy AddGoodsInfoDoneBlock addGoodsInfoDoneBlock;
+@property (nonatomic, strong) UIViewController *vc;
+@property (nonatomic, strong) UIView *bgView;
+@property (nonatomic, strong) FBFootView *footView;   //  底部功能选择视图
+@property (nonatomic, strong) UIButton *chooseGoods;
+@property (nonatomic, strong) UILabel *writeLab;
+@property (nonatomic, strong) UITextField *brand;
+@property (nonatomic, strong) UITextField *goods;
+@property (nonatomic, weak) id <THNMarkGoodsViewDelegate> delegate;
+@property (nonatomic, copy) AddBrandInfoDoneBlock addBrandInfoDoneBlock;
+@property (nonatomic, copy) AddGoodsInfoDoneBlock addGoodsInfoDoneBlock;
 
 @end

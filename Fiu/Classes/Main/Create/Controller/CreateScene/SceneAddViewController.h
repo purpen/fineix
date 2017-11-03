@@ -26,49 +26,49 @@
     ChangeFilterValueDelegate
 >
 
-@pro_strong NSArray             *locationArr;            //  照片位置
-@pro_strong UIImageView         *filtersImageView;       //  需要处理的图片视图
-@pro_strong UIImage             *filtersImg;             //  需要处理的原始图片
-@pro_strong NSString            *filterName;             //  选择的滤镜名字
-@pro_strong NSString            *fSceneId;
-@pro_strong NSString            *fSceneTitle;
-@pro_strong FBRequest           *addUserGoods;
-@pro_strong FBRequest           *addUserBrand;
-@pro_strong FBRequest           *deleteUserGoods;
-@pro_strong FBRequest           *userAddRequest;
-@pro_assign NSInteger            seleIndex;
-@pro_strong FBFootView          *footView;               //  底部功能选择视图
-@pro_strong UIScrollView        *functionView;
-@pro_strong FiltersView         *filtersView;            //  滤镜视图
-@pro_strong THNAdjustView       *adjustView;             //  调整视图
-@pro_strong UIButton            *bottomBtn;
-@pro_strong THNMarkGoodsView    *markGoodsView;
-@pro_strong NSArray             *footTitleArr;
-@pro_strong FSImageFilterManager *filterManager;
-@pro_strong THNFilterValueView  *filterValueView;
-@pro_strong FSFliterImage       *editFilterImage;
+@property (nonatomic, strong) NSArray             *locationArr;            //  照片位置
+@property (nonatomic, strong) UIImageView         *filtersImageView;       //  需要处理的图片视图
+@property (nonatomic, strong) UIImage             *filtersImg;             //  需要处理的原始图片
+@property (nonatomic, strong) NSString            *filterName;             //  选择的滤镜名字
+@property (nonatomic, strong) NSString            *fSceneId;
+@property (nonatomic, strong) NSString            *fSceneTitle;
+@property (nonatomic, strong) FBRequest           *addUserGoods;
+@property (nonatomic, strong) FBRequest           *addUserBrand;
+@property (nonatomic, strong) FBRequest           *deleteUserGoods;
+@property (nonatomic, strong) FBRequest           *userAddRequest;
+@property (nonatomic, assign) NSInteger            seleIndex;
+@property (nonatomic, strong) FBFootView          *footView;               //  底部功能选择视图
+@property (nonatomic, strong) UIScrollView        *functionView;
+@property (nonatomic, strong) FiltersView         *filtersView;            //  滤镜视图
+@property (nonatomic, strong) THNAdjustView       *adjustView;             //  调整视图
+@property (nonatomic, strong) UIButton            *bottomBtn;
+@property (nonatomic, strong) THNMarkGoodsView    *markGoodsView;
+@property (nonatomic, strong) NSArray             *footTitleArr;
+@property (nonatomic, strong) FSImageFilterManager *filterManager;
+@property (nonatomic, strong) THNFilterValueView  *filterValueView;
+@property (nonatomic, strong) FSFliterImage       *editFilterImage;
 
 ///
-@pro_strong UserGoodsTag           *userGoodsTag;
-@pro_strong NSMutableDictionary    *userAddGoodsDict;
-@pro_strong NSMutableArray         *tagBtnMarr;
-@pro_strong NSMutableArray         *userAddGoodsMarr;
-@pro_strong NSMutableArray         *goodsIdData;
-@pro_strong NSMutableArray         *goodsTitleData;
-@pro_strong NSMutableArray         *goodsPriceData;
-@pro_strong NSMutableArray         *goodsTypeData;
-@pro_strong NSMutableArray         *stickersContainer;
+@property (nonatomic, strong) UserGoodsTag           *userGoodsTag;
+@property (nonatomic, strong) NSMutableDictionary    *userAddGoodsDict;
+@property (nonatomic, strong) NSMutableArray         *tagBtnMarr;
+@property (nonatomic, strong) NSMutableArray         *userAddGoodsMarr;
+@property (nonatomic, strong) NSMutableArray         *goodsIdData;
+@property (nonatomic, strong) NSMutableArray         *goodsTitleData;
+@property (nonatomic, strong) NSMutableArray         *goodsPriceData;
+@property (nonatomic, strong) NSMutableArray         *goodsTypeData;
+@property (nonatomic, strong) NSMutableArray         *stickersContainer;
 
 /**
  *  添加标签
  *  标题／价格／坐标
  */
-@pro_strong NSMutableArray *popData;
+@property (nonatomic, strong) NSMutableArray *popData;
 
 /** 活动ID */
-@pro_strong NSString *actionId;
+@property (nonatomic, strong) NSString *actionId;
 /** 活动标题 */
-@pro_strong NSString *activeTitle;
+@property (nonatomic, strong) NSString *activeTitle;
 /**
  所属地盘id
  */

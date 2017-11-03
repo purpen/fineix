@@ -37,7 +37,8 @@
     __weak __typeof(self) weakSelf = self;
     self.getGoodsModel = ^(FBGoodsInfoModelData * model) {
         CGRect buyViewRect = weakSelf.buyView.frame;
-        buyViewRect = CGRectMake(0, SCREEN_HEIGHT - 410, SCREEN_WIDTH, 410);
+        CGFloat navTopHeight = Is_iPhoneX ? 444 : 410;
+        buyViewRect = CGRectMake(0, SCREEN_HEIGHT - navTopHeight, SCREEN_WIDTH, navTopHeight);
         [UIView animateWithDuration:.3 animations:^{
             weakSelf.buyView.frame = buyViewRect;
         }];

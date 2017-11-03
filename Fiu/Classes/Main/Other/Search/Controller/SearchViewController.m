@@ -123,7 +123,6 @@ static NSString *const URLSearchList = @"/search/getlist";
         _searchView = [[FBSearchView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, 44)];
         _searchView.searchInputBox.placeholder = NSLocalizedString(@"search", nil);
         _searchView.delegate = self;
-        _searchView.line.hidden = YES;
     }
     return _searchView;
 }

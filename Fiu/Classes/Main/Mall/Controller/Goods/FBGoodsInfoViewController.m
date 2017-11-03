@@ -599,7 +599,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 
 #pragma mark - 打开商品购买视图
 - (void)OpenGoodsBuyView:(NSInteger)buyState {
-    FBBuyGoodsViewController * buyVC = [[FBBuyGoodsViewController alloc] init];
+    FBBuyGoodsViewController *buyVC = [[FBBuyGoodsViewController alloc] init];
     buyVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     buyVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     buyVC.buyState = buyState;

@@ -33,6 +33,14 @@ static NSString *const recordCellId = @"THNWithdrawRecordTableViewCellId";
     [self setViewUI];
 }
 
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.recordTable.frame = CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 88);
+    }
+}
+
 #pragma mark - 请求结算列表数据
 - (void)thn_networkWithdrawRecordListData {
     [SVProgressHUD show];

@@ -24,13 +24,14 @@
 
 @interface THNFilterValueView : UIView
 
-@pro_strong UILabel *valueTitle;    //  数值标题
-@pro_strong UIButton *cancelBtn;    //  取消
-@pro_strong UIButton *sureBtn;      //  确定
-@pro_strong UISlider *valueSlider;  //  数值调整
-@pro_strong UILabel *valueShowLab;  //  显示当前数值
-@pro_strong UIView *sliderBack;
-@pro_weak id <ChangeFilterValueDelegate> delegate;
+@property (nonatomic, strong) UIView *navBackgroundView;
+@property (nonatomic, strong) UILabel *valueTitle;    //  数值标题
+@property (nonatomic, strong) UIButton *cancelBtn;    //  取消
+@property (nonatomic, strong) UIButton *sureBtn;      //  确定
+@property (nonatomic, strong) UISlider *valueSlider;  //  数值调整
+@property (nonatomic, strong) UILabel *valueShowLab;  //  显示当前数值
+@property (nonatomic, strong) UIView *sliderBack;
+@property (nonatomic, weak) id <ChangeFilterValueDelegate> delegate;
 
 - (void)thn_setSliderWithType:(NSInteger)type filterImage:(FSFliterImage *)filterImage;
 

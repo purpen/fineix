@@ -42,6 +42,15 @@ static NSInteger const MAX_SCALE = 100;
     [self thn_setViewUI];
 }
 
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    
+    if (Is_iPhoneX) {
+        self.scaleField.frame = CGRectMake(0, 220, SCREEN_WIDTH, 44);
+        self.passView.frame = CGRectMake(0, 279, SCREEN_WIDTH, 88);
+    }
+}
+
 #pragma mark - 网络
 /**
  该账号是否注册过
@@ -156,8 +165,9 @@ static NSInteger const MAX_SCALE = 100;
 }
 
 - (void)thn_creatTextFieldView:(NSArray *)titleArr {
+    CGFloat topNavHeight = Is_iPhoneX ? 88 : 64;
     for (NSInteger idx = 0; idx < titleArr.count; ++ idx) {
-        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 64 + (44 * idx), SCREEN_WIDTH, 44)];
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, topNavHeight + (44 * idx), SCREEN_WIDTH, 44)];
         textField.backgroundColor = [UIColor whiteColor];
         UILabel *leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 70, 44)];
         leftLabel.text = titleArr[idx];
@@ -401,14 +411,12 @@ static NSInteger const MAX_SCALE = 100;
  */
 - (void)thn_validationSave {
     if (_isNewUser) {
-//         NSLog(@"======== 手机： %@, 姓名： %@, 验证码： %@, 密码： %@, 确认密码： %@,", _phoneNumDone, _name, _auth , _password, _setPassword);
         if (_name.length == 0 || _phoneNumDone.length == 0 || _auth.length == 0 || _setPassword.length == 0 || _password.length == 0) {
             [SVProgressHUD showInfoWithStatus:@"请将资料填写完整"];
             return;
         }
         
     } else {
-//         NSLog(@"======== 手机： %@, 姓名： %@, 验证码： %@", _phoneNumDone, _name, _auth);
         if (_name.length == 0 || _phoneNumDone.length == 0 || _auth.length == 0) {
             [SVProgressHUD showInfoWithStatus:@"请将资料填写完整"];
             return;

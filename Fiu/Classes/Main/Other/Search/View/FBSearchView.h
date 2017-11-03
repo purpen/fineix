@@ -20,14 +20,11 @@
 
 @interface FBSearchView : UIView <UITextFieldDelegate>
 
-@pro_strong UIView              *   bgView;              //  背景
-@pro_strong UIImageView         *   searchIcon;          //  搜索图标
-@pro_strong UITextField         *   searchInputBox;      //  搜索输入框
-@pro_strong UILabel             *   line;                //  视图分割线
-@pro_strong UIButton            *   cancelBtn;           //  取消按钮
+@property (nonatomic, strong) UIView              *   bgView;              //  背景
+@property (nonatomic, strong) UIImageView         *   searchIcon;          //  搜索图标
+@property (nonatomic, strong) UITextField         *   searchInputBox;      //  搜索输入框
+@property (nonatomic, strong) UIButton            *   cancelBtn;           //  取消按钮
 
-@pro_weak id <FBSearchDelegate> delegate;
-
-//- (void)changeSearchBoxFrame:(BOOL)type;
+@property (nonatomic, weak) id <FBSearchDelegate> delegate;
 
 @end

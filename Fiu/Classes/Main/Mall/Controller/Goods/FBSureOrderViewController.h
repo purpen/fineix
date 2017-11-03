@@ -15,25 +15,25 @@
  *  type：下单类型
  *  0:购物车 ／ 1:立即购买
  */
-@pro_assign NSInteger           type;
-@pro_strong id                  result;
-@pro_strong NSDictionary    *   orderDict;
-@pro_strong NSMutableArray  *   carGoodsMarr;
-@pro_strong FBRequest       *   buyingRequest;
-@pro_strong FBRequest       *   addressRequest;
-@pro_strong FBRequest       *   orderRrquest;
-@pro_strong FBRequest       *   carPayRequest;
-@pro_strong FBRequest       *   freightRequest;
+@property (nonatomic, assign) NSInteger type;
+@property (nonatomic, strong) id result;
+@property (nonatomic, strong) NSDictionary *orderDict;
+@property (nonatomic, strong) NSMutableArray  *carGoodsMarr;
+@property (nonatomic, strong) FBRequest *buyingRequest;
+@property (nonatomic, strong) FBRequest *addressRequest;
+@property (nonatomic, strong) FBRequest *orderRrquest;
+@property (nonatomic, strong) FBRequest *carPayRequest;
+@property (nonatomic, strong) FBRequest *freightRequest;
 
-@pro_strong UITableView     *   orderTable;
-@pro_strong UIView          *   sureView;
-@pro_strong NSString        *   payPrice;
-@pro_strong UILabel         *   sumPrice;
-@pro_strong UILabel         *   bounsLab;
-@pro_strong UILabel         *   bounsPriceLab;
-@pro_strong NSString        *   sendTime;
-@pro_strong UIView          *   footerView;
-@pro_strong UITextField     *   summaryText;
-@pro_strong UILabel         *   coinLab;
+@property (nonatomic, strong) UITableView *orderTable;
+@property (nonatomic, strong) UIView *sureView;
+@property (nonatomic, strong) NSString *payPrice;
+@property (nonatomic, strong) UILabel *sumPrice;
+@property (nonatomic, strong) UILabel *bounsLab;
+@property (nonatomic, strong) UILabel *bounsPriceLab;
+@property (nonatomic, strong) NSString *sendTime;
+@property (nonatomic, strong) UIView *footerView;
+@property (nonatomic, strong) UITextField *summaryText;
+@property (nonatomic, strong) UILabel *coinLab;
 
 @end
