@@ -202,10 +202,10 @@ UITableViewDataSource
         }else {
             _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(2 + 90, 64, SCREEN_WIDTH - 90 - 4, SCREEN_HEIGHT - 64 - 49) collectionViewLayout:flowlayout];
         }
-        if (SCREEN_HEIGHT == 812) {
-            _collectionView.y += 24;
-            _collectionView.height -= 24;
-        }
+//        if (SCREEN_HEIGHT == 812) {
+//            _collectionView.y += 24;
+//            _collectionView.height -= 24;
+//        }
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
@@ -238,10 +238,10 @@ UITableViewDataSource
         }else {
             _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 90, SCREEN_HEIGHT - 64 - 49)];
         }
-        if (SCREEN_HEIGHT == 812) {
-            _tableView.y += 24;
-            _tableView.height -= 24;
-        }
+//        if (SCREEN_HEIGHT == 812) {
+//            _tableView.y += 24;
+//            _tableView.height -= 24;
+//        }
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableFooterView = [UIView new];
