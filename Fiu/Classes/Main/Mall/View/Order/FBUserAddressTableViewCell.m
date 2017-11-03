@@ -115,7 +115,7 @@
     [self addSubview:self.addressIcon];
     [_addressIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(10.5, 17));
-        make.centerY.mas_equalTo(self.mas_centerY).mas_offset(30);
+        make.top.mas_equalTo(self.lineView.mas_bottom).mas_offset(5);
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
     
@@ -129,7 +129,7 @@
     [self addSubview:self.userName];
     [_userName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH-50, 14));
-        make.top.equalTo(self.lineView.mas_bottom).with.offset(20);
+        make.top.equalTo(self.lineView.mas_bottom).with.offset(5);
         make.left.equalTo(_addressIcon.mas_right).with.offset(10);
         
     }];
@@ -137,7 +137,7 @@
     [self addSubview:self.cityName];
     [_cityName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH-50, 12));
-        make.top.equalTo(_userName.mas_bottom).with.offset(8);
+        make.top.equalTo(_userName.mas_bottom).with.offset(5);
         make.left.equalTo(_addressIcon.mas_right).with.offset(10);
     }];
     
@@ -151,7 +151,7 @@
     [self addSubview:self.phoneNum];
     [_phoneNum mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH-50, 12));
-        make.bottom.equalTo(self.mas_bottom).with.offset(-10);
+        make.bottom.equalTo(self.addressLab.mas_bottom).with.offset(5);
         make.left.equalTo(_addressIcon.mas_right).with.offset(10);
     }];
     

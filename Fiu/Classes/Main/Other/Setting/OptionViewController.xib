@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,6 +16,7 @@
                 <outlet property="phoneTF" destination="xWW-Ns-ypw" id="cfJ-EG-Ar2"/>
                 <outlet property="remindLabel" destination="Vhv-hT-91Q" id="mJc-wc-OWC"/>
                 <outlet property="submitBtn" destination="deA-oP-6Cn" id="91y-sy-mBa"/>
+                <outlet property="topSpace" destination="xhi-mp-yWH" id="TBg-en-SBf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,6 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你的意见或建议" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igp-Dm-O1u">
+                    <rect key="frame" x="15" y="80" width="127" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="WZo-Nm-8Av"/>
                         <constraint firstAttribute="width" constant="127" id="Ylh-WJ-ZEx"/>
@@ -30,6 +35,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sE3-JA-axL">
+                    <rect key="frame" x="15" y="116" width="345" height="120"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="120" id="JQI-hg-48Z"/>
@@ -44,6 +50,7 @@
                     </variation>
                 </textView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你的意见或建议，我们都会认真倾听。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vhv-hT-91Q">
+                    <rect key="frame" x="25" y="126" width="225.5" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="3mu-p4-r0f"/>
                     </constraints>
@@ -52,6 +59,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系方式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pCP-V0-NDh">
+                    <rect key="frame" x="15" y="251" width="109" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="109" id="4gM-lY-RRs"/>
                         <constraint firstAttribute="height" constant="21" id="pfF-bi-CqD"/>
@@ -61,6 +69,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="手机号/QQ/邮箱" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xWW-Ns-ypw">
+                    <rect key="frame" x="15" y="280" width="345" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="tLe-I0-ATG"/>
                         <constraint firstAttribute="width" secondItem="xWW-Ns-ypw" secondAttribute="height" multiplier="345:44" id="udG-Uy-bta"/>
@@ -74,6 +83,7 @@
                     </variation>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t2W-ts-3wo">
+                    <rect key="frame" x="15" y="339" width="198" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="8iB-bn-h8J"/>
                         <constraint firstAttribute="width" constant="198" id="eRo-En-rkN"/>
@@ -83,6 +93,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="deA-oP-6Cn">
+                    <rect key="frame" x="15" y="375" width="345" height="44"/>
                     <color key="backgroundColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="deA-oP-6Cn" secondAttribute="height" multiplier="345:44" id="0O7-MP-UO7"/>

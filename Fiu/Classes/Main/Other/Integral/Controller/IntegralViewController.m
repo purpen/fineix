@@ -12,6 +12,7 @@
 
 @interface IntegralViewController ()<UIWebViewDelegate,FBRequestDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *integralWebView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *webViewTopSpace;
 
 @end
 
@@ -19,6 +20,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (SCREEN_HEIGHT == 812) {
+        self.webViewTopSpace.constant = 88;
+    } else {
+        self.webViewTopSpace.constant = 64;
+    }
     // Do any additional setup after loading the view from its nib.
     self.navViewTitle.text = @"积分";
     FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];

@@ -297,10 +297,17 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.type == CollectionTypeGood) {
-        return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.31 * SCREEN_HEIGHT);
+    if (Is_iPhoneX) {
+        if (self.type == CollectionTypeGood) {
+            return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.31 * 667.0);
+        }
+        return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.25 * 667.0 + 35);
+    } else {
+        if (self.type == CollectionTypeGood) {
+            return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.31 * SCREEN_HEIGHT);
+        }
+        return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.25 * SCREEN_HEIGHT + 35);
     }
-    return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.25 * SCREEN_HEIGHT + 35);
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

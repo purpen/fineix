@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *optionTFV;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
 @property (weak, nonatomic) IBOutlet UIButton *submitBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpace;
 
 @end
 
@@ -27,6 +28,9 @@ NSString *const feedbackUrl = @"/gateway/feedback";//意见反馈接口
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
+    if (SCREEN_HEIGHT == 812) {
+        self.topSpace.constant += 24;
+    }
     //self.navigationController.navigationBarHidden = NO;
     self.navViewTitle.text = @"意见反馈";
     [self addNavBackBtn];

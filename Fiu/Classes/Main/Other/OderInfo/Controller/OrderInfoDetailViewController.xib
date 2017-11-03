@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="17A264c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,6 +23,7 @@
                 <outlet property="operation1stBtn" destination="vgY-NL-xbP" id="4EU-ps-jJe"/>
                 <outlet property="operation2ndBtn" destination="3yx-AF-cxB" id="m3Z-fu-0c4"/>
                 <outlet property="operationView" destination="LVV-2U-uU4" id="V5J-El-XMd"/>
+                <outlet property="operationViewBottomSpace" destination="KpX-yx-yDQ" id="vll-xG-JCF"/>
                 <outlet property="orderCodeLbl" destination="kT0-KJ-94l" id="AhF-uT-XOv"/>
                 <outlet property="payMoneyLbl" destination="T5Q-0D-agX" id="2xK-r6-Zbe"/>
                 <outlet property="paymentMethodLbl" destination="By2-cH-5eP" id="y4F-6U-5A6"/>

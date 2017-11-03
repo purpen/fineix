@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *pwdTF;
 @property (weak, nonatomic) IBOutlet UIView *pwdView;
 @property (weak, nonatomic) IBOutlet UIButton *submitBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *oldPwdViewTopSpace;
 
 @end
 
@@ -27,6 +28,9 @@ static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textCol
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 //    self.delegate = self;
+    if (SCREEN_HEIGHT == 812) {
+        self.oldPwdViewTopSpace.constant += 24;
+    }
     self.navViewTitle.text = @"修改密码";
     
     self.pwdView.layer.masksToBounds = YES;

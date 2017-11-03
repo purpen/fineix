@@ -99,7 +99,6 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
     [SVProgressHUD show];
     self.orderRequest = [FBAPI getWithUrlString:URLOrderInfo requestDictionary:@{@"rid":orderId} delegate:nil];
     [self.orderRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"订单详情==== %@", result);
         NSDictionary *data = [result valueForKey:@"data"];
         
         [self thn_getOrderInfoData:data];
@@ -107,7 +106,6 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", [error localizedDescription]);
     }];
 }
 
@@ -174,7 +172,11 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
 #pragma mark - 底部功能操作视图
 - (THNOrderOperationView *)bottomView {
     if (!_bottomView) {
-        _bottomView = [[THNOrderOperationView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 44)];
+        if (Is_iPhoneX) {
+            _bottomView = [[THNOrderOperationView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 64, SCREEN_WIDTH, 64)];
+        } else {
+            _bottomView = [[THNOrderOperationView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 44)];
+        }
         _bottomView.delegate = self;
     }
     return _bottomView;
@@ -281,7 +283,7 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
     if (indexPath.section == 0) {
         // 收货信息
         if (self.orderModel.delivery_type == 1) {
-             return 100;
+             return 130;
         }
         return 0;
         

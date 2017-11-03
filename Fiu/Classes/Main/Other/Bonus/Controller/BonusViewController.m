@@ -23,6 +23,7 @@
 @property (nonatomic,strong) NSMutableArray *bonusAry;
 @pro_assign BOOL                        rollDown;               //  是否下拉
 @pro_assign CGFloat                     lastContentOffset;      //  滚动的方向
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bonusTableViewTopSpace;
 @end
 
 static NSString *const BonusURL = @"/my/bonus";
@@ -32,6 +33,11 @@ static NSString *const BonusCellIdentifier = @"bonusCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (SCREEN_HEIGHT == 812) {
+        self.bonusTableViewTopSpace.constant = 88;
+    } else {
+        self.bonusTableViewTopSpace.constant = 64;
+    }
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
     self.navViewTitle.text = @"我的红包";

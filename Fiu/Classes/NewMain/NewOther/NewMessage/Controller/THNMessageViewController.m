@@ -61,7 +61,11 @@ static NSString *const messageTableCellId = @"MessageTableCellId";
 #pragma mark - 提醒列表
 - (UITableView *)messageTable {
     if (!_messageTable) {
-        _messageTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStylePlain)];
+        if (Is_iPhoneX) {
+            _messageTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, SCREEN_HEIGHT - 88) style:(UITableViewStylePlain)];
+        } else {
+            _messageTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStylePlain)];
+        }
         _messageTable.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _messageTable.delegate = self;
         _messageTable.dataSource = self;

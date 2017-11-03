@@ -190,6 +190,9 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (SCREEN_HEIGHT == 812) {
+        return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.3 * 667.0);
+    }
     return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.3 * SCREEN_HEIGHT);
 }
 

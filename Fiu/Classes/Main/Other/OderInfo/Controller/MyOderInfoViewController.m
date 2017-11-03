@@ -36,6 +36,7 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
 @interface MyOderInfoViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,OrderInfoCellDelegate,SGTopTitleViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *myTableViewTopSpace;
 
 
 @property (nonatomic, assign) NSInteger currentPageNumber;
@@ -70,6 +71,12 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (Is_iPhoneX) {
+        self.myTableViewTopSpace.constant = 88+44;
+    } else {
+        self.myTableViewTopSpace.constant = 64+44;
+    }
     
     [self.view addSubview:self.segmentedControl];
     [self requestDataForOderList];

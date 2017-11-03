@@ -22,6 +22,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *addAddressBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addressTableViewTopSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addAddressBtnBottomSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addAddressBtnHeightSpace;
 @end
 
 static NSString *const AddressURL = @"/delivery_address/get_list";
@@ -32,6 +35,13 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (SCREEN_HEIGHT == 812) {
+        self.addressTableViewTopSpace.constant = 88;
+        self.addAddressBtnHeightSpace.constant += 20;
+    } else {
+        self.addressTableViewTopSpace.constant = 64;
+    }
     
     self.delegate = self;
     self.navViewTitle.text = @"收货地址";
