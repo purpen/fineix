@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="THNLoginViewController">
             <connections>
+                <outlet property="backBtnTopSpace" destination="VA7-Bf-hwv" id="8ux-sn-anN"/>
                 <outlet property="loginBtn" destination="q8f-OJ-6SW" id="1Wk-No-Aa6"/>
                 <outlet property="phoneTF" destination="vPz-vm-Lrx" id="Oag-3n-UuU"/>
                 <outlet property="pwdTF" destination="7ss-5Z-jws" id="unn-xP-4Xc"/>
@@ -30,7 +31,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_login" translatesAutoresizingMaskIntoConstraints="NO" id="EOj-e7-lsg">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MST-f1-2kA">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MST-f1-2kA" userLabel="back">
                     <rect key="frame" x="0.0" y="10" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Cju-iR-XE4"/>
@@ -119,21 +120,21 @@
                     <rect key="frame" x="0.0" y="537" width="375" height="102"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fXp-MC-yTn">
-                            <rect key="frame" x="20" y="54" width="128" height="28"/>
+                            <rect key="frame" x="20" y="54" width="128.5" height="28"/>
                             <state key="normal" image="l_weiChat"/>
                             <connections>
                                 <action selector="wechat:" destination="-1" eventType="touchUpInside" id="xWy-yT-YR4"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Zz-GB-seu">
-                            <rect key="frame" x="148" y="55" width="79" height="27"/>
+                            <rect key="frame" x="148.5" y="55" width="78" height="27"/>
                             <state key="normal" image="l_sina"/>
                             <connections>
                                 <action selector="sina:" destination="-1" eventType="touchUpInside" id="cnF-9e-Xoi"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pOh-4p-Xxa">
-                            <rect key="frame" x="227" y="52" width="128" height="30"/>
+                            <rect key="frame" x="226.5" y="52" width="128.5" height="30"/>
                             <state key="normal" image="l_qq"/>
                             <connections>
                                 <action selector="qq:" destination="-1" eventType="touchUpInside" id="JrH-M3-ETf"/>

@@ -38,6 +38,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *sinaBtn;
 @property (weak, nonatomic) IBOutlet UIButton *qqBtn;
 @property (weak, nonatomic) IBOutlet UIView *thirdView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *backBtnTopSpace;
 @end
 
 static NSString *const VerifyCodeURL = @"/auth/verify_code";//发送验证码借口
@@ -47,6 +48,10 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (Is_iPhoneX) {
+        self.backBtnTopSpace.constant += 24;
+    }
     
     [self.view addSubview:self.tFView];
     [self.tFView mas_makeConstraints:^(MASConstraintMaker *make) {

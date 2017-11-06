@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *qqBtn;
 @property (weak, nonatomic) IBOutlet UIView *thirdView;
 @property (weak, nonatomic) IBOutlet UIButton *wechatBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelBtnTopSpace;
 
 @end
 
@@ -46,6 +47,10 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = YES;
+    
+    if (Is_iPhoneX) {
+        self.cancelBtnTopSpace.constant += 24;
+    }
     
     self.loginBtn.layer.masksToBounds = YES;
     self.loginBtn.layer.cornerRadius = 3;

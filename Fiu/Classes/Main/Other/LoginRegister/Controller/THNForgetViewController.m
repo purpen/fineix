@@ -13,6 +13,7 @@
 #import "THNUserData.h"
 #import "SVProgressHUD.h"
 #import "UIColor+Extension.h"
+#import "THNMacro.h"
 
 @interface THNForgetViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
@@ -21,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *backToTheTimeL;
 @property (weak, nonatomic) IBOutlet UITextField *setNewPwd;
 @property (weak, nonatomic) IBOutlet UIButton *sendBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *backBtnTopSpace;
 @property (weak, nonatomic) IBOutlet UIButton *commitBtn;
 @end
 
@@ -40,6 +42,11 @@ static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textCo
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (Is_iPhoneX) {
+        self.backBtnTopSpace.constant += 24;
+    }
+    
     self.setNewPwd.delegate = self;
     [self.phoneTF setValue:[UIColor colorWithHexString:@"#8B8B8B"] forKeyPath:XMGPlacerholderColorKeyPath];
     self.phoneTF.tintColor = [UIColor whiteColor];

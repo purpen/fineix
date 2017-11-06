@@ -35,6 +35,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *wechatBtn;
 @property (weak, nonatomic) IBOutlet UIButton *sinaBtn;
 @property (weak, nonatomic) IBOutlet UIButton *qqBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *backBtnTopSpace;
 @end
 
 static NSString *const LoginURL = @"/auth/login";//登录接口
@@ -46,6 +47,10 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (Is_iPhoneX) {
+        self.backBtnTopSpace.constant += 24;
+    }
     
     [self circle:self.pwdTF];
     [self circle:self.phoneTF];
