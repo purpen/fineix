@@ -225,7 +225,12 @@ static NSString *const RedirectURL           = @"http://www.taihuoniao.com";
 }
 
 - (void)lanch:(BOOL)flag {
-    NSArray *arr = [NSArray arrayWithObjects:@"Guide_one",@"Guide_two",@"Guide_three",@"Guide_four", nil];
+    NSArray *arr;
+    if (Is_iPhoneX) {
+        arr = [NSArray arrayWithObjects:@"iPhoneX01",@"iPhoneX02",@"iPhoneX03",@"iPhoneX04", nil];
+    } else {
+        arr = [NSArray arrayWithObjects:@"Guide_one",@"Guide_two",@"Guide_three",@"Guide_four", nil];
+    }
     BOOL codeFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"codeFlag"];
     BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
     // 获取当前的版本号
